@@ -1,3 +1,4 @@
+// Utility functions to replace MongoDB _id with id in objects and arrays
 export const replaceMongoIdInArray = (array) => {
   const mappedArray = array
     .map((item) => {

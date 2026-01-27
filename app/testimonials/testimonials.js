@@ -1,3 +1,4 @@
+// app/testimonials/testimonials.js
 const testimonials = [
     {
         id: 2,
