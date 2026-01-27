@@ -1,60 +1,43 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const schema = new Schema({
   name: {
     required: true,
-    type: String
+    type: String,
   },
   email: {
     required: true,
-    type: String
+    type: String,
   },
   password: {
-    required: true,
-    type: String
-  },
-  phone: {
     required: false,
-    type: String
+    type: String,
   },
   photo: {
     required: false,
-    type: String
-  },
-  bio: {
-    required: false,
-    type: String
+    type: String,
   },
   paymentType: {
     required: false,
-    type: String
+    type: String,
   },
-  bmi: {
+  createdAt: {
+    type: Date,
     required: false,
-    type: Number
   },
-  recipe: {
+  updatedAt: {
+    type: Date,
     required: false,
-    type: Array,
   },
-  goals: {
+  isAdmin: {
+    type: Boolean,
     required: false,
-    type: Array,
   },
-  nutrition: {
+  firstTimeLogin: {
+    type: Boolean,
     required: false,
-    type: Array,
   },
-  meditation: {
-    required: false,
-    type: Array,
-  },
-  workout: {
-    required: false,
-    type: Array,
-  },
-  
 });
 
-
-export const userModel = mongoose.models.users ?? mongoose.model("users", schema);
+export const userModel =
+  mongoose.models.users ?? mongoose.model("users", schema);

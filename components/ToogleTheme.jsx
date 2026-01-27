@@ -1,7 +1,5 @@
 "use client";
 import { useTheme } from "@/app/hooks/useTheme";
-import sun from "../public/Sun.png";
-import moon from "../public/Moon.png";
 import Image from "next/image";
 
 function ToogleTheme() {
@@ -9,22 +7,25 @@ function ToogleTheme() {
   return (
     <div className="flex justify-center items-center h-full">
       <div
-        className={`rounded-full  lg:h-[40px] shadow-md lg:w-[40px] w-[35px] h-[35px] relative ${
+        className={`rounded-lg border-[1px] lg:h-[40px] lg:w-[40px] sm:w-[35px] sm:h-[35px] h-[30px] w-[30px] relative ${
           theme
-            ? "bg-[#b8b8b8] hover:bg-[#b2b2b2] text-black"
-            : "bg-[#1f1f1f] hover:bg-[#272727] text-zinc-300"
+            ? "border-[#555555] hover:border-[#000000] hover:bg-[#fafafa]"
+            : "border-[#aaaaaa] hover:border-[#bbbbbb] hover:bg-[#111111]"
         }`}
-        onClick={() => setTheme((prev) => !prev)}
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          console.log("Toggle clicked, theme:", theme); // Debug log
+          setTheme((prev) => !prev);
+        }}
       >
         <div className="h-full w-full relative">
-          {" "}
           <Image
             priority
-            src={theme ? moon : sun}
+            src={theme ? "/Moon.png" : "/Sun.png"}
             alt={theme ? "moon" : "sun"}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
-            className="object-cover"
+            className="object-cover hover:cursor-pointer"
           />
         </div>
       </div>
