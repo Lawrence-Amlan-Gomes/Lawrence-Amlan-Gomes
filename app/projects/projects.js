@@ -1,5 +1,199 @@
 const projects = [
   {
+    id: 24,
+    title: "Facelees",
+    urlTitle: "facelees",
+    img: ["/P24.png"],
+    liveLink: "https://www.facelees.com/",
+    shortDescription:
+      "A full-stack Next.js e-commerce platform built in January 2026 for a local client — real-time COD shopping, admin-only access, product/hero image management, order tracking, and Cloudflare optimization.",
+    longDescription:
+      "Facelees is a modern, end-to-end full-stack e-commerce web application created in January 2026 specifically for a local businessman in Bangladesh. The platform delivers a clean, fast shopping experience with a public-facing shop (landing page) showcasing rotating hero banners, brand logos, and a dynamic product catalog. Customers can browse, search, sort, filter, add items to cart, and place orders via Cash on Delivery — no user registration or login is required for shopping. Authentication and all management features are strictly restricted to pre-approved admin Gmail accounts only. Admins have full control over the catalog (add/edit/delete products with image uploads), hero banners (order sequencing, visibility toggle), order viewing and status updates (pending → confirmed → shipped → delivered/cancelled), and their own profile/password management. Built with Next.js App Router, TypeScript for type safety, Tailwind CSS for responsive dark-themed UI, MongoDB for all data persistence, and Cloudflare for global speed, caching, and security. The application emphasizes performance, mobile-first design, secure admin flows, and real-world business usability for small-to-medium local retailers.",
+    techStack: [
+      ["Next.js", "/NextJs.png"],
+      ["React", "/React.png"],
+      ["Tailwind CSS", "/TailwindCss.png"],
+      ["JavaScript", "/js.png"],
+      ["TypeScript", "/ts.png"],
+      ["MongoDB", "/Mongodb.png"],
+      ["Cloudflare", "/cloudflare.png"],
+    ],
+    gitLink: "https://github.com/Lawrence-Amlan-Gomes/Lawrence-Amlan-Gomes",
+    feaTures: [
+      {
+        title: "Public Shop & Landing Page (/)",
+        description: [
+          {
+            text: [
+              "The root route functions as both the main landing page and the complete shop interface. It prominently features a rotating hero banner section (controlled by admin), brand logo showcase, and a rich product grid with advanced filtering capabilities.",
+              "Products display primary image, brand name (extracted from description), product name, short teaser description, real-time discounted price, original price strikethrough (when discounted), stock availability badge, and prominent Add/Remove from Cart buttons.",
+              "Fully public — no authentication required. Optimized for fast loading with Cloudflare edge caching.",
+            ],
+            listItems: [
+              "Dynamic hero banner carousel with admin-defined order and visibility",
+              "Brand logos section for visual trust-building",
+              "Responsive 1–5 column product grid (mobile to desktop)",
+              "Instant search across name, brand, category, and short description",
+              "Price sorting (low → high / high → low) with discounted price logic",
+              "Visual indicators: discount badge, out-of-stock overlay, in-stock green badge",
+              "Smooth hover animations and image zoom effect",
+              "Skeleton loading states during initial fetch",
+            ],
+            images: ["/P24.png", "/P24_3.png"],
+          },
+        ],
+      },
+      {
+        title: "Admin-Only Authentication System (/login & /register)",
+        description: [
+          {
+            text: [
+              "Access to any admin functionality is strictly limited to a predefined list of Gmail addresses. Normal visitors cannot register or log in — registration and login forms include real-time validation and clear restricted-access messaging.",
+              "Login supports secure credential checking with detailed error feedback. Registration requires double confirmation and redirects to login upon success. Both pages use a luxurious dark theme with gold accents consistent with the brand.",
+            ],
+            listItems: [
+              "Hard-coded admin Gmail whitelist verification",
+              "Real-time input validation (Gmail only, password length, required fields)",
+              "Prominent restricted access warnings with red alert styling",
+              "Seamless redirect after successful login to shop",
+              "Responsive, centered form layout with dark modern aesthetic",
+              "Fake hidden fields to improve autofill behavior on mobile/desktop",
+            ],
+            images: ["/P24_1.png", "/P24_2.png"],
+          },
+        ],
+      },
+      {
+        title: "Shopping Cart & Cash on Delivery Flow (/cart)",
+        description: [
+          {
+            text: [
+              "Persistent cart state allows users to add, remove, and adjust quantities of products. Real-time subtotal calculation includes discount application per item. Checkout uses a clean modal for Cash on Delivery orders, collecting essential delivery information with strong validation.",
+              "On successful order placement, the cart clears, an order ID is generated, and a confirmation dialog offers to view orders (redirects to /orders if confirmed).",
+            ],
+            listItems: [
+              "Real-time cart updates with quantity +/- controls",
+              "Item removal with confirmation",
+              "Accurate subtotal with per-item discounted pricing",
+              "COD checkout modal with name, address (textarea), and 11-digit mobile validation",
+              "Mobile number format enforcement (starts with 01, exactly 11 digits)",
+              "Success feedback with order summary popup",
+              "Continue shopping link and clear cart option",
+              "Responsive two-column layout on desktop",
+            ],
+            images: ["/P24_4.png", "/P24_5.png"],
+          },
+        ],
+      },
+      {
+        title: "Admin Product Catalog Management (/products)",
+        description: [
+          {
+            text: [
+              "Comprehensive admin interface for managing the entire product inventory. Admins can create new products (with image upload and preview), edit all fields (including separate short/long descriptions + brand name), toggle stock & visibility, or delete items (with safety checks).",
+              "Includes duplicate name prevention, character limits on descriptions, 500-product hard cap, search across multiple fields, and clean card-based display with brand highlighting.",
+            ],
+            listItems: [
+              "Full CRUD for products with optimistic UI updates",
+              "Image upload (max 5MB) with live preview and remove option",
+              "Combined description field parsed into short/long/brand for display",
+              "In-stock / active toggles with visual indicators",
+              "Category input (lowercased automatically)",
+              "Search by name/category/brand/short description",
+              "Hard limit of 500 products enforced",
+              "Responsive grid layout with hover effects",
+            ],
+            images: ["/P24_7.png"],
+          },
+        ],
+      },
+      {
+        title: "Admin Hero Banner & Branding Control (/advertising)",
+        description: [
+          {
+            text: [
+              "Dedicated admin section to manage the rotating hero banners on the landing page. Admins can upload new wide-format images, set unique animation order (sorting priority), toggle visibility, edit existing banners, or delete them.",
+              "Enforces maximum 20 images and prevents duplicate serial numbers. Includes aspect ratio guidance (25:10 recommended) for best display across devices.",
+            ],
+            listItems: [
+              "Add/edit/delete hero banners with image upload",
+              "Unique animationSerial control (1 = first shown)",
+              "Active/inactive toggle with overlay indicator",
+              "Image preview with remove button",
+              "20-banner strict limit with warning",
+              "Sorted display by animation order",
+              "Responsive banner cards with overlay controls",
+            ],
+            images: ["/P24_8.png"],
+          },
+        ],
+      },
+      {
+        title: "Admin Order Dashboard & Status Management (/orders)",
+        description: [
+          {
+            text: [
+              "Powerful admin overview showing every placed order with advanced filtering by status (all/pending/confirmed/shipped/delivered/cancelled), free-text search (name/email/mobile/address), and date sorting (newest/oldest).",
+              "Each order card displays complete customer details, full item list with images/prices/subtotals, total amount, and one-click status change buttons with optimistic UI and rollback on failure.",
+            ],
+            listItems: [
+              "Complete order list with real-time status updates",
+              "Multi-filter: status dropdown + keyword search",
+              "Date sorting toggle (newest/oldest first)",
+              "Detailed view: customer info, items grid, grand total",
+              "Status change buttons with visual feedback",
+              "Responsive card layout with color-coded status badges",
+              "Error handling with rollback on failed updates",
+            ],
+            images: ["/P24_9.png"],
+          },
+        ],
+      },
+      {
+        title: "Admin Personal Profile & Security (/profile)",
+        description: [
+          {
+            text: [
+              "Simple yet secure admin profile page displaying name and email. Provides direct link to change password and a prominent logout button with confirmation dialog.",
+              "Ensures admins can maintain account security without exposing unnecessary fields.",
+            ],
+            listItems: [
+              "Display of admin name and email",
+              "Dedicated 'Change Password' navigation",
+              "Secure logout with confirmation prompt",
+              "Consistent dark/gold theme matching the brand",
+              "Responsive two-column layout on larger screens",
+            ],
+            images: ["/P24_10.png"],
+          },
+        ],
+      },
+      {
+        title: "Technical Implementation & Optimizations",
+        description: [
+          {
+            text: [
+              "Developed using Next.js 14+ App Router with TypeScript for full type safety and maintainability. Tailwind CSS powers a consistent dark-mode, luxury-feel UI with gold accents. All data (products, hero images, orders) is stored and managed in MongoDB with efficient schemas and real-time hooks.",
+              "Cloudflare provides edge caching, DDoS protection, global CDN delivery, and performance optimization. Features include protected admin routes, optimistic UI updates, form validation, image upload handling, responsive design across all devices, and production-ready error handling.",
+            ],
+            listItems: [
+              "Next.js App Router + TypeScript full-stack architecture",
+              "Tailwind CSS responsive dark theme with gold branding",
+              "MongoDB for products, orders, and hero images persistence",
+              "Cloudflare for speed, security, and global edge delivery",
+              "Admin-only route protection via Gmail whitelist",
+              "Real-time cart state management with hooks",
+              "Optimistic updates & rollback on failed mutations",
+              "Image upload validation (size/format/preview)",
+              "Mobile-first responsive design throughout",
+            ],
+            images: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: 23,
     title: "Expense Tracker",
     urlTitle: "expense-tracker",
