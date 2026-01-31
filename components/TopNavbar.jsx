@@ -98,7 +98,7 @@ const TopNavbar = () => {
 
       {/* Mobile Navbar */}
       <nav
-        className={`fixed top-0 z-50 w-full h-14 flex sm:hidden items-center justify-between px-[10%] bg-opacity-50 backdrop-blur-md ${
+        className={`fixed top-0 z-50 w-full h-14 flex sm:hidden border-b-[1px] items-center justify-between px-[10%] bg-opacity-50 backdrop-blur-md ${
           theme
             ? "bg-[#ffffff] border-[#dddddd]"
             : "bg-[#000000] border-[#222222]"

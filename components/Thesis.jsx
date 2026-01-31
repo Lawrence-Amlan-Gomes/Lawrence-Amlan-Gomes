@@ -70,55 +70,40 @@ export default function Thesis() {
         </div>
         <div className="mb-12 relative">
           {/* PDF Viewer */}
-          <div className="w-full min-h-screen flex items-center justify-center px-[5%] sm:px-[10%] md:px-[15%] py-10 overflow-hidden">
-            <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
+          <div className="w-full flex items-center justify-center sm:px-8 md:px-12">
+            <div className="w-full max-w-5xl mx-auto">
               <div
                 className={`
-        relative overflow-hidden rounded-2xl 
-        w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl
-        border-[2px] shadow-2xl
-        ${theme ? "border-blue-800" : "border-blue-700"}
-        bg-white dark:bg-black
-      `}
-                style={{
-                  aspectRatio: "1 / 1.414", // True A4 portrait ratio (width:height ≈ 1:1.414)
-                  height: "90vh", // Limits height to screen
-                  maxHeight: "90vh",
-                }}
+          relative overflow-hidden rounded-xl sm:rounded-2xl 
+          w-full border-2 shadow-xl mx-auto
+          ${theme ? "border-blue-800/80 bg-white" : "border-blue-700/60 bg-neutral-950"}
+        `}
+                style={{ aspectRatio: "210 / 297" }} // exact A4 ratio (more precise than 1/1.414)
               >
                 <iframe
                   src="/Thesis.pdf#view=FitH&toolbar=1&navpanes=0&scrollbar=1"
-                  width="100%"
-                  height="100%"
-                  className="border-0 scale-100 origin-top-left"
-                  title="Lawrence's Undergraduate Thesis"
+                  className="absolute inset-0 w-full h-full border-0"
+                  title="Undergraduate Thesis – Lawrence"
                   allowFullScreen
-                  style={{
-                    pointerEvents: "auto",
-                    overflow: "hidden",
-                  }}
                 />
               </div>
 
-              {/* Fallback Message */}
-              <div className="mt-8 text-center px-4">
-                <p
-                  className={`text-sm ${
-                    theme ? "text-[#888888]" : "text-[#999999]"
-                  }`}
+              {/* Fallback / helper text */}
+              <p
+                className={`mt-5 text-center text-sm sm:text-base ${
+                  theme ? "text-gray-700" : "text-gray-300"
+                }`}
+              >
+                PDF not displaying correctly?{" "}
+                <a
+                  href="/Thesis.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-400 transition-colors"
                 >
-                  Can&apos;t view the PDF here?{" "}
-                  <a
-                    href="/Thesis.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 underline hover:text-blue-500"
-                  >
-                    Open in new tab
-                  </a>{" "}
-                  or download it.
-                </p>
-              </div>
+                  Open in new tab
+                </a>
+              </p>
             </div>
           </div>
           <div className="fixed right-[5%] md:right-[11%] top-[80px] sm:top-[110px] md:top-[150px] transform -translate-y-1/2 flex flex-row gap-3 md:flex-col sm:gap-4 z-50">

@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Testimonials() {
   const { theme } = useTheme();
-
+  console.log("testimonials:", testimonials);
   return (
     <div
       className={`w-full pt-[20%] sm:pt-[13%] ${
@@ -48,10 +48,11 @@ export default function Testimonials() {
             into every project to deliver outstanding results.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
           {testimonials.map((testimonial) => (
             <TestimonialCard
               key={testimonial.id}
+              urlTitle={testimonial.urlTitle}
               clientName={testimonial.clientName}
               clientImg={testimonial.clientImg}
               clientRole={testimonial.clientRole}

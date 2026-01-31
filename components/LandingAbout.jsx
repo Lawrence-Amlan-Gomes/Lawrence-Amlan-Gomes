@@ -7,11 +7,11 @@ export default function LandingAbout() {
   const { theme } = useTheme();
 
   return (
-    <div className="w-full px-[5%] sm:px-[10%] flex flex-row justify-between items-start gap-4 sm:gap-6 mb-[10%]">
+    <div className="w-full px-[5%] sm:px-[10%] flex flex-row justify-between items-start gap-4 sm:gap-6 md:mb-0 mb-[5%]">
       {/* LEFT TEXT SECTION */}
-      <div className={`w-[60%] sm:w-[70%] mr-[2.5%]`}>
+      <div className={`w-[50%] sm:w-[70%] mr-[2.5%]`}>
         <h1
-          className={`text-2xl xs:text-3xl sm:text-4xl lg:text-6xl 2xl:text-7xl font-bold mb-3 text-justify ${
+          className={`text-xl sm:text-4xl lg:text-6xl 2xl:text-7xl font-bold mb-3 text-justify ${
             theme ? "text-[#0a0a0a]" : "text-[#ebebeb]"
           }`}
         >
@@ -26,20 +26,9 @@ export default function LandingAbout() {
           Full-Stack Developer | Building Scalable, User-Centric Web Solutions
         </h2>
         <p
-          className={`leading-relaxed mb-6 text-justify text-xs sm:text-base ${
+          className={`leading-relaxed mb-6 text-justify text-xs hidden sm:block sm:text-base ${
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
-          } block sm:hidden`}
-        >
-          I&apos;m a Full-Stack Developer building intelligent, user-centric web
-          apps with React, Next.js, and AI APIs. I deliver responsive, secure,
-          and high-performance solutions using Tailwind CSS, Framer Motion,
-          Redux, MongoDB, and GraphQL.
-        </p>
-
-        <p
-          className={`leading-relaxed mb-6 text-justify text-xs sm:text-base ${
-            theme ? "text-[#555555]" : "text-[#aaaaaa]"
-          } hidden sm:block`}
+          }`}
         >
           I&apos;m a Full-Stack Developer passionate about engineering
           intelligent, high-performance web applications. With deep expertise in
@@ -56,7 +45,21 @@ export default function LandingAbout() {
         </p>
 
         <p
-          className={`font-medium mb-3 text-justify text-xs sm:text-base ${
+          className={`leading-relaxed mb-6 text-justify text-xs sm:hidden block sm:text-base ${
+            theme ? "text-[#555555]" : "text-[#aaaaaa]"
+          }`}
+        >
+          I'm a Full-Stack Developer focused on intelligent, high-performance
+          web apps. With React, Next.js, Tailwind CSS and Framer Motion, I build
+          responsive, SEO-friendly, and animated frontends. Backend-wise, I
+          create scalable systems using MongoDB, Redux Toolkit for real-time functionality. I integrate AI APIs to enable 
+          chatbots, content generation, predictive
+          features, and automation — delivering secure, data-driven, and
+          future-ready solutions that make an impact.
+        </p>
+
+        <p
+          className={`font-medium mb-3 text-justify text-xs hidden sm:block sm:text-base ${
             theme ? "text-[#444444]" : "text-[#bbbbbb]"
           }`}
         >
@@ -65,7 +68,7 @@ export default function LandingAbout() {
         </p>
 
         <ul
-          className={`list-disc ml-5 space-y-2 mb-8 text-justify text-xs sm:text-base ${
+          className={`list-disc ml-5 space-y-2 mb-8 text-justify text-xs sm:text-base hidden sm:block ${
             theme ? "text-[#666666]" : "text-[#aaaaaa]"
           }`}
         >
@@ -80,45 +83,10 @@ export default function LandingAbout() {
           <li>Enable real-time features with Firebase</li>
           <li>Craft responsive, accessible UIs with Tailwind CSS</li>
         </ul>
-
-        <div className="flex gap-4">
-          <Link href="/about">
-            <div
-              className={`px-4 py-2 flex justify-center items-center rounded-md text-sm sm:text-[15px] font-medium hover:cursor-pointer ${
-                theme
-                  ? "bg-blue-800 text-[#ffffff] hover:bg-white border-[1px] border-blue-800 hover:text-blue-800"
-                  : "bg-blue-700 text-[#ffffff] hover:bg-black border-[1px] border-blue-600 hover:text-blue-600"
-              }`}
-            >
-              Experience
-            </div>
-          </Link>
-          <Link
-            href="/resume"
-            className={`px-5 py-2 rounded-lg text-sm sm:text-[15px] font-semibold transition ${
-              theme
-                ? "bg-[#0a0a0a] text-[#ffffff] border-[1px] hover:bg-transparent hover:text-black border-[#0a0a0a]"
-                : "bg-[#ebebeb] text-[#0a0a0a] border-[1px] hover:bg-transparent hover:text-white border-[#ebebeb]"
-            }`}
-          >
-            Resume
-          </Link>
-          <Link href="/thesis">
-            <div
-              className={`px-5 py-2 rounded-lg text-sm sm:text-[15px] font-semibold transition hover:cursor-pointer ${
-                theme
-                  ? "bg-[#0a0a0a] text-[#ffffff] border-[1px] hover:bg-transparent hover:text-black border-[#0a0a0a]"
-                  : "bg-[#ebebeb] text-[#0a0a0a] border-[1px] hover:bg-transparent hover:text-white border-[#ebebeb]"
-              }`}
-            >
-              Thesis
-            </div>
-          </Link>
-        </div>
       </div>
 
       {/* RIGHT COLUMN */}
-      <div className="w-[40%] sm:w-[30%] ml-[2.5%]">
+      <div className="w-[50%] sm:w-[30%] ml-[2.5%]">
         {/* RIGHT IMAGE SECTION */}
         <div
           className={`relative rounded-xl overflow-hidden h-[200px] xs:h-[250px] sm:h-[300px] lg:h-[350px] 2xl:h-[400px] mb-6 ${
@@ -152,7 +120,7 @@ export default function LandingAbout() {
               alt="Graduation Icon"
               width={32}
               height={32}
-              className="absolute top-[-5px] sm:top-2 left-0 sm:left-3 object-contain"
+              className="absolute top-[3px] sm:top-2 left-2 sm:left-3 object-contain"
             />
             <div className="absolute inset-0 p-4 flex flex-col items-center justify-center">
               <div className="w-full flex items-center justify-center mb-4">

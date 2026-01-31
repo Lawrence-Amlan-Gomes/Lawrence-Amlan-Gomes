@@ -14,6 +14,7 @@ export default function ProjectCardDetailed({
   techStack,
   gitLink,
 }) {
+  console.log("urlTitle in ProjectCardDetailed:", urlTitle);
   const { theme } = useTheme();
   return (
     <div

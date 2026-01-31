@@ -62,6 +62,7 @@ export default function LandingTestimonials() {
         {testimonials.slice(0, numtestimonials).map((testimonial) => (
           <TestimonialCard
             key={testimonial.id}
+            urlTitle={testimonial.urlTitle}
             clientName={testimonial.clientName}
             clientImg={testimonial.clientImg}
             clientRole={testimonial.clientRole}

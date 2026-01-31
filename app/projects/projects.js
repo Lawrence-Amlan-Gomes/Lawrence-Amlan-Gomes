@@ -1000,9 +1000,9 @@ const projects = [
     img: ["/P19pic.png"],
     liveLink: "https://library-management-system-alpha-nine.vercel.app/",
     shortDescription:
-      "A full-stack Next.js library management system built in March 2025, featuring user and admin functionalities for book borrowing, profile management, and fine tracking with MongoDB integration.",
+      "A custom full-stack Next.js library management system built in March 2025 for a local client’s small personal library, with user borrowing (max 3 books), fine tracking for overdue returns, admin book management, and MongoDB backend.",
     longDescription:
-      "Library Management is a full-stack Next.js application developed in March 2025 for a client to manage a library system. It supports user authentication, book browsing, borrowing with a limit of 3 books, and fine calculation for overdue returns, all powered by MongoDB for robust data management. Users can search books, view borrowing history, and manage profiles, while admins can add, edit, or delete books and view user details. Built with Next.js, React, Tailwind CSS, JavaScript, and MongoDB, the site ensures a responsive and intuitive experience, showcasing skills in database integration, dynamic routing, and modern UI design.",
+      "Library Management is a full-stack Next.js application I developed in March 2025 for one of my local clients in Dhaka — he runs a small personal/community library and needed a simple, reliable digital system to manage his book collection. The app supports user registration/login, browsing and borrowing up to 3 books at a time, automatic fine calculation (100 TK per day per overdue book), borrowing history, profile management, and search. Admins (the client himself) can add/edit/delete books, view all users, and maintain data integrity (e.g., cannot delete borrowed books). Built with Next.js, React, Tailwind CSS, JavaScript, and MongoDB, it provides a clean, responsive interface that saves him hours of manual record-keeping and helps track loans more accurately for his library users.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1137,7 +1137,7 @@ const projects = [
               "Restricted deletion for borrowed books",
               "MongoDB-backed CRUD operations",
             ],
-            images: ["/P19_12pic.png"],
+            images: ["/P19_12pic.png", "/P19_12pic_2.png"],
           },
         ],
       },
@@ -1154,7 +1154,7 @@ const projects = [
               "Responsive design for admin user management",
               "Secure access restricted to admins",
             ],
-            images: ["/P19_13pic.png"],
+            images: ["/P19_13pic.png", "/P19_13pic_2.png"],
           },
         ],
       },
@@ -1456,9 +1456,9 @@ const projects = [
     img: ["/P17pic.png"],
     liveLink: "https://home-ssc-model-test.vercel.app/",
     shortDescription:
-      "A frontend Next.js application built in December 2024 for a home-based SSC exam preparation system, featuring MCQ tests for Chemistry with AI-generated questions.",
+      "A custom Next.js tool built in December 2024 for a local Chemistry tutor, enabling automatic AI-generated MCQ home tests covering the full SSC Chemistry book (grades 9–10) using Gemini 2.5 Flash.",
     longDescription:
-      "Home Test is a frontend Next.js application developed in December 2024 to aid students in preparing for SSC examinations through a self-paced MCQ model test system. The platform focuses on Chemistry for grades 9 and 10, utilizing the Gemini 2.5 Flash API to generate dynamic MCQs. The site features a minimalistic navbar, a home route with motivational messaging, and a Chemistry route for generating and answering MCQs with instant feedback. Built with Next.js, React, Tailwind CSS, and JavaScript, it offers a responsive and engaging user experience, showcasing skills in API integration, dynamic content generation, and interactive UI design.",
+      "This is a frontend Next.js application I created in December 2024 for one of my local clients — a Chemistry tutor in Dhaka who teaches SSC-level students door-to-door. He needed an easy way to generate full-syllabus MCQ model tests automatically so his students could practice effectively at home. The tool uses the Gemini 2.5 Flash API to create fresh, high-quality MCQs from the entire Chemistry book (grades 9 & 10). It includes a simple landing page, a dedicated Chemistry route for test generation, interactive answering with instant color-coded feedback, and a restart option. Built with Next.js, React, Tailwind CSS, and JavaScript, it provides a clean, responsive experience that saves the tutor many hours of manual question preparation.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1472,14 +1472,14 @@ const projects = [
         description: [
           {
             text: [
-              "The landing page welcomes students with a bold message: 'Prepare Yourself Better for Your Upcoming SSC Examination,' encouraging self-paced exam preparation.",
-              "A minimalistic navbar contains a single 'Chemistry' link, guiding users to the MCQ test generation route.",
+              "The landing page was designed with the tutor’s students in mind, displaying an encouraging message: 'Prepare Yourself Better for Your Upcoming SSC Examination'.",
+              "It features a very minimal navbar with only one link — 'Chemistry' — to take students directly to the MCQ generation section.",
             ],
             listItems: [
-              "Motivational heading for student engagement",
-              "Minimalistic navbar for focused navigation",
-              "Responsive design for all devices",
-              "Clear call-to-action for Chemistry route",
+              "Warm, motivational message tailored for SSC students",
+              "Extremely simple navigation focused on the main feature",
+              "Responsive layout suitable for mobile use by students",
+              "Clear direction toward Chemistry test generation",
             ],
             images: ["/P17pic.png"],
           },
@@ -1490,14 +1490,14 @@ const projects = [
         description: [
           {
             text: [
-              "The Chemistry route presents a 'Generate' button, allowing students to create a set of MCQs based on Chapter 1 of Chemistry for grades 9 and 10, stored in the file system.",
-              "Clicking the 'Generate' button triggers the Gemini 2.5 Flash API to produce 5 MCQs, each with 4 options (one correct, three incorrect).",
+              "This route contains a prominent 'Generate' button that instructs the Gemini 2.5 Flash API to produce 5 new MCQs based on the SSC Chemistry syllabus (starting with Chapter 1, but conceptually extendable to the full book).",
+              "Each generated question includes 4 options — one correct answer and three plausible distractors — matching real exam style.",
             ],
             listItems: [
-              "Dynamic MCQ generation via Gemini 2.5 Flash API",
-              "Chapter-specific content for grades 9 and 10",
-              "Responsive layout for question display",
-              "Clear and intuitive 'Generate' button",
+              "AI-powered MCQ generation using Gemini 2.5 Flash",
+              "Content aligned with SSC grades 9–10 Chemistry book",
+              "Clean, student-friendly question presentation",
+              "Straightforward 'Generate' interface for repeated use",
             ],
             images: ["/P17_1pic.png", "/P17_2pic.png"],
           },
@@ -1508,14 +1508,14 @@ const projects = [
         description: [
           {
             text: [
-              "Students can select answers for the 5 displayed MCQs and submit their responses using a 'Submit' button.",
-              "Upon submission, correct answers are highlighted with a green background, while incorrect student-selected answers are marked with a red background for immediate feedback.",
+              "Students answer the 5 questions by selecting options, then click 'Submit'.",
+              "Correct answers are instantly highlighted in green, while wrong selections are shown in red — giving immediate, visual feedback that helps students learn from mistakes right away.",
             ],
             listItems: [
-              "Interactive answer selection for MCQs",
-              "Color-coded feedback (green for correct, red for incorrect)",
-              "Instant result display after submission",
-              "Responsive and clear question interface",
+              "Interactive radio-button style answer selection",
+              "Clear green/red color feedback for right/wrong answers",
+              "Helps reinforce learning during home practice",
+              "Responsive and easy-to-use answer interface",
             ],
             images: ["/P17_3pic.png"],
           },
@@ -1526,13 +1526,13 @@ const projects = [
         description: [
           {
             text: [
-              "A 'Restart' button allows students to return to the initial generate state, clearing previous answers and enabling a fresh set of MCQs to be generated.",
+              "The 'Restart' button clears all previous answers and returns to the initial state, allowing the student (or tutor) to generate and attempt a completely new set of questions.",
             ],
             listItems: [
-              "Seamless reset to initial MCQ generation state",
-              "Clear user feedback for restart action",
-              "Efficient state management for test resets",
-              "Consistent UI flow for repeated practice",
+              "Easy reset for multiple practice attempts",
+              "Smooth transition back to generate screen",
+              "Encourages repeated self-testing at home",
+              "Maintains consistent user experience",
             ],
             images: ["/P17_1pic.png"],
           },
@@ -1543,15 +1543,14 @@ const projects = [
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast performance and SEO-friendly content delivery.",
-              "Integrates the Gemini 2.5 Flash API for dynamic MCQ generation, combined with Tailwind CSS for a responsive, utility-first design.",
+              "Developed using Next.js for fast loading and clean routing. Integrated Gemini 2.5 Flash for intelligent question creation. Styled entirely with Tailwind CSS for quick, responsive design. The tutor now regularly uses this tool to assign home tests, significantly reducing his manual question preparation time.",
             ],
             listItems: [
-              "Next.js routing for seamless navigation",
-              "Gemini 2.5 Flash API for real-time question generation",
-              "React hooks for state and effect management",
-              "Tailwind CSS for consistent, responsive styling",
-              "Optimized performance for educational content delivery",
+              "Next.js for performant, SEO-friendly frontend",
+              "Gemini 2.5 Flash API for dynamic, high-quality MCQs",
+              "React hooks for efficient state and UI updates",
+              "Tailwind CSS for modern, mobile-first styling",
+              "Real-world client usage — directly supports SSC students",
             ],
             images: [],
           },
