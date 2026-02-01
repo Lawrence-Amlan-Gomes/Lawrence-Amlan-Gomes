@@ -16,7 +16,7 @@ const testimonials = [
         clientImg: "/C2pic.png",
         urlTitle: "home-test",
         clientQuote:
-          "Lawrence developed a comprehensive learning management system for me. His exceptional work ethic, problem-solving skills, and critical thinking truly set him apart. He is one of the most capable and professional developers I have had the pleasure of working with.",
+          "Lawrence developed a comprehensive chemistry MCQ generation system for me. His exceptional work ethic, problem-solving skills, and critical thinking truly set him apart. He is one of the most capable and professional developers I have had the pleasure of working with.",
       },
     {
       id: 1,
