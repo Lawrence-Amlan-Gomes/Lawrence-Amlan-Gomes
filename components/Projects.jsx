@@ -1,11 +1,16 @@
 "use client";
 import { useTheme } from "@/app/hooks/useTheme";
-import ProjectCardDetailed from "./ProjectCardDetailed";
 import projects from "@/app/projects/projects";
 import Footer from "./Footer";
+import ProjectCardDetailed from "./ProjectCardDetailed";
 
 export default function Projects() {
   const { theme } = useTheme();
+
+  // Sort projects by date (latest to oldest)
+  const sortedProjects = [...projects].sort(
+    (a, b) => new Date(b.date) - new Date(a.date),
+  );
 
   return (
     <div
@@ -48,7 +53,7 @@ export default function Projects() {
           </p>
         </div>
         <div className="space-y-4 sm:space-y-6">
-          {projects.map((project) => (
+          {sortedProjects.map((project) => (
             <ProjectCardDetailed
               key={project.id}
               urlTitle={project.urlTitle}

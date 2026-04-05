@@ -3,6 +3,7 @@ const projects = [
     id: 24,
     title: "Facelees",
     urlTitle: "facelees",
+    date: "2026-01-15",
     img: ["/P24.png"],
     liveLink: "https://www.facelees.com/",
     shortDescription:
@@ -197,6 +198,7 @@ const projects = [
     id: 23,
     title: "Expense Tracker",
     urlTitle: "expense-tracker",
+    date: "2026-01-10",
     img: ["/P23.png"],
     liveLink: "https://expense-tracker-bold.vercel.app/",
     shortDescription:
@@ -338,6 +340,7 @@ const projects = [
     id: 22,
     title: "Daily Routine",
     urlTitle: "daily-routine",
+    date: "2025-12-20",
     img: ["/P22.png"],
     liveLink: "https://daily-routine-self.up.railway.app/",
     shortDescription:
@@ -454,50 +457,11 @@ const projects = [
       },
     ],
   },
-  // {
-  //   id: 18,
-  //   title: "Recruiter Reply",
-  //   urlTitle: "recruiter-reply",
-  //   img: ["/P18pic.png"],
-  //   liveLink: "https://recruiter-reply.vercel.app/",
-  //   shortDescription:
-  //     "This is a frontend Next JS website for a Client for a ecommerce shop built in Octobor 2024.",
-  //   longDescription:
-  //     "Book Finder is a frontend Next.js website built for a client to help users search and discover books. Launched in October 2024, it features a powerful search engine, book categorization, and detailed book previews. The site is styled with Tailwind CSS and uses React for dynamic rendering, ensuring a fast and responsive experience across all devices.",
-  //   techStack: [
-  //     ["Next JS", "/NextJs.png"],
-  //     ["React", "/React.png"],
-  //     ["Tailwind CSS", "/TailwindCss.png"],
-  //   ],
-  //   gitLink: "https://github.com/Lawrence-Amlan-Gomes/Recruiter-Reply",
-  //   feaTures: [
-  //     {
-  //       title: "Project Overview",
-  //       description: [
-  //         {
-  //           text: [
-  //             " paragraph 1 :Users can view a comprehensive dashboard that provides an overview of all projects",
-  //             " paragraph 2 : including their status, deadlines, and assigned team members.",
-  //           ],
-  //           listItems: ["List Item Paragrapht 1", "List Item Paragraph 2"],
-  //           images: ["/P1pic.png", "/P1pic.png"],
-  //         },
-  //         {
-  //           text: [
-  //             " paragraph 1 :Users can view a comprehensive dashboard that provides an overview of all projects",
-  //             " paragraph 2 : including their status, deadlines, and assigned team members.",
-  //           ],
-  //           listItems: ["List Item Paragrapht 1", "List Item Paragraph 2"],
-  //           images: ["/P3Pic.png", "/P3Pic.png"],
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
   {
     id: 16,
     title: "Be Healthy",
     urlTitle: "be-healthy",
+    date: "2025-09-15",
     img: ["/P16pic.png"],
     liveLink: "https://be-healthy-delta.vercel.app/",
     shortDescription:
@@ -751,6 +715,7 @@ const projects = [
     id: 15,
     title: "Faculty Review",
     urlTitle: "faculty-review",
+    date: "2025-07-20",
     img: ["/P15pic.png"],
     liveLink: "https://bracu-faculty-review.vercel.app/",
     shortDescription:
@@ -863,6 +828,7 @@ const projects = [
     id: 9,
     title: "Time Track",
     urlTitle: "time-track",
+    date: "2025-05-10",
     img: ["/P9pic.png"],
     liveLink: "https://timetrack-ten.vercel.app/",
     shortDescription:
@@ -953,50 +919,11 @@ const projects = [
       },
     ],
   },
-  // {
-  //   id: 13,
-  //   title: "Lawyer FYI",
-  //   urlTitle: "lawyer-fyi",
-  //   img: ["/P13pic.png"],
-  //   liveLink: "https://lawyer-fyi.vercel.app/",
-  //   shortDescription:
-  //     "This is a frontend Next JS website for a Client for a ecommerce shop built in Octobor 2024.",
-  //   longDescription:
-  //     "Book Finder is a frontend Next.js website built for a client to help users search and discover books. Launched in October 2024, it features a powerful search engine, book categorization, and detailed book previews. The site is styled with Tailwind CSS and uses React for dynamic rendering, ensuring a fast and responsive experience across all devices.",
-  //   techStack: [
-  //     ["Next JS", "/NextJs.png"],
-  //     ["React", "/React.png"],
-  //     ["Tailwind CSS", "/TailwindCss.png"],
-  //   ],
-  //   gitLink: "https://github.com/Lawrence-Amlan-Gomes/Lawyer-FYI",
-  //   feaTures: [
-  //     {
-  //       title: "Project Overview",
-  //       description: [
-  //         {
-  //           text: [
-  //             " paragraph 1 :Users can view a comprehensive dashboard that provides an overview of all projects",
-  //             " paragraph 2 : including their status, deadlines, and assigned team members.",
-  //           ],
-  //           listItems: ["List Item Paragrapht 1", "List Item Paragraph 2"],
-  //           images: ["/P1pic.png", "/P1pic.png"],
-  //         },
-  //         {
-  //           text: [
-  //             " paragraph 1 :Users can view a comprehensive dashboard that provides an overview of all projects",
-  //             " paragraph 2 : including their status, deadlines, and assigned team members.",
-  //           ],
-  //           listItems: ["List Item Paragrapht 1", "List Item Paragraph 2"],
-  //           images: ["/P3Pic.png", "/P3Pic.png"],
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
   {
     id: 19,
     title: "Library Management",
     urlTitle: "library-management",
+    date: "2025-03-15",
     img: ["/P19pic.png"],
     liveLink: "https://library-management-system-alpha-nine.vercel.app/",
     shortDescription:
@@ -1183,6 +1110,7 @@ const projects = [
     id: 7,
     title: "Cafeteria",
     urlTitle: "cafeteria",
+    date: "2025-02-20",
     img: ["/P7pic.png"],
     liveLink: "https://cafeteria-opal-psi.vercel.app/",
     shortDescription:
@@ -1329,6 +1257,7 @@ const projects = [
     id: 14,
     title: "Our Agency",
     urlTitle: "our-agency",
+    date: "2025-01-25",
     img: ["/P14pic.png"],
     liveLink: "https://our-agency-one.vercel.app/",
     shortDescription:
@@ -1453,6 +1382,7 @@ const projects = [
     id: 17,
     title: "Home Test",
     urlTitle: "home-test",
+    date: "2024-12-10",
     img: ["/P17pic.png"],
     liveLink: "https://home-ssc-model-test.vercel.app/",
     shortDescription:
@@ -1562,6 +1492,7 @@ const projects = [
     id: 8,
     title: "Protein Corner",
     urlTitle: "protein-corner",
+    date: "2024-11-15",
     img: ["/P8pic.png"],
     liveLink: "https://protein-corner-frontend.vercel.app/",
     shortDescription:
@@ -1703,6 +1634,7 @@ const projects = [
     id: 12,
     title: "Utes",
     urlTitle: "utes",
+    date: "2024-10-20",
     img: ["/P12pic.png"],
     liveLink: "https://utes.vercel.app/",
     shortDescription:
@@ -1862,6 +1794,7 @@ const projects = [
     id: 6,
     title: "Guest Book",
     urlTitle: "guest-book",
+    date: "2024-09-25",
     img: ["/P6pic.png"],
     liveLink: "https://guest-book-gamma.vercel.app/",
     shortDescription:
@@ -1965,6 +1898,7 @@ const projects = [
     id: 3,
     title: "Tasker",
     urlTitle: "tasker",
+    date: "2024-09-15",
     img: ["/P3Pic.png"],
     liveLink: "https://improved-tasker5.vercel.app/",
     shortDescription:
@@ -2104,6 +2038,7 @@ const projects = [
     id: 10,
     title: "CineRental",
     urlTitle: "cine-rental",
+    date: "2024-08-20",
     img: ["/P10pic.png"],
     liveLink: "https://cine-rental-two.vercel.app/",
     shortDescription:
@@ -2231,6 +2166,7 @@ const projects = [
     id: 5,
     title: "Shop Center",
     urlTitle: "shop-center",
+    date: "2024-08-10",
     img: ["/P5pic.png"],
     liveLink: "https://shop-center-black.vercel.app/",
     shortDescription:
@@ -2323,6 +2259,7 @@ const projects = [
     id: 2,
     title: "Book Finder",
     urlTitle: "book-finder",
+    date: "2024-07-15",
     img: ["/P2pic.png"],
     liveLink: "https://lws-react-js-assignment-2.vercel.app/",
     shortDescription:
@@ -2414,6 +2351,7 @@ const projects = [
     id: 11,
     title: "Photo Feed",
     urlTitle: "photo-feed",
+    date: "2024-06-20",
     img: ["/P11pic.png"],
     liveLink: "https://photo-feed-omega.vercel.app/",
     shortDescription:
@@ -2487,6 +2425,7 @@ const projects = [
     id: 4,
     title: "News Feed",
     urlTitle: "news-feed",
+    date: "2024-06-10",
     img: ["/P4pic.png"],
     liveLink: "https://news-feed-swart-nine.vercel.app/",
     shortDescription:
@@ -2542,6 +2481,7 @@ const projects = [
     id: 1,
     title: "Short React Projects",
     urlTitle: "short-react-projects",
+    date: "2024-05-15",
     img: ["/P1pic.png"],
     liveLink: "https://react-projects-ruddy-seven.vercel.app",
     shortDescription:

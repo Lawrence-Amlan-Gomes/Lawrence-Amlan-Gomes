@@ -1,13 +1,18 @@
-'use client';
-import { useState, useEffect } from "react";
+"use client";
 import { useTheme } from "@/app/hooks/useTheme";
-import Link from "next/link";
-import ProjectCard from "./ProjectCard";
 import projects from "@/app/projects/projects";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import ProjectCard from "./ProjectCard";
 
 export default function LandingProjects() {
   const { theme } = useTheme();
   const [numProjects, setNumProjects] = useState(6);
+
+  // Sort projects by date (latest to oldest)
+  const sortedProjects = [...projects].sort(
+    (a, b) => new Date(b.date) - new Date(a.date),
+  );
 
   useEffect(() => {
     const updateNumProjects = () => {
@@ -46,7 +51,7 @@ export default function LandingProjects() {
             style={{
               backgroundImage: theme
                 ? "linear-gradient(to right, rgba(51, 51, 51, 0), rgba(51, 51, 51, 1))"
-                : "linear-gradient(to right, rgba(221, 221, 221, 0), rgba(221, 221, 221, 0.4))"
+                : "linear-gradient(to right, rgba(221, 221, 221, 0), rgba(221, 221, 221, 0.4))",
             }}
           />
         </div>
@@ -55,12 +60,13 @@ export default function LandingProjects() {
             theme ? "text-[#666666]" : "text-[#aaaaaa]"
           }`}
         >
-          Here&apos;s a glimpse into some of my recent projects. Be sure to check back
-          often, as I&apos;m always adding new and exciting work to my portfolio!
+          Here&apos;s a glimpse into some of my recent projects. Be sure to
+          check back often, as I&apos;m always adding new and exciting work to
+          my portfolio!
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {projects.slice(0, numProjects).map((project) => (
+        {sortedProjects.slice(0, numProjects).map((project) => (
           <ProjectCard
             key={project.id}
             title={project.title}
