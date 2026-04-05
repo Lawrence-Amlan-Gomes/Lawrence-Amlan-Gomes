@@ -1,281 +1,229 @@
 const blogs = [
   {
-    id: 4,
-    title: "Building a Scalable E-Commerce App with Next.js and MongoDB",
-    urlTitle: "building-scalable-ecommerce-app-nextjs-mongodb",
-    img: "/ecommerceAppMain.png",
-    shortDescription: "Learn how to create a high-performance, scalable e-commerce app using Next.js for the frontend and MongoDB for the backend, with practical tips for optimization and deployment.",
-    longDescription: "In the dynamic world of online retail, building a scalable e-commerce application is essential to meet growing user demands and ensure seamless performance. This blog explores how to leverage Next.js, a powerful React framework, and MongoDB, a flexible NoSQL database, to develop a robust e-commerce platform like *Protein Corner*, a fitness supplement store I built in November 2024. Next.js enables fast, SEO-friendly pages through server-side rendering (SSR) and static site generation (SSG), while MongoDB’s schema-less design supports diverse data types, such as products, user profiles, and orders. This combination is ideal for creating applications that can scale efficiently as traffic and data grow. In this post, I’ll walk through the key steps of building such an app, drawing from my experience with *Protein Corner*, which features product filtering, a shopping cart, and payment integration. We’ll cover setting up dynamic product pages, designing a scalable MongoDB backend, and optimizing performance for a global audience. Additionally, I’ll share practical strategies for deployment and maintenance, ensuring your app remains responsive and secure. Whether you’re a junior developer or an experienced engineer, these insights will help you build an e-commerce platform that balances performance, scalability, and user experience. By the end, you’ll understand how to create a fully functional app that can handle thousands of users while maintaining speed and reliability, all deployed on a platform like Vercel for automatic scaling.",
-    feaTures: [
-      {
-        title: "Setting Up Next.js for Dynamic E-Commerce Pages",
-        description: [
-          {
-            text: [
-              "Next.js is a game-changer for e-commerce apps due to its support for server-side rendering (SSR) and static site generation (SSG), which ensure fast page loads and SEO optimization. In *Protein Corner*, I used dynamic routes to create individual product pages that load efficiently, even with thousands of products. For example, a route like `/products/[id]` fetches product data from MongoDB and renders it server-side, reducing client-side load. I integrated Tailwind CSS to craft responsive, modern designs, ensuring the app looks great on desktops and mobiles. Deploying on Vercel simplified the process with one-click deployments and automatic scaling, making it ideal for startups or solo developers. This setup allowed *Protein Corner* to achieve a 40% faster page load time compared to traditional React apps, based on Lighthouse metrics.",
-              "To implement this, you start by setting up a Next.js project with `create-next-app`, configure dynamic routes, and use `getServerSideProps` to fetch data. Tailwind CSS ensures rapid UI development, while Vercel handles hosting and domain setup seamlessly."
-            ],
-            listItems: [
-              "Dynamic routing for product pages",
-              "SSR and SSG for performance and SEO",
-              "Tailwind CSS for responsive, modern UI"
-            ],
-            images: ["/nextJsSetupDiagram.png", "/productPageScreenshot.png"]
-          }
-        ]
-      },
-      {
-        title: "Leveraging MongoDB for Scalable Data Management",
-        description: [
-          {
-            text: [
-              "MongoDB’s schema-less design is perfect for e-commerce apps, as it accommodates diverse data like product catalogs, user profiles, and order histories. In *Protein Corner*, I used MongoDB to store product details (e.g., name, price, category) and user data, with Mongoose for structured queries and validation. Indexing fields like product IDs and categories enabled fast searches, critical for filtering features like ‘protein powders under $50.’ As the app scales, MongoDB’s sharding distributes data across servers, while replica sets ensure high availability, preventing downtime during traffic spikes. For example, *Protein Corner* handled 25% faster query responses after optimizing indexes, as measured by MongoDB Atlas analytics.",
-              "To set this up, connect MongoDB to your Next.js app using Mongoose, define schemas for products and orders, and apply indexes for frequently queried fields. This ensures your backend remains efficient as your user base grows."
-            ],
-            listItems: [
-              "Flexible schema for diverse product data",
-              "Mongoose for structured queries and validation",
-              "Sharding and replica sets for scalability"
-            ],
-            images: ["/mongoDbSchemaDiagram.png", "/queryPerformanceGraph.png"]
-          }
-        ]
-      },
-      {
-        title: "Optimizing Performance and Deployment",
-        description: [
-          {
-            text: [
-              "Performance is critical for e-commerce apps to retain users and improve conversions. In *Protein Corner*, I implemented lazy loading for product images and used Next.js’s Image component for automatic optimization, reducing page load times by 30%. MongoDB’s aggregation pipeline cached frequently accessed data, like popular products, speeding up homepage rendering. Deploying on Vercel provided global CDN support and automatic scaling, ensuring the app handles traffic spikes during sales. I also used Lighthouse to monitor performance, achieving a score of 92/100, and secured the app with environment variables for API keys and Firebase authentication middleware to protect user data.",
-              "To replicate this, enable lazy loading in your Next.js app, optimize images with `next/image`, and use MongoDB’s aggregation for caching. Deploy on Vercel’s free tier and secure sensitive data with environment variables. Regular Lighthouse audits help maintain high performance."
-            ],
-            listItems: [
-              "Lazy loading for faster page rendering",
-              "Image optimization with Next.js Image",
-              "Vercel for seamless, scalable deployment"
-            ],
-            images: ["/performanceOptimizationInfographic.png", "/vercelDeploymentScreenshot.png"]
-          }
-        ]
-      }
-    ]
-  },
-  {
     id: 1,
-    title: "The Impact of AI on Modern Software Development",
-    urlTitle: "impact-of-ai-on-software-development",
-    img: "/aiInSoftwareDevMain.png",
-    shortDescription: "Exploring how artificial intelligence is revolutionizing the software development landscape, from code generation to automated testing and beyond.",
-    longDescription: "In today's fast-evolving tech ecosystem, artificial intelligence (AI) is a game-changer for software development, transforming how developers approach coding, testing, and deployment. This blog explores AI’s profound impact through tools like GitHub Copilot, which I used in Protein Corner to reduce coding time by 25%, and intelligent debugging systems that streamlined Time Track’s development. We’ll dive into practical applications, such as generating complex algorithms for Be Healthy’s fitness tracking and automating QA for Cafeteria’s order system. Additionally, we’ll address future trends, including AI’s role in Malaysia’s growing tech hub, where companies seek innovative solutions, and ethical challenges like ensuring unbiased code. By leveraging AI, developers can enhance productivity, maintain high standards, and focus on creative problem-solving, making it essential for tech enthusiasts aiming to stay competitive in dynamic markets like Malaysia’s.",
+    title: "End-to-End Deployment: Vercel, Netlify, and Self-Hosted Coolify on VPS",
+    urlTitle: "end-to-end-deployment-vercel-netlify-coolify",
+    img: "/B1_0_deploymentPipelineHero.png",
+    shortDescription:
+      "A practical guide to deploying full-stack Next.js applications across Vercel, Netlify, and a self-hosted Coolify instance on Hostinger VPS — including custom domains, environment variables, and GitHub-based CI/CD pipelines.",
+    longDescription:
+      "Shipping a web application doesn't end when the code is written — deployment is where products become real. In this post, I walk through the deployment workflows I've built across multiple production projects, covering three distinct hosting environments: Vercel for frontend-heavy Next.js apps, Netlify for static and JAMstack deployments, and a self-hosted Coolify instance running on a Hostinger VPS for projects requiring more infrastructure control. I'll cover how to configure GitHub-based CI/CD pipelines that trigger automatic deployments on push, how to manage environment variables securely across environments, and how to set up custom domains with SSL. I'll also compare the tradeoffs between managed platforms like Vercel and self-hosted solutions like Coolify — when each makes sense, and how to decide. By the end, you'll have a clear, repeatable deployment strategy for your Next.js full-stack applications.",
     feaTures: [
       {
-        title: "AI-Powered Code Generation",
+        title: "Deploying Next.js Apps on Vercel with GitHub CI/CD",
         description: [
           {
             text: [
-              "AI tools like GitHub Copilot are revolutionizing coding by suggesting entire functions or blocks based on natural language prompts, significantly boosting efficiency. In Protein Corner, I used Copilot to generate React components, cutting development time by 25% while ensuring clean, modular code.",
-              "These tools also maintain coding standards across teams. For Time Track, AI suggestions aligned variable naming and function structures with our style guide, reducing code review time by 15% and enabling junior developers in Malaysia to contribute effectively to complex projects."
+              "Vercel is the most seamless deployment target for Next.js applications, offering zero-config deployments, automatic preview environments for every pull request, and global CDN distribution out of the box. Connecting a GitHub repository takes under two minutes, and every push to main triggers a production deployment automatically — no manual steps required.",
+              "The most critical configuration step is environment variable management. Vercel's dashboard separates variables by environment (development, preview, production), which prevents accidental exposure of production secrets during testing. For API keys, database URIs, and payment credentials like Paddle's API key, always use Vercel's encrypted environment variable store rather than committing secrets to the repository.",
             ],
             listItems: [
-              "Natural language to code conversion for rapid development",
-              "Auto-completion of complex algorithms with high accuracy",
-              "Integration with popular IDEs like VS Code for seamless workflows"
+              "Zero-config Next.js deployment with automatic builds on git push",
+              "Preview deployments for every pull request for safe testing",
+              "Encrypted environment variable management per environment",
+              "Custom domain configuration with automatic SSL via Let's Encrypt",
             ],
-            images: ["/aiCodeGenerationExample.png", "/copilotScreenshot.png"]
+            images: [
+              "/B1_1_vercelGithubIntegrationDashboard.png",
+              "/B1_2_vercelEnvironmentVariablesConfig.png",
+            ],
           },
-          {
-            text: [
-              "Beyond suggestions, AI can generate complete prototypes from high-level requirements, accelerating the path from concept to MVP. For Be Healthy, I used AI to draft a fitness tracking module in JavaScript, reducing prototyping time by 30% and minimizing errors in initial drafts, which was critical for meeting tight deadlines in Malaysia’s competitive startup scene."
-            ],
-            listItems: [
-              "Rapid prototyping capabilities for faster project iteration",
-              "Error reduction in initial code drafts for cleaner codebases",
-              "Support for multiple programming languages like JavaScript, Python"
-            ],
-            images: ["/prototypeGenerationDiagram.png"]
-          }
-        ]
+        ],
       },
       {
-        title: "Automated Testing and Quality Assurance",
+        title: "Self-Hosting with Coolify on a Hostinger VPS",
         description: [
           {
             text: [
-              "AI is transforming QA by generating intelligent test cases and predicting bugs, optimizing coverage. In Cafeteria, AI-driven testing tools identified edge cases in the order system, improving test coverage by 35% and reducing manual testing hours. Machine learning models analyze code changes to prioritize high-risk areas, saving resources.",
-              "For Library Management, I implemented AI-based QA to detect potential crashes in the checkout system, cutting bug-related delays by 20%. This approach is vital in Malaysia, where reliable software is critical for tech-driven industries like education and hospitality."
+              "For projects requiring more infrastructure control — such as running persistent background services, managing multiple apps under one server, or reducing platform costs at scale — self-hosting with Coolify on a Hostinger VPS is a powerful alternative to managed platforms. Coolify is an open-source PaaS that gives you a Heroku-like deployment experience on your own server, with a clean dashboard, automatic SSL, reverse proxy configuration, and GitHub integration built in.",
+              "Setting up Coolify starts with provisioning a VPS on Hostinger, SSHing in, and running the Coolify installation script. Once running, you connect your GitHub account, point Coolify at a repository, and configure your build command and environment variables — the same workflow as Vercel, but fully under your control. Custom domains are configured by updating your DNS A record to point to your VPS IP, and Coolify handles the SSL certificate via Let's Encrypt automatically.",
             ],
             listItems: [
-              "Predictive bug detection for proactive issue resolution",
-              "Automated test case generation to reduce manual effort",
-              "Continuous integration enhancements for streamlined pipelines"
+              "Full infrastructure control with no platform vendor lock-in",
+              "Coolify dashboard for managing multiple apps on one VPS",
+              "Automatic SSL and reverse proxy via built-in Caddy/Nginx",
+              "GitHub-triggered deployments with build logs and rollback support",
             ],
-            images: ["/aiTestingFlowchart.png", "/bugPredictionGraph.png"]
-          }
-        ]
+            images: [
+              "/B1_3_coolifyDashboardAppOverview.png",
+              "/B1_4_hostingerVpsSSHSetupTerminal.png",
+            ],
+          },
+        ],
       },
       {
-        title: "Future Trends and Ethical Considerations",
+        title: "Custom Domains, SSL, and Environment Management Across Platforms",
         description: [
           {
             text: [
-              "As AI integrates deeper into development, its impact on jobs, creativity, and ethics becomes critical. In Malaysia’s tech scene, AI tools are reshaping roles, allowing developers to focus on architecture while AI handles repetitive tasks, as seen in Time Track’s automated UI generation. However, ethical challenges like bias in AI-generated code must be addressed to ensure fairness.",
-              "The future lies in hybrid human-AI collaboration, where developers oversee strategic decisions. For Protein Corner, I ensured AI outputs were reviewed to maintain originality, aligning with Malaysia’s push for ethical tech innovation in startups and enterprises."
+              "Regardless of which platform you deploy to, custom domain configuration follows the same core pattern: purchase a domain, update your DNS records to point to your hosting provider, and let the platform handle SSL. On Vercel and Netlify, you add the domain in the dashboard and they handle the rest. On Coolify, you set the domain in the app settings and it provisions a Let's Encrypt certificate automatically within minutes.",
+              "Environment variable discipline is the most commonly overlooked part of a production deployment. I use a consistent pattern across all projects: a `.env.local` file for local development (never committed to Git), and platform-specific environment variable dashboards for staging and production. For sensitive values like Paddle webhook secrets or MongoDB URIs, I rotate credentials immediately if a repository is ever accidentally made public — a step many developers skip.",
             ],
             listItems: [
-              "Job market evolution in tech with focus on high-level skills",
-              "Maintaining code originality to preserve developer creativity",
-              "Bias mitigation in AI tools for fair, inclusive software"
+              "DNS A and CNAME record configuration for custom domains",
+              "Automatic SSL provisioning across Vercel, Netlify, and Coolify",
+              "Environment variable discipline: local vs staging vs production",
+              "Credential rotation best practices for production security",
             ],
-            images: ["/futureAiDevIllustration.png", "/ethicalAiGuidelinesInfographic.png"]
-          }
-        ]
-      }
-    ]
+            images: [
+              "/B1_5_dnsConfigurationDiagramCustomDomain.png",
+              "/B1_6_envVariableManagementStrategyDiagram.png",
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     id: 2,
-    title: "Balancing Work and Personal Life in the Tech Industry",
-    urlTitle: "balancing-work-life-in-tech",
-    img: "/workLifeBalanceMain.png",
-    shortDescription: "Practical strategies for maintaining equilibrium between professional demands and personal well-being in the fast-paced world of technology.",
-    longDescription: "The tech industry’s relentless pace, driven by tight deadlines and constant innovation, often challenges work-life balance. This blog shares strategies from my experience as a junior full-stack developer in Malaysia, where I balanced Protein Corner’s tight deadlines with personal well-being. Drawing from projects like Time Track and Be Healthy, I’ll explore time management techniques that boosted productivity by 35%, boundary-setting practices that reduced stress, and self-care routines that improved mental clarity by 20%. These approaches are crucial for tech professionals in Malaysia’s high-pressure startup and enterprise environments, ensuring career growth without burnout. We’ll discuss practical tools and mindsets to maintain equilibrium, helping developers thrive in demanding roles while nurturing personal lives, a key concern for employers seeking sustainable talent in Malaysia’s tech hub.",
+    title: "Integrating Paddle for Subscriptions and One-Time Payments in Next.js",
+    urlTitle: "paddle-payments-subscriptions-nextjs",
+    img: "/B2_0_paddlePaymentIntegrationHero.png",
+    shortDescription:
+      "A step-by-step breakdown of integrating Paddle Billing into a Next.js application — covering subscription flows, one-time payments, webhooks, and customer portal setup.",
+    longDescription:
+      "Payment integration is one of the most technically demanding parts of building a SaaS product, and getting it wrong has real business consequences. In this post, I walk through how I integrated Paddle Billing into production Next.js applications — covering both subscription and one-time payment flows. Paddle acts as a Merchant of Record, which means it handles VAT, sales tax, and compliance globally — a significant advantage for indie developers and small teams shipping SaaS products internationally. I'll cover how to set up Paddle's client-side overlay checkout, handle server-side webhook events to update subscription state in MongoDB, implement customer portal access for plan management, and test the full payment flow in Paddle's sandbox environment. This is a practical, production-focused guide drawn from real integrations, not toy examples.",
     feaTures: [
       {
-        title: "Understanding Tech Industry Challenges",
+        title: "Setting Up Paddle Billing and Configuring Products",
         description: [
           {
             text: [
-              "The always-on culture and rapid technological changes in tech often lead to burnout. In Protein Corner, I faced 12-hour coding sprints, which highlighted the need to recognize stress early. Identifying signs like fatigue or reduced focus helped me adjust workloads, preventing long-term burnout.",
-              "Remote work, common in Malaysia’s tech scene, blurs personal and professional boundaries. For Time Track, managing notifications during off-hours was critical to maintain focus, with 30% of developers reporting burnout in industry surveys, underscoring the need for proactive stress management."
+              "Before writing a single line of code, Paddle requires you to configure your products and prices in the Paddle dashboard. For subscription products, you define a billing interval (monthly or annual), a price, and optionally a trial period. For one-time products, you set a fixed price. Each product gets a price ID that you'll reference in your frontend checkout code — similar to Stripe's price IDs if you've used that before.",
+              "Paddle operates in two modes: sandbox and production. Always develop and test against the sandbox environment first, using Paddle's test card numbers to simulate successful payments, failed charges, and subscription cancellations. Switching to production requires submitting your business details for Paddle's approval — factor this into your launch timeline, as it can take a few days.",
             ],
             listItems: [
-              "Common stressors in tech roles like tight deadlines",
-              "Impact of remote work on work-life boundaries",
-              "Statistics on tech industry burnout and its effects"
+              "Configuring subscription and one-time products in the Paddle dashboard",
+              "Understanding price IDs and how they map to checkout flows",
+              "Sandbox vs production environments and how to switch between them",
+              "Paddle as Merchant of Record: tax and compliance handled automatically",
             ],
-            images: ["/techBurnoutIllustration.png", "/workFromHomeSetup.png"]
-          }
-        ]
-      },
-      {
-        title: "Practical Time Management Strategies",
-        description: [
-          {
-            text: [
-              "Structured time management boosts productivity while preserving personal time. For Be Healthy, I used time-blocking to allocate coding, meetings, and breaks, improving task completion by 35%. Tools like Trello streamlined project tracking, aligning with Malaysia’s demand for efficient developers.",
-              "Techniques like the Pomodoro method enhanced focus during Cafeteria’s development, allowing me to tackle complex React components without fatigue. Setting realistic goals ensured I met deadlines while maintaining time for family, critical for long-term balance."
+            images: [
+              "/B2_1_paddleDashboardProductConfiguration.png",
+              "/B2_2_paddleSandboxTestCardCheckout.png",
             ],
-            listItems: [
-              "Pomodoro technique for sustained focus and productivity",
-              "Digital tools like Trello for efficient task management",
-              "Setting realistic daily goals to avoid overcommitment"
-            ],
-            images: ["/timeManagementCalendar.png", "/productivityAppsScreenshot.png"]
           },
-          {
-            text: [
-              "Learning to decline non-essential tasks and delegate effectively is vital. In Library Management, I delegated UI tweaks to a teammate, saving 10 hours weekly. Setting boundaries with colleagues, like clear communication hours, reduced after-hours disruptions, a practice valued in Malaysia’s collaborative tech culture."
-            ],
-            listItems: [
-              "Prioritization frameworks like Eisenhower Matrix for focus",
-              "Delegation best practices to optimize team efficiency",
-              "Boundary-setting with colleagues for work-life balance"
-            ],
-            images: ["/eisenhowerMatrixDiagram.png"]
-          }
-        ]
+        ],
       },
       {
-        title: "Self-Care and Long-Term Sustainability",
+        title: "Implementing the Checkout Flow in Next.js",
         description: [
           {
             text: [
-              "Regular exercise, hobbies, and social connections are essential for mental health in tech’s high-pressure environment. For Protein Corner, daily walks improved my focus by 20%, while hobbies like reading supported stress relief, aligning with Malaysia’s emphasis on employee well-being.",
-              "Building a support network, including mentors and peers, prevented isolation during Time Track’s development. Seeking professional help when needed ensured long-term resilience, a strategy Malaysian employers value for sustainable talent retention."
+              "Paddle's client-side checkout is implemented using their JavaScript SDK, which you load via a script tag or npm package. In a Next.js app, I initialize the Paddle SDK in a client component using a useEffect hook, passing the sandbox or production client token from environment variables. The checkout is triggered by calling `Paddle.Checkout.open()` with the price ID and any prefilled customer data — this opens Paddle's hosted overlay directly on your page without a redirect.",
+              "For authenticated users, passing the customer's email to the checkout prefills the form and associates the transaction with their account in Paddle. After a successful payment, Paddle redirects to a success URL you define — but critically, you should never rely on the redirect alone to update your database. Always use webhooks for authoritative payment confirmation, as redirects can be skipped or manipulated.",
             ],
             listItems: [
-              "Daily wellness routines for mental and physical health",
-              "Unplugging from tech to recharge and reduce stress",
-              "Career longevity strategies for sustained performance"
+              "Initializing the Paddle JS SDK in a Next.js client component",
+              "Triggering overlay checkout with price ID and customer data",
+              "Handling success and cancel redirect URLs",
+              "Why webhooks — not redirects — should update your database",
             ],
-            images: ["/selfCareActivitiesCollage.png", "/wellnessRoutineInfographic.png"]
-          }
-        ]
-      }
-    ]
+            images: [
+              "/B2_3_paddleCheckoutOverlayNextjsComponent.png",
+              "/B2_4_paddleCheckoutSuccessRedirectFlow.png",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Handling Webhooks and Syncing Subscription State to MongoDB",
+        description: [
+          {
+            text: [
+              "Webhooks are the backbone of any reliable payment integration. Paddle sends webhook events to a URL you configure in the dashboard — events like `subscription.created`, `subscription.updated`, `subscription.canceled`, and `transaction.completed`. In Next.js, I handle these in an App Router route handler (`/api/webhooks/paddle/route.ts`), verifying the webhook signature using Paddle's secret key before processing any event.",
+              "On receiving a `subscription.created` event, I extract the customer ID, subscription ID, plan, and status from the payload and write them to MongoDB against the user's record. This is how the app knows whether a user is on a free or paid plan. For cancellations, Paddle sends a `subscription.canceled` event when the billing period ends — I update the user's subscription status to `canceled` and restrict access to paid features accordingly. Keeping this state accurate is critical for a trustworthy SaaS product.",
+            ],
+            listItems: [
+              "Configuring webhook endpoints in the Paddle dashboard",
+              "Verifying webhook signatures in a Next.js route handler",
+              "Syncing subscription status to MongoDB on key lifecycle events",
+              "Handling cancellations, upgrades, and payment failures gracefully",
+            ],
+            images: [
+              "/B2_5_paddleWebhookRouteHandlerCodeDiagram.png",
+              "/B2_6_subscriptionStateMongodbSchemaDesign.png",
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     id: 3,
-    title: "Solving Programming Puzzles: Enhancing Problem-Solving Skills",
-    urlTitle: "solving-programming-puzzles",
-    img: "/programmingPuzzlesMain.png",
-    shortDescription: "How tackling coding challenges and riddles can sharpen your analytical thinking and boost your programming expertise.",
-    longDescription: "Programming puzzles are powerful tools for honing critical thinking and coding skills, essential for developers in Malaysia’s competitive tech landscape. This blog explores puzzle types, solving strategies, and career benefits, drawing from my experience with Protein Corner’s search algorithms and Time Track’s data optimization. Regular practice on platforms like LeetCode improved my query performance by 25%, preparing me for interviews at Malaysia’s tech firms. We’ll cover how puzzles enhance problem-solving, from optimizing Be Healthy’s fitness algorithms to debugging Cafeteria’s order system. These skills translate to real-world development, ensuring efficient, scalable solutions. Whether you’re preparing for technical interviews or refining your craft, this blog offers insights to tackle complex challenges with confidence, a key asset for standing out in Malaysia’s job market.",
+    title: "Building AI-Powered Features in Web Apps Using Third-Party APIs",
+    urlTitle: "ai-powered-features-third-party-apis-nextjs",
+    img: "/B3_0_aiPoweredFeaturesHero.png",
+    shortDescription:
+      "A practical guide to integrating AI capabilities into full-stack web applications using third-party APIs — covering prompt design, streaming responses, rate limiting, and cost management.",
+    longDescription:
+      "Adding AI-powered features to a web application has become one of the fastest ways to deliver meaningful value to users — but the implementation details matter far more than the API call itself. In this post, I walk through how I've integrated AI capabilities across multiple production projects using third-party APIs, covering the full picture from prompt engineering and streaming UX to error handling, rate limiting, and keeping costs under control. I'll use Next.js App Router as the runtime environment, with server-side route handlers managing API calls to prevent key exposure on the client. Whether you're building a content generation tool, an intelligent search feature, a document summarizer, or a context-aware assistant, the patterns covered here apply broadly across providers. This is a production-focused guide — not a 'hello world' AI tutorial.",
     feaTures: [
       {
-        title: "Types of Programming Puzzles",
+        title: "Architecture: Keeping AI API Calls Server-Side in Next.js",
         description: [
           {
             text: [
-              "Programming puzzles, from algorithmic challenges to logic riddles, test computational thinking. In Protein Corner, I solved search algorithm puzzles to optimize product filtering, boosting performance by 20%. Understanding puzzle categories enables targeted skill development.",
-              "Data structure puzzles, like tree traversals for Library Management, improved my ability to manage complex datasets. Logic riddles, used in Be Healthy’s goal-tracking feature, sharpened my reasoning, a skill Malaysian employers value for innovative solutions."
+              "The most important architectural decision when integrating a third-party AI API is keeping your API key server-side. Never call an AI provider directly from client-side JavaScript — your API key will be exposed in the browser's network tab and can be extracted and abused. In Next.js, the correct pattern is to create a route handler in the App Router (`/api/ai/route.ts`) that accepts a request from your frontend, validates the user's session, calls the AI API server-side using your secret key, and streams or returns the response.",
+              "This server-side intermediary also gives you a natural place to implement rate limiting per user, log requests for debugging and cost tracking, sanitize user input before it reaches the AI provider, and enforce content policies. I use a simple Redis-based rate limiter in this layer — each user gets a fixed number of AI requests per hour, tracked by their session ID.",
             ],
             listItems: [
-              "Algorithm optimization problems for efficient code",
-              "Data structure manipulations for complex systems",
-              "Logical reasoning riddles to enhance critical thinking"
+              "Route handler pattern for secure server-side AI API calls",
+              "Session validation before forwarding requests to the AI provider",
+              "Redis-based per-user rate limiting to control costs and abuse",
+              "Input sanitization and content policy enforcement at the API layer",
             ],
-            images: ["/puzzleTypesDiagram.png", "/algorithmExampleCode.png"]
-          }
-        ]
-      },
-      {
-        title: "Effective Solving Strategies",
-        description: [
-          {
-            text: [
-              "Breaking down complex puzzles into manageable steps is key. For Time Track, I used divide-and-conquer to optimize time-logging algorithms, reducing runtime by 25%. This structured approach ensures efficient solutions under tight deadlines, common in Malaysia’s tech startups.",
-              "Debugging techniques, like step-by-step tracing in Cafeteria’s payment system, helped identify bottlenecks, improving reliability by 15%. Analyzing time and space complexity upfront ensured scalable code, a critical skill for Malaysia’s enterprise projects."
+            images: [
+              "/B3_1_aiApiServerSideArchitectureDiagram.png",
+              "/B3_2_nextjsRouteHandlerAiRequestFlow.png",
             ],
-            listItems: [
-              "Problem decomposition methods for clear solutions",
-              "Debugging techniques to identify and fix issues",
-              "Time and space complexity analysis for optimization"
-            ],
-            images: ["/problemSolvingFlowchart.png", "/debuggingProcessIllustration.png"]
           },
-          {
-            text: [
-              "Platforms like LeetCode and HackerRank are invaluable for practice. For Be Healthy, daily LeetCode challenges honed my array manipulation skills, speeding up feature development by 20%. Collaborative solving on HackerRank fostered teamwork, aligning with Malaysia’s collaborative tech culture."
-            ],
-            listItems: [
-              "Daily practice routines to build consistent skills",
-              "Code review best practices for quality assurance",
-              "Collaborative solving approaches for team synergy"
-            ],
-            images: ["/leetcodeScreenshot.png"]
-          }
-        ]
+        ],
       },
       {
-        title: "Benefits for Career Growth",
+        title: "Streaming Responses for a Better User Experience",
         description: [
           {
             text: [
-              "Regular puzzle-solving enhances technical and problem-solving skills, directly applicable to real-world development. In Protein Corner, puzzle practice optimized database queries, improving user experience by 25%. This expertise is highly sought after in Malaysia’s tech job market.",
-              "Tech companies, especially in Malaysia, use puzzles in interviews to assess analytical thinking. My LeetCode practice for Time Track prepared me to solve array-based problems in interviews, increasing my confidence and success rate by 30%."
+              "One of the biggest UX improvements you can make when integrating AI features is streaming the response rather than waiting for the full completion before rendering. Without streaming, users stare at a loading spinner for several seconds before seeing anything — with streaming, text appears incrementally as it's generated, which feels dramatically more responsive and keeps users engaged.",
+              "In Next.js App Router, streaming AI responses is straightforward using the Web Streams API. The route handler returns a `Response` with a `ReadableStream` body, and on the client, I consume it using `fetch` with a reader on `response.body`. I update a state variable character by character as chunks arrive, rendering the output progressively. This pattern works with any AI provider that supports streaming completions.",
             ],
             listItems: [
-              "Interview preparation advantages for technical roles",
-              "Real-world application examples for practical impact",
-              "Continuous learning mindset for career advancement"
+              "Why streaming improves perceived performance for AI features",
+              "Returning a ReadableStream from a Next.js App Router route handler",
+              "Consuming streamed chunks on the client with fetch and a stream reader",
+              "Rendering progressive output with React state updates",
             ],
-            images: ["/careerGrowthGraph.png", "/interviewPuzzleScenario.png"]
-          }
-        ]
-      }
-    ]
-  }
+            images: [
+              "/B3_3_streamingResponseUXComparisonDemo.png",
+              "/B3_4_readableStreamNextjsRouteHandlerCode.png",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Prompt Design, Cost Management, and Production Considerations",
+        description: [
+          {
+            text: [
+              "The quality of your AI feature is determined largely by how well you design the prompt. A good system prompt constrains the model's behavior, defines its role, specifies the output format, and handles edge cases like empty input or off-topic requests. I always develop prompts iteratively — starting with a rough version, testing it against a range of real user inputs, and refining based on failure cases. Keeping system prompts in a constants file rather than inline in route handlers makes them easier to version and update.",
+              "Cost management is non-negotiable in production. AI API costs scale directly with token usage, so I implement a few layers of control: truncating user input to a max character count before sending, caching responses for identical or near-identical prompts using Redis with a short TTL, and monitoring usage via the provider's dashboard with budget alerts configured. For features used heavily, even small prompt optimizations — like removing redundant instructions — can reduce costs meaningfully at scale.",
+            ],
+            listItems: [
+              "System prompt design patterns for consistent, reliable outputs",
+              "Iterative prompt development and testing against real user inputs",
+              "Input truncation and token budget management per request",
+              "Response caching with Redis to reduce redundant API calls and costs",
+            ],
+            images: [
+              "/B3_5_promptDesignSystemPromptStructureDiagram.png",
+              "/B3_6_redisCachingAiResponseCostReductionDiagram.png",
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export default blogs;

@@ -1,18 +1,14 @@
-// components/SingleProject.jsx
 "use client";
 import { useTheme } from "@/app/hooks/useTheme";
-import Image from "next/image";
-import { useParams } from "next/navigation";
 import projects from "@/app/projects/projects";
-import Footer from "./Footer";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import { FaArrowLeft } from "react-icons/fa";
+import Image from "next/image";
 import Link from "next/link";
+import { FaArrowLeft, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import Footer from "./Footer";
 
 export default function SingleProject({ urlTitle }) {
   const { theme } = useTheme();
 
-  // Find the project by urlTitle
   const project = projects.find((p) => p.urlTitle === urlTitle);
 
   if (!project) {
@@ -26,6 +22,7 @@ export default function SingleProject({ urlTitle }) {
       }`}
     >
       <div className="w-[90%] sm:w-[80%] md:w-[60%] mx-auto mb-[5%] px-[5%] sm:px-0 relative">
+        {/* Title */}
         <div className="mb-12">
           <div
             className={`flex items-center mb-5 gap-4 ${
@@ -56,21 +53,24 @@ export default function SingleProject({ urlTitle }) {
             {project.longDescription}
           </p>
         </div>
+
+        {/* Hero image — 16:9 */}
         <div className="mb-12">
           <div
-            className={`relative p-0 overflow-hidden border-[1px] mb-3 rounded-2xl ${
+            className={`relative w-full aspect-video overflow-hidden border-[1px] rounded-2xl ${
               theme ? "border-blue-800" : "border-blue-700"
             }`}
           >
             <Image
               src={project.img[0]}
               alt={project.title}
-              width={1200}
-              height={600}
-              className="w-full h-auto object-cover rounded-lg"
+              fill
+              className="object-cover"
             />
           </div>
         </div>
+
+        {/* Tech stack */}
         <div className="mb-12">
           <h2
             className={`text-2xl sm:text-3xl tracking-wide font-semibold mb-4 ${
@@ -99,6 +99,8 @@ export default function SingleProject({ urlTitle }) {
             ))}
           </div>
         </div>
+
+        {/* Features — all images 16:9 */}
         {project.feaTures.map((feature, index) => (
           <div key={index} className="mb-12">
             <h2
@@ -132,20 +134,19 @@ export default function SingleProject({ urlTitle }) {
                     </li>
                   ))}
                 </ul>
-                <div className={`relative`}>
+                <div className="flex flex-col gap-3">
                   {desc.images.map((imgSrc, imgIndex) => (
                     <div
-                      className={`relative p-0 overflow-hidden mx-auto border-[1px] mb-3 rounded-2xl ${
+                      key={imgIndex}
+                      className={`relative w-full aspect-video overflow-hidden border-[1px] rounded-2xl ${
                         theme ? "border-blue-800" : "border-blue-700"
                       }`}
-                      key={imgIndex}
                     >
                       <Image
                         src={imgSrc}
                         alt={`${feature.title} image ${imgIndex + 1}`}
-                        width={1200}
-                        height={600}
-                        className="w-full h-auto object-cover rounded-lg"
+                        fill
+                        className="object-cover"
                       />
                     </div>
                   ))}
@@ -154,6 +155,8 @@ export default function SingleProject({ urlTitle }) {
             ))}
           </div>
         ))}
+
+        {/* Floating action buttons — right */}
         <div className="fixed right-[5%] md:right-[11%] top-[80px] sm:top-[110px] md:top-[150px] transform -translate-y-1/2 flex flex-row gap-3 md:flex-col sm:gap-4 z-50">
           <Link
             href="/projects"
@@ -195,6 +198,8 @@ export default function SingleProject({ urlTitle }) {
             </a>
           )}
         </div>
+
+        {/* Floating back button — left (desktop) */}
         <div className="md:fixed hidden left-[26%] sm:left-[4%] top-[80px] sm:top-[125px] transform -translate-y-1/2 md:flex flex-col gap-3 sm:gap-4 z-50">
           <Link
             href="/projects"

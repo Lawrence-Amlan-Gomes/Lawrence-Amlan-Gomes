@@ -9,7 +9,6 @@ import Link from "next/link";
 export default function SingleBlog({ urlTitle }) {
   const { theme } = useTheme();
 
-  // Find the blog by urlTitle
   const blog = blogs.find((p) => p.urlTitle === urlTitle);
 
   if (!blog) {
@@ -23,6 +22,8 @@ export default function SingleBlog({ urlTitle }) {
       }`}
     >
       <div className="w-[90%] sm:w-[80%] md:w-[60%] mx-auto mb-[5%] px-[5%] sm:px-0 relative">
+
+        {/* Title + long description */}
         <div className="mb-12">
           <div
             className={`flex items-center mb-5 gap-4 ${
@@ -53,21 +54,24 @@ export default function SingleBlog({ urlTitle }) {
             {blog.longDescription}
           </p>
         </div>
+
+        {/* Hero image — 16:9 */}
         <div className="mb-12">
           <div
-            className={`relative p-0 overflow-hidden border-[1px] mb-3 rounded-2xl ${
+            className={`relative w-full aspect-video overflow-hidden border-[1px] rounded-2xl ${
               theme ? "border-blue-800" : "border-blue-700"
             }`}
           >
             <Image
               src={blog.img}
               alt={blog.title}
-              width={1200}
-              height={600}
-              className="w-full h-auto object-cover rounded-lg"
+              fill
+              className="object-cover"
             />
           </div>
         </div>
+
+        {/* Features — all images 16:9 */}
         {blog.feaTures.map((feature, index) => (
           <div key={index} className="mb-12">
             <h2
@@ -101,20 +105,19 @@ export default function SingleBlog({ urlTitle }) {
                     </li>
                   ))}
                 </ul>
-                <div className={`relative`}>
+                <div className="flex flex-col gap-3">
                   {desc.images.map((imgSrc, imgIndex) => (
                     <div
-                      className={`relative p-0 overflow-hidden mx-auto border-[1px] mb-3 rounded-2xl ${
+                      key={imgIndex}
+                      className={`relative w-full aspect-video overflow-hidden border-[1px] rounded-2xl ${
                         theme ? "border-blue-800" : "border-blue-700"
                       }`}
-                      key={imgIndex}
                     >
                       <Image
                         src={imgSrc}
                         alt={`${feature.title} image ${imgIndex + 1}`}
-                        width={1200}
-                        height={600}
-                        className="w-full h-auto object-cover rounded-lg"
+                        fill
+                        className="object-cover"
                       />
                     </div>
                   ))}
@@ -123,6 +126,8 @@ export default function SingleBlog({ urlTitle }) {
             ))}
           </div>
         ))}
+
+        {/* Back button — mobile (right) */}
         <div className="fixed right-[5%] md:right-[11%] top-[80px] sm:top-[110px] md:top-[150px] transform -translate-y-1/2 flex flex-row gap-3 md:flex-col sm:gap-4 z-50">
           <Link
             href="/blogs"
@@ -131,11 +136,13 @@ export default function SingleBlog({ urlTitle }) {
                 ? "bg-[#ffffff] text-[#0a0a0a] border-[1px] border-blue-800 hover:bg-blue-800 hover:text-[#ffffff]"
                 : "bg-[#1a1a1a] text-[#ebebeb] border-[1px] border-blue-700 hover:bg-blue-700 hover:text-[#ffffff]"
             }`}
-            title="Back to Projects"
+            title="Back to Blogs"
           >
             <FaArrowLeft />
           </Link>
         </div>
+
+        {/* Back button — desktop (left) */}
         <div className="md:fixed hidden left-[26%] sm:left-[4%] top-[80px] sm:top-[125px] transform -translate-y-1/2 md:flex flex-col gap-3 sm:gap-4 z-50">
           <Link
             href="/blogs"
@@ -144,7 +151,7 @@ export default function SingleBlog({ urlTitle }) {
                 ? "bg-[#ffffff] text-[#0a0a0a] border-[1px] border-blue-800 hover:bg-blue-800 hover:text-[#ffffff]"
                 : "bg-[#1a1a1a] text-[#ebebeb] border-[1px] border-blue-700 hover:bg-blue-700 hover:text-[#ffffff]"
             }`}
-            title="Back to Projects"
+            title="Back to Blogs"
           >
             <FaArrowLeft />
           </Link>

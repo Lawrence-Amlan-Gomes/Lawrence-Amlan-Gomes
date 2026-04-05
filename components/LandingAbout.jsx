@@ -1,7 +1,5 @@
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { useTheme } from "@/app/hooks/useTheme";
-import Link from "next/link";
+import Image from "next/image";
 
 export default function LandingAbout() {
   const { theme } = useTheme();
@@ -9,7 +7,7 @@ export default function LandingAbout() {
   return (
     <div className="w-full px-[5%] sm:px-[10%] flex flex-row justify-between items-start gap-4 sm:gap-6 md:mb-0 mb-[5%]">
       {/* LEFT TEXT SECTION */}
-      <div className={`w-[50%] sm:w-[70%] mr-[2.5%]`}>
+      <div className="w-[60%] mr-[2.5%]">
         <h1
           className={`text-xl sm:text-4xl lg:text-6xl 2xl:text-7xl font-bold mb-3 text-justify ${
             theme ? "text-[#0a0a0a]" : "text-[#ebebeb]"
@@ -19,7 +17,7 @@ export default function LandingAbout() {
         </h1>
 
         <h2
-          className={`text-sm xs:text-base sm:text-xl font-semibold mb-4 text-justify ${
+          className={`text-xs xs:text-sm sm:text-xl font-semibold mb-4 text-justify ${
             theme ? "text-[#333333]" : "text-[#cccccc]"
           }`}
         >
@@ -28,7 +26,7 @@ export default function LandingAbout() {
 
         {/* Desktop bio */}
         <p
-          className={`leading-relaxed mb-6 text-justify text-xs hidden sm:block sm:text-base ${
+          className={`leading-relaxed mb-6 text-justify text-xs hidden sm:block sm:text-base xl:text-lg ${
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
@@ -46,17 +44,16 @@ export default function LandingAbout() {
 
         {/* Mobile bio */}
         <p
-          className={`leading-relaxed mb-6 text-justify text-xs sm:hidden block sm:text-base ${
+          className={`leading-relaxed mb-4 text-justify text-xs sm:hidden block ${
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
-          I&apos;m a Full-Stack Developer building production-ready web apps
-          end-to-end. Stack: Next.js, TypeScript, MongoDB, Redis, Tailwind CSS,
-          AWS S3. I&apos;ve shipped SaaS products and client projects with
-          Paddle payments, CI/CD pipelines, and cloud deployments — fast, clean,
-          and scalable.
+          Full-Stack Developer shipping production apps end-to-end. Next.js ·
+          TypeScript · MongoDB · Redis · Tailwind · AWS S3. Paddle payments,
+          CI/CD, and cloud deployments.
         </p>
 
+        {/* Desktop CTA */}
         <p
           className={`font-medium mb-3 text-justify text-xs hidden sm:block sm:text-base ${
             theme ? "text-[#444444]" : "text-[#bbbbbb]"
@@ -66,8 +63,9 @@ export default function LandingAbout() {
           something great together.
         </p>
 
+        {/* Desktop bullet list */}
         <ul
-          className={`list-disc ml-5 space-y-2 mb-8 text-justify text-xs sm:text-base hidden sm:block ${
+          className={`list-disc ml-5 space-y-2 mb-8 text-justify xl:text-lg text-xs sm:text-base hidden lg:block ${
             theme ? "text-[#666666]" : "text-[#aaaaaa]"
           }`}
         >
@@ -80,13 +78,43 @@ export default function LandingAbout() {
           <li>Manage state efficiently using Redux Toolkit</li>
           <li>Craft responsive, accessible UIs with Tailwind CSS</li>
         </ul>
+
+        {/* Mobile: horizontally scrollable pill list */}
+        <div className="flex lg:hidden overflow-x-auto gap-2 pb-2 -mx-1 px-1 scrollbar-hide">
+          {[
+            "Next.js",
+            "TypeScript",
+            "MongoDB",
+            "Redis",
+            "AWS S3",
+            "Paddle",
+            "Tailwind CSS",
+            "Redux Toolkit",
+            "CI/CD",
+            "Vercel",
+            "Netlify",
+            "Coolify",
+            "AI APIs",
+          ].map((tag) => (
+            <span
+              key={tag}
+              className={`flex-shrink-0 text-[10px] px-2 py-1 rounded-full border whitespace-nowrap ${
+                theme
+                  ? "border-[#cccccc] text-[#555555]"
+                  : "border-[#444444] text-[#aaaaaa]"
+              }`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* RIGHT COLUMN */}
-      <div className="w-[50%] sm:w-[30%] ml-[2.5%]">
-        {/* RIGHT IMAGE SECTION */}
+      <div className="w-[40%] ml-[2.5%]">
+        {/* Profile image */}
         <div
-          className={`relative rounded-xl overflow-hidden h-[200px] xs:h-[250px] sm:h-[300px] lg:h-[350px] 2xl:h-[400px] mb-6 ${
+          className={`relative rounded-xl overflow-hidden w-full aspect-[3/4] mb-4 sm:mb-6 ${
             theme ? "border-[#000000]" : "border-[#444444]"
           }`}
         >
@@ -98,15 +126,15 @@ export default function LandingAbout() {
           />
         </div>
 
-        {/* NEW UNIVERSITY SECTION */}
+        {/* University card */}
         <a
-          className="h-full w-full"
           href="https://www.bracu.ac.bd/"
           target="_blank"
           rel="noopener noreferrer"
+          className="block w-full"
         >
           <div
-            className={`relative rounded-xl h-[300px] xs:h-[300px] sm:h-[300px] lg:h-[250px] 2xl:h-[300px] border ${
+            className={`relative rounded-xl border ${
               theme
                 ? "hover:bg-[#f8f8f8] border-[#888888]"
                 : "border-[#333333] hover:bg-[#080808]"
@@ -115,36 +143,39 @@ export default function LandingAbout() {
             <Image
               src="/graduationIcon.png"
               alt="Graduation Icon"
-              width={32}
-              height={32}
-              className="absolute top-[3px] sm:top-2 left-2 sm:left-3 object-contain"
+              width={16}
+              height={16}
+              className="absolute top-2 left-2 sm:top-2 sm:left-3 object-contain w-4 h-4 sm:w-6 sm:h-6"
             />
-            <div className="absolute inset-0 p-4 flex flex-col items-center justify-center">
-              <div className="w-full flex items-center justify-center mb-4">
-                <Image
-                  src={theme ? "/bracuIconLight.png" : "/bracuIconDark.png"}
-                  alt="Brac University Icon"
-                  width={60}
-                  height={60}
-                  className="object-contain"
-                />
-              </div>
-              <div className="w-full flex flex-col items-center">
-                <p
-                  className={`text-xs sm:text-[15px] 2xl:text-[18px] font-medium mb-2 text-center ${
-                    theme ? "text-[#333333]" : "text-[#cccccc]"
-                  }`}
-                >
-                  Bachelor of Science in Computer Science (2022-2025)
-                </p>
-                <p
-                  className={`text-[10px] sm:text-[14px] 2xl:text-[16px] text-center ${
-                    theme ? "text-[#555555]" : "text-[#aaaaaa]"
-                  }`}
-                >
-                  Brac University | Dhaka, Bangladesh
-                </p>
-              </div>
+            <div className="p-3 sm:p-4 flex flex-col items-center justify-center gap-2 sm:gap-3">
+              <Image
+                src={theme ? "/bracuIconLight.png" : "/bracuIconDark.png"}
+                alt="Brac University Icon"
+                width={500}
+                height={500}
+                className="object-contain mt-4 sm:mt-2 w-8 h-8 sm:w-10 sm:h-10 lg:w-[150px] lg:h-[150px] xl:w-[180px] xl:h-[180px]"
+              />
+              <p
+                className={`hidden sm:block text-[9px] xs:text-[10px] sm:text-[15px] 2xl:text-[18px] font-medium text-center ${
+                  theme ? "text-[#333333]" : "text-[#cccccc]"
+                }`}
+              >
+                Bachelor of Science in Computer Science (2022 Jan –2026 Apr)
+              </p>
+              <p
+                className={`sm:hidden block text-[9px] xs:text-[10px] sm:text-[15px] 2xl:text-[18px] font-medium text-center ${
+                  theme ? "text-[#333333]" : "text-[#cccccc]"
+                }`}
+              >
+                BSc in CS | Brac University
+              </p>
+              <p
+                className={`hidden sm:block text-[8px] xs:text-[9px] sm:text-[14px] 2xl:text-[16px] text-center ${
+                  theme ? "text-[#555555]" : "text-[#aaaaaa]"
+                }`}
+              >
+                Brac University | Dhaka, Bangladesh
+              </p>
             </div>
           </div>
         </a>
