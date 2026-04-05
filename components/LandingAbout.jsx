@@ -23,39 +23,38 @@ export default function LandingAbout() {
             theme ? "text-[#333333]" : "text-[#cccccc]"
           }`}
         >
-          Full-Stack Developer | Building Scalable, User-Centric Web Solutions
+          Full-Stack Developer | Shipping Production-Ready Web Apps End-to-End
         </h2>
+
+        {/* Desktop bio */}
         <p
           className={`leading-relaxed mb-6 text-justify text-xs hidden sm:block sm:text-base ${
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
-          I&apos;m a Full-Stack Developer passionate about engineering
-          intelligent, high-performance web applications. With deep expertise in
-          React and Next.js, I build dynamic, responsive, and SEO-optimized
-          frontends styled with Tailwind CSS and animated with Framer Motion for
-          immersive user experiences. On the backend, I design scalable systems
-          using MongoDB and GraphQL for efficient data flow and API performance.
-          I streamline complex state with Redux Toolkit and integrate real-time
-          functionality via Firebase. I also implement AI API integrations
-          (OpenAI, Hugging Face, etc.) to power smart features like chatbots,
-          predictive analytics, content generation, and automation. From secure
-          payment gateways to data-driven UX, I deliver innovative, future-ready
-          solutions that drive impact.
+          I&apos;m a Full-Stack Developer based in Dhaka, Bangladesh,
+          specializing in building and shipping complete, production-ready web
+          applications — from architecture to deployment. My core stack: Next.js
+          (App Router) · TypeScript · React · Node.js · MongoDB · Redis ·
+          Tailwind CSS · Redux Toolkit · AWS S3. I&apos;ve independently built
+          and launched multiple SaaS products and client projects — handling
+          feature development, Paddle payment integrations, CI/CD pipelines,
+          custom domains, and cloud deployments on Vercel, Netlify, and
+          self-hosted Coolify. I move fast, integrate AI APIs across projects,
+          and deliver clean, maintainable codebases that scale.
         </p>
 
+        {/* Mobile bio */}
         <p
           className={`leading-relaxed mb-6 text-justify text-xs sm:hidden block sm:text-base ${
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
-          I'm a Full-Stack Developer focused on intelligent, high-performance
-          web apps. With React, Next.js, Tailwind CSS and Framer Motion, I build
-          responsive, SEO-friendly, and animated frontends. Backend-wise, I
-          create scalable systems using MongoDB, Redux Toolkit for real-time functionality. I integrate AI APIs to enable 
-          chatbots, content generation, predictive
-          features, and automation — delivering secure, data-driven, and
-          future-ready solutions that make an impact.
+          I&apos;m a Full-Stack Developer building production-ready web apps
+          end-to-end. Stack: Next.js, TypeScript, MongoDB, Redis, Tailwind CSS,
+          AWS S3. I&apos;ve shipped SaaS products and client projects with
+          Paddle payments, CI/CD pipelines, and cloud deployments — fast, clean,
+          and scalable.
         </p>
 
         <p
@@ -63,8 +62,8 @@ export default function LandingAbout() {
             theme ? "text-[#444444]" : "text-[#bbbbbb]"
           }`}
         >
-          Ready to build your next intelligent, high-performance web app? Let’s
-          collaborate.
+          Looking to build your next production web app? Let&apos;s ship
+          something great together.
         </p>
 
         <ul
@@ -72,15 +71,13 @@ export default function LandingAbout() {
             theme ? "text-[#666666]" : "text-[#aaaaaa]"
           }`}
         >
-          <li>
-            Develop dynamic, type-safe apps with React, Next.js & TypeScript
-          </li>
-          <li>Boost performance with SSR, lazy loading & code splitting</li>
-          <li>Manage complex state efficiently using Redux Toolkit</li>
-          <li>Create fluid, engaging animations with Framer Motion</li>
-          <li>Build scalable backends with MongoDB and GraphQL</li>
-          <li>Integrate AI APIs for chatbots, predictions & automation</li>
-          <li>Enable real-time features with Firebase</li>
+          <li>Build type-safe, full-stack apps with Next.js & TypeScript</li>
+          <li>Deploy via Vercel, Netlify, and self-hosted Coolify on VPS</li>
+          <li>Integrate Paddle for subscriptions and one-time payment flows</li>
+          <li>Implement AI-powered features via third-party APIs</li>
+          <li>Set up GitHub-based CI/CD pipelines and custom domains</li>
+          <li>Scale backends with MongoDB and Redis caching</li>
+          <li>Manage state efficiently using Redux Toolkit</li>
           <li>Craft responsive, accessible UIs with Tailwind CSS</li>
         </ul>
       </div>

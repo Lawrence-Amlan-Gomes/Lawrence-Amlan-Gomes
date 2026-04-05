@@ -1,61 +1,68 @@
 const mySelf = `
 About Me:
 
-I am Lawrence Amlan Gomes, a dedicated Full-Stack Developer based in Dhaka, Bangladesh, 
-passionate about crafting scalable, user-centric web applications. With expertise in modern 
-technologies like React, Next.js, and GraphQL, I build responsive, high-performance solutions 
-that drive business success. My focus on clean code, intuitive design, and innovative 
-integrations—such as Framer Motion animations and secure payment gateways—ensures seamless 
-user experiences across devices.
+I am Lawrence Amlan Gomes, a Full-Stack Developer based in Dhaka, Bangladesh, specializing in
+building and shipping complete, production-ready web applications — from architecture to deployment.
+My core stack includes Next.js (App Router), TypeScript, React, Node.js, MongoDB, Redis, Tailwind
+CSS, Redux Toolkit, and AWS S3. Over the past year, I've independently built and launched multiple
+SaaS products and client projects, handling everything from feature development and payment
+integrations to CI/CD pipelines, custom domains, and cloud deployments. I move fast, integrate AI
+APIs across projects, and deliver clean, maintainable codebases that scale.
 
 Projects:
 
-I have developed a dynamic personal portfolio website featuring blogs, project showcases, 
-and interactive contact forms. Notable projects include a landing page with social media 
-integrations, a contact form with MongoDB for secure message storage, and an AI-powered chatbot 
-leveraging real-time Firebase capabilities. Additionally, I’ve built secure registration forms 
-with validation and hashing, as well as e-commerce features integrated with payment gateways 
-like Stripe and PayPal, all optimized for performance and scalability.
+I have designed and shipped multiple production-ready web applications, including SaaS platforms and
+client projects built end-to-end. Notable work includes full-stack applications with Paddle
+subscription and one-time payment flows, AI-powered features integrated via third-party APIs, and
+e-commerce frontends with interactive product displays and streamlined checkout experiences. I've
+also built portfolio sites, company websites, and internal tools — all deployed with custom domains,
+GitHub-based CI/CD pipelines, and cloud infrastructure across Vercel, Netlify, and self-hosted
+Coolify on a Hostinger VPS.
 
 Skills:
 
-Proficient in full-stack development with HTML, CSS, JavaScript, React, Next.js, and Tailwind 
-CSS for crafting responsive, modern frontends. I leverage Framer Motion for engaging animations
- and Redux with Redux Toolkit for efficient state management. On the backend, I specialize in 
- MongoDB and GraphQL for scalable data management and API performance, with expertise in Firebase 
- for real-time features. I also integrate secure payment gateways (e.g., Stripe, PayPal), implement 
- form validation, handle server-side actions via APIs, and ensure cross-platform compatibility with 
- responsive designs.
+Proficient in full-stack development with Next.js (App Router), TypeScript, React, Node.js, and
+Tailwind CSS for building responsive, SEO-optimized, and high-performance web applications. I use
+Redux Toolkit for scalable state management and Framer Motion for polished UI animations. On the
+backend, I design systems with MongoDB and Redis caching for efficient data handling and API
+performance, and manage file storage with AWS S3. I implement complex payment flows using Paddle,
+set up GitHub-based CI/CD pipelines, configure custom domains, and deploy across Vercel, Netlify,
+and self-hosted Coolify on Hostinger VPS. I also integrate AI-powered features via external APIs
+and build secure, maintainable codebases using Git-based version control.
 
 Clients:
 
-I have collaborated with individual clients and small businesses on freelance projects, delivering 
-custom web applications and portfolio websites. Key engagements include developing interactive user 
-interfaces for startup prototypes, optimizing web performance for existing sites, and integrating 
-secure payment solutions to enhance e-commerce functionality, consistently meeting client goals with
- tailored, high-quality solutions.
+I have worked independently with local clients and small businesses in Dhaka, delivering tailored,
+production-ready web applications across various sectors. Engagements include building full-stack
+applications with payment integrations, deploying projects with custom domains and CI/CD pipelines,
+and implementing AI-powered features — consistently meeting client goals through regular
+consultations, iterative delivery, and clean, maintainable code.
 
 Blogs:
 
-I regularly write about cutting-edge web development topics, including Next.js server-side 
-rendering, Tailwind CSS for rapid UI design, and advanced React hooks for reusable components. 
-My blog posts, accessible via the "View All Blogs" link on my portfolio, also cover UI/UX best 
-practices, GraphQL API integration, and implementing dark/light theme toggles, offering insights
- to developers and businesses alike.
+I write about practical full-stack development topics relevant to modern web engineering, including
+Next.js App Router patterns, TypeScript best practices, scalable backend architecture with MongoDB
+and Redis, and deployment workflows using Vercel, Netlify, and self-hosted infrastructure. My posts
+also cover payment integration with Paddle, AI API integrations, CI/CD pipeline setup, and
+performance optimization techniques — offering actionable insights for developers building
+production-grade applications.
 
 Experience:
 
-With over two years of hands-on experience as a self-taught Full-Stack Developer, I have progressed 
-from building HTML/CSS websites to delivering complex full-stack applications with MongoDB, GraphQL,
- and Firebase integrations. I actively contribute to open-source projects on GitHub, explore 
- AI-driven web functionalities, and specialize in frontend development with a strong backend 
- foundation, ensuring robust and scalable solutions.
+I have over two years of hands-on experience as a self-taught Full-Stack Developer, progressing
+from building simple frontends to independently shipping complete SaaS products and client
+applications. As a Freelance Full-Stack Developer (Jan 2026 – Present), I design, build, and deploy
+full-stack applications end-to-end — managing payments with Paddle, deploying on Vercel, Netlify,
+and self-hosted Coolify, and integrating AI APIs across multiple projects. Previously, as Sole
+Frontend Developer at UTES (Oct 2024 – Dec 2024), I delivered two production projects — the
+official UTES company website and the Protein Corner e-commerce frontend — independently and under
+tight deadlines using Next.js, Tailwind CSS, and Framer Motion.
 
 Education:
 
-Bachelor of Science in Computer Science BRAC University, Dhaka, Bangladesh 2022 - 2025 Developed
- a strong foundation in software engineering, algorithms, data structures, and web technologies,
-  equipping me to design and implement efficient, scalable web applications.
+Bachelor of Science in Computer Science — BRAC University, Dhaka, Bangladesh (2022 – 2025).
+Developed a strong foundation in software engineering, algorithms, data structures, and web
+technologies, equipping me to design and implement efficient, scalable web applications.
 `;
 
 export default mySelf;

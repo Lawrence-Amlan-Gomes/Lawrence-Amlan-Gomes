@@ -1,50 +1,50 @@
 const experiences = [
   {
     id: 2,
-    title: "Self-Employed Full-Stack Developer",
-    companyName: "Local Clients, Dhaka",
+    title: "Freelance Full-Stack Developer",
+    companyName: "Self-employed · Remote",
     img: "/Company2pic.png",
-    duration: "Jan 2024 - Present",
-    overview: "Independently designed and delivered tailored web solutions for small-scale client needs in Dhaka, managing all aspects of development from client requirements to deployment.",
-    technologies: ["Next.js", "Tailwind CSS", "Firebase", "MongoDB", "Git"],
+    duration: "Jan 2026 - Present · 4 mos",
+    overview: "Designed, developed, and deployed three full-stack web applications for local clients in Dhaka, managing the complete lifecycle from requirements to production.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Vercel", "Netlify", "Coolify", "Paddle", "Git"],
     paragraphs: [
       [
         "Challenge",
-        "Clients in Dhaka required simple, cost-effective web applications for their personal or small-scale work, often with specific needs and limited budgets.",
+        "Local clients needed custom, production-ready web applications with modern feature sets — including payment integrations and AI-powered functionality — often within limited budgets and timelines.",
       ],
       [
         "Action",
-        "Developed full-stack web applications using Next.js for optimized server-side rendering, Tailwind CSS for responsive and modern UI, and MongoDB with Firebase for scalable data management. Conducted client consultations to align solutions with their objectives and ensured code quality through Git-based version control.",
+        "Built and shipped three full-stack applications using Next.js, TypeScript, Tailwind CSS, and MongoDB. Handled end-to-end deployment across Vercel, Netlify, and a self-hosted Coolify instance on a Hostinger VPS, including custom domain configuration and GitHub-based CI/CD pipelines. Integrated Paddle for subscription and one-time payment flows, and implemented AI-powered features via third-party APIs. Maintained clean, maintainable codebases through Git-based version control and iterated based on regular client consultations.",
       ],
       [
         "Result",
-        "Successfully delivered 3 web applications for 3 clients in various small-scale sectors, enhancing their online presence and supporting their individual operational needs.",
+        "Successfully delivered three production applications with high client satisfaction, establishing reliable deployment pipelines and enabling clients to operate with scalable, fully functional web products.",
       ],
     ],
-  },,
+  },
   {
     id: 1,
-    title: "Frontend Developer",
-    companyName: "Utes",
+    title: "Sole Frontend Developer",
+    companyName: "UTES · Part-time",
     img: "/Company1pic.png",
-    duration: "Oct 2023 - Dec 2023",
-    overview: "Served as the sole developer for a startup, building a modern, high-performance website to establish its online presence within a constrained two-month timeline.",
-    technologies: ["Next.js", "Tailwind CSS", "Firebase", "Git"],
+    duration: "Oct 2024 - Dec 2024 · 3 mos",
+    overview: "Served as the sole frontend engineer at UTES, independently delivering two production projects under tight deadlines using Next.js, Tailwind CSS, and Framer Motion.",
+    technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Git"],
     paragraphs: [
       [
         "Challenge",
-        "Utes, a startup with limited resources, needed a professional, SEO-optimized website to attract customers and build brand credibility under tight deadlines.",
+        "UTES needed two distinct production-ready frontends delivered simultaneously — a company website and a full-featured e-commerce platform — under tight deadlines and with close alignment to the product vision.",
       ],
       [
         "Action",
-        "Single-handedly developed a responsive frontend using Next.js for efficient server-side rendering and Tailwind CSS for visually appealing, mobile-friendly design. Integrated Firebase for real-time data features and optimized performance with techniques like lazy loading, image compression, and Git for version control.",
+        "Independently built the official UTES company website as a responsive, SEO-optimized interface aligned with the company's brand identity. In parallel, developed the frontend for Protein Corner, a full-featured e-commerce platform featuring interactive product displays and a streamlined checkout experience. Used Framer Motion throughout for polished UI interactions and maintained close communication with leadership at every stage.",
       ],
       [
         "Result",
-        "Launched a high-quality website that enhanced Utes’ brand perception, improved user retention by 25%, and supported initial customer acquisition efforts before the company’s closure.",
+        "Delivered both projects on time, with a professional company presence and a fully functional storefront that matched the product vision — all as a sole frontend contributor working part-time.",
       ],
     ],
   },
 ];
-// New added
+
 export default experiences;
