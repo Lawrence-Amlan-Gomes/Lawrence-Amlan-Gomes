@@ -1,6 +1,7 @@
 "use client";
 import { useTheme } from "@/app/hooks/useTheme";
-import { FaQuoteLeft } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,24 +12,35 @@ export default function TestimonialCard({
   clientRole,
   clientQuote,
 }) {
-  console.log("urlTitle:", urlTitle);
   const { theme } = useTheme();
 
   return (
-    <div
-      className={`w-full mx-auto p-8 rounded-2xl hover:cursor-pointer border-[1px] flex flex-col justify-between relative ${
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4 }}
+      className={`w-full mx-auto p-8 rounded-2xl hover:cursor-pointer border-[1px] flex flex-col justify-between relative transition-shadow ${
         theme
-          ? "bg-[#ffffff] hover:bg-[#fafafa] text-[#aaaaaa] border-blue-800"
-          : "bg-[#000000] hover:bg-[#060606] text-[#eeeeee] border-blue-800"
+          ? "bg-[#ffffff] hover:bg-[#fafafa] text-[#aaaaaa] border-blue-800 hover:shadow-lg hover:shadow-blue-900/10"
+          : "bg-[#000000] hover:bg-[#060606] text-[#eeeeee] border-blue-800 hover:shadow-lg hover:shadow-blue-500/10"
       }`}
     >
       <div className="flex flex-col flex-grow">
         {/* Quote Icon */}
         <FaQuoteLeft
-          className={`text-xl mb-4 ${
+          className={`text-xl mb-3 ${
             theme ? "text-[#666666]" : "text-[#aaaaaa]"
           }`}
         />
+
+        {/* Star Ratings */}
+        <div className="flex gap-0.5 mb-3">
+          {[...Array(5)].map((_, i) => (
+            <FaStar key={i} className="text-yellow-400 text-xs sm:text-sm" />
+          ))}
+        </div>
 
         {/* Quote Text */}
         <p
@@ -60,7 +72,9 @@ export default function TestimonialCard({
               {clientName}
             </h3>
             <p
-              className={`text-sm ${theme ? "text-[#666666]" : "text-[#aaaaaa]"}`}
+              className={`text-xs sm:text-sm font-medium ${
+                theme ? "text-blue-700" : "text-blue-500"
+              }`}
             >
               {clientRole}
             </p>
@@ -79,6 +93,6 @@ export default function TestimonialCard({
           View Project →
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

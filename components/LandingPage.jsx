@@ -9,6 +9,7 @@ import LandingTestimonials from "./LandingTestimonials";
 import LandingBlogs from "./LandingBlogs";
 import LandingContact from "./LandingContact";
 import LandingButtons from "./LandingButtons";
+import LandingStatsStrip from "./LandingStatsStrip";
 
 export default function LandingPage() {
   const { theme } = useTheme();
@@ -21,6 +22,7 @@ export default function LandingPage() {
     >
       <LandingAbout/>
       <LandingButtons/>
+      <LandingStatsStrip/>
       <LandingProjects/>
       <LandingTestimonials/>
       <LandingBlogs/>

@@ -1,31 +1,67 @@
+"use client";
 import { useTheme } from "@/app/hooks/useTheme";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.10 } },
+};
 
 export default function LandingAbout() {
   const { theme } = useTheme();
 
   return (
-    <div className="w-full px-[5%] sm:px-[10%] flex flex-row justify-between items-start gap-4 sm:gap-6 md:mb-0 mb-[5%]">
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-80px" }}
+      className="w-full px-[5%] sm:px-[10%] flex flex-row justify-between items-start gap-4 sm:gap-6 md:mb-0 mb-[5%]"
+    >
       {/* LEFT TEXT SECTION */}
       <div className="w-[60%] mr-[2.5%]">
-        <h1
+
+        {/* Available for Work badge */}
+        <motion.div variants={fadeUp} className="flex items-center gap-2 mb-4">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
+          </span>
+          <span className={`text-xs sm:text-sm font-medium tracking-wide ${theme ? "text-green-700" : "text-green-400"}`}>
+            Available for Work
+          </span>
+        </motion.div>
+
+        <motion.h1
+          variants={fadeUp}
           className={`text-xl sm:text-4xl lg:text-6xl 2xl:text-7xl font-bold mb-3 text-justify ${
             theme ? "text-[#0a0a0a]" : "text-[#ebebeb]"
           }`}
         >
-          👋 Hi, <br /> I&apos;m Lawrence.
-        </h1>
+          Hi, I&apos;m{" "}
+          <span className={theme ? "text-blue-800" : "text-blue-500"}>Lawrence.</span>
+        </motion.h1>
 
-        <h2
+        <motion.h2
+          variants={fadeUp}
           className={`text-xs xs:text-sm sm:text-xl font-semibold mb-4 text-justify ${
             theme ? "text-[#333333]" : "text-[#cccccc]"
           }`}
         >
           Full-Stack Developer | Shipping Production-Ready Web Apps End-to-End
-        </h2>
+        </motion.h2>
 
         {/* Desktop bio */}
-        <p
+        <motion.p
+          variants={fadeUp}
           className={`leading-relaxed mb-6 text-justify text-xs hidden sm:block sm:text-base xl:text-lg ${
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
@@ -40,10 +76,11 @@ export default function LandingAbout() {
           custom domains, and cloud deployments on Vercel, Netlify, and
           self-hosted Coolify. I move fast, integrate AI APIs across projects,
           and deliver clean, maintainable codebases that scale.
-        </p>
+        </motion.p>
 
         {/* Mobile bio */}
-        <p
+        <motion.p
+          variants={fadeUp}
           className={`leading-relaxed mb-4 text-justify text-xs sm:hidden block ${
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
@@ -51,21 +88,23 @@ export default function LandingAbout() {
           Full-Stack Developer shipping production apps end-to-end. Next.js ·
           TypeScript · MongoDB · Redis · Tailwind · AWS S3. Paddle payments,
           CI/CD, and cloud deployments.
-        </p>
+        </motion.p>
 
         {/* Desktop CTA */}
-        <p
+        <motion.p
+          variants={fadeUp}
           className={`font-medium mb-3 text-justify text-xs hidden sm:block sm:text-base ${
             theme ? "text-[#444444]" : "text-[#bbbbbb]"
           }`}
         >
           Looking to build your next production web app? Let&apos;s ship
           something great together.
-        </p>
+        </motion.p>
 
         {/* Desktop bullet list */}
-        <ul
-          className={`list-disc ml-5 space-y-2 mb-8 text-justify xl:text-lg text-xs sm:text-base hidden lg:block ${
+        <motion.ul
+          variants={fadeUp}
+          className={`list-disc ml-5 space-y-2 mb-4 text-justify xl:text-lg text-xs sm:text-base hidden lg:block ${
             theme ? "text-[#666666]" : "text-[#aaaaaa]"
           }`}
         >
@@ -77,10 +116,41 @@ export default function LandingAbout() {
           <li>Scale backends with MongoDB and Redis caching</li>
           <li>Manage state efficiently using Redux Toolkit</li>
           <li>Craft responsive, accessible UIs with Tailwind CSS</li>
-        </ul>
+        </motion.ul>
+
+        {/* Desktop social quick-links */}
+        <motion.div variants={fadeUp} className="hidden lg:flex items-center gap-3 mt-2 mb-6">
+          <a
+            href="https://github.com/Lawrence-Amlan-Gomes"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
+              theme
+                ? "border-[#333333] text-[#333333] hover:border-blue-800 hover:text-blue-800"
+                : "border-[#555555] text-[#aaaaaa] hover:border-blue-500 hover:text-blue-400"
+            }`}
+          >
+            <FaGithub className="text-sm" /> GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/lawrence-amlan-gomes-13847426b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
+              theme
+                ? "border-[#333333] text-[#333333] hover:border-blue-800 hover:text-blue-800"
+                : "border-[#555555] text-[#aaaaaa] hover:border-blue-500 hover:text-blue-400"
+            }`}
+          >
+            <FaLinkedin className="text-sm" /> LinkedIn
+          </a>
+          <span className={`text-xs ${theme ? "text-[#999999]" : "text-[#555555]"}`}>
+            · Based in Dhaka, BD
+          </span>
+        </motion.div>
 
         {/* Mobile: horizontally scrollable pill list */}
-        <div className="flex lg:hidden overflow-x-auto gap-2 pb-2 -mx-1 px-1 scrollbar-hide">
+        <motion.div variants={fadeUp} className="flex lg:hidden overflow-x-auto gap-2 pb-2 -mx-1 px-1 scrollbar-hide">
           {[
             "Next.js",
             "TypeScript",
@@ -107,14 +177,14 @@ export default function LandingAbout() {
               {tag}
             </span>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* RIGHT COLUMN */}
-      <div className="w-[40%] ml-[2.5%]">
+      <motion.div variants={fadeUp} className="w-[40%] ml-[2.5%]">
         {/* Profile image */}
         <div
-          className={`relative rounded-xl overflow-hidden w-full aspect-[3/4] mb-4 sm:mb-6 ${
+          className={`relative rounded-xl overflow-hidden w-full aspect-[3/4] mb-4 sm:mb-4 ${
             theme ? "border-[#000000]" : "border-[#444444]"
           }`}
         >
@@ -124,7 +194,27 @@ export default function LandingAbout() {
             fill
             className="object-cover object-top"
           />
+          {/* Gradient overlay at bottom for depth */}
+          <div
+            className={`absolute bottom-0 left-0 right-0 h-20 ${
+              theme
+                ? "bg-gradient-to-t from-white/60 to-transparent"
+                : "bg-gradient-to-t from-black/60 to-transparent"
+            }`}
+          />
         </div>
+
+        {/* Hire Me CTA button */}
+        <a
+          href="mailto:amlangomes@gmail.com"
+          className={`flex items-center justify-center gap-2 w-full py-2 sm:py-2.5 rounded-xl font-semibold text-xs sm:text-sm mb-3 sm:mb-4 transition-all border-[1px] ${
+            theme
+              ? "bg-blue-800 text-white border-blue-800 hover:bg-white hover:text-blue-800"
+              : "bg-blue-700 text-white border-blue-700 hover:bg-black hover:text-blue-500"
+          }`}
+        >
+          <MdEmail className="text-sm sm:text-base" /> Hire Me
+        </a>
 
         {/* University card */}
         <a
@@ -179,7 +269,7 @@ export default function LandingAbout() {
             </div>
           </div>
         </a>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

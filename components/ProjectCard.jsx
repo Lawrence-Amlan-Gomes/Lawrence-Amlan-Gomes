@@ -3,6 +3,8 @@ import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
 
 export default function ProjectCard({
   title,
@@ -15,13 +17,21 @@ export default function ProjectCard({
   const { theme } = useTheme();
 
   return (
-    <div
-      className={`flex flex-col rounded-lg overflow-hidden border-[1px] ${
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4 }}
+      className={`flex flex-col rounded-lg overflow-hidden border-[1px] transition-shadow ${
         theme
-          ? "bg-[#ffffff] hover:bg-[#fafafa] text-[#333333] border-blue-800"
-          : "bg-[#000000] hover:bg-[#0a0a0a] text-[#dddddd] border-blue-800"
+          ? "bg-[#ffffff] hover:bg-[#fafafa] text-[#333333] border-blue-800 hover:shadow-lg hover:shadow-blue-900/10"
+          : "bg-[#000000] hover:bg-[#0a0a0a] text-[#dddddd] border-blue-800 hover:shadow-lg hover:shadow-blue-500/10"
       }`}
     >
+      {/* Top blue accent bar */}
+      <div className={`h-[2px] w-full ${theme ? "bg-blue-800" : "bg-blue-700"}`} />
+
       <div className="w-full px-6 pt-6">
         <div
           className={`relative w-full aspect-video overflow-hidden rounded-md border-[1px] ${
@@ -42,14 +52,14 @@ export default function ProjectCard({
       <div className="flex flex-col p-6">
         <div className="flex justify-between items-center mb-3">
           <h2 className="md:text-lg font-semibold pr-5">{title}</h2>
-          <div className="flex gap-2 pr-4">
-            {techStack.slice(0, 2).map(([name, src]) => (
+          <div className="flex gap-2 pr-2 flex-shrink-0">
+            {techStack.slice(0, 4).map(([name, src]) => (
               <Image
                 key={name}
                 src={src}
                 alt={name}
-                width={24}
-                height={24}
+                width={20}
+                height={20}
                 className="object-contain"
               />
             ))}
@@ -61,33 +71,26 @@ export default function ProjectCard({
             href={liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-1 ${
-              theme ? "hover:text-blue-800" : "hover:text-blue-600"
+            className={`flex items-center gap-1.5 ${
+              theme ? "hover:text-blue-800" : "hover:text-blue-500"
             }`}
           >
-            <span>→</span> Live Demo
+            <FiExternalLink className="text-sm" /> Live Demo
           </a>
           {gitLink && (
             <a
               href={gitLink}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-1 hover:tracking-wider ${
+              className={`flex items-center gap-1.5 ${
                 theme ? "hover:text-[#000000]" : "hover:text-[#ffffff]"
               }`}
             >
-              <Image
-                src={theme ? "/gitHubLight.png" : "/gitHubDark.png"}
-                alt="GitHub"
-                width={16}
-                height={16}
-                className="object-contain"
-              />
-              GitHub
+              <FaGithub className="text-sm" /> GitHub
             </a>
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
