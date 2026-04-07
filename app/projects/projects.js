@@ -1380,91 +1380,121 @@ const projects = [
   },
   {
     id: 17,
-    title: "Home Test",
+    title: "Chemisty MCQ Test",
     urlTitle: "home-test",
     date: "2024-12-10",
-    img: ["/P17pic.png"],
-    liveLink: "https://home-ssc-model-test.vercel.app/",
+    img: ["/P17_2_screenshotOfLandingPage.png"],
+    liveLink: "https://chemistry-mcq-test.vercel.app/",
     shortDescription:
-      "A custom Next.js tool built in December 2024 for a local Chemistry tutor, enabling automatic AI-generated MCQ home tests covering the full SSC Chemistry book (grades 9–10) using Gemini 2.5 Flash.",
+      "A comprehensive SSC Chemistry MCQ preparation platform with intelligent 10-question tests, built-in 10-minute timer, complete syllabus coverage, exam tips, user authentication, progress tracking, and performance analytics.",
     longDescription:
-      "This is a frontend Next.js application I created in December 2024 for one of my local clients — a Chemistry tutor in Dhaka who teaches SSC-level students door-to-door. He needed an easy way to generate full-syllabus MCQ model tests automatically so his students could practice effectively at home. The tool uses the Gemini 2.5 Flash API to create fresh, high-quality MCQs from the entire Chemistry book (grades 9 & 10). It includes a simple landing page, a dedicated Chemistry route for test generation, interactive answering with instant color-coded feedback, and a restart option. Built with Next.js, React, Tailwind CSS, and JavaScript, it provides a clean, responsive experience that saves the tutor many hours of manual question preparation.",
+      "Your SSC Chemistry MCQ Test application is a comprehensive educational platform designed specifically for students preparing for SSC (Secondary School Certificate) chemistry examinations. The application features an intelligent MCQ generation system that randomly selects 10 chemistry questions from a curated database covering all major branches including Inorganic, Physical, and Organic Chemistry, with a built-in 10-minute timer to simulate real exam conditions. Beyond just testing, the platform offers extensive learning resources through a comprehensive coverage section that displays the complete SSC chemistry syllabus in an interactive, expandable format, allowing students to systematically review topics, subtopics, and key concepts. The application also includes strategic exam tips that provide test-taking techniques, subject-specific shortcuts, and common pitfalls to avoid, helping students maximize their performance. With a robust user authentication system, progress tracking capabilities, and detailed performance analytics displayed through interactive line charts, students can monitor their improvement over time, save scores, and track their learning journey. The modern, responsive interface built with Next.js 14 and Tailwind CSS ensures a seamless learning experience across all devices, making it an all-in-one solution for SSC chemistry exam preparation that combines practice, learning, strategy, and progress monitoring in a single, user-friendly platform.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
+      ["TypeScript", "/ts.png"],
       ["JavaScript", "/js.png"],
     ],
-    gitLink: "https://github.com/Lawrence-Amlan-Gomes/HomeSSCModelText",
+    gitLink: "https://github.com/Lawrence-Amlan-Gomes/Chemistry-MCQ-Test",
     feaTures: [
       {
-        title: "Landing Page (/ Route)",
+        title: "Landing Page & Authentication",
         description: [
           {
             text: [
-              "The landing page was designed with the tutor’s students in mind, displaying an encouraging message: 'Prepare Yourself Better for Your Upcoming SSC Examination'.",
-              "It features a very minimal navbar with only one link — 'Chemistry' — to take students directly to the MCQ generation section.",
+              "A clean, motivational landing page welcomes SSC students and guides them toward the main features.",
+              "Robust user authentication system (login/register) allows users to create accounts, save progress, and track performance over time.",
             ],
             listItems: [
-              "Warm, motivational message tailored for SSC students",
-              "Extremely simple navigation focused on the main feature",
-              "Responsive layout suitable for mobile use by students",
-              "Clear direction toward Chemistry test generation",
+              "Encouraging design tailored for SSC Chemistry students",
+              "Secure login and registration with email/password",
+              "Protected routes for personalized experience",
+              "Responsive and mobile-friendly interface",
             ],
-            images: ["/P17pic.png"],
+            images: [
+              "/P17_2_screenshotOfLandingPage.png",
+              "/P17_1_screenshotOfRegistrationPage.png",
+              "/P17_1_screenshotOfLoginPage.png",
+            ],
           },
         ],
       },
       {
-        title: "Chemistry Route (/chemistry)",
+        title: "MCQ Test System with Timer",
         description: [
           {
             text: [
-              "This route contains a prominent 'Generate' button that instructs the Gemini 2.5 Flash API to produce 5 new MCQs based on the SSC Chemistry syllabus (starting with Chapter 1, but conceptually extendable to the full book).",
-              "Each generated question includes 4 options — one correct answer and three plausible distractors — matching real exam style.",
+              "The core feature allows students to take realistic model tests. The system randomly selects 10 high-quality MCQs from a comprehensive database covering Inorganic, Physical, and Organic Chemistry.",
+              "A built-in 10-minute countdown timer simulates actual exam pressure.",
             ],
             listItems: [
-              "AI-powered MCQ generation using Gemini 2.5 Flash",
-              "Content aligned with SSC grades 9–10 Chemistry book",
-              "Clean, student-friendly question presentation",
-              "Straightforward 'Generate' interface for repeated use",
+              "Random selection of 10 MCQs per test",
+              "Full coverage of SSC Chemistry syllabus (Grades 9-10)",
+              "10-minute timer with visual countdown",
+              "Realistic exam-style questions with 4 options each",
+              "Instant submission and scoring",
             ],
-            images: ["/P17_1pic.png", "/P17_2pic.png"],
+            images: [
+              "/P17_3_screenshotOfMCQTestInterface.png",
+              "/P17_4_screenshotOfTimerAndQuestions.png",
+            ],
           },
         ],
       },
       {
-        title: "MCQ Interaction and Feedback",
+        title: "Syllabus Coverage Section",
         description: [
           {
             text: [
-              "Students answer the 5 questions by selecting options, then click 'Submit'.",
-              "Correct answers are instantly highlighted in green, while wrong selections are shown in red — giving immediate, visual feedback that helps students learn from mistakes right away.",
+              "An interactive, expandable syllabus viewer displays the complete SSC Chemistry syllabus.",
+              "Students can browse all chapters, topics, and subtopics in an organized format for systematic revision.",
             ],
             listItems: [
-              "Interactive radio-button style answer selection",
-              "Clear green/red color feedback for right/wrong answers",
-              "Helps reinforce learning during home practice",
-              "Responsive and easy-to-use answer interface",
+              "Fully structured SSC Chemistry syllabus",
+              "Expandable accordion-style sections",
+              "Topic-wise and subtopic-wise breakdown",
+              "Easy navigation for quick review",
             ],
-            images: ["/P17_3pic.png"],
+            images: ["/P17_5_screenshotOfSyllabusCoverage.png"],
           },
         ],
       },
       {
-        title: "Restart Functionality",
+        title: "Exam Tips & Strategies",
         description: [
           {
             text: [
-              "The 'Restart' button clears all previous answers and returns to the initial state, allowing the student (or tutor) to generate and attempt a completely new set of questions.",
+              "Dedicated section providing valuable exam strategies, time-management tips, subject-specific shortcuts, and common mistakes to avoid in SSC Chemistry exams.",
             ],
             listItems: [
-              "Easy reset for multiple practice attempts",
-              "Smooth transition back to generate screen",
-              "Encourages repeated self-testing at home",
-              "Maintains consistent user experience",
+              "Test-taking techniques and shortcuts",
+              "Chapter-wise important tips",
+              "Common pitfalls and how to avoid them",
+              "Practical advice for maximizing scores",
             ],
-            images: ["/P17_1pic.png"],
+            images: ["/P17_6_screenshotOfExamTipsPage.png"],
+          },
+        ],
+      },
+      {
+        title: "Progress Tracking & Analytics",
+        description: [
+          {
+            text: [
+              "After each test, students can view detailed performance analytics including score, accuracy, time taken, and weak areas.",
+              "Interactive line charts show improvement trends over multiple attempts.",
+            ],
+            listItems: [
+              "Save and review past test scores",
+              "Performance analytics with line charts",
+              "Progress tracking across attempts",
+              "Identification of strong and weak topics",
+            ],
+            images: [
+              "/P17_7_screenshotOfPerformanceAnalytics.png",
+              "/P17_8_screenshotOfProgressCharts.png",
+            ],
           },
         ],
       },
@@ -1473,14 +1503,16 @@ const projects = [
         description: [
           {
             text: [
-              "Developed using Next.js for fast loading and clean routing. Integrated Gemini 2.5 Flash for intelligent question creation. Styled entirely with Tailwind CSS for quick, responsive design. The tutor now regularly uses this tool to assign home tests, significantly reducing his manual question preparation time.",
+              "Built with Next.js 14 (App Router) for excellent performance and SEO. The modern, clean UI is powered by Tailwind CSS, ensuring a responsive experience on all devices (mobile-first design).",
+              "The application combines practice tests, learning resources, strategy guides, and progress monitoring into one powerful platform.",
             ],
             listItems: [
-              "Next.js for performant, SEO-friendly frontend",
-              "Gemini 2.5 Flash API for dynamic, high-quality MCQs",
-              "React hooks for efficient state and UI updates",
-              "Tailwind CSS for modern, mobile-first styling",
-              "Real-world client usage — directly supports SSC students",
+              "Next.js 14 + TypeScript for type safety and performance",
+              "Tailwind CSS for modern, responsive design",
+              "Curated question database with random selection",
+              "10-minute timer implementation",
+              "Interactive charts for analytics",
+              "User authentication and progress persistence",
             ],
             images: [],
           },
