@@ -1,25 +1,27 @@
 "use client";
-import { motion } from "framer-motion";
 import { useTheme } from "@/app/hooks/useTheme";
-import projects from "@/app/projects/projects";
-import testimonials from "@/app/testimonials/testimonials";
+import { motion } from "framer-motion";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 const staggerContainer = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.10 } },
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
 export default function LandingStatsStrip() {
   const { theme } = useTheme();
 
   const stats = [
-    { value: `${projects.length}+`, label: "Projects Shipped" },
-    { value: `${testimonials.length}+`, label: "Happy Clients" },
+    { value: "20+", label: "Projects Shipped" },
+    { value: "3+", label: "Happy Clients" },
     { value: "2+", label: "Years Experience" },
     { value: "SaaS", label: "Products Launched" },
   ];

@@ -3,7 +3,7 @@ const projects = [
     id: 24,
     title: "Facelees",
     urlTitle: "facelees",
-    date: "2026-01-15",
+    date: "2026-02-15",
     img: ["/P24.png"],
     liveLink: "https://www.facelees.com/",
     shortDescription:
@@ -340,13 +340,13 @@ const projects = [
     id: 22,
     title: "Daily Routine",
     urlTitle: "daily-routine",
-    date: "2025-12-20",
+    date: "2026-03-20",
     img: ["/P22.png"],
-    liveLink: "https://daily-routine-self.up.railway.app/",
+    liveLink: "https://mydailyroutine.app/",
     shortDescription:
-      "A full-stack Next.js weekly routine planner built in December 2025 with advanced time scheduling, conflict detection, multi-day editing, zoomable timeline visualization and MongoDB integration.",
+      "A full-stack Next.js weekly routine planner SaaS built in December 2025 with advanced time scheduling, conflict detection, multi-day editing, zoomable timeline visualization and MongoDB integration.",
     longDescription:
-      "Daily Routine is a modern full-stack Next.js application developed in December 2025 to help users efficiently plan and visualize their weekly schedule. It features a beautiful interactive timeline view with zoom controls, real-time 'Now' indicator, task conflict prevention, multi-day task editing, and powerful single/multi-day task management. Built with Next.js, TypeScript, React, Tailwind CSS, and MongoDB — offers a polished, responsive experience focused on time management precision and user convenience.",
+      "Daily Routine is a modern full-stack Next.js SaaS application developed in December 2025 to help users efficiently plan and visualize their weekly schedule. It features a beautiful interactive timeline view with zoom controls, real-time 'Now' indicator, task conflict prevention, multi-day task editing, and powerful single/multi-day task management. Built with Next.js, TypeScript, React, Tailwind CSS, and MongoDB — offers a polished, responsive experience focused on time management precision and user convenience.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -923,13 +923,13 @@ const projects = [
     id: 19,
     title: "Library Management",
     urlTitle: "library-management",
-    date: "2025-03-15",
+    date: "2025-10-15",
     img: ["/P19pic.png"],
     liveLink: "https://library-management-system-alpha-nine.vercel.app/",
     shortDescription:
-      "A custom full-stack Next.js library management system built in March 2025 for a local client’s small personal library, with user borrowing (max 3 books), fine tracking for overdue returns, admin book management, and MongoDB backend.",
+      "A custom full-stack Next.js library management system to be built in October 2025 for a local client's small personal library, with user borrowing (max 3 books), fine tracking for overdue returns, admin book management, and MongoDB backend.",
     longDescription:
-      "Library Management is a full-stack Next.js application I developed in March 2025 for one of my local clients in Dhaka — he runs a small personal/community library and needed a simple, reliable digital system to manage his book collection. The app supports user registration/login, browsing and borrowing up to 3 books at a time, automatic fine calculation (100 TK per day per overdue book), borrowing history, profile management, and search. Admins (the client himself) can add/edit/delete books, view all users, and maintain data integrity (e.g., cannot delete borrowed books). Built with Next.js, React, Tailwind CSS, JavaScript, and MongoDB, it provides a clean, responsive interface that saves him hours of manual record-keeping and helps track loans more accurately for his library users.",
+      "Library Management will be a full-stack Next.js application I will develop in October 2025 for one of my local clients in Dhaka — he runs a small personal/community library and needs a simple, reliable digital system to manage his book collection. The app will support user registration/login, browsing and borrowing up to 3 books at a time, automatic fine calculation (100 TK per day per overdue book), borrowing history, profile management, and search. Admins (the client himself) will be able to add/edit/delete books, view all users, and maintain data integrity (e.g., cannot delete borrowed books). Built with Next.js, React, Tailwind CSS, JavaScript, and MongoDB, it will provide a clean, responsive interface that will save him hours of manual record-keeping and help track loans more accurately for his library users.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1382,13 +1382,13 @@ const projects = [
     id: 17,
     title: "Chemisty MCQ Test",
     urlTitle: "home-test",
-    date: "2024-12-10",
+    date: "2025-12-10",
     img: ["/P17_2_screenshotOfLandingPage.png"],
     liveLink: "https://chemistry-mcq-test.vercel.app/",
     shortDescription:
       "A comprehensive SSC Chemistry MCQ preparation platform with intelligent 10-question tests, built-in 10-minute timer, complete syllabus coverage, exam tips, user authentication, progress tracking, and performance analytics.",
     longDescription:
-      "Your SSC Chemistry MCQ Test application is a comprehensive educational platform designed specifically for students preparing for SSC (Secondary School Certificate) chemistry examinations. The application features an intelligent MCQ generation system that randomly selects 10 chemistry questions from a curated database covering all major branches including Inorganic, Physical, and Organic Chemistry, with a built-in 10-minute timer to simulate real exam conditions. Beyond just testing, the platform offers extensive learning resources through a comprehensive coverage section that displays the complete SSC chemistry syllabus in an interactive, expandable format, allowing students to systematically review topics, subtopics, and key concepts. The application also includes strategic exam tips that provide test-taking techniques, subject-specific shortcuts, and common pitfalls to avoid, helping students maximize their performance. With a robust user authentication system, progress tracking capabilities, and detailed performance analytics displayed through interactive line charts, students can monitor their improvement over time, save scores, and track their learning journey. The modern, responsive interface built with Next.js 14 and Tailwind CSS ensures a seamless learning experience across all devices, making it an all-in-one solution for SSC chemistry exam preparation that combines practice, learning, strategy, and progress monitoring in a single, user-friendly platform.",
+      "Your SSC Chemistry MCQ Test application will be a comprehensive educational platform designed specifically for students preparing for SSC (Secondary School Certificate) chemistry examinations. The application will feature an intelligent MCQ generation system that randomly selects 10 chemistry questions from a curated database covering all major branches including Inorganic, Physical, and Organic Chemistry, with a built-in 10-minute timer to simulate real exam conditions. Beyond just testing, the platform will offer extensive learning resources through a comprehensive coverage section that displays the complete SSC chemistry syllabus in an interactive, expandable format, allowing students to systematically review topics, subtopics, and key concepts. The application will also include strategic exam tips that provide test-taking techniques, subject-specific shortcuts, and common pitfalls to avoid, helping students maximize their performance. With a robust user authentication system, progress tracking capabilities, and detailed performance analytics displayed through interactive line charts, students will be able to monitor their improvement over time, save scores, and track their learning journey. The modern, responsive interface built with Next.js 14 and Tailwind CSS will ensure a seamless learning experience across all devices, making it an all-in-one solution for SSC chemistry exam preparation that combines practice, learning, strategy, and progress monitoring in a single, user-friendly platform.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],

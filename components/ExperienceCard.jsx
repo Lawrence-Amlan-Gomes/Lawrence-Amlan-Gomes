@@ -1,5 +1,58 @@
-import Image from "next/image";
 import { useTheme } from "@/app/hooks/useTheme";
+import Image from "next/image";
+
+// Function to calculate duration from date range
+const calculateDuration = (duration) => {
+  const [startDate, endDate] = duration.split(" - ");
+
+  if (endDate === "Present") {
+    const start = new Date(startDate);
+    const now = new Date();
+    const months =
+      (now.getFullYear() - start.getFullYear()) * 12 +
+      (now.getMonth() - start.getMonth()) +
+      1;
+
+    if (months < 1) return "Less than 1 month";
+    if (months === 1) return "1 month";
+    if (months < 12) return `${months} months`;
+
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+
+    if (years === 1) {
+      return remainingMonths === 0
+        ? "1 year"
+        : `1 year ${remainingMonths} months`;
+    }
+    return remainingMonths === 0
+      ? `${years} years`
+      : `${years} years ${remainingMonths} months`;
+  } else {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const months =
+      (end.getFullYear() - start.getFullYear()) * 12 +
+      (end.getMonth() - start.getMonth()) +
+      1;
+
+    if (months < 1) return "Less than 1 month";
+    if (months === 1) return "1 month";
+    if (months < 12) return `${months} months`;
+
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+
+    if (years === 1) {
+      return remainingMonths === 0
+        ? "1 year"
+        : `1 year ${remainingMonths} months`;
+    }
+    return remainingMonths === 0
+      ? `${years} years`
+      : `${years} years ${remainingMonths} months`;
+  }
+};
 
 export default function ExperienceCard({ exp }) {
   const { theme } = useTheme();
@@ -49,7 +102,9 @@ export default function ExperienceCard({ exp }) {
           }`}
         >
           <div className="font-medium pr-2">{exp.companyName}</div>
-          <div className="italic">{exp.duration}</div>
+          <div className="italic">
+            {exp.duration} · {calculateDuration(exp.duration)}
+          </div>
         </div>
 
         {/* Challenge, Action, Result */}

@@ -4,7 +4,7 @@ const experiences = [
     title: "Freelance Full-Stack Developer",
     companyName: "Self-employed · Remote",
     img: "/Company2pic.png",
-    duration: "Jan 2026 - Present · 4 mos",
+    duration: "Oct 2025 - Present",
     overview: "Designed, developed, and deployed three full-stack web applications for local clients in Dhaka, managing the complete lifecycle from requirements to production.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Vercel", "Netlify", "Coolify", "Paddle", "Git"],
     paragraphs: [
@@ -27,7 +27,7 @@ const experiences = [
     title: "Sole Frontend Developer",
     companyName: "UTES · Part-time",
     img: "/Company1pic.png",
-    duration: "Oct 2024 - Dec 2024 · 3 mos",
+    duration: "Oct 2024 - Dec 2024",
     overview: "Served as the sole frontend engineer at UTES, independently delivering two production projects under tight deadlines using Next.js, Tailwind CSS, and Framer Motion.",
     technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Git"],
     paragraphs: [
