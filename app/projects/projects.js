@@ -1025,7 +1025,7 @@ const projects = [
             ],
             listItems: [
               "Comprehensive borrowing history display",
-              "Card-based layout for historical records",
+              "Card-based layout for borrowing history",
               "Clear date information for borrowing and returns",
               "Responsive design for history overview",
             ],
@@ -1670,9 +1670,9 @@ const projects = [
     img: ["/P12pic.png"],
     liveLink: "https://utes.vercel.app/",
     shortDescription:
-      "A frontend Next.js website built in October 2024 for Utes, an IT solutions company, featuring a comprehensive showcase of services, solutions, and support with responsive design.",
+      "A frontend Next.js website built in October 2024 for Utes, an IT solutions company, featuring a comprehensive showcase of services, clients, and career opportunities with responsive design.",
     longDescription:
-      "Utes is a frontend Next.js website developed in October 2024 for Utes, an IT solutions company, where I served as the sole frontend developer. The platform showcases the company’s services, solutions, and support offerings through a professional interface with dynamic routing. It includes a responsive navbar with theme toggle and login, a hero section, detailed service and solution pages, a contact form, and an about page. Built with Next.js, Tailwind CSS, and JavaScript, the site ensures a seamless, modern user experience, highlighting my skills in dynamic routing, responsive design, and content presentation.",
+      "Utes is a frontend Next.js website developed in October 2024 for Utes, an IT solutions company, where I served as the sole frontend developer. The platform showcases the company's services, clients, and career opportunities through a professional interface with dynamic routing. It includes a responsive navbar with theme toggle and login, a hero section, detailed service pages, client testimonials, career listings, a contact form, and an about page. Built with Next.js, Tailwind CSS, and JavaScript, the site ensures a seamless, modern user experience, highlighting my skills in dynamic routing, responsive design, and content presentation.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1686,7 +1686,7 @@ const projects = [
         description: [
           {
             text: [
-              "The landing page features a responsive navbar with the Utes logo, links to Services, Solutions, Supports, Contact, About, a theme toggle button, and a login button for user authentication.",
+              "The landing page features a responsive navbar with the Utes logo, links to Services, Clients, Career, Contact, About, a theme toggle button, and a login button for user authentication.",
               "The hero section displays an image of the company building with a heading 'Transforming Your Ideas into Digital Reality' and a subheading 'Expert IT Solutions Designed to Optimize Operations, Enhance Security, and Propel Your Business into the Future.'",
             ],
             listItems: [
@@ -1699,10 +1699,10 @@ const projects = [
           },
           {
             text: [
-              "Scrolling down reveals cards showcasing solutions, services, and support offerings, providing a quick overview of Utes’s capabilities.",
+              "Scrolling down reveals cards showcasing services, clients, and career opportunities, providing a quick overview of Utes's capabilities.",
             ],
             listItems: [
-              "Card-based layout for solutions and services",
+              "Card-based layout for services, clients, and careers",
               "Responsive grid optimized for all devices",
               "Interactive hover effects for user engagement",
               "Consistent visual hierarchy for easy navigation",
@@ -1730,36 +1730,36 @@ const projects = [
         ],
       },
       {
-        title: "Solutions Route",
+        title: "Clients Route",
         description: [
           {
             text: [
-              "The Solutions route highlights AI Solution, ICT and Training, and E-Commerce and Online Market, each with in-depth descriptions and supporting visuals.",
-              "Descriptions emphasize innovation, e.g., 'Our AI solution service empowers businesses with cutting-edge technology to enhance efficiency and decision-making.'",
+              "The Clients route showcases Utes's portfolio of successful projects and client testimonials, highlighting partnerships across various industries including technology, healthcare, and e-commerce.",
+              "Each client case study includes project details, challenges faced, solutions delivered, and measurable outcomes, demonstrating Utes's expertise and reliability.",
             ],
             listItems: [
-              "Detailed solution descriptions with technical focus",
-              "Visuals tailored to AI, training, and e-commerce",
-              "Business-oriented messaging for client appeal",
-              "Consistent branding and styling",
+              "Detailed client case studies with project outcomes",
+              "Testimonials from satisfied clients",
+              "Industry-specific success stories",
+              "Visual project showcases and results",
             ],
             images: ["/P12_3pic.png"],
           },
         ],
       },
       {
-        title: "Supports Route",
+        title: "Career Route",
         description: [
           {
             text: [
-              "The Supports route outlines Technical Support, Customer Support, Maintenance Support, and Warranty and Repairs, with descriptions emphasizing 24/7 availability and rapid response.",
-              "Example: 'Our technical support team is dedicated to providing exceptional assistance for all your IT needs' with accompanying visuals.",
+              "The Career route displays current job openings at Utes, including positions for software developers, designers, and IT specialists, with detailed job descriptions and requirements.",
+              "Each listing includes role responsibilities, required qualifications, benefits offered, and a straightforward application process for prospective candidates.",
             ],
             listItems: [
-              "24/7 support with multiple contact channels",
-              "Proactive maintenance and warranty services",
-              "Clear, customer-focused support descriptions",
-              "Responsive design for support information",
+              "Current job openings with detailed descriptions",
+              "Clear requirements and qualifications",
+              "Company benefits and culture information",
+              "Easy application process for candidates",
             ],
             images: ["/P12_4pic.png"],
           },
