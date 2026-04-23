@@ -2,8 +2,7 @@
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaUser, FaFileAlt, FaBookOpen } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { FaUser, FaFileAlt, FaBookOpen, FaRegCalendarAlt } from "react-icons/fa";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -77,21 +76,19 @@ export default function LandingButtons() {
         </motion.div>
       ))}
 
-      {/* Get in Touch ghost button */}
+      {/* Book a Meeting ghost button */}
       <motion.div variants={fadeUp} className="flex-shrink-0">
-        <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=amlangomes@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/contact#cal-booking"
           className={`px-3 py-1.5 sm:px-5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition hover:cursor-pointer whitespace-nowrap flex items-center gap-2 border-[1px] ${
             theme
               ? "border-blue-800 text-blue-800 hover:bg-blue-800 hover:text-white"
               : "border-blue-600 text-blue-500 hover:bg-blue-700 hover:text-white"
           }`}
         >
-          <MdEmail className="text-sm" />
-          Get in Touch
-        </a>
+          <FaRegCalendarAlt className="text-sm" />
+          Book a Meeting
+        </Link>
       </motion.div>
     </motion.div>
   );

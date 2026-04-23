@@ -12,6 +12,7 @@ import EachField from "./EachField";
 import Chat from "./Chat";
 import { Sen } from "next/font/google";
 import SendMessage from "./SendMessage";
+import CalEmbed from "./CalEmbed";
 
 const techStack = [
   ["X", "/XLight.png", "/XDark.png"],
@@ -31,6 +32,18 @@ export default function Contact() {
   const { theme } = useTheme();
   const [showPopup, setShowPopup] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash === "#cal-booking") {
+      const scrollToCal = () => {
+        const el = document.getElementById("cal-booking");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      const t = setTimeout(scrollToCal, 300);
+      return () => clearTimeout(t);
+    }
+  }, []);
 
   const handleGoogleClick = () => {
     navigator.clipboard.writeText("amlangomes@gmail.com");
@@ -191,6 +204,45 @@ export default function Contact() {
           </div>
         </div>
         <SendMessage theme={theme} />
+
+        <div id="cal-booking" className="mt-24 scroll-mt-24">
+          <div
+            className={`flex items-center mb-5 gap-4 ${
+              theme ? "text-[#333333]" : "text-[#dddddd]"
+            }`}
+          >
+            <h2
+              className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${
+                theme ? "text-[#333333]" : "text-[#dddddd]"
+              }`}
+            >
+              Book a Meeting
+            </h2>
+            <div
+              className="flex-grow h-[1px]"
+              style={{
+                backgroundImage: theme
+                  ? "linear-gradient(to right, rgba(51, 51, 51, 0), rgba(51, 51, 51, 1))"
+                  : "linear-gradient(to right, rgba(221, 221, 221, 0), rgba(221, 221, 221, 0.4))",
+              }}
+            />
+          </div>
+          <p
+            className={`text-sm sm:text-base lg:text-md mb-6 ${
+              theme ? "text-[#666666]" : "text-[#aaaaaa]"
+            }`}
+          >
+            Pick a time that works for you and let&apos;s chat. Schedule a
+            quick 15-minute meeting directly on my calendar below.
+          </p>
+          <div
+            className={`w-full rounded-lg border-[1px] overflow-hidden ${
+              theme ? "border-[#e5e5e5]" : "border-[#222222]"
+            }`}
+          >
+            <CalEmbed theme={theme} />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
