@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
 
-const CAL_LINK = "lawrence-amlan-gomes/15-minutes-meeting";
-const NAMESPACE = "15-minutes-meeting";
+const CAL_LINK = "lawrence-amlan-gomes/15min";
+const NAMESPACE = "15min";
 
 export default function CalEmbed({ theme }) {
   useEffect(() => {
