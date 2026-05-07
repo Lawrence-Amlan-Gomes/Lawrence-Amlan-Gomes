@@ -83,12 +83,13 @@ Delivered 2 production projects: the UTES company website (SEO-optimized) and Pr
 
 ---
 
-## GitHub Stats
+## GitHub Activity
 
 <div align="center">
 
-![Lawrence's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Lawrence-Amlan-Gomes&show_icons=true&theme=dark&hide_border=true&count_private=true)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Lawrence-Amlan-Gomes&layout=compact&theme=dark&hide_border=true)
+[![GitHub Streak](https://streak-stats.demolab.com?user=Lawrence-Amlan-Gomes&theme=dark&hide_border=true)](https://github.com/Lawrence-Amlan-Gomes)
+
+![Profile Views](https://komarev.com/ghpvc/?username=Lawrence-Amlan-Gomes&style=flat-square&color=22c55e&label=Profile+Views)
 
 </div>
 
