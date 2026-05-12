@@ -68,7 +68,7 @@ function Footer() {
               <BsTwitterX />
             </a>
             <a
-              href="https://www.linkedin.com/in/lawrence-amlan-gomes-13847426b/"
+              href="https://www.linkedin.com/in/lawrence-amlan-gomes/"
               target="_blank"
               rel="noopener noreferrer"
               className={`text-xl ${

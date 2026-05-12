@@ -133,7 +133,7 @@ export default function LandingAbout() {
             <FaGithub className="text-sm" /> GitHub
           </a>
           <a
-            href="https://www.linkedin.com/in/lawrence-amlan-gomes-13847426b/"
+            href="https://www.linkedin.com/in/lawrence-amlan-gomes/"
             target="_blank"
             rel="noopener noreferrer"
             className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${

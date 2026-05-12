@@ -24,7 +24,7 @@ const techStack = [
 const urls = {
   Email: "email",
   X: "https://x.com/AmlanGomes2001",
-  LinkedIn: "https://www.linkedin.com/in/lawrence-amlan-gomes-13847426b/",
+  LinkedIn: "https://www.linkedin.com/in/lawrence-amlan-gomes/",
   GitHub: "https://github.com/Lawrence-Amlan-Gomes",
 };
 
