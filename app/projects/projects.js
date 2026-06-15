@@ -1,5 +1,213 @@
 const projects = [
   {
+    id: 25,
+    title: "Real Caffeine Calculator",
+    urlTitle: "real-caffeine-calculator",
+    date: "2026-06-16",
+    img: ["/P25.png"],
+    liveLink: "https://realcaffeinecalculator.com",
+    shortDescription:
+      "A browser-based caffeine half-life calculator that shows exactly how much caffeine is in your system right now and when it's safe to sleep, based on your drinks, metabolism, and bedtime.",
+    longDescription:
+      "Real Caffeine Calculator applies pharmacokinetic exponential decay math to give users a real-time view of caffeine in their bloodstream. Users log any combination of drinks from a 30+ item database spanning Starbucks, energy drinks, teas, and custom entries, then the tool calculates current mg, projects a 24-hour SVG decay chart with color-coded risk zones, and computes the latest safe caffeine cut-off time before bed. Metabolism is fully adjustable for five profiles (normal, fast, slow, pregnant, smoker) driven by CYP1A2 half-life data from NIH research. Built with Astro 6 as a fully static site, styled with Tailwind CSS v4, written in TypeScript and vanilla JS, and deployed on Cloudflare Workers Assets — no server, no account, no data ever leaves the browser.",
+    techStack: [
+      ["Tailwind CSS", "/TailwindCss.png"],
+      ["TypeScript", "/ts.png"],
+      ["JavaScript", "/js.png"],
+      ["Cloudflare", "/cloudflare.png"],
+    ],
+    gitLink: "https://github.com/Lawrence-Amlan-Gomes/realcaffeinecalculator",
+    feaTures: [
+      {
+        title: "Caffeine Calculator — Drink Logger",
+        description: [
+          {
+            text: [
+              "The core input panel lets users log one or more drinks consumed at any time of day. Each row has a drink selector (grouped by category as optgroups), a time picker that auto-fills the current time, and a remove button. A custom \"enter mg\" option is available for unlisted drinks.",
+              "The drink database includes 30+ real-world entries: 12 coffee drinks (including Starbucks sizes, Death Wish, cold brew), 12 energy drinks (Bang 300mg, Reign 300mg, Monster, Celsius, Red Bull in three sizes), teas, sodas, and a freeform custom entry. All drinks use size-specific names and fixed mg values for accuracy.",
+            ],
+            listItems: [
+              "Add/remove multiple drinks, each with independent time inputs",
+              "30+ drinks grouped into Coffee, Energy Drinks, Tea & Other, Custom",
+              "Custom drink option lets users enter any mg value directly",
+              "Time picker assumes drinks >1 hour in the future occurred yesterday (prevents input errors)",
+              "Body weight field (lbs) unlocks a mg/kg load readout, color-coded green/amber/red",
+              "Bedtime picker defaults to 11:00 PM, used for all sleep-threshold calculations",
+              "Metabolism selector: Normal (5hr), Fast (3hr), Slow (8hr), Pregnant (15hr), Smoker (3hr) half-lives",
+            ],
+            images: ["/P25_1.png"],
+          },
+        ],
+      },
+      {
+        title: "Live Results Panel — Current mg, Status & Sleep Risk",
+        description: [
+          {
+            text: [
+              "The outputs card shows a large hero number for current mg in system, a status badge that reads \"Log a drink to start / Safe to sleep / Cutting it close / Too much for sleep,\" and a \"You can have caffeine until\" hero timestamp that dynamically inverts from the bedtime to find the latest safe intake window.",
+              "Below the chart, three stat rows show: when caffeine clears below 50mg (\"caffeine clears at\"), sleep disruption risk badge with mg-at-bedtime (\"Low impact / Moderate impact / High impact\"), and optional mg/kg load. A red warning banner appears when total intake exceeds the FDA's 400mg daily limit.",
+            ],
+            listItems: [
+              "Hero \"safe until\" time: latest moment a 95mg reference drink keeps bedtime caffeine below 25mg",
+              "Safe-until color: green (time available), red (\"None today\"), muted (\"Window passed\")",
+              "Current mg counter updates every 60 seconds via setInterval",
+              "Sleep disruption risk badge: Low (<25mg at bed), Moderate (25–100mg), High (>100mg)",
+              "mg at bedtime shown inline with the sleep risk badge",
+              "mg/kg load (green <3, amber 3–6, red >6) — only visible when weight is entered",
+              "400mg FDA daily limit warning banner",
+            ],
+            images: ["/P25_2.png"],
+          },
+        ],
+      },
+      {
+        title: "24-Hour Caffeine Decay Chart",
+        description: [
+          {
+            text: [
+              "An inline SVG chart renders a 24-hour caffeine decay curve starting from the first drink. It samples 240 data points and draws a blue polyline with a gradient fill underneath. Three background color bands show safe (<50mg, green), moderate (50–150mg, amber), and high (>150mg, red) zones.",
+              "Vertical dashed markers for \"now\" (white) and \"bedtime\" (purple) are plotted on the chart. A dot with a white center marks the current position on the curve. The chart re-renders on every calculation tick and whenever the theme changes (dark/light mode), swapping axis and grid colors accordingly.",
+            ],
+            listItems: [
+              "240-sample polyline with gradient fill below the curve",
+              "Color zone backgrounds: green safe, amber moderate, red high",
+              "Orange dashed horizontal line at 50mg \"sleep-safe\" threshold",
+              "White dashed \"now\" vertical line with a filled dot marking current position",
+              "Purple dashed \"bedtime\" vertical line",
+              "X-axis labels every 4 hours; Y-axis labels scale dynamically to peak mg",
+              "Chart legend (hidden until drinks are logged): icons for each line and zone",
+              "Responds to dark/light theme toggle — all colors update without page reload",
+            ],
+            images: ["/P25_3.png"],
+          },
+        ],
+      },
+      {
+        title: "SEO Content — Understanding Caffeine Half-Life",
+        description: [
+          {
+            text: [
+              "A structured editorial section below the calculator explains the science in six headed paragraphs: what caffeine half-life is, how CYP1A2 genetics affect clearance, how the calculator formula works, why timing matters for sleep (citing Drake et al. 2013 JCSM), FDA daily limits, and a comparison of caffeine content across popular drink brands.",
+            ],
+            listItems: [
+              "Six in-depth subsections with keyword-rich headings",
+              "Inline strong tags highlight key calculator phrases for semantic SEO",
+              "Mentions specific mg values for real drinks (Death Wish 728mg, Bang 300mg, Starbucks Cold Brew 205mg)",
+              "References the exponential decay formula directly in copy",
+            ],
+            images: ["/P25_4.png"],
+          },
+        ],
+      },
+      {
+        title: "FAQ Section (with Schema.org markup)",
+        description: [
+          {
+            text: [
+              "A five-question accordion FAQ uses native HTML <details>/<summary> elements for no-JS expand/collapse. Each question also maps to a FAQPage schema.org JSON-LD block injected into <head> for rich result eligibility in Google Search.",
+            ],
+            listItems: [
+              "5 questions: how it works, what half-life is, safe daily limit, when to stop before bed, body weight effect",
+              "Native <details> elements — no JavaScript required",
+              "FAQPage JSON-LD injected via Astro's head slot",
+              "Questions match high-intent search queries",
+            ],
+            images: ["/P25_5.png"],
+          },
+        ],
+      },
+      {
+        title: "Sources Section",
+        description: [
+          {
+            text: [
+              "A numbered citation list beneath the FAQ links to the five authoritative sources the calculator's science is based on: NIH StatPearls on caffeine half-life range, FDA consumer guidance on the 400mg limit, Drake et al. 2013 in the Journal of Clinical Sleep Medicine, AASM sleep timing recommendations, and USDA FoodData Central for drink caffeine content.",
+            ],
+            listItems: [
+              "NIH StatPearls — half-life 3–15hr range",
+              "FDA — 400mg/day safe limit for healthy adults",
+              "Drake et al. 2013 (JCSM) — caffeine 6hrs before bed reduces total sleep time",
+              "American Academy of Sleep Medicine (AASM)",
+              "USDA FoodData Central — caffeine content by beverage",
+            ],
+            images: ["/P25_6.png"],
+          },
+        ],
+      },
+      {
+        title: "Dark / Light Theme Toggle",
+        description: [
+          {
+            text: [
+              "The site ships dark-first. A sun/moon icon button in the sticky header toggles a `.light` class on <html>, which overrides all CSS custom properties. Theme preference is persisted to localStorage. An inline script in <head> applies the class before first paint, preventing any flash of unstyled content (FOUC).",
+              "The calculator's SVG chart listens for a custom `theme-change` DOM event dispatched on toggle and re-renders with the correct axis/grid colors for the active theme.",
+            ],
+            listItems: [
+              "Dark-first design with full light mode via CSS custom property overrides",
+              "Preference saved to localStorage and restored on next visit",
+              "FOUC prevention via inline `is:inline` script in <head>",
+              "Chart re-renders automatically on theme switch",
+              "Sticky header uses backdrop-filter blur with theme-aware background",
+            ],
+            images: ["/P25_7.png"],
+          },
+        ],
+      },
+      {
+        title: "Responsive Navigation (Mobile Hamburger)",
+        description: [
+          {
+            text: [
+              "The sticky header collapses to a hamburger menu on screens narrower than 640px. Clicking the hamburger reveals a dropdown nav with all three links. The hamburger icon swaps to an X when open. Clicking outside the header or any nav link closes the menu.",
+            ],
+            listItems: [
+              "Desktop: horizontal nav links (Calculator, About, Contact) + theme toggle",
+              "Mobile: hamburger icon (≤639px) opens a dropdown nav panel",
+              "Icon animates: bars → X on open, X → bars on close",
+              "Closes on outside click or link tap",
+              "Full light/dark theme support in both desktop and mobile nav states",
+            ],
+            images: ["/P25_8.png"],
+          },
+        ],
+      },
+      {
+        title: "About Page",
+        description: [
+          {
+            text: [
+              "A single-column editorial page explains what the tool is, how it works, and who it's for. A \"Key facts\" card lists five bullet points about the science and privacy model in a styled dark card with checkmarks.",
+            ],
+            listItems: [
+              "What the tool does and who it's for",
+              "Key facts card: half-life, sleep threshold, FDA limit, browser-only processing, no sign-up",
+              "Disclaimer about medical advice",
+              "CTA button linking back to the calculator",
+            ],
+            images: ["/P25_9.png"],
+          },
+        ],
+      },
+      {
+        title: "Contact Page (Formspree)",
+        description: [
+          {
+            text: [
+              "A clean contact form with Name, Email, Subject, and Message fields submits via the Formspree API using `fetch` with `FormData`. On success, the form resets and shows a green confirmation message. On failure, a red error message appears. The submit button shows \"Sending…\" while in-flight and \"Sent\" on success.",
+            ],
+            listItems: [
+              "Four fields: Name, Email, Subject, Message",
+              "Async submission via fetch to Formspree endpoint",
+              "Inline success (green) and error (red) feedback without page reload",
+              "Submit button disabled during in-flight request to prevent double-submit",
+            ],
+            images: ["/P25_10.png"],
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: 24,
     title: "Facelees",
     urlTitle: "facelees",
