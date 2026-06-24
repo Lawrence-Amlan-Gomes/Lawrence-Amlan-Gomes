@@ -202,6 +202,13 @@ When the user says **End Today** (at any point during this workflow):
 | JavaScript | /js.png |
 | TypeScript | /ts.png |
 | MongoDB | /Mongodb.png |
+| Node.js | /node.png |
+| Express.js | /express.png |
+| PostgreSQL | /postgresql.png |
+| Redis | /redis.png |
+| Docker | /docker.png |
+| Nginx | /nginx.png |
+| BullMQ | /bullmq.png |
 | Cloudflare | /cloudflare.png |
 | Firebase | /Firebase.png |
 | Framer Motion | /framerMotion.png |

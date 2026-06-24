@@ -1,5 +1,126 @@
 const projects = [
   {
+    id: 26,
+    title: "ShortStack",
+    urlTitle: "shortstack",
+    date: "2026-06-24",
+    img: ["/P26.png"],
+    liveLink: "https://shortstack.lawrenceamlangomes.com",
+    shortDescription:
+      "A production-deployed URL shortener with click analytics, Redis caching, and async job queues — built to learn the full backend engineering stack from Express to Nginx.",
+    longDescription:
+      "ShortStack is a full-stack URL shortener built with Node.js, Express 5, and PostgreSQL, deployed on a Hostinger VPS via Coolify. It implements a cache-aside pattern with Redis to serve redirects at low latency, and decouples click recording from the redirect path using BullMQ async job queues — so analytics never slow down the user. The infrastructure layer includes a multi-stage Docker build, an Nginx reverse proxy, and Traefik handling SSL termination, forming a production-grade request chain. A multi-tenant auth API built with JWT and bcrypt allows the same service to support multiple independent applications. The project was built deliberately from primitives — raw SQL, no ORM, no framework magic — to develop deep understanding of each layer.",
+    techStack: [
+      ["Node.js", "/node.png"],
+      ["Express.js", "/express.png"],
+      ["PostgreSQL", "/postgresql.png"],
+      ["Redis", "/redis.png"],
+      ["Docker", "/docker.png"],
+      ["Nginx", "/nginx.png"],
+      ["BullMQ", "/bullmq.png"],
+      ["TypeScript", "/ts.png"],
+      ["React", "/React.png"],
+      ["JavaScript", "/js.png"],
+    ],
+    gitLink: "https://github.com/Lawrence-Amlan-Gomes/shortstack",
+    feaTures: [
+      {
+        title: "URL Shortener UI",
+        description: [
+          {
+            text: [
+              "A minimal React single-page app served directly by Express from the built static files. Users paste a long URL and receive a short link in the same domain (e.g. shortstack.lawrenceamlangomes.com/abc123).",
+              "The interface handles loading states, validation errors from the API, and a one-click copy-to-clipboard action with visual feedback.",
+            ],
+            listItems: [
+              "Paste any valid URL and generate a 6-character random slug",
+              "Short URL displayed as a clickable link and copyable to clipboard",
+              "Loading and error states handled in UI",
+              "Built with Vite + React + TypeScript, served as static files by Express",
+            ],
+            images: ["/P26_1.png"],
+          },
+        ],
+      },
+      {
+        title: "Redirect Engine with Redis Cache",
+        description: [
+          {
+            text: [
+              "Visiting a short URL (e.g. /abc123) triggers a 301 redirect to the original URL. The redirect handler checks Redis first — on a cache HIT the response skips the database entirely. On a MISS it queries PostgreSQL, populates the cache with a 24-hour TTL, and redirects.",
+              "An X-Cache: HIT/MISS response header exposes cache behaviour for observability, following the CDN industry convention.",
+            ],
+            listItems: [
+              "Cache-aside pattern: Redis checked before every DB query",
+              "Write-through on create: cache warmed immediately so first redirect is always a HIT",
+              "24-hour TTL on all cached slugs",
+              "X-Cache response header for cache observability",
+            ],
+            images: ["/P26_2.png"],
+          },
+        ],
+      },
+      {
+        title: "Click Analytics",
+        description: [
+          {
+            text: [
+              "Every redirect asynchronously records a click event via BullMQ. The redirect response is sent immediately — the analytics write happens in a background worker, so the user never waits for the database INSERT.",
+              "Click data is stored in a separate normalised clicks table (not a counter column), enabling time-series queries. The /api/links/:slug/stats endpoint returns the total click count for any slug.",
+            ],
+            listItems: [
+              "Click jobs enqueued on every redirect — zero latency impact on user",
+              "BullMQ worker processes jobs in-process, INSERTs into PostgreSQL clicks table",
+              "Separate clicks table with timestamp column — supports \"clicks per day\" style queries",
+              "GET /api/links/:slug/stats returns total click count",
+              "Bull Board observability UI at /admin/queues (protected by HTTP basic auth)",
+            ],
+            images: ["/P26_3.png"],
+          },
+        ],
+      },
+      {
+        title: "Multi-Tenant Auth API",
+        description: [
+          {
+            text: [
+              "A JWT-based authentication API with an app field on every user, allowing the same email to register independently for different applications. The UNIQUE(email, app) constraint enforces this at the database level.",
+              "Passwords are hashed with bcrypt (cost factor 12). JWT tokens are issued in the response body with a 7-day expiry.",
+            ],
+            listItems: [
+              "POST /api/auth/register — email, password, app field required, Zod validated",
+              "POST /api/auth/login — returns signed JWT on success",
+              "UNIQUE(email, app) constraint — multi-tenant by design",
+              "bcrypt password hashing (cost factor 12)",
+              "JWT issued in response body (not cookie) for cross-origin client compatibility",
+            ],
+            images: ["/P26_4.png"],
+          },
+        ],
+      },
+      {
+        title: "Production Infrastructure",
+        description: [
+          {
+            text: [
+              "The full production request chain is: Internet → Traefik (SSL termination, port 443) → Nginx (reverse proxy, port 80, internal) → Express (port 3000, internal). Nginx and the app run as separate Docker services defined in docker-compose.yml and deployed via Coolify's docker-compose buildpack.",
+              "The Nginx config uses Docker's internal DNS resolver (127.0.0.11) with a variable upstream to force runtime DNS resolution — preventing the default behaviour where Nginx caches upstream IPs at startup and breaks when containers restart.",
+            ],
+            listItems: [
+              "Multi-stage Dockerfile: client-builder, server-builder, and lean production image",
+              "Nginx reverse proxy baked into its own Docker image (no volume mounts)",
+              "Traefik handles SSL — Nginx and Express never exposed to the public internet",
+              "App joins coolify Docker network to reach Redis by hostname",
+              "docker-compose.dev.yml override for local development with local Postgres + Redis",
+              ".env.example documents all required environment variables",
+            ],
+            images: ["/P26_5.png"],
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: 25,
     title: "Real Caffeine Calculator",
     urlTitle: "real-caffeine-calculator",
