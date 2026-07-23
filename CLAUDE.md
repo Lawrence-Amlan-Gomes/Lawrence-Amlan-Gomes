@@ -46,21 +46,22 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 
 | Route | Purpose |
 |---|---|
-| `/` | Landing page |
-| `/home` | Home section components |
-| `/about` | About + experience |
+| `/` | Redirects client-side to `/home` (`app/page.js`) |
+| `/home` | Landing page — About/Projects/Testimonials/Blogs/Stats sections |
+| `/about` | About + skills (`app/about/skills.js`) + experience |
 | `/projects` | Projects list |
 | `/project/[urlTitle]` | Single project detail |
 | `/blogs` | Blog list |
 | `/blog/[urlTitle]` | Single blog detail |
-| `/contact` | Contact form |
+| `/contact` | Contact form + Gemini chatbot + Cal.com booking embed |
 | `/resume` | Resume viewer |
 | `/testimonials` | Testimonials |
-| `/thesis` | Thesis section |
+| `/thesis` | Thesis section (`page.jsx` — the one page not using `.js`) |
 | `/profile` | User profile (auth required) |
 | `/changePassword` | Change password (auth required) |
-| `/payment` | Payment page |
+| `/payment` | Pricing page (UI only — see Known Gaps) |
 | `/color` | (dev) color reference |
+| `/error` | Error boundary page (`components/ErrorComponent.jsx`) |
 
 ## Key Patterns
 
@@ -92,8 +93,21 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 MONGODB_CONNECTION_STRING=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
+NEXTAUTH_URL=
 NEXTAUTH_SECRET=
 GEMINI_API_KEY=
 ```
 
 EmailJS keys are also required for the contact form (see `.env.local`).
+
+> `GOOGLE_CLIENT_SECRET` is required by `app/auth.js` but is currently **absent** from both `.env.local` and `productionENV.txt` — Google sign-in will fail until it's added. See Known Gaps.
+
+## Known Gaps / Incomplete Areas
+
+These exist in the code as-is; know about them before touching auth or payments so you don't assume more is wired up than actually is.
+
+- **No `/login` or `/register` route exists**, even though `components/LoginForm.jsx` and `RegistrationForm.jsx` are fully built but never imported, and multiple places redirect to `/login` that 404 today: `components/Profile.jsx`, `components/ChangePassword.jsx`, and `registerUser` in `app/actions/index.js`.
+- **Google OAuth is misconfigured** — `GOOGLE_CLIENT_SECRET` isn't set (see above), so `signIn("google")` will fail as-is.
+- **`/payment` is a static mockup**, not a real payment flow — three pricing cards with no click handlers and no payment SDK in `package.json` (no Stripe/Paddle). The real Paddle integration referenced in Lawrence's bio/experience content belongs to the separate `mydailyroutine.app` product, not this repo.
+- **Duplicate Google sign-in components**: `components/SignInWithGoogle.jsx` and `SingInGoogle.jsx` (typo'd filename) both exist, both mislabeled "Register" despite calling `signIn("google")`.
+- `db/queries.js` stores passwords in plaintext (`models/user-model.js`) with no hashing step — relevant only if the dead login/register flow above is ever revived.

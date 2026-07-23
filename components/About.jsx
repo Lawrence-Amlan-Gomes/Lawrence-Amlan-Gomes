@@ -2,6 +2,7 @@
 import experiences from "@/app/about/experiences";
 import { useTheme } from "@/app/hooks/useTheme";
 import ExperienceCard from "./ExperienceCard";
+import Skills from "./Skills";
 import Footer from "./Footer";
 
 export default function About() {
@@ -47,6 +48,9 @@ export default function About() {
             </p>
           </div>
         </div>
+
+        {/* Skills Section */}
+        <Skills />
 
         {/* Experience Section */}
         <div className="mt-10 overflow-hidden">

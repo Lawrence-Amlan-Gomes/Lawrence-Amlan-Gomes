@@ -1,22 +1,22 @@
-# skill_newProjectMaker
+# New Project Maker
+
+_Owned by skillCoFounder.md. Absorbed from `skills/skill_newProjectMaker.md` (now safe to delete — this is the canonical copy)._
 
 ## Trigger
 
-User says `@skills/skill_newProjectMaker.md` or `skill_newProjectMaker`, or any equivalent that means: start the new project intake workflow.
-
----
+Lawrence says **"New Project"**, "add a project," "add project maker," or a clear equivalent meaning: start the new project intake workflow.
 
 ## What it does
 
-This skill guides a multi-phase workflow for adding a new project to `app/projects/projects.js`. It:
+Guides a multi-phase workflow for adding a new project to `app/projects/projects.js`. It:
 
-1. Analyzes existing projects to learn the pattern and determine the next ID
-2. Generates a **Probe Prompt** the user pastes into the **new project's own Claude Code session**
-3. Receives the **Report** that Claude Code pastes back here
-4. Writes the new project object into `projects.js`
-5. Produces a **Screenshot Checklist** — one filename + one instruction per image
+1. Analyzes existing projects to learn the pattern and determine the next ID.
+2. Generates a **Probe Prompt** Lawrence pastes into the **new project's own Claude Code session**.
+3. Receives the **Report** Lawrence pastes back here.
+4. Writes the new project object into `projects.js`.
+5. Produces a **Screenshot Checklist** — one filename + one instruction per image.
 
-When the user says **"End Today"**, the skill writes its current phase and collected data into the `## Session State` section at the bottom of this file so the next session resumes exactly where this one left off.
+If "End Today" happens mid-workflow, current phase and collected data get snapshotted into `## Session State` at the bottom of this file (in addition to the normal `co-founder/where-we-left-off.md` note pointing here), so the next session resumes exactly where this one left off.
 
 ---
 
@@ -24,14 +24,14 @@ When the user says **"End Today"**, the skill writes its current phase and colle
 
 ### Phase 0 — Startup
 
-When triggered (`@skills/skill_newProjectMaker.md`):
+When triggered:
 
 1. Read `## Session State` at the bottom of this file.
    - If `phase` is not `idle`, resume from that phase and echo a one-line summary of where things stand.
    - If `phase` is `idle`, continue below.
 2. Read `app/projects/projects.js` (the full file).
 3. Find the highest `id` value across all projects. The new project's ID = highest + 1.
-4. Tell the user: *"Ready to add project #<ID>. I'll now generate the Probe Prompt — paste it into the new project's Claude Code session and bring the report back here."*
+4. Tell Lawrence: *"Ready to add project #<ID>. I'll now generate the Probe Prompt — paste it into the new project's Claude Code session and bring the report back here."*
 5. Move to Phase 1.
 
 ---
@@ -88,7 +88,7 @@ END OF REPORT
 
 ---
 
-After the user pastes the report back, move to Phase 2.
+After Lawrence pastes the report back, move to Phase 2.
 
 ---
 
@@ -163,32 +163,31 @@ After outputting this, mark phase as `idle` in Session State and clear stored da
 
 ---
 
-## "End Today" command
+## "End Today" mid-workflow
 
-When the user says **End Today** (at any point during this workflow):
+If "End Today" fires while this workflow is not `idle`:
 
-1. Determine current phase and all data collected so far.
-2. Overwrite the `## Session State` section at the bottom of **this file** with the current snapshot (see format below).
-3. If anything was learned about this portfolio project's conventions that isn't already in `CLAUDE.md`, append a brief note under a `## New Project Maker Notes` section in `CLAUDE.md`.
-4. Reply: *"Session saved at Phase <N>. Next session will resume from here."*
+1. Overwrite `## Session State` below with the current phase and all data collected so far.
+2. In `co-founder/where-we-left-off.md`, note that a new-project-maker run is mid-flight and to check this file.
+3. If anything was learned about this portfolio project's conventions that isn't already in `CLAUDE.md`, edit `CLAUDE.md` precisely (only the relevant section).
 
 ---
 
 ## Scope
 
-- Writes to: `app/projects/projects.js`, this skill file's `## Session State` section, `CLAUDE.md` (only if new conventions discovered)
-- Reads: `app/projects/projects.js`, this skill file
-- Never modifies: any other source file, public images (user places them manually)
+- Writes to: `app/projects/projects.js`, this file's `## Session State` section, `CLAUDE.md` (only if new conventions discovered)
+- Reads: `app/projects/projects.js`, this file
+- Never modifies: any other source file, public images (Lawrence places them manually)
 
 ---
 
 ## Edge cases
 
-- **Report is incomplete**: Ask the user for the missing fields before proceeding. Do not guess.
-- **Duplicate urlTitle**: Warn the user and ask for a different one before writing.
-- **User resumes mid-session**: Read Session State, echo where we left off, continue from that phase.
+- **Report is incomplete**: Ask Lawrence for the missing fields before proceeding. Do not guess.
+- **Duplicate urlTitle**: Warn Lawrence and ask for a different one before writing.
+- **Resuming mid-session**: Read Session State, echo where we left off, continue from that phase.
 - **No new conventions for CLAUDE.md**: Skip that step silently — don't add empty or redundant notes.
-- **Tech stack icon not in the known list**: Use the closest match and note it to the user.
+- **Tech stack icon not in the known list**: Use the closest match and note it to Lawrence.
 
 ---
 
