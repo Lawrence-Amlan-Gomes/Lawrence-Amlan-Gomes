@@ -17,5 +17,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3002 (3000/3001 were occupied by processes not started by me) — killed clean at End Today on 2026-07-23
+note: last session ran on 3001 (3000 occupied by a foreign MySelf-project process not started by me) — killed clean at End Today on 2026-07-24
 ```
