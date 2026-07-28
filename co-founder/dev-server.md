@@ -17,5 +17,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3001 (3000 occupied by a foreign MySelf-project process not started by me) — killed clean at End Today on 2026-07-24
+note: last session ran on 3001 (3000 occupied by a foreign process not started by me) — killed clean at End Today on 2026-07-29. node_modules was missing on this checkout; ran `npm install` (454 packages) before `npm run dev` would resolve.
 ```

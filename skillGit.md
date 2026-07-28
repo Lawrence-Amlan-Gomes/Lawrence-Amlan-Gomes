@@ -32,7 +32,7 @@ Skip this whole section silently if `.git` already exists.
 ### 2. Commit and push
 
 1. `git status` first — review what's actually changed. If anything looks like it shouldn't be committed (secrets, `.env` files, stray build artifacts), flag it to Lawrence before staging rather than committing it silently.
-2. `git add` the relevant files (not blindly `-A` if something looks off per the check above).
+2. `git add -A` (stage everything) — standing instruction from Lawrence as of 2026-07-29. The step 1 review is the safeguard: if it surfaced anything secret-looking, stop and flag it instead of staging blindly.
 3. Write a professional commit message summarizing the actual changes made — what changed and why, not generic boilerplate.
 4. `git commit -m "<message>"`.
 5. `git push origin main` (or the tracked branch).

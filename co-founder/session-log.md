@@ -2,6 +2,16 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-07-29 — End Today (silent-execution rule, git add -A rule, stats-strip sync scope)
+
+- No portfolio code/content touched — three co-founder rule/process pieces, plus routine inbound mail.
+- Processed 5 inbound mails from **High Level Design** (Lawrence's system-design learning project), 2026-07-24 to 2026-07-28: absorbed a snapshot into `mail_box_senders.md` memory (27/31 topics mastered — Core Concepts, Key Technologies, Common Patterns all fully done; only Practice Designs left) and deleted all 5 per protocol.
+- New standing rule from Lawrence: **silent execution** — no narration while working, report only once a task is done (exceptions: genuine blockers, decisions only he can make, risky/hard-to-reverse actions). Saved to memory as `feedback_silent_execution.md`.
+- New standing rule from Lawrence: **`skillGit.md` now defaults to `git add -A`** (was "prefer specific files") for the End Today auto-chain. Confirmed this repo is already past "first-time setup" — `origin` and `main` tracking already exist.
+- Expanded the "everywhere's about" sync rule (skillCoFounder.md step 6): added `components/LandingStatsStrip.jsx` (the four hardcoded home stat counters) as a real sync target, and clarified `/projects`+`/testimonials`(+home previews) stay in the "does this match reality" check too — fixes just land in the data file, not the component, since those render live off it.
+- Real clarification landed with Lawrence: DSA/System-Design skills are genuinely his skills, but stay off the public site because of a **prior confirmed exclusion decision** (granular detail = interview-prep altitude), not because mail-derived skills don't count. A genuinely new stack skill via mail (tested with a hypothetical "mastered Angular.js") would sync automatically — confirmed no exclusion blocks that case.
+- Dev server: started on 3001 this session (3000 held by a foreign process; `node_modules` was missing on this checkout, ran `npm install` first before `next dev` would resolve), killed clean at End Today.
+
 ### 2026-07-24 — End Today (Inbound Mail Relay, public-facing sync rule, skillGit auto-chain)
 
 - No portfolio code touched — three co-founder tooling pieces built/confirmed this session.
