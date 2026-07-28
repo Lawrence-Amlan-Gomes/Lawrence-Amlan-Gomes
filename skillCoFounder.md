@@ -15,7 +15,7 @@ co-founder/where-we-left-off.md   — current snapshot, rewritten every "End Tod
 co-founder/session-log.md         — dated history, newest entry on top
 co-founder/dev-server.md          — port-management rule + live dev-server state
 co-founder/chat-relay.md          — "Start Chat" / "End Chat" protocol with another project's Claude
-co-founder/mail-relay.md          — async mail exchange: "send the mails" (outbound) + auto-checked mail-box/ (inbound)
+co-founder/mail-relay.md          — async mail exchange: outbound auto-sent every End Today + auto-checked mail-box/ (inbound)
 co-founder/new-project-maker.md   — "New Project" intake workflow (adds an entry to app/projects/projects.js)
 co-founder/lawrence-skills-reference.md — verified full technical skill inventory + what's deliberately shown vs. trimmed on the portfolio
 ```
@@ -46,6 +46,7 @@ Trigger phrases: **"End Today"**, "end of day", "wrap up", "that's it for today,
 
 When triggered:
 
+0. **Send the mails, by default, first.** As of 2026-07-29 this runs automatically on every "End Today" — no need for Lawrence to say "send the mails" separately, same as the `skillGit` auto-chain at the other end of this sequence. Follow the Outbound protocol in `co-founder/mail-relay.md` (re-read it live): fan out this session's summary to every configured destination by default, skipping only destinations with nothing relevant to them. Must happen before step 2 below overwrites this session's state. If Lawrence says something specific before/with the End Today prompt (narrow to one destination, skip the mail this time), that overrides the default.
 1. Review the session — decisions made, code shipped, blockers hit, things ruled out. Pull from what actually happened, not assumptions.
 2. Overwrite `co-founder/where-we-left-off.md` with a fresh snapshot: current focus, immediate next step, open questions, anything blocking. Keep it short enough to read in 10 seconds.
 3. Add a new dated entry to the **top** of `co-founder/session-log.md` (newest first) — 3–6 terse bullets, no fluff. Use today's actual date.
@@ -67,7 +68,7 @@ When triggered:
 ## Sub-skills
 
 - **Chat Relay** — triggered by "Start Chat" / "End Chat." Full protocol in `co-founder/chat-relay.md`. Read it in full the moment "Start Chat" is said (don't rely on memory of it — re-read live, it may have been updated).
-- **Mail Relay** — outbound triggered by "send the mails" (usually paired as "End Today, send the mails" — send mails first, then run End Today); inbound runs automatically every session start (step 3 of Startup behavior above), no trigger phrase needed. Full protocol in `co-founder/mail-relay.md`, including the destination-folder list. Re-read it live when triggered, same reasoning as above.
+- **Mail Relay** — outbound now runs automatically as step 0 of every "End Today" (no trigger phrase needed, same as the `skillGit` auto-chain), fanning out to every configured destination by default unless Lawrence varies it; can still be triggered standalone mid-session via "send the mails" for an ad hoc sync. Inbound runs automatically every session start (step 3 of Startup behavior above), no trigger phrase needed. Full protocol in `co-founder/mail-relay.md`, including the destination-folder list. Re-read it live when triggered, same reasoning as above.
 - **New Project Maker** — triggered by "New Project" / "add a project." Full multi-phase workflow in `co-founder/new-project-maker.md`, including its own resumable Session State. Re-read it live when triggered, same reasoning as above.
 - **skillGit** — runs automatically as the final step of every "End Today" (step 8 above), no trigger phrase needed from Lawrence in that context. Full protocol in `skillGit.md` (build check → fix → commit → push to main). Can also still be triggered standalone by `@skillGit.md` any other time, same as before.
 
@@ -75,7 +76,7 @@ When triggered:
 
 ## Scope
 
-- Writes to: files inside `co-founder/`; `CLAUDE.md` (only when real architecture/pattern facts changed); `mail-box/` (read-and-delete only, per Inbound protocol); `README.md`, `app/about/skills.js`, `components/About.jsx`, `components/LandingAbout.jsx`, `app/myself.js`, `app/about/experiences.js`, `components/LandingStatsStrip.jsx` (only via the End Today "everywhere's about" sync step, only for verified new facts — not general editing)
+- Writes to: files inside `co-founder/`; `CLAUDE.md` (only when real architecture/pattern facts changed); `mail-box/` (read-and-delete only, per Inbound protocol); the configured destination mailbox folders listed in `co-founder/mail-relay.md` (write-only, additive, one new `.md` per topic — never edits or deletes what's already there); `README.md`, `app/about/skills.js`, `components/About.jsx`, `components/LandingAbout.jsx`, `app/myself.js`, `app/about/experiences.js`, `components/LandingStatsStrip.jsx` (only via the End Today "everywhere's about" sync step, only for verified new facts — not general editing)
 - Reads: this file, everything in `co-founder/`, `CLAUDE.md`, `mail-box/`, recent git log/diff for session context
 - Never touches: other files in `skills/`, source code — unless Lawrence separately asks for implementation work during the session (that's normal work, not part of this skill's self-update), or `skillGit.md` running its own build-fix/commit/push scope as the automatic final step of End Today (step 8)
 

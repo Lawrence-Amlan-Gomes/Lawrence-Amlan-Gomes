@@ -13,10 +13,10 @@ Unlike **Chat Relay** (`chat-relay.md`), which is a live, synchronous back-and-f
 
 ### Trigger
 
-- **"send the mails"** — write mail files now, into every configured destination.
-- Normal phrasing is combined with End Today: e.g. "End Today, send the mails." When said together, **order matters**: send the mails FIRST (this file's protocol), THEN run the standard End Today sequence from `skillCoFounder.md`. Mail content should describe this session's work, so it must be written before `where-we-left-off.md` / `session-log.md` get overwritten for the *next* session — write mail first, then do End Today bookkeeping.
-- "send the mails" can in principle be triggered standalone (not paired with End Today) if Lawrence just wants a mid-session sync sent — treat it the same way, just skip the subsequent End Today steps.
-- **Default fan-out: send to ALL configured destinations, every time.** If Lawrence says just "End Today, send the mails" with no further qualifier, that means every folder in the Destinations list gets this session's relevant mail(s) — don't ask which ones, don't guess a subset. Only narrow to specific destinations if Lawrence explicitly says so in or before that prompt (e.g. "send the mails to just the mydailyroutine one").
+- **Automatic, every "End Today" — no trigger phrase needed anymore.** As of 2026-07-29, sending mail is a default step of every End Today, the same way `skillGit` auto-chains at the end of it. Lawrence no longer has to say "send the mails" — it happens by default, unless he says something specific before/with that End Today prompt to vary it (narrow to one destination, skip it this time, etc.).
+- **Order matters**: send the mails FIRST (this file's protocol), THEN run the standard End Today sequence from `skillCoFounder.md`. Mail content should describe this session's work, so it must be written before `where-we-left-off.md` / `session-log.md` get overwritten for the *next* session — write mail first, then do End Today bookkeeping.
+- "send the mails" can still be said standalone mid-session (not paired with End Today) if Lawrence wants an ad hoc sync sent early — treat it the same way, just skip the subsequent End Today steps.
+- **Default fan-out: send to ALL configured destinations, every time.** Plain "End Today" with no further qualifier means every folder in the Destinations list gets this session's relevant mail(s) — don't ask which ones, don't guess a subset. Only narrow to specific destinations if Lawrence explicitly says so in or before that prompt (e.g. "send the mails to just the mydailyroutine one," or "skip the mail today").
 - If a given destination has nothing relevant to this session (nothing this project's work would matter to that sibling), it's fine to skip writing a mail to it — "send to all" means all destinations get considered, not that every destination must always receive a file regardless of relevance.
 
 ### Destinations
