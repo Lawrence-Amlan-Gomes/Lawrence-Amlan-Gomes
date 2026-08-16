@@ -4,23 +4,19 @@ _Owned by skillCoFounder.md — read this first on every session start, overwrit
 
 ## Current focus
 
-No portfolio code/content changed this session — an inbound-mail catch-up (16 days since last session) plus one live Chat Relay consult.
+No portfolio code/content changed this session — one inbound mail closure + one live Chat Relay exchange, both with the Fiverr project.
 
-1. **Processed 11 backlogged inbound mails** across 4 sibling senders — absorbed into memory (`mail_box_senders.md`, rewritten) and all deleted per protocol:
-   - **DSA Visualized**: 53/53 problems solved (2-D DP closed via Unique Paths), new Phase 0.5 OOP Fundamentals curriculum, Roadmap rebuilt as real nested URL routes.
-   - **High Level Design**: Common Patterns fully mastered; Practice Designs group now building from scratch with an expanded 6-topic list (URL Shortener + Rate Limiter done, 4 remain).
-   - **Node + Express** — **new sender, not previously tracked**: running its own Postgres/MongoDB fundamentals-to-advanced curriculum; built and then fully deleted a "Company-Specific Interview Prep" stage at Lawrence's explicit request.
-   - **Fiverr** — **new sender, not previously tracked**: Lawrence's private Fiverr seller-onboarding tracker, sourced content read-only from this repo, has since diverged and dropped its portfolio-mirror routes.
-   - Checked whether any of this triggers the "everywhere's about" public sync — it doesn't; verified `app/about/skills.js` already lists MongoDB and PostgreSQL/SQL, so nothing new to reflect publicly.
-2. **Chat Relay with Fiverr's cofounder** (Start Chat → End Chat, live in this session): they're building the Gallery for Lawrence's first Fiverr Gig ("full stack web app... with AI features") and asked which real projects to showcase. Recommended, with real file paths pulled from `app/projects/projects.js` and `app/testimonials/testimonials.js`:
-   - **3 for gallery/video/thumbnail**: My Daily Routine (the AI headline — Gemini-powered `/ai-routine` builder, real screenshots `P22AIRoutinePage.png`/`P22AIChatFlow.png`), Facelees (real paying client, e-commerce, `P24*.png`), Chemistry MCQ Test (real client, timer + analytics charts for visual variety, `P17_*.png`) — flagged Library Management as an alternate for slot 3 if they want CRUD/admin depth instead.
-   - **2 for the case-study PDFs**: My Daily Routine + Facelees — deepest, most self-contained stories.
-   - Flagged one open gap to them: no real cost/pricing data exists anywhere in this repo for the 3 named client projects (Facelees, Chemistry MCQ, Library Management) — any PDF wanting budget figures needs those from Lawrence directly.
-3. **No mail sent out this End Today** — judged both configured destinations (`skillsUpdateMentor`, `jobCrackMentor`) as having nothing genuinely new to report: the inbound mail was passive absorption (not this project's own new facts), and the Fiverr consult was already delivered live to its origin via the chat relay itself, so mailing it elsewhere would be redundant. Fine to skip per the "skip if nothing relevant" rule — not a change to the standing "mail every End Today" default.
+1. **Processed 1 inbound mail** from Fiverr (`Fiverr - Gig 1 Gallery Built From Your Project Data.md`): Gig 1 is now fully built (7/7 steps) using the projects recommended last session — gallery led with My Daily Routine (AI angle), plus Facelees and Chemistry MCQ Test; two case-study PDFs built (My Daily Routine + Facelees). Lawrence's earlier Facelees→portfolio→contact-info Fiverr ToS concern was researched by them and closed as a non-issue — no changes needed on either side. Absorbed into `mail_box_senders.md`, mail deleted per protocol.
+2. **Chat Relay with Fiverr's cofounder** (Start Chat → End Chat, live this session): they're building Gig 2 ("AI feature integration") and asked for assets narrowed to just the AI Routine Builder feature specifically. Gave them, sourced from `app/projects/projects.js`:
+   - Only 2 real images exist for that feature: `P22AIRoutinePage.png`, `P22AIChatFlow.png` — declined to invent a third (input/output/model-selection breakdown) since no third file exists in the data.
+   - Real feature detail (grounded system prompt, per-user `AIRoutine` Mongoose collection, live-streamed `updatedRoutine`, one-click copy into main routine).
+   - Flagged two gaps rather than inventing: no specific Gemini model version is documented for this feature (only "`@google/genai` (Gemini)" — explicitly distinguished from the portfolio's own separate chatbot, which does use documented Gemini 2.5 Flash, so the two aren't the same and shouldn't be conflated), and no user testimonial exists for it since My Daily Routine is Lawrence's own SaaS, not a client project (testimonials.js has no entry for it).
+   - No dedicated AI-feature hero/thumbnail exists — flagged `P22AIRoutinePage.png` as the best real substitute if Gig 2 needs one.
+3. **No mail sent out this End Today** — same judgment as last session: nothing genuinely new for either configured destination (`skillsUpdateMentor`, `jobCrackMentor`). The inbound mail was passive absorption and the Chat Relay content was already delivered live to its origin (Fiverr) via the relay itself, so mailing it elsewhere would be redundant. Skip per the "skip if nothing relevant" rule, not a standing-default change.
 
 ## Immediate next step
 
-Nothing in-flight. Watch for: more mail from any of the 4 tracked senders (DSA Visualized, High Level Design, Node + Express, Fiverr) — Node+Express and Fiverr are new as of this session, worth confirming their cadence over the next couple of sessions. If Fiverr's Gig Gallery build raises follow-up questions, expect another Chat Relay or a mail.
+Nothing in-flight. Watch for: Fiverr's Gig 2 gallery build may raise a follow-up (they now have the two real AI Routine images + detail, no third image). Also still watching cadence from DSA Visualized / High Level Design / Node + Express — no mail from any of those three this session.
 
 ## Open questions
 
@@ -28,7 +24,8 @@ Nothing in-flight. Watch for: more mail from any of the 4 tracked senders (DSA V
 - Icons for Testing & Tooling / CI/CD chips, or stay text-only permanently?
 - Still unconfirmed: is the JobCrack mailbox exclusively a mail-drop, or does it double as a data folder for something else?
 - Add a plain "System Design" and/or "DSA / Problem Solving" chip to the public skills page, or keep both internal-only? Undecided, Lawrence's call.
-- If Lawrence ever wants real cost/pricing figures for Facelees / Chemistry MCQ / Library Management recorded somewhere (the Fiverr project asked, this repo has none), that's a fact only he can supply.
+- If Lawrence ever wants real cost/pricing figures for Facelees / Chemistry MCQ / Library Management recorded somewhere (Fiverr asked before, this repo has none), that's a fact only he can supply.
+- If Fiverr's Gig 2 ends up needing a third AI-Routine-specific image or a real Gemini model version for My Daily Routine, that's a fact only Lawrence can supply (not documented in this repo's project data).
 
 ## Blockers
 
