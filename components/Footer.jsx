@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useTheme } from "@/app/hooks/useTheme";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import { FaLinkedin, FaGithub, FaBriefcase } from "react-icons/fa";
+import { SiGmail, SiFiverr } from "react-icons/si";
 import { BsTwitterX } from "react-icons/bs";
 import { useState } from "react";
 import { TiTick } from "react-icons/ti";
@@ -90,6 +90,30 @@ function Footer() {
               }`}
             >
               <FaGithub />
+            </a>
+            <a
+              href="https://www.fiverr.com/s/qb8xwdy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-xl ${
+                theme
+                  ? "text-[#0a0a0a] hover:text-blue-800"
+                  : "text-[#ebebeb] hover:text-blue-600"
+              }`}
+            >
+              <SiFiverr />
+            </a>
+            <a
+              href="https://contra.com/amlan_gomes_233w6dje?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=amlan_gomes_233w6dje"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-xl ${
+                theme
+                  ? "text-[#0a0a0a] hover:text-blue-800"
+                  : "text-[#ebebeb] hover:text-blue-600"
+              }`}
+            >
+              <FaBriefcase />
             </a>
             <a
               href="#"

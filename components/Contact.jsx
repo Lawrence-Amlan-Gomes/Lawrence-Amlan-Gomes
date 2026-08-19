@@ -13,12 +13,16 @@ import Chat from "./Chat";
 import { Sen } from "next/font/google";
 import SendMessage from "./SendMessage";
 import CalEmbed from "./CalEmbed";
+import { SiFiverr } from "react-icons/si";
+import { FaBriefcase } from "react-icons/fa";
 
 const techStack = [
   ["X", "/XLight.png", "/XDark.png"],
   ["LinkedIn", "/LinkedIn.png", "/LinkedIn.png"],
   ["GitHub", "/gitHubLight.png", "/gitHubDark.png"],
   ["Email", "/gmail.png", "/gmail.png"],
+  ["Fiverr", null, null, SiFiverr],
+  ["Contra", null, null, FaBriefcase],
 ];
 
 const urls = {
@@ -26,6 +30,9 @@ const urls = {
   X: "https://x.com/AmlanGomes2001",
   LinkedIn: "https://www.linkedin.com/in/lawrence-amlan-gomes/",
   GitHub: "https://github.com/Lawrence-Amlan-Gomes",
+  Fiverr: "https://www.fiverr.com/s/qb8xwdy",
+  Contra:
+    "https://contra.com/amlan_gomes_233w6dje?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=amlan_gomes_233w6dje",
 };
 
 export default function Contact() {
@@ -122,7 +129,9 @@ export default function Contact() {
               </div>
             </div>
             <div className="mt-6 flex flex-row flex-nowrap justify-between gap-2 sm:flex-wrap sm:gap-4 sm:justify-start relative">
-              {techStack.map((tech) => (
+              {techStack.map((tech) => {
+                const Icon = tech[3];
+                return (
                 <a
                   key={tech[0]}
                   href={urls[tech[0]] === "email" ? "#" : urls[tech[0]]}
@@ -154,15 +163,20 @@ export default function Contact() {
                       : "border-blue-700 hover:bg-[#080808]"
                   }`}
                 >
-                  <Image
-                    src={theme ? tech[1] : tech[2]}
-                    alt={tech[0]}
-                    width={32}
-                    height={32}
-                    className="object-contain"
-                  />
+                  {Icon ? (
+                    <Icon size={32} />
+                  ) : (
+                    <Image
+                      src={theme ? tech[1] : tech[2]}
+                      alt={tech[0]}
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  )}
                 </a>
-              ))}
+                );
+              })}
             </div>
           </div>
 

@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { TiTick } from "react-icons/ti";
+import { SiFiverr } from "react-icons/si";
+import { FaBriefcase } from "react-icons/fa";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -21,6 +23,8 @@ const techStack = [
   ["LinkedIn", "/LinkedIn.png", "/LinkedIn.png"],
   ["GitHub", "/gitHubLight.png", "/gitHubDark.png"],
   ["Email", "/gmail.png", "/gmail.png"],
+  ["Fiverr", null, null, SiFiverr],
+  ["Contra", null, null, FaBriefcase],
 ];
 
 const urls = {
@@ -28,6 +32,9 @@ const urls = {
   X: "https://x.com/AmlanGomes2001",
   LinkedIn: "https://www.linkedin.com/in/lawrence-amlan-gomes/",
   GitHub: "https://github.com/Lawrence-Amlan-Gomes",
+  Fiverr: "https://www.fiverr.com/s/qb8xwdy",
+  Contra:
+    "https://contra.com/amlan_gomes_233w6dje?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=amlan_gomes_233w6dje",
 };
 
 export default function LandingContact() {
@@ -121,7 +128,9 @@ export default function LandingContact() {
         viewport={{ once: true }}
         className="flex flex-wrap gap-4 relative"
       >
-        {techStack.map((tech) => (
+        {techStack.map((tech) => {
+          const Icon = tech[3];
+          return (
           <motion.a
             key={tech[0]}
             variants={fadeUp}
@@ -156,13 +165,17 @@ export default function LandingContact() {
                 : "border-blue-700 hover:bg-[#080808] hover:shadow-md hover:shadow-blue-500/10"
             }`}
           >
-            <Image
-              src={theme ? tech[1] : tech[2]}
-              alt={tech[0]}
-              width={28}
-              height={28}
-              className="object-contain"
-            />
+            {Icon ? (
+              <Icon size={28} />
+            ) : (
+              <Image
+                src={theme ? tech[1] : tech[2]}
+                alt={tech[0]}
+                width={28}
+                height={28}
+                className="object-contain"
+              />
+            )}
             <span
               className={`text-[10px] sm:text-xs font-medium ${
                 theme ? "text-[#666666]" : "text-[#888888]"
@@ -171,7 +184,8 @@ export default function LandingContact() {
               {tech[0]}
             </span>
           </motion.a>
-        ))}
+          );
+        })}
       </motion.div>
 
       <div className="flex justify-start mt-8">
