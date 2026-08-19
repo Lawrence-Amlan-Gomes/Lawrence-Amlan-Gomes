@@ -43,6 +43,7 @@ const TopNavbar = () => {
   const { theme } = useTheme();
   const [active, setActive] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollbarWidth, setScrollbarWidth] = useState(0);
   const pathname = usePathname();
   const trimedPathname = pathname.split("/").pop();
 
@@ -54,6 +55,16 @@ const TopNavbar = () => {
     }
   }, [trimedPathname]);
 
+  useEffect(() => {
+    const measureScrollbar = () => {
+      const el = document.getElementById("app-scroll-root");
+      if (el) setScrollbarWidth(el.offsetWidth - el.clientWidth);
+    };
+    measureScrollbar();
+    window.addEventListener("resize", measureScrollbar);
+    return () => window.removeEventListener("resize", measureScrollbar);
+  }, [pathname]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -62,7 +73,8 @@ const TopNavbar = () => {
     <>
       {/* Desktop Navbar */}
       <nav
-        className={`fixed top-0 z-50 w-[99%] h-12 sm:h-14 md:h-16 hidden sm:flex items-center justify-between border-b-[1px] px-[10%] bg-opacity-65 backdrop-blur-xl ${
+        style={{ right: scrollbarWidth }}
+        className={`fixed top-0 left-0 z-50 h-12 sm:h-14 md:h-16 hidden sm:flex items-center justify-between border-b-[1px] px-[10%] bg-opacity-65 backdrop-blur-xl ${
           theme
             ? "bg-[#ffffff] border-[#dddddd]"
             : "bg-[#000000] border-[#222222]"
@@ -99,7 +111,8 @@ const TopNavbar = () => {
 
       {/* Mobile Navbar */}
       <nav
-        className={`fixed top-0 z-50 w-full h-14 flex sm:hidden border-b-[1px] items-center justify-between px-[10%] bg-opacity-50 backdrop-blur-md ${
+        style={{ right: scrollbarWidth }}
+        className={`fixed top-0 left-0 z-50 h-14 flex sm:hidden border-b-[1px] items-center justify-between px-[10%] bg-opacity-50 backdrop-blur-md ${
           theme
             ? "bg-[#ffffff] border-[#dddddd]"
             : "bg-[#000000] border-[#222222]"
@@ -146,7 +159,8 @@ const TopNavbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div
-          className={`fixed z-40 w-full top-14 bg-opacity-65 backdrop-blur-xl border-b-[1px] ${
+          style={{ right: scrollbarWidth }}
+          className={`fixed left-0 z-40 top-14 bg-opacity-65 backdrop-blur-xl border-b-[1px] ${
             theme
               ? "bg-[#ffffff] border-[#dddddd]"
               : "bg-[#000000] border-[#222222]"

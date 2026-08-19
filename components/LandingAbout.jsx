@@ -206,7 +206,9 @@ export default function LandingAbout() {
 
         {/* Hire Me CTA button */}
         <a
-          href="mailto:amlangomes@gmail.com"
+          href="https://cal.com/lawrence-amlan-gomes/15min?overlayCalendar=true"
+          target="_blank"
+          rel="noopener noreferrer"
           className={`flex items-center justify-center gap-2 w-full py-2 sm:py-2.5 rounded-xl font-semibold text-xs sm:text-sm mb-3 sm:mb-4 transition-all border-[1px] ${
             theme
               ? "bg-blue-800 text-white border-blue-800 hover:bg-white hover:text-blue-800"

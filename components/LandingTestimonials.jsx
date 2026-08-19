@@ -1,10 +1,11 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import testimonials from "@/app/testimonials/testimonials";
 import TestimonialCard from "./TestimonialCard";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -18,24 +19,33 @@ const staggerContainer = {
 
 export default function LandingTestimonials() {
   const { theme } = useTheme();
-  const [numtestimonials, setNumtestimonials] = useState(6);
+  const scrollRef = useRef(null);
+  const holdDirectionRef = useRef(0);
+  const holdRafRef = useRef(null);
 
-  useEffect(() => {
-    const updateNumtestimonials = () => {
-      if (window.innerWidth < 768) {
-        setNumtestimonials(2);
-      } else if (window.innerWidth < 1024) {
-        setNumtestimonials(2);
-      } else {
-        setNumtestimonials(3);
-      }
-    };
+  const scrollByCard = (direction) => {
+    scrollRef.current?.scrollBy({ left: direction * 380, behavior: "smooth" });
+  };
 
-    updateNumtestimonials();
-    window.addEventListener("resize", updateNumtestimonials);
+  const holdStep = () => {
+    if (scrollRef.current && holdDirectionRef.current !== 0) {
+      scrollRef.current.scrollLeft += holdDirectionRef.current * 9;
+      holdRafRef.current = requestAnimationFrame(holdStep);
+    }
+  };
 
-    return () => window.removeEventListener("resize", updateNumtestimonials);
-  }, []);
+  const startHoldScroll = (direction) => {
+    holdDirectionRef.current = direction;
+    cancelAnimationFrame(holdRafRef.current);
+    holdRafRef.current = requestAnimationFrame(holdStep);
+  };
+
+  const stopHoldScroll = () => {
+    holdDirectionRef.current = 0;
+    cancelAnimationFrame(holdRafRef.current);
+  };
+
+  useEffect(() => stopHoldScroll, []);
 
   return (
     <div className="px-[5%] sm:px-[10%] mb-[5%] pb-[5%] w-full">
@@ -77,25 +87,72 @@ export default function LandingTestimonials() {
             }}
           />
         </motion.div>
-        <motion.p
+        <motion.div
           variants={fadeUp}
-          className={`text-base lg:text-md w-full md:w-[50%] mt-2 ${
-            theme ? "text-[#666666]" : "text-[#aaaaaa]"
-          }`}
+          className="flex items-start justify-between gap-4 mt-2"
         >
-          Every project I ship is a commitment to quality. Here&#39;s what clients say about working with me directly.
-        </motion.p>
+          <p
+            className={`text-base lg:text-md flex-1 md:max-w-[50%] ${
+              theme ? "text-[#666666]" : "text-[#aaaaaa]"
+            }`}
+          >
+            Every project I ship is a commitment to quality. Here&#39;s what clients say about working with me directly.
+          </p>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <button
+              onClick={() => scrollByCard(-1)}
+              onMouseDown={() => startHoldScroll(-1)}
+              onMouseUp={stopHoldScroll}
+              onMouseLeave={stopHoldScroll}
+              onTouchStart={() => startHoldScroll(-1)}
+              onTouchEnd={stopHoldScroll}
+              onTouchCancel={stopHoldScroll}
+              aria-label="Scroll testimonials left"
+              className={`p-2 rounded-full border-[1px] text-lg cursor-pointer transition-colors select-none ${
+                theme
+                  ? "border-blue-800 text-blue-800 hover:bg-blue-800 hover:text-white"
+                  : "border-blue-700 text-blue-500 hover:bg-blue-700 hover:text-white"
+              }`}
+            >
+              <FiChevronLeft />
+            </button>
+            <button
+              onClick={() => scrollByCard(1)}
+              onMouseDown={() => startHoldScroll(1)}
+              onMouseUp={stopHoldScroll}
+              onMouseLeave={stopHoldScroll}
+              onTouchStart={() => startHoldScroll(1)}
+              onTouchEnd={stopHoldScroll}
+              onTouchCancel={stopHoldScroll}
+              aria-label="Scroll testimonials right"
+              className={`p-2 rounded-full border-[1px] text-lg cursor-pointer transition-colors select-none ${
+                theme
+                  ? "border-blue-800 text-blue-800 hover:bg-blue-800 hover:text-white"
+                  : "border-blue-700 text-blue-500 hover:bg-blue-700 hover:text-white"
+              }`}
+            >
+              <FiChevronRight />
+            </button>
+          </div>
+        </motion.div>
       </motion.div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
-        {testimonials.slice(0, numtestimonials).map((testimonial) => (
-          <TestimonialCard
+      <div
+        ref={scrollRef}
+        className="flex flex-nowrap items-stretch overflow-x-auto overflow-y-hidden gap-4 sm:gap-6 py-4 scrollbar-hide"
+      >
+        {testimonials.map((testimonial) => (
+          <div
             key={testimonial.id}
-            urlTitle={testimonial.urlTitle}
-            clientName={testimonial.clientName}
-            clientImg={testimonial.clientImg}
-            clientRole={testimonial.clientRole}
-            clientQuote={testimonial.clientQuote}
-          />
+            className="w-[300px] sm:w-[360px] lg:w-[420px] flex-shrink-0"
+          >
+            <TestimonialCard
+              urlTitle={testimonial.urlTitle}
+              clientName={testimonial.clientName}
+              clientImg={testimonial.clientImg}
+              clientRole={testimonial.clientRole}
+              clientQuote={testimonial.clientQuote}
+            />
+          </div>
         ))}
       </div>
       <div className="flex justify-center mt-8">

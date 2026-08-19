@@ -23,7 +23,7 @@ export default function ProjectCard({
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4 }}
-      className={`flex flex-col rounded-lg overflow-hidden border-[1px] transition-shadow ${
+      className={`flex flex-col h-full rounded-lg overflow-hidden border-[1px] transition-shadow ${
         theme
           ? "bg-[#ffffff] hover:bg-[#fafafa] text-[#333333] border-blue-800 hover:shadow-lg hover:shadow-blue-900/10"
           : "bg-[#000000] hover:bg-[#0a0a0a] text-[#dddddd] border-blue-800 hover:shadow-lg hover:shadow-blue-500/10"

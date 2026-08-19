@@ -2,6 +2,15 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-20 — End Today (Hidden admin login built, landing sections horizontal-scroll + arrows, navbar/scrollbar bug fixed)
+
+- Built the real admin login flow: `LoginForm.jsx` stripped to a single Google button + red "Only admins can login" warning; `app/auth.js` restricts sign-in to `amlangomes@gmail.com` server-side via a `signIn` callback; new `app/admin/page.js` (server-guarded) + `components/Admin.jsx`; real `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` set in `.env.local` (Google sign-in now actually works, was previously broken). `/login` and `/admin` restyled to match the site's real color language instead of the unused `color.js` tokens.
+- Flagged for Lawrence: Vercel needs `GOOGLE_CLIENT_ID` updated and `GOOGLE_CLIENT_SECRET` added manually (can't do this myself); Google Cloud Console redirect URI needs the prod domain for the new OAuth client. Local `productionENV.txt` (gitignored) updated to match as a reference.
+- Applied horizontal-scroll-all-cards + hold-to-scroll arrow buttons to Projects, Testimonials, and My Writings sections identically. Fixed three real bugs along the way: uneven card heights (missing `h-full`), a pre-existing latent bug where `scrollbar-hide` was used in multiple places but never actually defined anywhere (added real CSS to `globals.css`), and a CSS spec quirk (`overflow-x-auto` silently forcing `overflow-y: auto`) that was both cropping the hover-lifted card border and making rows vertically scrollable.
+- Fixed the navbar's `w-[99%]` hack (Lawrence's own workaround for the navbar covering the scrollbar): now dynamically measures the real scrollbar width and insets the fixed nav by that exact amount. Considered `sticky` positioning instead but reverted — it would've broken nearly every page's `pt-[20%] sm:pt-[13%]` top-padding compensation.
+- No outbound mail — nothing this session relevant to either configured destination's scope.
+- Dev server: started on 3001 this session (3000 held by a foreign process), restarted once mid-session after the `.env.local` change, killed clean at End Today.
+
 ### 2026-08-19 — End Today (Fiverr + Contra social links added)
 
 - Added Fiverr and Contra as new social/contact links across all three surfaces: `components/Footer.jsx` (icon links), `components/Contact.jsx`, and `components/LandingContact.jsx` (techStack/urls pattern).

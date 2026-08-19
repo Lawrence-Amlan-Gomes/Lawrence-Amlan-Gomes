@@ -57,8 +57,10 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 | `/resume` | Resume viewer |
 | `/testimonials` | Testimonials |
 | `/thesis` | Thesis section (`page.jsx` — the one page not using `.js`) |
-| `/profile` | User profile (auth required) |
-| `/changePassword` | Change password (auth required) |
+| `/profile` | User profile — **orphaned, see Known Gaps** |
+| `/changePassword` | Change password — **orphaned, see Known Gaps** |
+| `/login` | Hidden admin-only login — single "Log in with Google" button, restricted server-side to one email (`app/auth.js`). Reachable via the `©` in `Footer.jsx`'s copyright line. |
+| `/admin` | Admin landing page, server-guarded — redirects to `/login` unless the session matches the admin email |
 | `/payment` | Pricing page (UI only — see Known Gaps) |
 | `/color` | (dev) color reference |
 | `/error` | Error boundary page (`components/ErrorComponent.jsx`) |
@@ -77,7 +79,8 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 
 ### Auth
 - NextAuth v5 beta — import `{ auth, signIn, signOut }` from `app/auth.js`, not from `next-auth` directly.
-- Use the `useAuth` hook (`app/hooks/useAuth.js`) in client components to read session state.
+- `/login` is admin-only: `app/auth.js`'s `signIn` callback rejects any Google account except the hardcoded `ADMIN_EMAIL` (`amlangomes@gmail.com`). `/admin` (`app/admin/page.js`) enforces the same check server-side via `auth()` before rendering.
+- The `useAuth` hook (`app/hooks/useAuth.js`) and `AuthContext`/`AuthProvider` are a **separate**, older DB-user auth system (unrelated to NextAuth sessions) — see Known Gaps, it's currently orphaned.
 
 ### Server Actions
 - Mark files with `"use server"` at the top.
@@ -100,14 +103,14 @@ GEMINI_API_KEY=
 
 EmailJS keys are also required for the contact form (see `.env.local`).
 
-> `GOOGLE_CLIENT_SECRET` is required by `app/auth.js` but is currently **absent** from both `.env.local` and `productionENV.txt` — Google sign-in will fail until it's added. See Known Gaps.
+> `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are set locally in `.env.local` and Google sign-in works in dev. **Vercel's production env vars still need Lawrence to update `GOOGLE_CLIENT_ID` and add `GOOGLE_CLIENT_SECRET` manually** (not synced automatically), and the Google Cloud Console OAuth client's authorized redirect URIs need the production domain added.
 
 ## Known Gaps / Incomplete Areas
 
 These exist in the code as-is; know about them before touching auth or payments so you don't assume more is wired up than actually is.
 
-- **No `/login` or `/register` route exists**, even though `components/LoginForm.jsx` and `RegistrationForm.jsx` are fully built but never imported, and multiple places redirect to `/login` that 404 today: `components/Profile.jsx`, `components/ChangePassword.jsx`, and `registerUser` in `app/actions/index.js`.
-- **Google OAuth is misconfigured** — `GOOGLE_CLIENT_SECRET` isn't set (see above), so `signIn("google")` will fail as-is.
+- **No `/register` route exists** — `components/RegistrationForm.jsx` is fully built but never imported, and `registerUser` in `app/actions/index.js` redirects to `/login` after creating a user, but that redirect no longer makes sense now that `/login` is admin-only (see below).
+- **`/profile` and `/changePassword` are orphaned** — both depend on `AuthContext`'s `auth` value (via `useAuth`), which used to get populated by `LoginForm.jsx`'s old email/password login and Google-matched-DB-user lookup. That logic was removed when `LoginForm.jsx` was rebuilt as an admin-only Google gate (2026-08-20), so nothing sets `auth` anymore — these two routes are permanently stuck showing "You have to login first." Fixing this means either wiring a real user-facing auth flow back in, or removing the routes.
 - **`/payment` is a static mockup**, not a real payment flow — three pricing cards with no click handlers and no payment SDK in `package.json` (no Stripe/Paddle). The real Paddle integration referenced in Lawrence's bio/experience content belongs to the separate `mydailyroutine.app` product, not this repo.
-- **Duplicate Google sign-in components**: `components/SignInWithGoogle.jsx` and `SingInGoogle.jsx` (typo'd filename) both exist, both mislabeled "Register" despite calling `signIn("google")`.
-- `db/queries.js` stores passwords in plaintext (`models/user-model.js`) with no hashing step — relevant only if the dead login/register flow above is ever revived.
+- **Duplicate Google sign-in components**: `components/SignInWithGoogle.jsx` and `SingInGoogle.jsx` (typo'd filename) both exist, both mislabeled "Register", both unused and unrelated to the current admin-only `signIn("google")` flow in `LoginForm.jsx`.
+- `db/queries.js` stores passwords in plaintext (`models/user-model.js`) with no hashing step — relevant only if a real user-facing login/register flow is ever built (the old email/password path in `LoginForm.jsx` no longer exists).

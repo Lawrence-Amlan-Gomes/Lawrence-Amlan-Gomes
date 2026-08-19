@@ -9,7 +9,7 @@ export default function BlogCard({ title, img, shortDescription }) {
 
   return (
     <div
-      className={`flex flex-col rounded-lg overflow-hidden border-[1px] hover:cursor-pointer ${
+      className={`flex flex-col h-full rounded-lg overflow-hidden border-[1px] hover:cursor-pointer ${
         theme
           ? "bg-[#ffffff] hover:bg-[#fafafa] text-[#333333] border-blue-800"
           : "bg-[#000000] hover:bg-[#0a0a0a] text-[#dddddd] border-blue-800"

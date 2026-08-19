@@ -51,7 +51,10 @@ function Footer() {
                 theme ? "text-[#555555]" : "text-[#cccccc]"
               }`}
             >
-              © {new Date().getFullYear()} Lawrence. All rights reserved.
+              <Link href="/login" className="no-underline hover:no-underline">
+                ©
+              </Link>{" "}
+              {new Date().getFullYear()} Lawrence. All rights reserved.
             </span>
           </div>
           <div className="flex items-center space-x-4 relative">
