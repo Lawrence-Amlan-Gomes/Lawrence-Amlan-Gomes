@@ -36,9 +36,10 @@ app/              # Next.js App Router pages and server logic
   ClientLayout.js # Client wrapper with providers + navbar/footer
 
 components/       # Shared UI components (all .jsx)
-models/           # Mongoose models (user-model.js, message.js)
+models/           # Mongoose models (user-model.js, message.js, testimonial-model.js, settings-model.js)
 db/queries.js     # All DB query functions
-services/mongo.js # Mongoose connection helper (dbConnect)
+services/mongo.js # Mongoose connection helper (dbConnect) — caches the connection promise so concurrent calls (e.g. a page firing several server actions in parallel) don't race
+services/s3.js    # S3-compatible (MinIO) blob storage — presigned uploads, delete, public URL builder
 utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 ```
 
@@ -55,12 +56,13 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 | `/blog/[urlTitle]` | Single blog detail |
 | `/contact` | Contact form + Gemini chatbot + Cal.com booking embed |
 | `/resume` | Resume viewer |
-| `/testimonials` | Testimonials |
+| `/testimonials` | Testimonials — DB-backed (see Testimonials pattern below), not a static file. Includes a public add/edit form, shown only when the admin toggle is on. |
 | `/thesis` | Thesis section (`page.jsx` — the one page not using `.js`) |
 | `/profile` | User profile — **orphaned, see Known Gaps** |
 | `/changePassword` | Change password — **orphaned, see Known Gaps** |
 | `/login` | Hidden admin-only login — single "Log in with Google" button, restricted server-side to one email (`app/auth.js`). Reachable via the `©` in `Footer.jsx`'s copyright line. |
-| `/admin` | Admin landing page, server-guarded — redirects to `/login` unless the session matches the admin email |
+| `/admin` | Admin dashboard, sidebar layout (`app/admin/layout.js` + `components/AdminShell.jsx`) — the layout guards the whole `/admin/*` subtree server-side via `auth()`, redirecting to `/login` unless the session matches the admin email. Individual pages under it don't re-guard themselves. |
+| `/admin/testimonials` | Admin CRUD for testimonials — list, edit (with photo/video framing via `components/MediaFramer.jsx`), lock/delete, drag-to-reorder, and the public-submissions toggle. |
 | `/payment` | Pricing page (UI only — see Known Gaps) |
 | `/color` | (dev) color reference |
 | `/error` | Error boundary page (`components/ErrorComponent.jsx`) |
@@ -79,12 +81,20 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 
 ### Auth
 - NextAuth v5 beta — import `{ auth, signIn, signOut }` from `app/auth.js`, not from `next-auth` directly.
-- `/login` is admin-only: `app/auth.js`'s `signIn` callback rejects any Google account except the hardcoded `ADMIN_EMAIL` (`amlangomes@gmail.com`). `/admin` (`app/admin/page.js`) enforces the same check server-side via `auth()` before rendering.
+- `/login` is admin-only: `app/auth.js`'s `signIn` callback rejects any Google account except the hardcoded `ADMIN_EMAIL` (`amlangomes@gmail.com`). The whole `/admin/*` subtree enforces the same check server-side via `app/admin/layout.js` (not individual pages) before rendering.
+- Admin-only server actions must re-check `auth()` against `ADMIN_EMAIL` themselves too (e.g. every `admin*Action` in `app/actions/testimonials.js`) — a server action is a public HTTP endpoint regardless of what the UI shows, so the layout guard alone doesn't protect it.
 - The `useAuth` hook (`app/hooks/useAuth.js`) and `AuthContext`/`AuthProvider` are a **separate**, older DB-user auth system (unrelated to NextAuth sessions) — see Known Gaps, it's currently orphaned.
 
 ### Server Actions
 - Mark files with `"use server"` at the top.
 - Keep mutations in `app/actions/index.js`; keep the AI action in `app/server.js`.
+
+### Testimonials
+- DB-backed (`models/testimonial-model.js`), not a static file — unlike `projects.js`/blogs, which stay static. Query/mutation functions live in `db/queries.js`; all actions in `app/actions/testimonials.js`.
+- `models/settings-model.js` holds a singleton toggle (`testimonialSubmissionsOpen`) that gates public create/edit — checked server-side inside the actions, not just hidden in the UI.
+- Photo (1:1) and video (2:3) upload direct from the browser to MinIO via a presigned POST (`services/s3.js`, `requestUploadUrl` action) — never routed through a server action's body, to avoid Vercel's request size limits. Framing (which portion of the source shows) is non-destructive: the original file is stored as-is, and an `{x, y}` object-position is saved and applied via CSS at render time — there's no real image/video cropping or re-encoding anywhere in this flow.
+- `projectUrlTitle` on a testimonial just stores a string validated against `app/projects/projects.js` at write time — no separate DB collection for projects; that static file stays the single source of truth.
+- `order` (Number) drives display order, admin-reorderable via drag-and-drop in `/admin/testimonials` (`adminReorderTestimonialsAction`, bulk-writes the whole order in one call).
 
 ### AI Chatbot
 - `app/server.js` — `response(prompt, inputOutputPair)` builds a conversation history string and calls Gemini. The chatbot's persona and constraints come from `app/myself.js`.
@@ -99,11 +109,19 @@ GOOGLE_CLIENT_SECRET=
 NEXTAUTH_URL=
 NEXTAUTH_SECRET=
 GEMINI_API_KEY=
+S3_ENDPOINT=
+S3_REGION=
+S3_ACCESS_KEY=
+S3_SECRET_KEY=
+S3_BUCKET=
+S3_PUBLIC_URL=
 ```
 
 EmailJS keys are also required for the contact form (see `.env.local`).
 
-> `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are set locally in `.env.local` and Google sign-in works in dev. **Vercel's production env vars still need Lawrence to update `GOOGLE_CLIENT_ID` and add `GOOGLE_CLIENT_SECRET` manually** (not synced automatically), and the Google Cloud Console OAuth client's authorized redirect URIs need the production domain added.
+> Google sign-in works in both dev and production as of 2026-08-20 — Vercel's `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are set, and Google Cloud Console's authorized redirect URIs include the `www.lawrenceamlangomes.com` production domain (the bare apex alone wasn't enough — it threw `redirect_uri_mismatch` until the `www` variant was added).
+>
+> **`S3_*` vars are local-only so far** — set in `.env.local`, not yet added to Vercel. Testimonial photo/video uploads will fail in production until Lawrence adds all six to Vercel's env vars.
 
 ## Known Gaps / Incomplete Areas
 

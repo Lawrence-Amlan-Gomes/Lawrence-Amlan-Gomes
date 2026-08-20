@@ -1,14 +1,30 @@
 "use client";
+import { useState } from "react";
 import { useTheme } from "@/app/hooks/useTheme";
 import TestimonialCard from "./TestimonialCard";
-import testimonials from "@/app/testimonials/testimonials";
+import TestimonialForm from "./TestimonialForm";
+import AddTestimonialCard from "./AddTestimonialCard";
+import { getAllTestimonialsAction } from "@/app/actions/testimonials";
 import Footer from "./Footer";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 
-export default function Testimonials() {
+export default function Testimonials({ initialTestimonials, submissionsOpen }) {
   const { theme } = useTheme();
-  console.log("testimonials:", testimonials);
+  const [testimonials, setTestimonials] = useState(initialTestimonials);
+  const [formMode, setFormMode] = useState(null); // null | "create" | testimonial object
+
+  const refresh = async () => {
+    const fresh = await getAllTestimonialsAction();
+    setTestimonials(fresh);
+  };
+
+  const closeForm = () => setFormMode(null);
+  const handleSaved = async () => {
+    await refresh();
+    closeForm();
+  };
+
   return (
     <div
       className={`w-full pt-[20%] sm:pt-[13%] ${
@@ -48,15 +64,38 @@ export default function Testimonials() {
             into every project to deliver outstanding results.
           </p>
         </div>
+
+        {submissionsOpen && formMode && (
+          <div className="mb-8">
+            <TestimonialForm
+              existing={formMode === "create" ? null : formMode}
+              onSaved={handleSaved}
+              onCancel={closeForm}
+            />
+          </div>
+        )}
+
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
+          {submissionsOpen && !formMode && (
+            <AddTestimonialCard onClick={() => setFormMode("create")} />
+          )}
           {testimonials.map((testimonial) => (
             <TestimonialCard
               key={testimonial.id}
-              urlTitle={testimonial.urlTitle}
-              clientName={testimonial.clientName}
-              clientImg={testimonial.clientImg}
-              clientRole={testimonial.clientRole}
-              clientQuote={testimonial.clientQuote}
+              id={testimonial.id}
+              name={testimonial.name}
+              designation={testimonial.designation}
+              comment={testimonial.comment}
+              rating={testimonial.rating}
+              photoUrl={testimonial.photoUrl}
+              photoPosition={testimonial.photoPosition}
+              videoUrl={testimonial.videoUrl}
+              videoPosition={testimonial.videoPosition}
+              videoHidden={testimonial.videoHidden}
+              projectUrlTitle={testimonial.projectUrlTitle}
+              locked={testimonial.locked}
+              canEdit={submissionsOpen}
+              onEdit={() => setFormMode(testimonial)}
             />
           ))}
         </div>

@@ -1,10 +1,11 @@
 'use client';
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import testimonials from "@/app/testimonials/testimonials";
 import TestimonialCard from "./TestimonialCard";
+import AddTestimonialCard from "./AddTestimonialCard";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const fadeUp = {
@@ -17,8 +18,9 @@ const staggerContainer = {
   show: { transition: { staggerChildren: 0.10 } },
 };
 
-export default function LandingTestimonials() {
+export default function LandingTestimonials({ testimonials = [], submissionsOpen }) {
   const { theme } = useTheme();
+  const router = useRouter();
   const scrollRef = useRef(null);
   const holdDirectionRef = useRef(0);
   const holdRafRef = useRef(null);
@@ -140,17 +142,31 @@ export default function LandingTestimonials() {
         ref={scrollRef}
         className="flex flex-nowrap items-stretch overflow-x-auto overflow-y-hidden gap-4 sm:gap-6 py-4 scrollbar-hide"
       >
+        {submissionsOpen && (
+          <div className="w-[340px] max-[425px]:w-[90vw] sm:w-[400px] lg:w-[460px] h-[320px] max-[425px]:h-[400px] sm:h-[360px] lg:h-[400px] flex-shrink-0">
+            <AddTestimonialCard href="/testimonials" />
+          </div>
+        )}
         {testimonials.map((testimonial) => (
           <div
             key={testimonial.id}
-            className="w-[300px] sm:w-[360px] lg:w-[420px] flex-shrink-0"
+            onClick={() => router.push("/testimonials")}
+            className="flex-shrink-0 cursor-pointer"
           >
             <TestimonialCard
-              urlTitle={testimonial.urlTitle}
-              clientName={testimonial.clientName}
-              clientImg={testimonial.clientImg}
-              clientRole={testimonial.clientRole}
-              clientQuote={testimonial.clientQuote}
+              id={testimonial.id}
+              name={testimonial.name}
+              designation={testimonial.designation}
+              comment={testimonial.comment}
+              rating={testimonial.rating}
+              photoUrl={testimonial.photoUrl}
+              photoPosition={testimonial.photoPosition}
+              videoUrl={testimonial.videoUrl}
+              videoPosition={testimonial.videoPosition}
+              videoHidden={testimonial.videoHidden}
+              projectUrlTitle={testimonial.projectUrlTitle}
+              locked={testimonial.locked}
+              variant="row"
             />
           </div>
         ))}

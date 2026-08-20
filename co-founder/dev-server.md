@@ -9,6 +9,8 @@ _Owned by skillCoFounder.md._
 - I may kill and recreate a dev server **only if I started it** in the current or a prior session (tracked below by PID). If I do, tell Lawrence it was restarted and on what port.
 - On "End Today," always kill the dev server I started before finishing the session, and reset the state below to `not running`. Don't leave orphaned processes behind.
 - If Lawrence says he's already running his own dev server separately, don't start a second one — just note that in state below.
+- **Restart after every code change** (Lawrence's standing instruction, 2026-08-20): once any file edit is made during a session, kill and restart the dev server I'm tracking before considering the change done — don't wait for him to ask each time. Applies to any edit, not just risky ones.
+- **If `npm run build` was run at any point in the session** (e.g. to verify a change compiles), `rm -rf .next` before the next `npm run dev` restart. Production build and dev mode write incompatible artifacts to the same `.next` directory — alternating them without clearing it causes real runtime errors (`__webpack_modules__[moduleId] is not a function`, hook-call failures), not just cosmetic staleness. Hit this directly on 2026-08-20.
 
 ## Current State
 
@@ -17,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3001 (3000 occupied by a foreign process not started by me), restarted once mid-session after .env.local changed — killed clean at End Today on 2026-08-20.
+note: last session ran on 3001 (3000 held by a foreign next-server process, as usual), restarted many times through iterative UI work — killed clean at End Today on 2026-08-20. Always verify the real listening PID via `lsof -iTCP:<port> -sTCP:LISTEN`, not the `npm run dev` wrapper PID from `$!`.
 ```

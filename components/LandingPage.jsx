@@ -11,7 +11,7 @@ import LandingContact from "./LandingContact";
 import LandingButtons from "./LandingButtons";
 import LandingStatsStrip from "./LandingStatsStrip";
 
-export default function LandingPage() {
+export default function LandingPage({ testimonials = [], submissionsOpen }) {
   const { theme } = useTheme();
 
   return (
@@ -24,7 +24,7 @@ export default function LandingPage() {
       <LandingButtons/>
       <LandingStatsStrip/>
       <LandingProjects/>
-      <LandingTestimonials/>
+      <LandingTestimonials testimonials={testimonials} submissionsOpen={submissionsOpen}/>
       <LandingBlogs/>
       <LandingContact/>
       <Footer />
