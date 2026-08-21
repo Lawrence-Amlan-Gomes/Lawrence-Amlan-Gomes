@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3001 (3000 held by a foreign next-server process, as usual), restarted many times through iterative UI work — killed clean at End Today on 2026-08-20. Always verify the real listening PID via `lsof -iTCP:<port> -sTCP:LISTEN`, not the `npm run dev` wrapper PID from `$!`.
+note: last session ran on 3002 (3000/3001 held by foreign next-server processes, as usual), restarted 3 times (projects.js edit, p27.png->P27.png rename, skills.js edit) — killed clean at End Today on 2026-08-21.
 ```

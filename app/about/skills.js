@@ -10,6 +10,7 @@ const skills = [
       ["Tailwind CSS", "/TailwindCss.png", "/TailwindCss.png"],
       ["Redux Toolkit", "/redux.png", "/redux.png"],
       ["Framer Motion", "/framerMotion.png", "/framerMotion.png"],
+      ["Astro", null, null],
     ],
   },
   {
@@ -40,6 +41,7 @@ const skills = [
       ["Netlify", "/netlify.png", "/netlify.png"],
       ["Coolify", "/coolify.png", "/coolify.png"],
       ["Paddle", "/paddle.png", "/paddle.png"],
+      ["Cloudflare Workers", "/cloudflare.png", "/cloudflare.png"],
       ["CI/CD", null, null],
     ],
   },

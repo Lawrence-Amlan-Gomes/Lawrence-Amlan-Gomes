@@ -80,6 +80,7 @@ Delivered 2 production projects: the UTES company website (SEO-optimized) and Pr
 |---|---|---|---|
 | **My Daily Routine** | AI-powered SaaS planner — live users, Paddle payments, dual auth | Next.js · MongoDB · Redis · Paddle | [Live](https://mydailyroutine.app) · [GitHub](https://github.com/Lawrence-Amlan-Gomes/Daily-Routine) |
 | **Facelees** | E-commerce platform — real-time COD, admin panel, Cloudflare optimization | Next.js · MongoDB · Tailwind | [Live](https://www.facelees.com) · [GitHub](https://github.com/Lawrence-Amlan-Gomes/Lawrence-Amlan-Gomes) |
+| **Budget Meal Maker** | Budget-aware meal planning calculator — costed meal plans from a hand-rolled allocation solver | Astro · TypeScript · Tailwind · Cloudflare Workers | [Live](https://budgetmealmaker.com) · [GitHub](https://github.com/Lawrence-Amlan-Gomes/Budget-Meal-Maker) |
 
 ---
 

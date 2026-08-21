@@ -2,6 +2,16 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-21 — End Today (New Project Maker: Budget Meal Maker added as project #27, screenshot-checklist format rule corrected, skills/README synced)
+
+- Ran the full New Project Maker workflow: added project #27 "Budget Meal Maker" (Astro + TypeScript islands, Cloudflare Workers deploy, hand-rolled meal-budget allocation solver, SEO content library) to `app/projects/projects.js`, produced the screenshot checklist, Lawrence captured and dropped all 8 images in `public/`.
+- Found and fixed a real bug: the main image landed as `p27.png` (lowercase), which would 404 on Vercel's case-sensitive filesystem despite working fine on macOS locally — renamed to `P27.png` to match convention, verified all 8 images + the project page return 200.
+- Screenshot Checklist delivery format corrected twice at Lawrence's direction, now locked into `new-project-maker.md` Phase 4: each filename stem goes in its own fenced code block (real copy-icon button in this chat UI), `.png` and the instruction sit outside the block as plain text. Ruled out both a full HTML Artifact with JS copy buttons and inline single-backtick spans (no copy button on those here) before landing on this.
+- "Everywhere's about" sync: added Astro and Cloudflare Workers (both newly verified via this project) as chips to `app/about/skills.js`, added Budget Meal Maker to `README.md`'s Selected Projects table. Deliberately left the curated "core stack" bio prose (About.jsx, LandingAbout.jsx, myself.js, README badges, experiences.js) untouched — one project's first use of a tool isn't yet "core."
+- Sent outbound mail to both `skillsUpdateMentor` and `jobCrackMentor` describing the new project and new skills — first time in several sessions this project's work was judged mail-relevant, versus recent UI-polish sessions that weren't.
+- Processed 1 inbound mail (Fiverr Gig 3 status, FYI only) at session start; absorbed into memory, deleted.
+- Dev server: started on 3002 this session (3000/3001 held by foreign processes, as usual), restarted twice for code changes, killed clean at End Today.
+
 ### 2026-08-20 (later session) — End Today (Testimonials rebuilt as a full DB-backed feature: schema, S3 uploads, admin CRUD, public submissions, drag-reorder)
 
 - Fixed production Google OAuth `redirect_uri_mismatch` — Google Cloud Console only had the bare apex domain registered, not `www.lawrenceamlangomes.com` (the site's actual canonical domain). Added the `www` variant to both Authorized JavaScript origins and redirect URIs. Confirmed working by Lawrence; no code change.

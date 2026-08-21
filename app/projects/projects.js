@@ -1,5 +1,157 @@
 const projects = [
   {
+    id: 27,
+    title: "Budget Meal Maker",
+    urlTitle: "budget-meal-maker",
+    date: "2026-08-16",
+    img: ["/P27.png"],
+    liveLink: "https://budgetmealmaker.com",
+    shortDescription:
+      "An interactive budget-aware meal planning calculator that turns a user's stats, monthly food budget, and locally-priced groceries into an optimized, costed meal plan — not generic advice.",
+    longDescription:
+      "Budget Meal Maker is a static, server-rendered multi-page app built with Astro and vanilla TypeScript client islands (no React/Next-style SPA), styled with Tailwind CSS v4 on a custom green-accented design system. Its core is a 4-step stepper calculator — BMI, Physical Activity, Food & Budget, and Result — that runs a hand-rolled greedy allocation solver (no external LP dependency) to produce a Perfect Meal, a budget-trimmed Affordable Meal, and a fully user-driven Custom Meal, each with per-macro warnings, a scaled grocery shopping list, and print-to-PDF export. It ships a full pre-launch content layer (SEO methodology/FAQ/reference pages with JSON-LD schema, legal pages, GA4 analytics), a ConvertKit lead-magnet email capture, and a promo card for a companion paid ebook. The whole app runs client-side with no backend or database, persisting user input to sessionStorage, and deploys as static assets on Cloudflare Workers via a Git-integrated CI pipeline.",
+    techStack: [
+      ["TypeScript", "/ts.png"],
+      ["Tailwind CSS", "/TailwindCss.png"],
+      ["Cloudflare Workers", "/cloudflare.png"],
+      ["JavaScript", "/js.png"],
+    ],
+    gitLink: "https://github.com/Lawrence-Amlan-Gomes/Budget-Meal-Maker",
+    feaTures: [
+      {
+        title: "BMI & Calorie Target Calculator (Step 1)",
+        description: [
+          {
+            text: [
+              "The calculator's first step collects height, weight, age, and gender, then computes BMI and a Mifflin-St Jeor basal metabolic rate that later steps use to size daily calorie targets. Height and weight fields toggle between metric and imperial units, converting the entered value in place rather than resetting it, so switching cm↔ft/in or kg↔lbs never loses what the user typed.",
+              "Results are shown against a full WHO six-band BMI category chart with the user's own row highlighted, and the age field is restricted to 18–120 since every formula the calculator relies on (WHO BMI bands, Mifflin-St Jeor) is only valid for adults. Saved values restore automatically on page reload so returning users don't have to re-enter their stats.",
+            ],
+            listItems: [
+              "Metric/imperial toggle with value-preserving unit conversion",
+              "WHO six-band BMI category chart with the user's result highlighted",
+              "Adults-only age range (18–120) enforced at the form level",
+              "Session-persisted inputs that restore on reload",
+            ],
+            images: ["/P27_1.png"],
+          },
+        ],
+      },
+      {
+        title: "Physical Activity Selector (Step 2)",
+        description: [
+          {
+            text: [
+              "Instead of an abstract \"sedentary/active\" dropdown, this step offers 60 real, illustrated activities (desk job, running, yoga, construction work, etc.) grouped under the four standard PAL (Physical Activity Level) tiers that feed the Mifflin-St Jeor calorie formula.",
+              "A hybrid search combines exact substring matching against each activity's name and keyword list with a Fuse.js fuzzy-search fallback that only kicks in when the substring pass returns nothing — keeping common queries clean while still catching typos. A pill-style category tab bar lets users filter to a single PAL tier, and typing a query auto-highlights whichever tab contains all the matching results.",
+            ],
+            listItems: [
+              "60 illustrated real-world activities mapped to 4 PAL tiers",
+              "Hybrid substring-first, fuzzy-fallback search (Fuse.js)",
+              "Category pill tabs with search-aware auto-highlighting",
+              "Single-select, required to proceed",
+            ],
+            images: ["/P27_2.png"],
+          },
+        ],
+      },
+      {
+        title: "Food & Budget Selection (Step 3)",
+        description: [
+          {
+            text: [
+              "Users set their monthly food budget, currency (auto-detected from browser locale, with a curated dropdown plus free-text \"Other\"), and meals-per-day, then browse a 95-item grocery database across 12 categories using the same hybrid search/tab pattern as Step 2. This step merges what were originally two separate screens (pick foods, then price them) into one, since a two-phase commit was judged the most likely place users would drop off.",
+              "Checking a food expands an inline pricing widget directly in its card — amount, unit (g/kg, \"piece\" for applicable items, or ml/L for liquids), and price — with unit switches converting the entered amount rather than relabeling it, so \"1 kg\" becoming \"1 g\" can't silently mean a 1000x quantity error. A live macro-coverage checklist requires at least 3 foods covering a protein, carb, and fat source (classified by gram-per-100g thresholds, not calorie share) before the step is considered complete, and each food's widget shows a live kcal/protein/carbs/fat readout with percentage-of-calories breakdown as the amount is typed.",
+            ],
+            listItems: [
+              "95-food database across 12 categories with images, hybrid search, and category tabs",
+              "Budget, currency (locale-detected default), and meals-per-day inputs",
+              "Inline per-food pricing widget with unit-converting amount entry (g/kg/piece/ml/L)",
+              "Live macro-coverage checklist (protein/carbs/fat sources) gating step completion",
+              "Real-time per-food macro and calorie-percentage preview",
+            ],
+            images: ["/P27_3.png"],
+          },
+        ],
+      },
+      {
+        title: "Meal Plan Results (Step 4)",
+        description: [
+          {
+            text: [
+              "Clicking \"Make my meal\" computes four scenarios (Standard/Gradual pace × Balanced/High-Protein macro split), each with its own BMI-adjusted calorie target and up to three meal cards: Perfect Meal (accurate nutrition from only the user's selected foods, cost tracked but budget-ignored), Affordable Meal (shown only when Perfect Meal exceeds budget — trades cost down from Perfect Meal's own foods in a fixed fat→pricier-macro→direct-reduction order until it fits), and Custom Meal (a fully free-form builder where the user manually checks foods and types exact amounts, independent of any solver).",
+              "Every meal card shows specific, detailed warning banners (exact overage in $, or exact macro/calorie shortfall) rather than a generic notice, and a \"Doing the Groceries\" shopping-list section per card with Per Day/Week/Month toggle pills. Results go stale and require recalculation if the user edits any earlier step. A \"Download as PDF\" button (two entry points) uses the browser's native print dialog with a dedicated print stylesheet that forces a consistent light-theme, full-color export regardless of the active screen theme.",
+            ],
+            listItems: [
+              "4 computed scenarios (pace × macro-split combinations) as switchable tabs",
+              "Perfect Meal, Affordable Meal (budget trade-down), and free-form Custom Meal cards",
+              "Per-card specific warning banners (exact $ overage or macro/calorie shortfall)",
+              "\"Doing the Groceries\" shopping list with Per Day/Week/Month scaling",
+              "Stale-result detection when earlier steps are edited",
+              "One-click PDF export via a themed print stylesheet",
+              "Daily water-intake recommendation card",
+            ],
+            images: ["/P27_4.png"],
+          },
+        ],
+      },
+      {
+        title: "Landing Page",
+        description: [
+          {
+            text: [
+              "The homepage pitches the calculator against a field of static \"budget meal plan\" articles with no real tool, then walks through the actual 4-step flow (BMI, Activity, Food & Budget, Result) as an alternating image-and-text section, each row illustrated with a custom flat-vector image matching the rest of the site's art style.",
+              "Below the walkthrough, a \"Learn more\" section links out to the site's SEO content pages, and the footer carries a full site-wide navigation (calculator plus every content and legal page) in place of a bare copyright line.",
+            ],
+            listItems: [
+              "Hero section with direct CTA into the calculator",
+              "Image-led, alternating step-by-step walkthrough of the real 4-step flow",
+              "\"Learn more\" links into the SEO content library",
+              "Site-wide Explore/Legal navigation in the footer",
+            ],
+            images: ["/P27_5.png"],
+          },
+        ],
+      },
+      {
+        title: "SEO Content & Reference Library",
+        description: [
+          {
+            text: [
+              "Four long-form, source-cited content pages share a common ArticleLayout shell: a methodology guide to building a budget meal plan, a macro-calculator explainer with a worked example, a page of three real meal plans with real cost breakdowns, and an FAQ page with 13 questions rendered from the same data array that feeds its JSON-LD FAQPage schema (so visible content and schema can never drift apart).",
+              "A fifth page, \"Cheapest Budget Foods by Macro,\" ranks 11 real grocery staples by protein/carb/fat value-per-dollar using build-time-computed rankings that call the exact same macroValueScore() function the calculator's own solver uses internally, each price individually sourced from a dated BLS/FRED series rather than fabricated. All nutrition and price claims across the library are backed by cited sources (USDA, CDC, Mayo Clinic, PubMed, BLS/FRED) rather than model memory.",
+            ],
+            listItems: [
+              "Methodology guide, macro-calculator explainer, and cheap-meal-ideas pages with real cost breakdowns",
+              "FAQ page with 13 questions and matching JSON-LD FAQPage schema",
+              "\"Cheapest Budget Foods by Macro\" ranking page computed from the calculator's own value-scoring function",
+              "Every claim sourced (USDA, CDC, Mayo Clinic, PubMed, BLS/FRED)",
+              "Full bidirectional interlinking between all content pages, the homepage, and the footer",
+            ],
+            images: ["/P27_6.png"],
+          },
+        ],
+      },
+      {
+        title: "Lead Capture & Ebook Cross-Sell",
+        description: [
+          {
+            text: [
+              "Once a result is generated in Step 4, an email capture card (built on a self-styled ConvertKit form embed matching the site's own design tokens rather than Kit's default widget) invites the user to get emailed the \"Cheapest Budget Foods by Macro\" guide, with double opt-in confirmation before any reward is granted.",
+              "Directly below it, a promo card for a companion paid ebook (\"Budget Meal Maker: The Real-Price Meal Plan\") links out to the portfolio's centralized ebook storefront with tracked UTM parameters. Both cards are gated behind the same \"a result exists\" condition as the PDF export button and are automatically excluded from the printed PDF output.",
+            ],
+            listItems: [
+              "ConvertKit email signup gated behind a completed result, double opt-in confirmed",
+              "Custom on-brand success/error states matching the site's own styling",
+              "Companion paid-ebook promo card with cover image, pitch, and tracked outbound link",
+              "Both cards excluded automatically from PDF/print export",
+            ],
+            images: ["/P27_7.png"],
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: 26,
     title: "ShortStack",
     urlTitle: "shortstack",

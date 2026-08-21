@@ -137,29 +137,23 @@ Move to Phase 4.
 
 ### Phase 4 — Screenshot Checklist
 
-Output a checklist in this exact format — one entry per image file the project needs:
+**Standing rule (2026-08-21, corrected three times same day): stay in chat, not an Artifact — each stem gets its own fenced code block (with a real copy-icon button), and `.png` sits outside it.** The chat UI only renders a hover copy-icon button on triple-backtick fenced blocks, not on inline single-backtick spans — so each stem (`P<ID>`, `P<ID>_1`, `P<ID>_2`, ...) must be its own fenced block, containing only that stem and nothing else (no `.png`, no instruction text inside it). Immediately after the block, write `.png` as plain text, then the capture instruction as plain text or inline code on the same or next line. Format per item:
 
 ```
-SCREENSHOT CHECKLIST for <Title>
-
-P<ID>.png
-`<instruction for the main/hero image>`
-
-P<ID>_1.png
-`<instruction for feature 1>`
-
-P<ID>_2.png
-`<instruction for feature 2>`
-
-...
 ```
+P<ID>_1
+```
+.png — <capture instruction>
+```
+
+First attempt published a whole HTML artifact with JS copy buttons (overkill). Second attempt used inline single-backtick spans, which have no copy button in this chat UI at all. Third (this) attempt uses fenced blocks, which do render a copy button, with the stem alone inside so the button copies exactly the stem.
 
 Instructions should say exactly what page/state to capture and on what URL, e.g.:
 - `take a screenshot of the landing page of example.com`
 - `take a screenshot of the dashboard with sample data loaded at example.com/dashboard`
 - `take a screenshot of the login page at example.com/login`
 
-After outputting this, mark phase as `idle` in Session State and clear stored data. The workflow is complete.
+After publishing, tell Lawrence the artifact link and mark phase as `idle` in Session State, clearing stored data. The workflow is complete.
 
 ---
 

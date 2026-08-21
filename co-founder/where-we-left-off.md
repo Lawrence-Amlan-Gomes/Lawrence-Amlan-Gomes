@@ -4,49 +4,39 @@ _Owned by skillCoFounder.md — read this first on every session start, overwrit
 
 ## Current focus
 
-Huge session — fixed production Google OAuth, then built a full DB-backed testimonials feature end to end (schema, S3 blob storage, admin CRUD, public submission flow, drag-to-reorder), then did many rounds of UI polish on how testimonial cards render on the landing page and `/testimonials`.
+Short, clean session: ran the full New Project Maker workflow end-to-end for a new real project, fixed one real bug found along the way, and locked in a corrected standing-format rule for how screenshot checklists get delivered.
 
-1. **Production Google OAuth fixed**: `redirect_uri_mismatch` was because Google Cloud Console's OAuth client only had the bare `lawrenceamlangomes.com` redirect URI registered, not the actual canonical `www.lawrenceamlangomes.com` the site resolves to. Added the `www` variant to both Authorized JavaScript origins and Authorized redirect URIs — confirmed fixed by Lawrence. No code changes needed.
+1. **New Project Maker run, start to finish**: added project #27 "Budget Meal Maker" (https://budgetmealmaker.com, https://github.com/Lawrence-Amlan-Gomes/Budget-Meal-Maker) to `app/projects/projects.js` — a solo-built, live, static Astro + TypeScript-islands budget meal-planning calculator with a hand-rolled greedy allocation solver, Tailwind v4, SEO content library with JSON-LD schema, ConvertKit lead capture, and a paid-ebook cross-sell, deployed to Cloudflare Workers. Report parsed from the probe prompt, 7 features written into the entry, screenshot checklist produced, Lawrence captured and dropped all 8 images into `public/`.
 
-2. **Admin panel beautified**: `components/Admin.jsx` went from a single centered card to a real dashboard shell — extracted into `components/AdminShell.jsx` (sidebar nav, mobile drawer, account chip + logout) wired via a new `app/admin/layout.js` that now owns the `/admin/*` auth guard (individual pages under it no longer re-guard themselves). Fixed a real layout bug along the way: the sidebar/content was rendering underneath the sitewide fixed `TopNavbar` — added proper top-offset padding matching the navbar's real height per breakpoint.
+2. **Real bug found and fixed**: the main hero image landed as `p27.png` (lowercase) while `projects.js` references `/P27.png` — harmless on macOS's case-insensitive filesystem but would 404 on Vercel's case-sensitive one in production, same class of bug as every other project's naming convention depends on. Renamed to match; verified all 8 images + the project page return 200 on the restarted dev server.
 
-3. **Testimonials — full DB-backed feature build** (this is the bulk of the session):
-   - **Schema**: `models/testimonial-model.js` (rating, comment, name, designation, photo/video URL+key+position, videoHidden, projectUrlTitle, locked, order) + `models/settings-model.js` (singleton `testimonialSubmissionsOpen` toggle).
-   - **Storage**: `services/s3.js` — presigned-POST direct-to-MinIO uploads (browser never routes big files through a server action, avoiding Vercel body-size limits), server-enforced size/type limits, delete-on-replace and delete-on-remove. Verified end-to-end against the real bucket multiple times with throwaway test uploads (always cleaned up after).
-   - **Actions**: `app/actions/testimonials.js` — public create/edit gated by the toggle + server-side validation (rating range, non-empty fields — Mongoose's `required` doesn't reject empty strings, so this was a real gap closed), admin actions re-check `auth()` server-side (never trust the client, since server actions are public endpoints).
-   - **Public UI**: `/testimonials` and the home preview strip now read from Mongo. `TestimonialCard.jsx` has three distinct render paths now: grid (`/testimonials`, untouched original behavior), landing-with-video (video docked right), landing-without-video — all sharing `header`/`stars`/`commentBlock`/`authorBlock` sub-elements.
-   - **Video**: custom controls (native `<video controls>` silently drops volume/fullscreen buttons at narrow widths — replaced with an always-visible custom bar: play/pause, mute/unmute, fullscreen, seek bar). Fullscreen also had a real bug — the video kept its small-thumbnail crop position even fullscreen; fixed via a `fullscreenchange` listener that switches to `object-contain` while fullscreen.
-   - **Admin UI**: `AdminTestimonials.jsx` (list, lock/delete, the open/closed toggle — which had a real alignment bug from relying on implicit CSS static positioning, fixed with explicit `left-1`), `AdminTestimonialEditor.jsx` + `MediaFramer.jsx` (slider-based photo 1:1 / video 2:3 framing — non-destructive, stores an `{x,y}` object-position, doesn't touch the original file), `DropzoneUpload.jsx` (drag-and-drop file picker, public form only).
-   - **Reordering**: `order` field + `adminReorderTestimonialsAction` (bulkWrite) + native HTML5 drag-and-drop in the admin list (no new dependency) — display order on the public site now follows admin's arrangement instead of `createdAt`.
-   - **Migration**: `scripts/seed-testimonials.mjs` moved the 3 original static testimonials into Mongo (`locked: true`); old `app/testimonials/testimonials.js` deleted, Mongo is now the sole source of truth.
-   - **Real bug found and fixed mid-build**: `services/mongo.js`'s `dbConnect()` called `mongoose.connect()` unconditionally on every invocation with no caching — harmless when only one caller per request existed, but `/home`/`/testimonials` now fire multiple parallel server actions per request, and the resulting connection race caused an intermittent `MongooseError: buffering timed out` crash. Fixed with the standard cached-connection-promise pattern; verified stable under concurrent load.
-   - **Real data on the site now**: 4 live testimonials — the 3 original (locked) plus one Lawrence added himself through the real public form (`name: "Lawrence"`, has a video) while testing. Left untouched, not test data.
+3. **Screenshot Checklist output format — corrected twice this session, now locked in `co-founder/new-project-maker.md` Phase 4**: Lawrence wants each image's filename *stem* (no `.png`) as its own fenced triple-backtick code block so the chat UI's real copy-icon button copies just the stem, with `.png` and the capture instruction written as plain text right after, outside the block. Two wrong attempts before landing here: (a) a whole HTML Artifact with JS copy buttons — overkill, not what "copy button" meant in this chat context; (b) inline single-backtick spans — those don't render a copy button at all here, only fenced blocks do. Full corrected protocol + the exact template is now in `new-project-maker.md` Phase 4 for every future run.
 
-4. **Card sizing/layout — several correction rounds**, final state: landing cards have fixed width+height per breakpoint (two size presets: with-video wider, without-video narrower), no dynamic/content-based width (an earlier width-estimate-from-comment-length approach was built then explicitly reverted). Comment section is internally vertically scrollable (`scrollbar-thin`, themed blue thumb) so arbitrarily long comments never overflow the fixed card. At `≤425px` screens, non-video cards are exactly `90vw` wide (matching the visible content width given the strip's `px-[5%]` padding) and all landing cards get a taller height tier. `/testimonials` (grid page) was deliberately kept untouched through all of this — none of the landing-specific sizing/scroll logic applies there. Testimonial-page video also got a max-width/max-height cap (`240×360px`, exact 2:3) since it was previously `w-full` and became disproportionately tall in the 2-column grid.
+4. **"Everywhere's about" sync ran**: two genuinely new verified stack pieces from Budget Meal Maker — Astro and Cloudflare Workers (first project actually deployed *to* Cloudflare Workers, vs. Facelees which just uses Cloudflare for CDN/optimization). Added both as new chips to `app/about/skills.js` (Astro under Frontend, Cloudflare Workers under Tools & Deployment) and added Budget Meal Maker as a third row in `README.md`'s Selected Projects table. Deliberately did **not** touch the curated "core stack" bio prose (`components/About.jsx`, `components/LandingAbout.jsx`, `app/myself.js`'s About Me/Skills sections, README's Core Stack badges, `app/about/experiences.js`) — those represent Lawrence's primary/repeated stack and this is one project's first use of each, not yet core; judgment call, flagged in the outbound mail in case it needs revisiting later. `LandingStatsStrip.jsx`'s "20+ Projects Shipped" stays as-is — 27 total now, hasn't cleared 30.
 
-5. **Standing instruction added this session**: restart the tracked dev server after every code change, automatically, without being asked (`co-founder/dev-server.md` updated; also saved to cross-session memory `feedback_restart_dev_server.md`). Also fixed real dev-server hygiene bugs: the `npm run dev` background PID from `$!` doesn't reliably match the actual listening `next-server` process (caused stray orphaned servers earlier this session — cleaned up), and alternating `npm run build`/`npm run dev` against the same `.next` directory causes real runtime errors, not just staleness (`rm -rf .next` before restarting dev if a build ran).
+5. **Outbound mail sent** (first time in several sessions this project's work was judged relevant, vs. the recent precedent of skipping pure UI-polish sessions): one mail each to `skillsUpdateMentor` and `jobCrackMentor` describing the new project and the two new verified skills — a real new shipped project with new-to-this-portfolio tech felt distinctly different from the testimonials/UI-polish sessions that were judged not relevant before.
 
-6. **CLAUDE.md updated** to reflect all of the above (new directory entries, `/admin/testimonials` route, corrected auth-guard location, new Testimonials pattern section, new S3 env vars, corrected the now-stale Google OAuth prod-broken note).
+6. **Inbound mail processed at session start**: one mail from Fiverr — Gig 3 ("Payment/Billing Integration") started, repositioned around buyer intent to avoid cannibalizing Gig 1's bundled payment feature, 5/7 steps built, FYI only. Absorbed into memory (`mail_box_senders.md`), file deleted.
 
-7. **No outbound mail sent** — consistent with this project's established precedent (prior sessions with comparable portfolio feature-work were judged not relevant to the `skillsUpdateMentor`/`jobCrackMentor` destinations despite their "full session summary" scope note); this session's work is the same kind of pure portfolio feature-building.
+7. **CLAUDE.md**: nothing needed updating — no architecture/pattern/directory changes this session, just a data-file addition and a co-founder-internal workflow rule.
 
 ## Immediate next step
 
-Nothing code-blocking. Lawrence should:
-- Add the six `S3_*` env vars to Vercel before testimonial uploads will work in production.
-- Click through the actual drag-and-drop reorder and the admin photo/video framer himself — both were verified structurally (correct DB persistence, correct classes/markup) but never visually, since this environment has no real browser.
+Nothing code-blocking. Carried forward from prior sessions, still open:
+- Add the six `S3_*` env vars to Vercel (testimonial uploads still won't work in prod without them).
+- Keep or gut the dead `/register` route + mockup `/payment` surface?
+- Icons for Testing & Tooling / CI/CD chips (now also no icon for the new Astro chip), or stay text-only permanently?
+- Should `projects.js`'s stale future-tense copy on Library Management and Chemistry MCQ Test be rewritten to past tense? Cosmetic, not urgent.
+- Worth a closer look sometime: `app/myself.js`'s Experience section says the freelance role started "Jan 2026," but `app/about/experiences.js` (the actual rendered data) says "Oct 2025" — a real discrepancy noticed in passing this session, not fixed since it wasn't caused by this session's work.
 
 ## Open questions
 
-- Carried from earlier sessions, still open: keep or gut the dead `/register` route + mockup `/payment` surface?
-- Icons for Testing & Tooling / CI/CD chips, or stay text-only permanently?
-- Still unconfirmed: is the JobCrack mailbox exclusively a mail-drop, or does it double as a data folder for something else?
-- Should `projects.js`'s stale future-tense copy on Library Management and Chemistry MCQ Test be rewritten to past tense now that both are shipped? Cosmetic, not urgent.
+- Was sending mail this session the right call, or should "new project shipped" not be treated differently from "UI polish shipped" for mail-relay purposes going forward? No pushback from Lawrence yet either way.
 
 ## Blockers
 
-None on my side. Lawrence needs to add the `S3_*` vars to Vercel for testimonial uploads to work in production (same pattern as the earlier Google OAuth gap, now resolved).
+None on my side. Lawrence needs to add the `S3_*` vars to Vercel for testimonial uploads to work in production (long-standing, unrelated to this session).
 
 ## Dev server
 
-Not running — killed clean this session (was on port 3001; 3000 held by a foreign process, as usual). See `co-founder/dev-server.md`.
+Not running — killed clean this session. See `co-founder/dev-server.md`.
