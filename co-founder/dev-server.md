@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3002 (3000/3001 held by foreign next-server processes, as usual), restarted 3 times (projects.js edit, p27.png->P27.png rename, skills.js edit) — killed clean at End Today on 2026-08-21.
+note: last session ran on 3002 (3000/3001 held by foreign next-server processes, as usual), restarted 5 times (landing-photo/YouTube edits, blog removal + type field + gitLink strip + filter navbar, filter navbar positioning fix, scrollbar-overlap fix) — killed clean at End Today on 2026-08-22.
 ```

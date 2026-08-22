@@ -11,7 +11,6 @@ const navItems = [
   { href: "/projects", label: "Projects", activeKey: "projects" },
   { href: "/testimonials", label: "Clients", activeKey: "testimonials" },
   { href: "/about", label: "About", activeKey: "about" },
-  { href: "/blogs", label: "Blogs", activeKey: "blogs" },
   { href: "/contact", label: "Contact", activeKey: "contact" },
 ];
 

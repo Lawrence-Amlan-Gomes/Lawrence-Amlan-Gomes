@@ -38,15 +38,6 @@ applications with payment integrations, deploying projects with custom domains a
 and implementing AI-powered features — consistently meeting client goals through regular
 consultations, iterative delivery, and clean, maintainable code.
 
-Blogs:
-
-I write about practical full-stack development topics relevant to modern web engineering, including
-Next.js App Router patterns, TypeScript best practices, scalable backend architecture with MongoDB
-and Redis, and deployment workflows using Vercel, Netlify, and self-hosted infrastructure. My posts
-also cover payment integration with Paddle, AI API integrations, CI/CD pipeline setup, and
-performance optimization techniques — offering actionable insights for developers building
-production-grade applications.
-
 Experience:
 
 I have over two years of hands-on experience as a self-taught Full-Stack Developer, progressing

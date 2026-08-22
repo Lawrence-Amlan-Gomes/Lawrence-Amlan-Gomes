@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { TiTick } from "react-icons/ti";
-import { SiFiverr } from "react-icons/si";
+import { SiFiverr, SiYoutube } from "react-icons/si";
 import { FaBriefcase } from "react-icons/fa";
 
 const fadeUp = {
@@ -25,6 +25,7 @@ const techStack = [
   ["Email", "/gmail.png", "/gmail.png"],
   ["Fiverr", null, null, SiFiverr],
   ["Contra", null, null, FaBriefcase],
+  ["YouTube", null, null, SiYoutube],
 ];
 
 const urls = {
@@ -35,6 +36,7 @@ const urls = {
   Fiverr: "https://www.fiverr.com/s/qb8xwdy",
   Contra:
     "https://contra.com/amlan_gomes_233w6dje?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=amlan_gomes_233w6dje",
+  YouTube: "https://www.youtube.com/channel/UCQGdRvyFVqexgZWts4O3jsA",
 };
 
 export default function LandingContact() {

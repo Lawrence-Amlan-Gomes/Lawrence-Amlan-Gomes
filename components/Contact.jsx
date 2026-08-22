@@ -13,7 +13,7 @@ import Chat from "./Chat";
 import { Sen } from "next/font/google";
 import SendMessage from "./SendMessage";
 import CalEmbed from "./CalEmbed";
-import { SiFiverr } from "react-icons/si";
+import { SiFiverr, SiYoutube } from "react-icons/si";
 import { FaBriefcase } from "react-icons/fa";
 
 const techStack = [
@@ -23,6 +23,7 @@ const techStack = [
   ["Email", "/gmail.png", "/gmail.png"],
   ["Fiverr", null, null, SiFiverr],
   ["Contra", null, null, FaBriefcase],
+  ["YouTube", null, null, SiYoutube],
 ];
 
 const urls = {
@@ -33,6 +34,7 @@ const urls = {
   Fiverr: "https://www.fiverr.com/s/qb8xwdy",
   Contra:
     "https://contra.com/amlan_gomes_233w6dje?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=amlan_gomes_233w6dje",
+  YouTube: "https://www.youtube.com/channel/UCQGdRvyFVqexgZWts4O3jsA",
 };
 
 export default function Contact() {

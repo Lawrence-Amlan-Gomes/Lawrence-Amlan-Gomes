@@ -6,7 +6,6 @@ import Footer from "./Footer";
 import LandingAbout from "./LandingAbout";
 import LandingProjects from "./LandingProjects";
 import LandingTestimonials from "./LandingTestimonials";
-import LandingBlogs from "./LandingBlogs";
 import LandingContact from "./LandingContact";
 import LandingButtons from "./LandingButtons";
 import LandingStatsStrip from "./LandingStatsStrip";
@@ -25,7 +24,6 @@ export default function LandingPage({ testimonials = [], submissionsOpen }) {
       <LandingStatsStrip/>
       <LandingProjects/>
       <LandingTestimonials testimonials={testimonials} submissionsOpen={submissionsOpen}/>
-      <LandingBlogs/>
       <LandingContact/>
       <Footer />
     </div>

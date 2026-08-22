@@ -16,17 +16,6 @@ const SEED_DATA = [
     locked: true,
   },
   {
-    name: "Mr. Kabir",
-    designation: "Local Client, Dhaka",
-    photoUrl: "/C2pic.png",
-    photoKey: null,
-    projectUrlTitle: "home-test",
-    rating: 5,
-    comment:
-      "Lawrence developed a comprehensive chemistry MCQ generation system for me. His exceptional work ethic, problem-solving skills, and critical thinking truly set him apart. He is one of the most capable and professional developers I have had the pleasure of working with.",
-    locked: true,
-  },
-  {
     name: "Mr. Musfiq",
     designation: "Local Client, Dhaka",
     photoUrl: "/C3pic.png",

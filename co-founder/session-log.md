@@ -2,6 +2,17 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-22 — End Today (Landing photo/YouTube tweaks, project type taxonomy + client-list correction, blogs removed, projects filter navbar)
+
+- Swapped Landing About's photo to the square `/ProfilePic27.png` (frame changed to `aspect-square`); added a YouTube link across Footer, Contact, and LandingContact.
+- Added a `type: "saas" | "clients-project" | "hobby-project"` field to every entry in `app/projects/projects.js` after asking clarifying questions. Client's-project: Library Management, Facelees. SaaS: My Daily Routine, Real Caffeine Calculator, Budget Meal Maker. Everything else (18, including a reclassified Chemistry MCQ Test) is hobby-project. Client/SaaS entries got `gitLink: null` — existing conditional rendering already hides the GitHub button, no component changes needed.
+- Deleted Mr. Kabir's testimonial from the live MongoDB collection (confirmed with Lawrence first) — it claimed a client relationship over Chemistry MCQ Test, no longer accurate now that project is hobby-classified. Also removed from `scripts/seed-testimonials.mjs` so a re-seed can't resurrect it.
+- Removed blogs entirely, per Lawrence's explicit "I don't need them anymore" (confirmed full deletion vs. hide-only): `/blogs`, `/blog/[urlTitle]`, `blogs.js`, all Blog* components, the nav link, the home-page section, the AI bio's Blogs paragraph, and README's Writing section.
+- Built a filter bar on `/projects` (All / SaaS / Client Projects / Hobby Projects), corrected twice at Lawrence's direction: first attempt was `sticky`-in-flow and pushed the heading down from its original position — fixed by making it `fixed` and out of flow; then it was found overlapping the main scrollbar — fixed by replicating `TopNavbar.jsx`'s exact scrollbar-width measurement pattern instead of a plain full-width bar.
+- `CLAUDE.md` updated live (not deferred): Pages table, new "Projects" pattern section, stale Testimonials wording fixed.
+- Sent 1 mail each to `skillsUpdateMentor` and `jobCrackMentor` (`Client List Correction + Project Taxonomy.md`) — corrects a previously-sent fact (Kabir named as a client) and shares the new taxonomy.
+- Dev server: started on 3002 this session (3000/3001 held by foreign processes, as usual), restarted 5 times through the iteration rounds, killed clean at End Today.
+
 ### 2026-08-21 — End Today (New Project Maker: Budget Meal Maker added as project #27, screenshot-checklist format rule corrected, skills/README synced)
 
 - Ran the full New Project Maker workflow: added project #27 "Budget Meal Maker" (Astro + TypeScript islands, Cloudflare Workers deploy, hand-rolled meal-budget allocation solver, SEO content library) to `app/projects/projects.js`, produced the screenshot checklist, Lawrence captured and dropped all 8 images in `public/`.

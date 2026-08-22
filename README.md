@@ -96,16 +96,6 @@ Delivered 2 production projects: the UTES company website (SEO-optimized) and Pr
 
 ---
 
-## Writing
-
-I write about the practical decisions behind shipping real products.
-
-- [End-to-End Deployment: Vercel, Netlify, and Self-Hosted Coolify on VPS](https://www.lawrenceamlangomes.com/blogs)
-- [Integrating Paddle for Subscriptions and One-Time Payments in Next.js](https://www.lawrenceamlangomes.com/blogs)
-- [Building AI-Powered Features in Web Apps Using Third-Party APIs](https://www.lawrenceamlangomes.com/blogs)
-
----
-
 <div align="center">
 
 **Open to remote full-stack roles · Available immediately**  

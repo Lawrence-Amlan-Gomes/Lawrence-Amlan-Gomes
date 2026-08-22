@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useTheme } from "@/app/hooks/useTheme";
 import { FaLinkedin, FaGithub, FaBriefcase } from "react-icons/fa";
-import { SiGmail, SiFiverr } from "react-icons/si";
+import { SiGmail, SiFiverr, SiYoutube } from "react-icons/si";
 import { BsTwitterX } from "react-icons/bs";
 import { useState } from "react";
 import { TiTick } from "react-icons/ti";
@@ -117,6 +117,18 @@ function Footer() {
               }`}
             >
               <FaBriefcase />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCQGdRvyFVqexgZWts4O3jsA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-xl ${
+                theme
+                  ? "text-[#0a0a0a] hover:text-blue-800"
+                  : "text-[#ebebeb] hover:text-blue-600"
+              }`}
+            >
+              <SiYoutube />
             </a>
             <a
               href="#"

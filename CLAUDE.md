@@ -48,12 +48,10 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 | Route | Purpose |
 |---|---|
 | `/` | Redirects client-side to `/home` (`app/page.js`) |
-| `/home` | Landing page — About/Projects/Testimonials/Blogs/Stats sections |
+| `/home` | Landing page — About/Projects/Testimonials/Stats sections |
 | `/about` | About + skills (`app/about/skills.js`) + experience |
-| `/projects` | Projects list |
+| `/projects` | Projects list — sticky secondary filter bar (`components/Projects.jsx`) below the main navbar, filters client-side by each project's `type` (`saas` / `clients-project` / `hobby-project`) |
 | `/project/[urlTitle]` | Single project detail |
-| `/blogs` | Blog list |
-| `/blog/[urlTitle]` | Single blog detail |
 | `/contact` | Contact form + Gemini chatbot + Cal.com booking embed |
 | `/resume` | Resume viewer |
 | `/testimonials` | Testimonials — DB-backed (see Testimonials pattern below), not a static file. Includes a public add/edit form, shown only when the admin toggle is on. |
@@ -89,8 +87,12 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 - Mark files with `"use server"` at the top.
 - Keep mutations in `app/actions/index.js`; keep the AI action in `app/server.js`.
 
+### Projects
+- Every entry in `app/projects/projects.js` has a `type` field: `"saas"`, `"clients-project"`, or `"hobby-project"` — drives the filter bar on `/projects` (`components/Projects.jsx`) and is the single source of truth for that classification (no separate DB field or list elsewhere).
+- `clients-project` and `saas` entries set `gitLink: null` — those projects intentionally show no GitHub link in the UI (client work and shipped SaaS products aren't public repos). `ProjectCard.jsx` / `ProjectCardDetailed.jsx` / `SingleProject.jsx` already render the GitHub button conditionally on `gitLink` being truthy, so this is enforced purely by the data, not by extra UI logic.
+
 ### Testimonials
-- DB-backed (`models/testimonial-model.js`), not a static file — unlike `projects.js`/blogs, which stay static. Query/mutation functions live in `db/queries.js`; all actions in `app/actions/testimonials.js`.
+- DB-backed (`models/testimonial-model.js`), not a static file — unlike `projects.js`, which stays static. Query/mutation functions live in `db/queries.js`; all actions in `app/actions/testimonials.js`.
 - `models/settings-model.js` holds a singleton toggle (`testimonialSubmissionsOpen`) that gates public create/edit — checked server-side inside the actions, not just hidden in the UI.
 - Photo (1:1) and video (2:3) upload direct from the browser to MinIO via a presigned POST (`services/s3.js`, `requestUploadUrl` action) — never routed through a server action's body, to avoid Vercel's request size limits. Framing (which portion of the source shows) is non-destructive: the original file is stored as-is, and an `{x, y}` object-position is saved and applied via CSS at render time — there's no real image/video cropping or re-encoding anywhere in this flow.
 - `projectUrlTitle` on a testimonial just stores a string validated against `app/projects/projects.js` at write time — no separate DB collection for projects; that static file stays the single source of truth.

@@ -184,12 +184,12 @@ export default function LandingAbout() {
       <motion.div variants={fadeUp} className="w-[40%] ml-[2.5%]">
         {/* Profile image */}
         <div
-          className={`relative rounded-xl overflow-hidden w-full aspect-[3/4] mb-4 sm:mb-4 ${
+          className={`relative rounded-xl overflow-hidden w-full aspect-square mb-4 sm:mb-4 ${
             theme ? "border-[#000000]" : "border-[#444444]"
           }`}
         >
           <Image
-            src="/22.jpg"
+            src="/ProfilePic27.png"
             alt="Profile picture"
             fill
             className="object-cover object-top"
