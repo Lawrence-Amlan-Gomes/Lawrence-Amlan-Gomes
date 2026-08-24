@@ -90,7 +90,13 @@ export default function FloatingChat() {
         whileTap={{ scale: 0.94 }}
         aria-label={open ? "Close chat" : "Chat with Lawrence"}
         className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-xl border-[2px] overflow-hidden hover:cursor-pointer ${
-          theme ? "border-white" : "border-black"
+          open
+            ? theme
+              ? "border-white"
+              : "border-black"
+            : theme
+            ? "border-blue-800"
+            : "border-blue-600"
         }`}
       >
         {open ? (

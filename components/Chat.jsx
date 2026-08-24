@@ -11,6 +11,7 @@ const SUGGESTIONS = [
   "What's your tech stack?",
   "Which clients have you worked with?",
   "What projects have you shipped?",
+  "What services do you offer?",
 ];
 
 export default function Chat() {
@@ -113,7 +114,7 @@ export default function Chat() {
                 theme ? "text-[#777777]" : "text-[#999999]"
               }`}
             >
-              I can talk about my skills, projects, and clients.
+              I can talk about my skills, projects, clients, and services.
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-2 mt-1">

@@ -2,6 +2,13 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-24 (later session) — End Today (Chatbot empty-state gap closed: Services mentioned + 4th suggestion chip, closed-button blue border)
+
+- Fixed a gap from earlier today's Services launch: the chatbot's first-impression empty state ("Ask me anything...") didn't mention Services at all. `components/Chat.jsx` — subtitle now includes "and services", added a 4th suggestion chip "What services do you offer?" — verified live, returns an accurate answer covering all 4 services.
+- `components/FloatingChat.jsx` — the closed chat button now shows a blue border around the avatar (open state unchanged) so it reads more clearly as clickable.
+- No mail sent — small polish-only follow-up to work already mailed last session, nothing new to report.
+- Dev server: started on 3001 this session (3000 held by a foreign process, as usual), killed clean at End Today.
+
 ### 2026-08-24 — End Today (Mobile/layout bug fixes, chatbot went global + rearchitected around a table-of-contents tool call, full content voice rewrite, new Services offering)
 
 - Fixed two real layout bugs: the footer's icon row was overflowing horizontally on mobile between ~640–900px, forcing the whole page to scroll sideways (fixed by wrapping + a global `overflow-x: hidden` safety net); the `/projects` filter bar was literally overlapping the page heading at several widths (fixed fragile percentage-based padding with a fixed, breakpoint-stepped offset). Also fixed oversized (flat 28px from 640px up) tech-stack icons on project detail pages to scale gradually per breakpoint.

@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3001 (3000 held by a foreign process, as usual), restarted many times (footer/projects layout fixes, floating chat rebuild, chatbot table-of-contents rearchitecture, full content voice rewrite, new Services offering) — killed clean at End Today on 2026-08-24.
+note: last session ran on 3001 (3000 held by a foreign process, as usual) for a short follow-up (chatbot empty-state Services mention + closed-button blue border) — killed clean at End Today on 2026-08-24 (later session).
 ```
