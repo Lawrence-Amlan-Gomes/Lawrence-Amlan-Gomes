@@ -18,7 +18,7 @@ npm run lint     # ESLint
 **Database**: MongoDB via Mongoose — connection in `services/mongo.js`  
 **Auth**: NextAuth v5 beta with Google OAuth (`app/auth.js`)  
 **AI**: Google Gemini 2.5 Flash via `@google/genai` (`app/server.js`)  
-**Email**: EmailJS (`@emailjs/browser`)
+**Email**: none — the contact form (and its EmailJS integration) was removed 2026-08-24; `@emailjs/browser` is now an unused dependency left in `package.json`
 
 ### Directory layout
 
@@ -32,6 +32,7 @@ app/              # Next.js App Router pages and server logic
   providers/      # Context providers (wrap ClientLayout)
   server.js       # Gemini AI server action
   myself.js       # Lawrence's bio/context string fed to the AI chatbot
+  services.js     # Productized services offered to clients/businesses — source for LandingServices.jsx and the chatbot
   layout.js       # Root layout — calls dbConnect() on every request
   ClientLayout.js # Client wrapper with providers + navbar/footer
 
@@ -48,11 +49,11 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 | Route | Purpose |
 |---|---|
 | `/` | Redirects client-side to `/home` (`app/page.js`) |
-| `/home` | Landing page — About/Projects/Testimonials/Stats sections |
+| `/home` | Landing page — About/Stats/Projects/Services/Testimonials sections |
 | `/about` | About + skills (`app/about/skills.js`) + experience |
 | `/projects` | Projects list — sticky secondary filter bar (`components/Projects.jsx`) below the main navbar, filters client-side by each project's `type` (`saas` / `clients-project` / `hobby-project`) |
 | `/project/[urlTitle]` | Single project detail |
-| `/contact` | Contact form + Gemini chatbot + Cal.com booking embed |
+| `/contact` | Contact icon grid (X/LinkedIn/GitHub/Email/Fiverr/Contra/YouTube) + Cal.com booking embed. No contact form, no page-specific chatbot — the AI chatbot is now a global floating widget (see AI Chatbot pattern below) |
 | `/resume` | Resume viewer |
 | `/testimonials` | Testimonials — DB-backed (see Testimonials pattern below), not a static file. Includes a public add/edit form, shown only when the admin toggle is on. |
 | `/thesis` | Thesis section (`page.jsx` — the one page not using `.js`) |
@@ -91,6 +92,10 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 - Every entry in `app/projects/projects.js` has a `type` field: `"saas"`, `"clients-project"`, or `"hobby-project"` — drives the filter bar on `/projects` (`components/Projects.jsx`) and is the single source of truth for that classification (no separate DB field or list elsewhere).
 - `clients-project` and `saas` entries set `gitLink: null` — those projects intentionally show no GitHub link in the UI (client work and shipped SaaS products aren't public repos). `ProjectCard.jsx` / `ProjectCardDetailed.jsx` / `SingleProject.jsx` already render the GitHub button conditionally on `gitLink` being truthy, so this is enforced purely by the data, not by extra UI logic.
 
+### Services
+- `app/services.js` is the single source of truth for the productized services Lawrence offers to clients/businesses (Custom Web/Mobile App, Embedded AI Chatbot, Automated Meeting Scheduler, Lead Magnet & Email Capture) — distinct from `app/projects/projects.js`, which lists things he's already shipped, not offerings for hire. Each entry has `title`, `implementation`, `outcome`, and an optional `proof` (a factual note when the service is demonstrable on this very site, e.g. the floating chatbot or Cal.com booking).
+- Rendered on `/home` via `components/LandingServices.jsx` (between Projects and Testimonials in `components/LandingPage.jsx`) and fed to the AI chatbot via `app/server.js`'s `buildServicesBlock()`. Add a new service only here — it then appears on the site and in chatbot answers automatically.
+
 ### Testimonials
 - DB-backed (`models/testimonial-model.js`), not a static file — unlike `projects.js`, which stays static. Query/mutation functions live in `db/queries.js`; all actions in `app/actions/testimonials.js`.
 - `models/settings-model.js` holds a singleton toggle (`testimonialSubmissionsOpen`) that gates public create/edit — checked server-side inside the actions, not just hidden in the UI.
@@ -99,8 +104,12 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 - `order` (Number) drives display order, admin-reorderable via drag-and-drop in `/admin/testimonials` (`adminReorderTestimonialsAction`, bulk-writes the whole order in one call).
 
 ### AI Chatbot
-- `app/server.js` — `response(prompt, inputOutputPair)` builds a conversation history string and calls Gemini. The chatbot's persona and constraints come from `app/myself.js`.
-- The `[/n]` tokens in AI responses are intentional formatting markers parsed by the Chat component.
+- `app/server.js` — `response(prompt, inputOutputPair)` calls Gemini (`gemini-2.5-flash`) via `@google/genai`, using its native **function calling** (tool use), not a single giant context dump. The system prompt (`buildSystemInstruction()`, passed as `config.systemInstruction`) contains: the hand-written About Me / Experience / Education narrative from `app/myself.js`, the full Skills list from `app/about/skills.js`, and a **lightweight Table of Contents** — one line per project (`urlTitle`, title, type, date, `shortDescription` only) built from `app/projects/projects.js`. It deliberately does NOT include each project's full `longDescription`, feature breakdown, or client testimonials up front.
+- A `get_project_details` tool is declared alongside it. When a visitor asks something that needs real depth — a project's full description, its feature-by-feature breakdown, its tech stack, or a client's actual testimonial — the model calls this tool with a `urlTitle` from the table of contents; `getProjectDetails()` looks up that one project's full data (including a live `getAllTestimonials()` MongoDB query via `db/queries.js`, matched by `projectUrlTitle`) and the result is fed back to the model in a follow-up turn before it answers. `response()` loops this tool-call round-trip up to `MAX_TOOL_ROUNDS` (3) using the `createUserContent`/`createModelContent`/`createPartFromFunctionCall`/`createPartFromFunctionResponse` helpers from `@google/genai`. Broad questions (which SaaS products exist, how many projects, etc.) are answered straight from the table of contents with no tool call.
+- This keeps the per-request context small and roughly constant as more projects/features are added over time (the table of contents grows by one line per project; the tool call only pulls in the one project actually being asked about), rather than growing every project's full detail into every single prompt. Do not revert this to dumping full project detail into the system instruction — extend `getProjectDetails()`'s returned fields instead if the model needs more per-project data.
+- `app/myself.js` still only holds the hand-written, low-churn About Me / Experience / Education narrative — do not add project/skill/client facts back into it; add them to the real data source (`projects.js`, `skills.js`, a testimonial) so both the chatbot and the rest of the site pick them up automatically.
+- Rendered globally as a floating widget (`components/FloatingChat.jsx`, mounted in `app/ClientLayout.js`) — not page-specific. `components/Chat.jsx` is the panel body (message list + input), reused as-is inside the floating panel.
+- The `[/n]` tokens in AI responses are intentional formatting markers parsed by `EachInputOutput.jsx`.
 
 ## Environment Variables
 
@@ -118,8 +127,6 @@ S3_SECRET_KEY=
 S3_BUCKET=
 S3_PUBLIC_URL=
 ```
-
-EmailJS keys are also required for the contact form (see `.env.local`).
 
 > Google sign-in works in both dev and production as of 2026-08-20 — Vercel's `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are set, and Google Cloud Console's authorized redirect URIs include the `www.lawrenceamlangomes.com` production domain (the bare apex alone wasn't enough — it threw `redirect_uri_mismatch` until the `www` variant was added).
 >

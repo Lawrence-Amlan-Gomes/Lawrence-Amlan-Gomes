@@ -18,33 +18,36 @@ export default function PromptInput({
     setIAmThinking(false);
   }, [aiResponse]);
 
+  const handleSend = () => {
+    if (myText !== "") {
+      setIAmThinking(true);
+      getResponse();
+    }
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      if (myText !== "") {
-        setIAmThinking(true);
-        getResponse();
-      }
+      handleSend();
     }
   };
 
   return (
     <div
-      className={`relative w-full h-full overflow-hidden p-[1%] border-[1px] rounded-lg ${
+      className={`flex items-end gap-2 w-full rounded-2xl border-[1px] px-3 py-2 transition-colors focus-within:ring-2 ${
         theme
-          ? "bg-[#ffffff] border-[#333333]"
-          : "bg-[#000000] border-[#444444]"
+          ? "bg-white border-[#e0e0e0] focus-within:ring-blue-800/20 focus-within:border-blue-800"
+          : "bg-[#0a0a0a] border-[#262626] focus-within:ring-blue-600/30 focus-within:border-blue-600"
       }`}
     >
       <textarea
-        className={`w-full h-full sm:text-[14px] pl-[3%] pr-[15%] py-[1%] rounded-lg resize-none overflow-y-auto outline-none scrollbar-thin ${
+        rows={1}
+        className={`flex-1 max-h-24 text-[13px] resize-none outline-none bg-transparent py-1 overflow-y-auto scrollbar-thin ${
           theme
-            ? "bg-white text-black placeholder:text-[#666666] scrollbar-thumb-[#222222] scrollbar-track-[#f8f8f8]"
-            : "bg-black text-[#eeeeee] placeholder:text-[#888888] scrollbar-thumb-[#eeeeee] scrollbar-track-[#0f0f0f]"
+            ? "text-black placeholder:text-[#999999]"
+            : "text-[#eeeeee] placeholder:text-[#666666]"
         }`}
-        placeholder={
-          iAmThinking ? "I am thinking..." : "Ask me anything about me..."
-        }
+        placeholder={iAmThinking ? "Thinking..." : "Message Lawrence's AI..."}
         value={myText}
         onChange={(e) => {
           setMyText(e.target.value);
@@ -52,15 +55,22 @@ export default function PromptInput({
         }}
         onKeyDown={handleKeyDown}
       ></textarea>
-      <FaArrowUp
-        onClick={() => {
-          if (myText !== "") {
-            setIAmThinking(true);
-            getResponse();
-          }
-        }}
-        className="absolute bottom-5 right-5 cursor-pointer hover:text-white hover:border-[1px] hover:bg-blue-800 text-blue-800 border-[1px] border-blue-800 rounded-full p-1 text-[25px] sm:text-[25px] hover:cursor-pointer"
-      />
+      <button
+        onClick={handleSend}
+        disabled={myText === ""}
+        aria-label="Send message"
+        className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:cursor-pointer disabled:cursor-not-allowed ${
+          myText === ""
+            ? theme
+              ? "bg-[#eeeeee] text-[#aaaaaa]"
+              : "bg-[#1a1a1a] text-[#555555]"
+            : theme
+            ? "bg-blue-800 text-white hover:bg-blue-700"
+            : "bg-blue-700 text-white hover:bg-blue-600"
+        }`}
+      >
+        <FaArrowUp size={13} />
+      </button>
     </div>
   );
 }

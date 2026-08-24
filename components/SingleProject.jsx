@@ -79,22 +79,22 @@ export default function SingleProject({ urlTitle }) {
           >
             Technology Stack
           </h2>
-          <div className="flex flex-wrap gap-3 sm:gap-4">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {project.techStack.map(([name, src]) => (
               <div
                 key={name}
-                className={`flex flex-col items-center p-4 sm:p-6 rounded-lg border-[1px] ${
+                className={`flex flex-col items-center p-2.5 sm:p-3 lg:p-3.5 rounded-lg border-[1px] ${
                   theme ? "border-blue-800" : "border-blue-700"
                 }`}
               >
                 <Image
                   src={src}
                   alt={name}
-                  width={28}
-                  height={28}
-                  className="object-contain mb-2"
+                  width={24}
+                  height={24}
+                  className="object-contain mb-1.5 w-[18px] h-[18px] sm:w-5 sm:h-5 lg:w-6 lg:h-6"
                 />
-                <span className="text-xs sm:text-xs text-center">{name}</span>
+                <span className="text-[10px] sm:text-xs text-center">{name}</span>
               </div>
             ))}
           </div>

@@ -8,9 +8,9 @@ const projects = [
     img: ["/P27.png"],
     liveLink: "https://budgetmealmaker.com",
     shortDescription:
-      "An interactive budget-aware meal planning calculator that turns a user's stats, monthly food budget, and locally-priced groceries into an optimized, costed meal plan — not generic advice.",
+      "Budget Meal Maker turns your stats and monthly food budget into a real, costed meal plan — not another generic \"eat healthy\" article.",
     longDescription:
-      "Budget Meal Maker is a static, server-rendered multi-page app built with Astro and vanilla TypeScript client islands (no React/Next-style SPA), styled with Tailwind CSS v4 on a custom green-accented design system. Its core is a 4-step stepper calculator — BMI, Physical Activity, Food & Budget, and Result — that runs a hand-rolled greedy allocation solver (no external LP dependency) to produce a Perfect Meal, a budget-trimmed Affordable Meal, and a fully user-driven Custom Meal, each with per-macro warnings, a scaled grocery shopping list, and print-to-PDF export. It ships a full pre-launch content layer (SEO methodology/FAQ/reference pages with JSON-LD schema, legal pages, GA4 analytics), a ConvertKit lead-magnet email capture, and a promo card for a companion paid ebook. The whole app runs client-side with no backend or database, persisting user input to sessionStorage, and deploys as static assets on Cloudflare Workers via a Git-integrated CI pipeline.",
+      "Budget Meal Maker helps people eat well without blowing their food budget. Instead of guessing what to buy, you enter your stats, goals, and what you actually have to spend — and it builds a real meal plan: three options (a nutritionally ideal plan, a budget-trimmed version, and one you customize yourself), each with an exact grocery list and cost breakdown, ready to print. Built with Astro and TypeScript for a fast, no-backend experience.",
     techStack: [
       ["TypeScript", "/ts.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -20,76 +20,73 @@ const projects = [
     gitLink: null,
     feaTures: [
       {
-        title: "BMI & Calorie Target Calculator (Step 1)",
+        title: "Step 1: Your Stats",
         description: [
           {
             text: [
-              "The calculator's first step collects height, weight, age, and gender, then computes BMI and a Mifflin-St Jeor basal metabolic rate that later steps use to size daily calorie targets. Height and weight fields toggle between metric and imperial units, converting the entered value in place rather than resetting it, so switching cm↔ft/in or kg↔lbs never loses what the user typed.",
-              "Results are shown against a full WHO six-band BMI category chart with the user's own row highlighted, and the age field is restricted to 18–120 since every formula the calculator relies on (WHO BMI bands, Mifflin-St Jeor) is only valid for adults. Saved values restore automatically on page reload so returning users don't have to re-enter their stats.",
+              "You start by entering your height, weight, age, and gender — Budget Meal Maker uses this to work out your BMI and roughly how many calories you burn day to day. You can switch between metric and imperial units at any point without losing what you typed.",
+              "Your result is shown against a clear healthy-range chart so you know exactly where you stand. Since the formulas only make sense for adults, the age field is limited to 18–120, and if you come back later, your saved stats are right where you left them.",
             ],
             listItems: [
-              "Metric/imperial toggle with value-preserving unit conversion",
-              "WHO six-band BMI category chart with the user's result highlighted",
-              "Adults-only age range (18–120) enforced at the form level",
-              "Session-persisted inputs that restore on reload",
+              "Switch between metric and imperial without losing your numbers",
+              "See exactly where your BMI falls on a clear health-range chart",
+              "Built for adults (18–120), since that's who the formulas apply to",
+              "Your stats are saved automatically for next time",
             ],
             images: ["/P27_1.png"],
           },
         ],
       },
       {
-        title: "Physical Activity Selector (Step 2)",
+        title: "Step 2: How Active You Are",
         description: [
           {
             text: [
-              "Instead of an abstract \"sedentary/active\" dropdown, this step offers 60 real, illustrated activities (desk job, running, yoga, construction work, etc.) grouped under the four standard PAL (Physical Activity Level) tiers that feed the Mifflin-St Jeor calorie formula.",
-              "A hybrid search combines exact substring matching against each activity's name and keyword list with a Fuse.js fuzzy-search fallback that only kicks in when the substring pass returns nothing — keeping common queries clean while still catching typos. A pill-style category tab bar lets users filter to a single PAL tier, and typing a query auto-highlights whichever tab contains all the matching results.",
+              "Rather than picking a vague \"sedentary\" or \"active\" label, you choose from 60 real, illustrated activities — desk job, running, yoga, construction work, and more — grouped into simple activity levels that shape how many calories you need.",
+              "A smart search finds what you're looking for even if you're not sure of the exact term, and you can filter by category to browse instead of typing.",
             ],
             listItems: [
-              "60 illustrated real-world activities mapped to 4 PAL tiers",
-              "Hybrid substring-first, fuzzy-fallback search (Fuse.js)",
-              "Category pill tabs with search-aware auto-highlighting",
-              "Single-select, required to proceed",
+              "60 real, illustrated activities to choose from",
+              "Smart search that's forgiving of typos",
+              "Filter by category to browse instead of searching",
+              "Pick the one that best matches your day",
             ],
             images: ["/P27_2.png"],
           },
         ],
       },
       {
-        title: "Food & Budget Selection (Step 3)",
+        title: "Step 3: Your Food & Budget",
         description: [
           {
             text: [
-              "Users set their monthly food budget, currency (auto-detected from browser locale, with a curated dropdown plus free-text \"Other\"), and meals-per-day, then browse a 95-item grocery database across 12 categories using the same hybrid search/tab pattern as Step 2. This step merges what were originally two separate screens (pick foods, then price them) into one, since a two-phase commit was judged the most likely place users would drop off.",
-              "Checking a food expands an inline pricing widget directly in its card — amount, unit (g/kg, \"piece\" for applicable items, or ml/L for liquids), and price — with unit switches converting the entered amount rather than relabeling it, so \"1 kg\" becoming \"1 g\" can't silently mean a 1000x quantity error. A live macro-coverage checklist requires at least 3 foods covering a protein, carb, and fat source (classified by gram-per-100g thresholds, not calorie share) before the step is considered complete, and each food's widget shows a live kcal/protein/carbs/fat readout with percentage-of-calories breakdown as the amount is typed.",
+              "Here you set your monthly food budget, your currency (detected automatically, but changeable), and how many meals you eat a day. Then you browse a database of 95 real grocery items across 12 categories and pick what you actually buy, with search and filters to find things fast.",
+              "For each food you pick, you enter how much and what it costs, and Budget Meal Maker instantly shows the calories, protein, carbs, and fat it adds — with unit conversions handled for you, so switching between grams and kilograms never accidentally changes your quantity. It also nudges you to include at least one protein, one carb, and one fat source before you move on, so your final plan is actually balanced.",
             ],
             listItems: [
-              "95-food database across 12 categories with images, hybrid search, and category tabs",
-              "Budget, currency (locale-detected default), and meals-per-day inputs",
-              "Inline per-food pricing widget with unit-converting amount entry (g/kg/piece/ml/L)",
-              "Live macro-coverage checklist (protein/carbs/fat sources) gating step completion",
-              "Real-time per-food macro and calorie-percentage preview",
+              "95 real grocery items across 12 categories, searchable and filterable",
+              "Budget, currency, and meals-per-day, all set by you",
+              "Live cost and nutrition preview as you add each food",
+              "Gentle nudge to keep your picks nutritionally balanced",
             ],
             images: ["/P27_3.png"],
           },
         ],
       },
       {
-        title: "Meal Plan Results (Step 4)",
+        title: "Step 4: Your Meal Plan",
         description: [
           {
             text: [
-              "Clicking \"Make my meal\" computes four scenarios (Standard/Gradual pace × Balanced/High-Protein macro split), each with its own BMI-adjusted calorie target and up to three meal cards: Perfect Meal (accurate nutrition from only the user's selected foods, cost tracked but budget-ignored), Affordable Meal (shown only when Perfect Meal exceeds budget — trades cost down from Perfect Meal's own foods in a fixed fat→pricier-macro→direct-reduction order until it fits), and Custom Meal (a fully free-form builder where the user manually checks foods and types exact amounts, independent of any solver).",
-              "Every meal card shows specific, detailed warning banners (exact overage in $, or exact macro/calorie shortfall) rather than a generic notice, and a \"Doing the Groceries\" shopping-list section per card with Per Day/Week/Month toggle pills. Results go stale and require recalculation if the user edits any earlier step. A \"Download as PDF\" button (two entry points) uses the browser's native print dialog with a dedicated print stylesheet that forces a consistent light-theme, full-color export regardless of the active screen theme.",
+              "Hit \"Make my meal\" and Budget Meal Maker builds your plan: a Perfect Meal built purely around good nutrition, an Affordable Meal that trims cost back down to fit your budget when the perfect one runs over, and a Custom Meal you build yourself by hand. Each one comes with a clear grocery list you can scale to a day, week, or month.",
+              "If a plan goes over budget or falls short on nutrition, you'll see exactly by how much — not just a vague warning. Change anything in an earlier step and your results update to match. When you're happy with a plan, one click turns it into a clean, printable PDF.",
             ],
             listItems: [
-              "4 computed scenarios (pace × macro-split combinations) as switchable tabs",
-              "Perfect Meal, Affordable Meal (budget trade-down), and free-form Custom Meal cards",
-              "Per-card specific warning banners (exact $ overage or macro/calorie shortfall)",
-              "\"Doing the Groceries\" shopping list with Per Day/Week/Month scaling",
-              "Stale-result detection when earlier steps are edited",
-              "One-click PDF export via a themed print stylesheet",
-              "Daily water-intake recommendation card",
+              "Three tailored meal options: Perfect, Affordable, and Custom",
+              "Grocery list that scales to a day, week, or month",
+              "Specific warnings when a plan is over budget or under target",
+              "One-click PDF export, ready to print",
+              "A daily water-intake suggestion included with every plan",
             ],
             images: ["/P27_4.png"],
           },
@@ -100,51 +97,51 @@ const projects = [
         description: [
           {
             text: [
-              "The homepage pitches the calculator against a field of static \"budget meal plan\" articles with no real tool, then walks through the actual 4-step flow (BMI, Activity, Food & Budget, Result) as an alternating image-and-text section, each row illustrated with a custom flat-vector image matching the rest of the site's art style.",
-              "Below the walkthrough, a \"Learn more\" section links out to the site's SEO content pages, and the footer carries a full site-wide navigation (calculator plus every content and legal page) in place of a bare copyright line.",
+              "The homepage makes the pitch fast: most \"budget meal plan\" content online is just an article with no real tool behind it — this one actually builds your plan for you. It walks through the four simple steps with matching illustrations, so you know exactly what to expect before you start.",
+              "Below that, a \"Learn more\" section links into the site's meal-planning guides, and the footer carries full navigation to every page on the site.",
             ],
             listItems: [
-              "Hero section with direct CTA into the calculator",
-              "Image-led, alternating step-by-step walkthrough of the real 4-step flow",
-              "\"Learn more\" links into the SEO content library",
-              "Site-wide Explore/Legal navigation in the footer",
+              "Clear hero section with a direct path into the calculator",
+              "Visual walkthrough of the four-step process",
+              "Links into the site's meal-planning guides",
+              "Full site navigation in the footer",
             ],
             images: ["/P27_5.png"],
           },
         ],
       },
       {
-        title: "SEO Content & Reference Library",
+        title: "Meal Planning Guides",
         description: [
           {
             text: [
-              "Four long-form, source-cited content pages share a common ArticleLayout shell: a methodology guide to building a budget meal plan, a macro-calculator explainer with a worked example, a page of three real meal plans with real cost breakdowns, and an FAQ page with 13 questions rendered from the same data array that feeds its JSON-LD FAQPage schema (so visible content and schema can never drift apart).",
-              "A fifth page, \"Cheapest Budget Foods by Macro,\" ranks 11 real grocery staples by protein/carb/fat value-per-dollar using build-time-computed rankings that call the exact same macroValueScore() function the calculator's own solver uses internally, each price individually sourced from a dated BLS/FRED series rather than fabricated. All nutrition and price claims across the library are backed by cited sources (USDA, CDC, Mayo Clinic, PubMed, BLS/FRED) rather than model memory.",
+              "Beyond the calculator, the site includes real, well-researched guides: how to actually build a budget meal plan, how the underlying math works with a worked example, real sample meal plans with real costs, and an FAQ covering the most common questions.",
+              "There's also a ranking of the cheapest grocery staples by nutritional value for the money — every number sourced from real nutrition and pricing data, not guessed.",
             ],
             listItems: [
-              "Methodology guide, macro-calculator explainer, and cheap-meal-ideas pages with real cost breakdowns",
-              "FAQ page with 13 questions and matching JSON-LD FAQPage schema",
-              "\"Cheapest Budget Foods by Macro\" ranking page computed from the calculator's own value-scoring function",
-              "Every claim sourced (USDA, CDC, Mayo Clinic, PubMed, BLS/FRED)",
-              "Full bidirectional interlinking between all content pages, the homepage, and the footer",
+              "A step-by-step guide to building your own budget meal plan",
+              "A plain-language explainer of how the calculator works",
+              "Real sample meal plans with real costs",
+              "An FAQ answering the most common questions",
+              "A ranking of the cheapest, most nutritious grocery staples",
             ],
             images: ["/P27_6.png"],
           },
         ],
       },
       {
-        title: "Lead Capture & Ebook Cross-Sell",
+        title: "Email Guide & Ebook",
         description: [
           {
             text: [
-              "Once a result is generated in Step 4, an email capture card (built on a self-styled ConvertKit form embed matching the site's own design tokens rather than Kit's default widget) invites the user to get emailed the \"Cheapest Budget Foods by Macro\" guide, with double opt-in confirmation before any reward is granted.",
-              "Directly below it, a promo card for a companion paid ebook (\"Budget Meal Maker: The Real-Price Meal Plan\") links out to the portfolio's centralized ebook storefront with tracked UTM parameters. Both cards are gated behind the same \"a result exists\" condition as the PDF export button and are automatically excluded from the printed PDF output.",
+              "Once you get your results, you can enter your email to receive a free guide to the cheapest, most nutritious groceries — no spam, just a one-time send after you confirm your email.",
+              "There's also an optional companion ebook for anyone who wants an even deeper, real-price meal-planning guide. Both offers are tucked out of the way and never show up in your printed PDF.",
             ],
             listItems: [
-              "ConvertKit email signup gated behind a completed result, double opt-in confirmed",
-              "Custom on-brand success/error states matching the site's own styling",
-              "Companion paid-ebook promo card with cover image, pitch, and tracked outbound link",
-              "Both cards excluded automatically from PDF/print export",
+              "Free emailed guide to budget-friendly groceries",
+              "Confirmed opt-in, no spam",
+              "Optional companion ebook for a deeper dive",
+              "Never appears in your printed plan",
             ],
             images: ["/P27_7.png"],
           },
@@ -161,9 +158,9 @@ const projects = [
     img: ["/P26.png"],
     liveLink: "https://shortstack.lawrenceamlangomes.com",
     shortDescription:
-      "A production-deployed URL shortener with click analytics, Redis caching, and async job queues — built to learn the full backend engineering stack from Express to Nginx.",
+      "ShortStack turns long, messy links into short ones that redirect instantly and keep count of every click — a real, production-deployed URL shortener, not just a demo.",
     longDescription:
-      "ShortStack is a full-stack URL shortener built with Node.js, Express 5, and PostgreSQL, deployed on a Hostinger VPS via Coolify. It implements a cache-aside pattern with Redis to serve redirects at low latency, and decouples click recording from the redirect path using BullMQ async job queues — so analytics never slow down the user. The infrastructure layer includes a multi-stage Docker build, an Nginx reverse proxy, and Traefik handling SSL termination, forming a production-grade request chain. A multi-tenant auth API built with JWT and bcrypt allows the same service to support multiple independent applications. The project was built deliberately from primitives — raw SQL, no ORM, no framework magic — to develop deep understanding of each layer.",
+      "ShortStack takes any long link and turns it into a short, easy-to-share one that redirects in an instant and quietly keeps track of every click it gets, so you always know how a link is performing. It stays fast by keeping popular links ready to go in memory instead of looking them up from scratch every time, and it logs click activity in the background so tracking never slows down the redirect itself. It also supports multiple separate apps sharing one login system, each keeping its own users. Built with Node.js, Express, PostgreSQL, and Redis, and deployed as a real, secure production service with Docker and Nginx.",
     techStack: [
       ["Node.js", "/node.png"],
       ["Express.js", "/express.png"],
@@ -183,14 +180,14 @@ const projects = [
         description: [
           {
             text: [
-              "A minimal React single-page app served directly by Express from the built static files. Users paste a long URL and receive a short link in the same domain (e.g. shortstack.lawrenceamlangomes.com/abc123).",
-              "The interface handles loading states, validation errors from the API, and a one-click copy-to-clipboard action with visual feedback.",
+              "A clean, simple page where you paste in a long URL and get back a short link on the ShortStack domain, ready to share right away.",
+              "It handles the small details that make it feel polished — clear loading feedback, friendly messages if a link is invalid, and a one-click button to copy your new short link.",
             ],
             listItems: [
-              "Paste any valid URL and generate a 6-character random slug",
-              "Short URL displayed as a clickable link and copyable to clipboard",
-              "Loading and error states handled in UI",
-              "Built with Vite + React + TypeScript, served as static files by Express",
+              "Paste in any valid URL and get back a short, random link",
+              "Your short link appears as a clickable link you can copy in one click",
+              "Clear feedback while it's working, and friendly errors if something's wrong",
+              "Built with React and TypeScript for a fast, responsive interface",
             ],
             images: ["/P26_1.png"],
           },
@@ -201,14 +198,14 @@ const projects = [
         description: [
           {
             text: [
-              "Visiting a short URL (e.g. /abc123) triggers a 301 redirect to the original URL. The redirect handler checks Redis first — on a cache HIT the response skips the database entirely. On a MISS it queries PostgreSQL, populates the cache with a 24-hour TTL, and redirects.",
-              "An X-Cache: HIT/MISS response header exposes cache behaviour for observability, following the CDN industry convention.",
+              "Clicking a short link sends you straight to the original page — instantly. Rather than looking every link up from scratch, ShortStack keeps recently used links ready in fast memory, so most redirects never have to touch the database at all.",
+              "It even quietly reports whether a redirect came from that fast memory or the database, the same trick big content-delivery networks use, which made it easy to prove the speed-up was actually working.",
             ],
             listItems: [
-              "Cache-aside pattern: Redis checked before every DB query",
-              "Write-through on create: cache warmed immediately so first redirect is always a HIT",
-              "24-hour TTL on all cached slugs",
-              "X-Cache response header for cache observability",
+              "Every redirect checks the fast in-memory cache first, before ever touching the database",
+              "New links are cached the moment they're created, so even the first click is instant",
+              "Cached links automatically refresh every 24 hours",
+              "A hidden response detail reveals whether a redirect was served from cache or the database",
             ],
             images: ["/P26_2.png"],
           },
@@ -219,15 +216,15 @@ const projects = [
         description: [
           {
             text: [
-              "Every redirect asynchronously records a click event via BullMQ. The redirect response is sent immediately — the analytics write happens in a background worker, so the user never waits for the database INSERT.",
-              "Click data is stored in a separate normalised clicks table (not a counter column), enabling time-series queries. The /api/links/:slug/stats endpoint returns the total click count for any slug.",
+              "Every click on a short link gets logged for later — but the person clicking never has to wait for it. The redirect happens right away, while the click is recorded quietly in the background.",
+              "Each click is saved as its own timestamped record rather than just a running total, which makes it possible to see how a link's traffic changes over time. A simple lookup returns the total number of clicks for any link on demand.",
             ],
             listItems: [
-              "Click jobs enqueued on every redirect — zero latency impact on user",
-              "BullMQ worker processes jobs in-process, INSERTs into PostgreSQL clicks table",
-              "Separate clicks table with timestamp column — supports \"clicks per day\" style queries",
-              "GET /api/links/:slug/stats returns total click count",
-              "Bull Board observability UI at /admin/queues (protected by HTTP basic auth)",
+              "Every click is queued for logging without ever slowing down the redirect",
+              "A background worker processes the queue and saves each click to the database",
+              "Click history is timestamped, so activity can be tracked day by day",
+              "A simple stats lookup returns the total clicks for any link",
+              "A password-protected admin view shows the click queue processing in real time",
             ],
             images: ["/P26_3.png"],
           },
@@ -238,15 +235,15 @@ const projects = [
         description: [
           {
             text: [
-              "A JWT-based authentication API with an app field on every user, allowing the same email to register independently for different applications. The UNIQUE(email, app) constraint enforces this at the database level.",
-              "Passwords are hashed with bcrypt (cost factor 12). JWT tokens are issued in the response body with a 7-day expiry.",
+              "A login system built to be shared across more than one app — the same email address can hold a separate account for each app that uses it, so nothing gets mixed up between them.",
+              "Passwords are securely encrypted before they're ever stored, and signing in hands back a login token that stays valid for a week.",
             ],
             listItems: [
-              "POST /api/auth/register — email, password, app field required, Zod validated",
-              "POST /api/auth/login — returns signed JWT on success",
-              "UNIQUE(email, app) constraint — multi-tenant by design",
-              "bcrypt password hashing (cost factor 12)",
-              "JWT issued in response body (not cookie) for cross-origin client compatibility",
+              "Sign up with an email and password, checked before anything is saved",
+              "Log in and receive a secure token confirming who you are",
+              "Built so the same email can be used separately across different apps",
+              "Passwords are encrypted and never stored in plain text",
+              "Login tokens work smoothly even when the app and the login system live on different domains",
             ],
             images: ["/P26_4.png"],
           },
@@ -257,16 +254,16 @@ const projects = [
         description: [
           {
             text: [
-              "The full production request chain is: Internet → Traefik (SSL termination, port 443) → Nginx (reverse proxy, port 80, internal) → Express (port 3000, internal). Nginx and the app run as separate Docker services defined in docker-compose.yml and deployed via Coolify's docker-compose buildpack.",
-              "The Nginx config uses Docker's internal DNS resolver (127.0.0.11) with a variable upstream to force runtime DNS resolution — preventing the default behaviour where Nginx caches upstream IPs at startup and breaks when containers restart.",
+              "ShortStack isn't just a demo running on a laptop — it's deployed as a real, secure production service. Every request passes through a proper routing and security chain before it ever reaches the app, the same kind of setup real-world web services rely on.",
+              "It's also built to stay reliable through restarts and updates, so redeploying the service never quietly breaks it for anyone using it.",
             ],
             listItems: [
-              "Multi-stage Dockerfile: client-builder, server-builder, and lean production image",
-              "Nginx reverse proxy baked into its own Docker image (no volume mounts)",
-              "Traefik handles SSL — Nginx and Express never exposed to the public internet",
-              "App joins coolify Docker network to reach Redis by hostname",
-              "docker-compose.dev.yml override for local development with local Postgres + Redis",
-              ".env.example documents all required environment variables",
+              "Packaged into a lean, optimized production build",
+              "Runs behind its own reverse proxy for routing and security",
+              "All traffic is encrypted with HTTPS before it ever reaches the app",
+              "Connects securely to its caching layer within the deployment network",
+              "A separate local setup makes it easy to develop and test without touching production",
+              "All required configuration is clearly documented for easy setup",
             ],
             images: ["/P26_5.png"],
           },
@@ -283,9 +280,9 @@ const projects = [
     img: ["/P25.png"],
     liveLink: "https://realcaffeinecalculator.com",
     shortDescription:
-      "A browser-based caffeine half-life calculator that shows exactly how much caffeine is in your system right now and when it's safe to sleep, based on your drinks, metabolism, and bedtime.",
+      "Real Caffeine Calculator tells you exactly how much caffeine is still in your system and the latest time you can have one without wrecking your sleep — based on what you actually drank, your metabolism, and your bedtime.",
     longDescription:
-      "Real Caffeine Calculator applies pharmacokinetic exponential decay math to give users a real-time view of caffeine in their bloodstream. Users log any combination of drinks from a 30+ item database spanning Starbucks, energy drinks, teas, and custom entries, then the tool calculates current mg, projects a 24-hour SVG decay chart with color-coded risk zones, and computes the latest safe caffeine cut-off time before bed. Metabolism is fully adjustable for five profiles (normal, fast, slow, pregnant, smoker) driven by CYP1A2 half-life data from NIH research. Built with Astro 6 as a fully static site, styled with Tailwind CSS v4, written in TypeScript and vanilla JS, and deployed on Cloudflare Workers Assets — no server, no account, no data ever leaves the browser.",
+      "Real Caffeine Calculator answers the question everyone asks after an afternoon coffee: is this going to keep me up tonight? Log whatever you drank — pick from a library of over 30 real drinks like Starbucks orders, energy drinks, and tea, or enter a custom amount — and it shows exactly how much caffeine is still in your body right now, a chart of how it clears out over the next 24 hours, and the latest time you could safely have more before bed. You can even tune it to your own body, choosing between normal, fast, or slow metabolism, plus profiles for pregnancy and smoking, based on real published research on how differently people process caffeine. It runs entirely in your browser, so there's no account and nothing you enter ever leaves your device. Built with Astro, TypeScript, and Tailwind CSS, and hosted on Cloudflare.",
     techStack: [
       ["Tailwind CSS", "/TailwindCss.png"],
       ["TypeScript", "/ts.png"],
@@ -299,17 +296,17 @@ const projects = [
         description: [
           {
             text: [
-              "The core input panel lets users log one or more drinks consumed at any time of day. Each row has a drink selector (grouped by category as optgroups), a time picker that auto-fills the current time, and a remove button. A custom \"enter mg\" option is available for unlisted drinks.",
-              "The drink database includes 30+ real-world entries: 12 coffee drinks (including Starbucks sizes, Death Wish, cold brew), 12 energy drinks (Bang 300mg, Reign 300mg, Monster, Celsius, Red Bull in three sizes), teas, sodas, and a freeform custom entry. All drinks use size-specific names and fixed mg values for accuracy.",
+              "This is where you tell the calculator what you actually drank. Add as many drinks as you like, each with its own time, picked from an organized list of categories — or just type in a custom amount if your drink isn't on the list.",
+              "The drink list covers more than 30 real options: a dozen coffee drinks including popular Starbucks sizes and strong brews like Death Wish, a dozen energy drinks like Bang, Reign, Monster, Celsius, and Red Bull in different sizes, plus teas, sodas, and a fully custom entry — each with an accurate caffeine amount already built in.",
             ],
             listItems: [
-              "Add/remove multiple drinks, each with independent time inputs",
-              "30+ drinks grouped into Coffee, Energy Drinks, Tea & Other, Custom",
-              "Custom drink option lets users enter any mg value directly",
-              "Time picker assumes drinks >1 hour in the future occurred yesterday (prevents input errors)",
-              "Body weight field (lbs) unlocks a mg/kg load readout, color-coded green/amber/red",
-              "Bedtime picker defaults to 11:00 PM, used for all sleep-threshold calculations",
-              "Metabolism selector: Normal (5hr), Fast (3hr), Slow (8hr), Pregnant (15hr), Smoker (3hr) half-lives",
+              "Add or remove as many drinks as you want, each with its own time",
+              "Over 30 drinks organized into Coffee, Energy Drinks, Tea & Other, and Custom",
+              "A custom option lets you enter the exact caffeine amount for anything not listed",
+              "Smart time handling catches likely mistakes, like accidentally logging a drink for the future",
+              "Enter your body weight to see a color-coded reading of your caffeine load relative to your size",
+              "Set your bedtime (defaults to 11:00 PM) to power all the sleep-safety calculations",
+              "Choose your metabolism type — normal, fast, slow, pregnant, or smoker — each processed at its own real-world rate",
             ],
             images: ["/P25_1.png"],
           },
@@ -320,17 +317,17 @@ const projects = [
         description: [
           {
             text: [
-              "The outputs card shows a large hero number for current mg in system, a status badge that reads \"Log a drink to start / Safe to sleep / Cutting it close / Too much for sleep,\" and a \"You can have caffeine until\" hero timestamp that dynamically inverts from the bedtime to find the latest safe intake window.",
-              "Below the chart, three stat rows show: when caffeine clears below 50mg (\"caffeine clears at\"), sleep disruption risk badge with mg-at-bedtime (\"Low impact / Moderate impact / High impact\"), and optional mg/kg load. A red warning banner appears when total intake exceeds the FDA's 400mg daily limit.",
+              "The results panel is the heart of the tool: a big, clear number showing how much caffeine is in your system right now, a plain-language status like \"Safe to sleep\" or \"Too much for sleep,\" and a headline telling you the latest time you could still have a caffeinated drink and be fine by bedtime.",
+              "Below that, it shows when your caffeine will drop to a safe level, how much it's likely to disrupt your sleep (low, moderate, or high impact), and, if you entered your weight, how your intake compares to your body size. If you've gone over the FDA's recommended daily limit, a clear warning lets you know.",
             ],
             listItems: [
-              "Hero \"safe until\" time: latest moment a 95mg reference drink keeps bedtime caffeine below 25mg",
-              "Safe-until color: green (time available), red (\"None today\"), muted (\"Window passed\")",
-              "Current mg counter updates every 60 seconds via setInterval",
-              "Sleep disruption risk badge: Low (<25mg at bed), Moderate (25–100mg), High (>100mg)",
-              "mg at bedtime shown inline with the sleep risk badge",
-              "mg/kg load (green <3, amber 3–6, red >6) — only visible when weight is entered",
-              "400mg FDA daily limit warning banner",
+              "Shows the latest moment you could have a typical coffee and still keep your bedtime caffeine low",
+              "Color-coded so you can tell at a glance whether you still have time, none left today, or your window's passed",
+              "The current caffeine reading updates automatically every minute",
+              "A sleep-risk badge tells you if your bedtime caffeine level is low, moderate, or high impact",
+              "Shows exactly how much caffeine will still be in your system at bedtime",
+              "A color-coded caffeine load relative to your body weight, shown once you enter it",
+              "A warning appears if you go over the FDA's recommended daily caffeine limit",
             ],
             images: ["/P25_2.png"],
           },
@@ -341,18 +338,18 @@ const projects = [
         description: [
           {
             text: [
-              "An inline SVG chart renders a 24-hour caffeine decay curve starting from the first drink. It samples 240 data points and draws a blue polyline with a gradient fill underneath. Three background color bands show safe (<50mg, green), moderate (50–150mg, amber), and high (>150mg, red) zones.",
-              "Vertical dashed markers for \"now\" (white) and \"bedtime\" (purple) are plotted on the chart. A dot with a white center marks the current position on the curve. The chart re-renders on every calculation tick and whenever the theme changes (dark/light mode), swapping axis and grid colors accordingly.",
+              "A chart plots exactly how your caffeine level will rise and fall over the next 24 hours, starting from your first drink. Color bands across the background make it easy to see at a glance when you're in a safe zone, a moderate zone, or a high zone.",
+              "Markers show exactly where \"now\" and your bedtime fall on the timeline, with a dot tracking your current caffeine level right on the curve. The whole chart updates live as time passes and adapts automatically if you switch between dark and light mode.",
             ],
             listItems: [
-              "240-sample polyline with gradient fill below the curve",
-              "Color zone backgrounds: green safe, amber moderate, red high",
-              "Orange dashed horizontal line at 50mg \"sleep-safe\" threshold",
-              "White dashed \"now\" vertical line with a filled dot marking current position",
-              "Purple dashed \"bedtime\" vertical line",
-              "X-axis labels every 4 hours; Y-axis labels scale dynamically to peak mg",
-              "Chart legend (hidden until drinks are logged): icons for each line and zone",
-              "Responds to dark/light theme toggle — all colors update without page reload",
+              "A smooth curve with a soft gradient fill traces your caffeine level hour by hour",
+              "Green, amber, and red zones show safe, moderate, and high caffeine levels at a glance",
+              "A marked line shows the caffeine level considered safe for sleep",
+              "A marker shows exactly where you are right now on the curve",
+              "A separate marker shows where your bedtime falls on the timeline",
+              "The timeline is labeled every few hours and automatically scales to your caffeine peak",
+              "A legend appears once you've logged a drink, explaining every line and zone",
+              "Updates instantly to match dark or light mode, no reload needed",
             ],
             images: ["/P25_3.png"],
           },
@@ -363,13 +360,13 @@ const projects = [
         description: [
           {
             text: [
-              "A structured editorial section below the calculator explains the science in six headed paragraphs: what caffeine half-life is, how CYP1A2 genetics affect clearance, how the calculator formula works, why timing matters for sleep (citing Drake et al. 2013 JCSM), FDA daily limits, and a comparison of caffeine content across popular drink brands.",
+              "Below the calculator, a plain-language guide walks through the science behind it — what caffeine half-life actually means, how genetics change the way people process it, how the calculator's math works, why timing your last coffee matters for sleep, official daily limits, and how caffeine content compares across popular drinks.",
             ],
             listItems: [
-              "Six in-depth subsections with keyword-rich headings",
-              "Inline strong tags highlight key calculator phrases for semantic SEO",
-              "Mentions specific mg values for real drinks (Death Wish 728mg, Bang 300mg, Starbucks Cold Brew 205mg)",
-              "References the exponential decay formula directly in copy",
+              "Six clearly organized sections covering the science end to end",
+              "Key terms are highlighted throughout so the important points are easy to spot",
+              "Includes real numbers for popular drinks, like Death Wish coffee's 728mg or a Starbucks Cold Brew's 205mg",
+              "Explains in plain terms how caffeine actually leaves your system over time",
             ],
             images: ["/P25_4.png"],
           },
@@ -380,13 +377,13 @@ const projects = [
         description: [
           {
             text: [
-              "A five-question accordion FAQ uses native HTML <details>/<summary> elements for no-JS expand/collapse. Each question also maps to a FAQPage schema.org JSON-LD block injected into <head> for rich result eligibility in Google Search.",
+              "A short FAQ answers the five questions people ask most — how the tool works, what half-life means, what a safe daily limit looks like, when to stop drinking caffeine before bed, and how body weight factors in. It's also structured so these answers can show up directly in Google search results.",
             ],
             listItems: [
-              "5 questions: how it works, what half-life is, safe daily limit, when to stop before bed, body weight effect",
-              "Native <details> elements — no JavaScript required",
-              "FAQPage JSON-LD injected via Astro's head slot",
-              "Questions match high-intent search queries",
+              "Covers how it works, what half-life means, safe daily limits, cutoff timing, and body weight",
+              "Opens and closes smoothly with a simple click",
+              "Structured so answers can appear directly in search results",
+              "Answers the exact questions people search for",
             ],
             images: ["/P25_5.png"],
           },
@@ -397,14 +394,14 @@ const projects = [
         description: [
           {
             text: [
-              "A numbered citation list beneath the FAQ links to the five authoritative sources the calculator's science is based on: NIH StatPearls on caffeine half-life range, FDA consumer guidance on the 400mg limit, Drake et al. 2013 in the Journal of Clinical Sleep Medicine, AASM sleep timing recommendations, and USDA FoodData Central for drink caffeine content.",
+              "For anyone who wants to double-check the science, a sources list links out to the actual research behind the calculator — from federal health guidance to peer-reviewed sleep studies to government food data — so nothing here is just made up.",
             ],
             listItems: [
-              "NIH StatPearls — half-life 3–15hr range",
-              "FDA — 400mg/day safe limit for healthy adults",
-              "Drake et al. 2013 (JCSM) — caffeine 6hrs before bed reduces total sleep time",
-              "American Academy of Sleep Medicine (AASM)",
-              "USDA FoodData Central — caffeine content by beverage",
+              "NIH research on how long caffeine's effects can last, from 3 to 15 hours depending on the person",
+              "FDA guidance on the 400mg daily limit considered safe for most healthy adults",
+              "A sleep medicine study showing caffeine even six hours before bed can cut into your sleep",
+              "Sleep timing guidance from the American Academy of Sleep Medicine",
+              "USDA data on caffeine content across different drinks",
             ],
             images: ["/P25_6.png"],
           },
@@ -415,15 +412,15 @@ const projects = [
         description: [
           {
             text: [
-              "The site ships dark-first. A sun/moon icon button in the sticky header toggles a `.light` class on <html>, which overrides all CSS custom properties. Theme preference is persisted to localStorage. An inline script in <head> applies the class before first paint, preventing any flash of unstyled content (FOUC).",
-              "The calculator's SVG chart listens for a custom `theme-change` DOM event dispatched on toggle and re-renders with the correct axis/grid colors for the active theme.",
+              "The site looks great in dark mode by default, with a simple sun/moon button to switch to light mode whenever you prefer. Your choice is remembered for next time, and the page loads already in the right theme instead of flashing the wrong one first.",
+              "The decay chart updates its colors instantly whenever you switch themes, so it always matches the rest of the page.",
             ],
             listItems: [
-              "Dark-first design with full light mode via CSS custom property overrides",
-              "Preference saved to localStorage and restored on next visit",
-              "FOUC prevention via inline `is:inline` script in <head>",
-              "Chart re-renders automatically on theme switch",
-              "Sticky header uses backdrop-filter blur with theme-aware background",
+              "Designed dark-first, with a full, polished light mode as an option",
+              "Remembers your theme choice for your next visit",
+              "Loads in the correct theme immediately, with no flash of the wrong colors",
+              "The chart automatically re-colors itself when you switch themes",
+              "The header stays visible as you scroll, with a subtle blur that adapts to the current theme",
             ],
             images: ["/P25_7.png"],
           },
@@ -434,14 +431,14 @@ const projects = [
         description: [
           {
             text: [
-              "The sticky header collapses to a hamburger menu on screens narrower than 640px. Clicking the hamburger reveals a dropdown nav with all three links. The hamburger icon swaps to an X when open. Clicking outside the header or any nav link closes the menu.",
+              "On phones and smaller screens, the navigation tucks neatly into a hamburger menu that expands into a dropdown with a tap. It closes itself automatically once you tap a link or tap anywhere else on the page.",
             ],
             listItems: [
-              "Desktop: horizontal nav links (Calculator, About, Contact) + theme toggle",
-              "Mobile: hamburger icon (≤639px) opens a dropdown nav panel",
-              "Icon animates: bars → X on open, X → bars on close",
-              "Closes on outside click or link tap",
-              "Full light/dark theme support in both desktop and mobile nav states",
+              "On desktop, the Calculator, About, and Contact links sit in the header alongside the theme toggle",
+              "On mobile, a hamburger icon opens the same navigation in a dropdown",
+              "The icon animates smoothly between a menu and a close button",
+              "Closes automatically when you tap a link or tap outside the menu",
+              "Looks right in both dark and light mode, on any screen size",
             ],
             images: ["/P25_8.png"],
           },
@@ -452,13 +449,13 @@ const projects = [
         description: [
           {
             text: [
-              "A single-column editorial page explains what the tool is, how it works, and who it's for. A \"Key facts\" card lists five bullet points about the science and privacy model in a styled dark card with checkmarks.",
+              "A simple About page explains what the tool does, how it works, and who it's for, with a quick-facts card summarizing the key science and privacy points at a glance.",
             ],
             listItems: [
-              "What the tool does and who it's for",
-              "Key facts card: half-life, sleep threshold, FDA limit, browser-only processing, no sign-up",
-              "Disclaimer about medical advice",
-              "CTA button linking back to the calculator",
+              "A clear explanation of what the tool does and who it's for",
+              "A quick-facts card covering half-life, sleep thresholds, daily limits, and privacy",
+              "A clear note that it's not medical advice",
+              "A button linking straight back to the calculator",
             ],
             images: ["/P25_9.png"],
           },
@@ -469,13 +466,13 @@ const projects = [
         description: [
           {
             text: [
-              "A clean contact form with Name, Email, Subject, and Message fields submits via the Formspree API using `fetch` with `FormData`. On success, the form resets and shows a green confirmation message. On failure, a red error message appears. The submit button shows \"Sending…\" while in-flight and \"Sent\" on success.",
+              "A simple contact form lets visitors reach out directly with their name, email, subject, and message. It gives clear feedback the whole way through — showing when it's sending, confirming once it's sent, and letting you know if something went wrong.",
             ],
             listItems: [
-              "Four fields: Name, Email, Subject, Message",
-              "Async submission via fetch to Formspree endpoint",
-              "Inline success (green) and error (red) feedback without page reload",
-              "Submit button disabled during in-flight request to prevent double-submit",
+              "Name, email, subject, and message fields",
+              "Sends instantly without reloading the page",
+              "Clear success and error messages shown right on the page",
+              "The submit button locks while sending to prevent accidental double submissions",
             ],
             images: ["/P25_10.png"],
           },
@@ -492,9 +489,9 @@ const projects = [
     img: ["/P24.png"],
     liveLink: "https://www.facelees.com/",
     shortDescription:
-      "A full-stack Next.js e-commerce platform built in January 2026 for a local client — real-time COD shopping, admin-only access, product/hero image management, order tracking, and Cloudflare optimization.",
+      "Facelees is a full online storefront built for a local Bangladeshi retailer, letting customers browse and order products for cash on delivery with no sign-up required, while the owner runs everything — products, banners, and orders — from a private dashboard.",
     longDescription:
-      "Facelees is a modern, end-to-end full-stack e-commerce web application created in January 2026 specifically for a local businessman in Bangladesh. The platform delivers a clean, fast shopping experience with a public-facing shop (landing page) showcasing rotating hero banners, brand logos, and a dynamic product catalog. Customers can browse, search, sort, filter, add items to cart, and place orders via Cash on Delivery — no user registration or login is required for shopping. Authentication and all management features are strictly restricted to pre-approved admin Gmail accounts only. Admins have full control over the catalog (add/edit/delete products with image uploads), hero banners (order sequencing, visibility toggle), order viewing and status updates (pending → confirmed → shipped → delivered/cancelled), and their own profile/password management. Built with Next.js App Router, TypeScript for type safety, Tailwind CSS for responsive dark-themed UI, MongoDB for all data persistence, and Cloudflare for global speed, caching, and security. The application emphasizes performance, mobile-first design, secure admin flows, and real-world business usability for small-to-medium local retailers.",
+      "Facelees gives a local retailer a real online storefront without any of the usual friction. Customers can browse the full product catalog, search and filter for what they want, and place an order for cash on delivery in just a few clicks — no account or login needed. Behind the scenes, the shop owner has a private dashboard for everything that keeps the business running: adding and editing products with photos, controlling the rotating banner images on the homepage, and tracking every order from the moment it's placed through to delivery. Access to that dashboard is locked to the owner's own approved accounts, so the storefront stays open to everyone while the business tools stay private. Built with Next.js, TypeScript, and MongoDB, and served through Cloudflare for a fast, secure experience anywhere.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -507,148 +504,148 @@ const projects = [
     gitLink: null,
     feaTures: [
       {
-        title: "Public Shop & Landing Page (/)",
+        title: "Public Shop & Landing Page",
         description: [
           {
             text: [
-              "The root route functions as both the main landing page and the complete shop interface. It prominently features a rotating hero banner section (controlled by admin), brand logo showcase, and a rich product grid with advanced filtering capabilities.",
-              "Products display primary image, brand name (extracted from description), product name, short teaser description, real-time discounted price, original price strikethrough (when discounted), stock availability badge, and prominent Add/Remove from Cart buttons.",
-              "Fully public — no authentication required. Optimized for fast loading with Cloudflare edge caching.",
+              "The homepage doubles as the whole shop — a rotating banner up top, a showcase of brand logos for trust, and a full product grid customers can search and filter through.",
+              "Each product card shows a clear photo, brand and name, a short description, the current price (with the original price crossed out when it's discounted), whether it's in stock, and an easy add-to-cart button.",
+              "The whole storefront is open to anyone — no account needed — and loads fast thanks to edge caching.",
             ],
             listItems: [
-              "Dynamic hero banner carousel with admin-defined order and visibility",
-              "Brand logos section for visual trust-building",
-              "Responsive 1–5 column product grid (mobile to desktop)",
-              "Instant search across name, brand, category, and short description",
-              "Price sorting (low → high / high → low) with discounted price logic",
-              "Visual indicators: discount badge, out-of-stock overlay, in-stock green badge",
-              "Smooth hover animations and image zoom effect",
-              "Skeleton loading states during initial fetch",
+              "A rotating banner carousel the owner fully controls, order and all",
+              "A brand logo showcase that builds trust with shoppers",
+              "A product grid that adapts smoothly from phone to desktop",
+              "Instant search across product name, brand, category, and description",
+              "Sort products by price, low to high or high to low, discounts included",
+              "Clear visual badges for discounts, in-stock, and out-of-stock items",
+              "Smooth hover animations and a subtle image zoom effect",
+              "Friendly loading placeholders while the page fetches products",
             ],
             images: ["/P24.png", "/P24_3.png"],
           },
         ],
       },
       {
-        title: "Admin-Only Authentication System (/login & /register)",
+        title: "Admin-Only Authentication System",
         description: [
           {
             text: [
-              "Access to any admin functionality is strictly limited to a predefined list of Gmail addresses. Normal visitors cannot register or log in — registration and login forms include real-time validation and clear restricted-access messaging.",
-              "Login supports secure credential checking with detailed error feedback. Registration requires double confirmation and redirects to login upon success. Both pages use a luxurious dark theme with gold accents consistent with the brand.",
+              "Only the shop owner's own approved accounts can ever get into the admin tools. Regular visitors can't sign up or log in at all — they're clearly told the area is restricted.",
+              "Logging in gives clear, helpful feedback if something's wrong, and both the login and account screens carry the same dark, gold-accented look as the rest of the brand.",
             ],
             listItems: [
-              "Hard-coded admin Gmail whitelist verification",
-              "Real-time input validation (Gmail only, password length, required fields)",
-              "Prominent restricted access warnings with red alert styling",
-              "Seamless redirect after successful login to shop",
-              "Responsive, centered form layout with dark modern aesthetic",
-              "Fake hidden fields to improve autofill behavior on mobile/desktop",
+              "Only pre-approved Gmail accounts can ever access the admin area",
+              "Instant validation on every field as you type",
+              "Clear warnings shown to anyone who tries to access restricted areas",
+              "A smooth redirect straight into the shop after logging in",
+              "A clean, centered form that looks great on any device",
+              "Small touches that make autofill behave properly on phones and desktops",
             ],
             images: ["/P24_1.png", "/P24_2.png"],
           },
         ],
       },
       {
-        title: "Shopping Cart & Cash on Delivery Flow (/cart)",
+        title: "Shopping Cart & Cash on Delivery Flow",
         description: [
           {
             text: [
-              "Persistent cart state allows users to add, remove, and adjust quantities of products. Real-time subtotal calculation includes discount application per item. Checkout uses a clean modal for Cash on Delivery orders, collecting essential delivery information with strong validation.",
-              "On successful order placement, the cart clears, an order ID is generated, and a confirmation dialog offers to view orders (redirects to /orders if confirmed).",
+              "Shoppers can add products to their cart, adjust quantities, and remove items freely, with the total updating instantly, discounts included. Checking out is simple — a clean pop-up collects delivery details for a cash-on-delivery order, with careful validation so nothing gets missed.",
+              "Once an order goes through, the cart clears itself, an order number is generated, and the customer gets a confirmation with the option to view their order.",
             ],
             listItems: [
-              "Real-time cart updates with quantity +/- controls",
-              "Item removal with confirmation",
-              "Accurate subtotal with per-item discounted pricing",
-              "COD checkout modal with name, address (textarea), and 11-digit mobile validation",
-              "Mobile number format enforcement (starts with 01, exactly 11 digits)",
-              "Success feedback with order summary popup",
-              "Continue shopping link and clear cart option",
-              "Responsive two-column layout on desktop",
+              "Update quantities instantly with simple plus/minus controls",
+              "Remove items with a quick confirmation to avoid mistakes",
+              "An accurate running total that accounts for every item's discount",
+              "A checkout form collecting name, address, and a validated phone number",
+              "Phone numbers are checked against the correct local format before submitting",
+              "A clear order confirmation summary once checkout succeeds",
+              "Easy options to keep shopping or clear the cart",
+              "A clean two-column layout on larger screens",
             ],
             images: ["/P24_4.png", "/P24_5.png"],
           },
         ],
       },
       {
-        title: "Admin Product Catalog Management (/products)",
+        title: "Admin Product Catalog Management",
         description: [
           {
             text: [
-              "Comprehensive admin interface for managing the entire product inventory. Admins can create new products (with image upload and preview), edit all fields (including separate short/long descriptions + brand name), toggle stock & visibility, or delete items (with safety checks).",
-              "Includes duplicate name prevention, character limits on descriptions, 500-product hard cap, search across multiple fields, and clean card-based display with brand highlighting.",
+              "A full toolkit for managing everything in the store. The owner can add new products with photos, edit any detail — description, brand, pricing — toggle whether something's in stock or visible, and remove products safely.",
+              "It also guards against accidental duplicates, keeps descriptions a sensible length, supports up to 500 products, and makes everything easy to find with a proper search.",
             ],
             listItems: [
-              "Full CRUD for products with optimistic UI updates",
-              "Image upload (max 5MB) with live preview and remove option",
-              "Combined description field parsed into short/long/brand for display",
-              "In-stock / active toggles with visual indicators",
-              "Category input (lowercased automatically)",
-              "Search by name/category/brand/short description",
-              "Hard limit of 500 products enforced",
-              "Responsive grid layout with hover effects",
+              "Add, edit, and remove products, with the interface updating instantly",
+              "Upload product photos with a live preview before saving",
+              "One description field that's automatically split into a short teaser, full details, and brand name",
+              "Simple toggles for in-stock and visible status, with clear indicators",
+              "Categories are kept consistent automatically",
+              "Search products by name, category, brand, or description",
+              "Supports up to 500 products in the catalog",
+              "A clean, responsive grid with subtle hover effects",
             ],
             images: ["/P24_7.png"],
           },
         ],
       },
       {
-        title: "Admin Hero Banner & Branding Control (/advertising)",
+        title: "Admin Hero Banner & Branding Control",
         description: [
           {
             text: [
-              "Dedicated admin section to manage the rotating hero banners on the landing page. Admins can upload new wide-format images, set unique animation order (sorting priority), toggle visibility, edit existing banners, or delete them.",
-              "Enforces maximum 20 images and prevents duplicate serial numbers. Includes aspect ratio guidance (25:10 recommended) for best display across devices.",
+              "A dedicated space for managing the rotating banners on the homepage. The owner can upload new wide banner images, choose the order they appear in, show or hide them, and edit or remove them at any time.",
+              "It supports up to 20 banners at once and gives sizing guidance so every image displays properly on any device.",
             ],
             listItems: [
-              "Add/edit/delete hero banners with image upload",
-              "Unique animationSerial control (1 = first shown)",
-              "Active/inactive toggle with overlay indicator",
-              "Image preview with remove button",
-              "20-banner strict limit with warning",
-              "Sorted display by animation order",
-              "Responsive banner cards with overlay controls",
+              "Add, edit, or delete banners with image upload",
+              "Set exactly which banner shows first and in what order",
+              "Show or hide any banner with a simple toggle",
+              "Preview an image before saving, or remove it entirely",
+              "Supports up to 20 banners, with a warning if you hit the limit",
+              "Banners display in exactly the order chosen",
+              "Clean banner cards with controls right where you need them",
             ],
             images: ["/P24_8.png"],
           },
         ],
       },
       {
-        title: "Admin Order Dashboard & Status Management (/orders)",
+        title: "Admin Order Dashboard & Status Management",
         description: [
           {
             text: [
-              "Powerful admin overview showing every placed order with advanced filtering by status (all/pending/confirmed/shipped/delivered/cancelled), free-text search (name/email/mobile/address), and date sorting (newest/oldest).",
-              "Each order card displays complete customer details, full item list with images/prices/subtotals, total amount, and one-click status change buttons with optimistic UI and rollback on failure.",
+              "A complete overview of every order that's come in, with filtering by status — pending, confirmed, shipped, delivered, or cancelled — plus search and sorting by date, so nothing slips through the cracks.",
+              "Every order shows the customer's details, the full list of items with prices, and the total, with one click to move an order along to its next status.",
             ],
             listItems: [
-              "Complete order list with real-time status updates",
-              "Multi-filter: status dropdown + keyword search",
-              "Date sorting toggle (newest/oldest first)",
-              "Detailed view: customer info, items grid, grand total",
-              "Status change buttons with visual feedback",
-              "Responsive card layout with color-coded status badges",
-              "Error handling with rollback on failed updates",
+              "A full order list that updates status in real time",
+              "Filter by status or search by keyword",
+              "Sort orders newest or oldest first",
+              "A detailed view of customer info, items ordered, and the total",
+              "One-click status updates with clear visual feedback",
+              "Color-coded status badges that make order state easy to scan",
+              "Safely handles failed updates so nothing gets left in a bad state",
             ],
             images: ["/P24_9.png"],
           },
         ],
       },
       {
-        title: "Admin Personal Profile & Security (/profile)",
+        title: "Admin Personal Profile & Security",
         description: [
           {
             text: [
-              "Simple yet secure admin profile page displaying name and email. Provides direct link to change password and a prominent logout button with confirmation dialog.",
-              "Ensures admins can maintain account security without exposing unnecessary fields.",
+              "A simple profile page for the owner, showing their name and email, with a quick way to change their password and log out securely.",
+              "It keeps account management straightforward without exposing anything that isn't needed.",
             ],
             listItems: [
-              "Display of admin name and email",
-              "Dedicated 'Change Password' navigation",
-              "Secure logout with confirmation prompt",
-              "Consistent dark/gold theme matching the brand",
-              "Responsive two-column layout on larger screens",
+              "Shows the admin's name and email",
+              "A direct link to change password",
+              "Logout with a confirmation step to prevent accidents",
+              "Matches the same dark, gold-accented look as the rest of the site",
+              "A clean two-column layout on larger screens",
             ],
             images: ["/P24_10.png"],
           },
@@ -659,19 +656,19 @@ const projects = [
         description: [
           {
             text: [
-              "Developed using Next.js 14+ App Router with TypeScript for full type safety and maintainability. Tailwind CSS powers a consistent dark-mode, luxury-feel UI with gold accents. All data (products, hero images, orders) is stored and managed in MongoDB with efficient schemas and real-time hooks.",
-              "Cloudflare provides edge caching, DDoS protection, global CDN delivery, and performance optimization. Features include protected admin routes, optimistic UI updates, form validation, image upload handling, responsive design across all devices, and production-ready error handling.",
+              "Under the hood, the whole site is built with Next.js and TypeScript for a solid, maintainable foundation, styled with a consistent dark, gold-accented look. Every product, banner, and order lives in a MongoDB database, kept fast and reliable.",
+              "Cloudflare handles the security and speed side — caching, protection against attacks, and fast delivery anywhere in the world. On top of that, the admin area stays locked down, the interface updates instantly, and the whole site is built to work smoothly on any device.",
             ],
             listItems: [
-              "Next.js App Router + TypeScript full-stack architecture",
-              "Tailwind CSS responsive dark theme with gold branding",
-              "MongoDB for products, orders, and hero images persistence",
-              "Cloudflare for speed, security, and global edge delivery",
-              "Admin-only route protection via Gmail whitelist",
-              "Real-time cart state management with hooks",
-              "Optimistic updates & rollback on failed mutations",
-              "Image upload validation (size/format/preview)",
-              "Mobile-first responsive design throughout",
+              "Built end-to-end with Next.js and TypeScript",
+              "A responsive dark theme with gold branding throughout",
+              "MongoDB stores products, orders, and banner images",
+              "Cloudflare delivers speed, security, and reliability worldwide",
+              "Admin tools are locked to approved accounts only",
+              "The cart updates instantly as customers shop",
+              "Interface updates instantly, with safe fallback if something fails",
+              "Image uploads are checked and previewed before saving",
+              "Designed to work great on mobile first, and everywhere else too",
             ],
             images: [],
           },
@@ -688,9 +685,9 @@ const projects = [
     img: ["/P23.png"],
     liveLink: "https://expense-tracker-bold.vercel.app/",
     shortDescription:
-      "A modern full-stack expense tracking SaaS built in January 2026 with Next.js and TypeScript, featuring real-time bank accounts, cash management, monthly spending tracking, and clean UI/UX.",
+      "Expense Tracker gives you one clear place to see where your money actually goes — bank accounts, cash on hand, and every month's spending, all tracked and totaled automatically.",
     longDescription:
-      "Expense Tracker is a full-stack Next.js SaaS application developed in January 2026 to help users gain complete clarity over their personal finances. It allows tracking of multiple bank accounts, physical cash, monthly spendings with date-based entries, and provides visual summaries of income, expenses, and balances. Built with Next.js, TypeScript, React, Tailwind CSS, and MongoDB, the application offers secure authentication, responsive design, real-time data synchronization, and an intuitive dashboard experience — perfect for anyone who wants simple yet powerful personal finance management.",
+      "Expense Tracker helps you actually understand your own finances instead of guessing. You add your bank accounts and cash on hand, log what you spend day by day, and it keeps a running picture of your balances, income, and spending for every month — no spreadsheets required. Everything is tied to your own account, so your numbers stay private and update the moment you make a change. Built with Next.js, TypeScript, and MongoDB for a fast, reliable dashboard experience.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -706,115 +703,113 @@ const projects = [
         description: [
           {
             text: [
-              "The landing page introduces the Expense Tracker SaaS with a professional hero section, showcasing the core value of financial clarity. Users can navigate to login, registration, or dashboard (after authentication).",
+              "A clean, welcoming homepage that explains what Expense Tracker does and gets you straight into signing up, logging in, or your dashboard if you're already in.",
             ],
             listItems: [
-              "Modern and clean hero section design",
-              "Theme toggle support (light/dark)",
-              "Responsive layout for all devices",
-              "Clear calls-to-action for getting started",
+              "Clean, modern hero section",
+              "Light/dark theme toggle",
+              "Responsive on every device",
+              "Clear calls-to-action to get started",
             ],
             images: ["/P23_1.png"],
           },
         ],
       },
       {
-        title: "Authentication Routes",
+        title: "Account & Login",
         description: [
           {
             text: [
-              "Standard secure login and registration system, identical in flow to other projects. Users register with email and password, then log in to access the dashboard. Unauthenticated users are redirected to /login when trying to access protected routes.",
+              "A straightforward sign-up and login flow. You register with your email and password, log in, and your data is yours alone — anyone not signed in is kept out of the dashboard.",
             ],
             listItems: [
-              "Secure login form (/login)",
-              "Registration form (/register)",
-              "MongoDB with hashed password storage",
-              "Responsive authentication pages",
+              "Secure login and registration",
+              "Passwords stored safely, never in plain text",
+              "Responsive account pages",
             ],
             images: ["/P23_2.png", "/P23_3.png"],
           },
         ],
       },
       {
-        title: "Dashboard - Financial Overview",
+        title: "Dashboard — Financial Overview",
         description: [
           {
             text: [
-              "The main dashboard (/dashBoard) provides a complete overview of finances split into three panels: Bank Accounts & Cash, Monthly Overview, and Selected Month Spendings. Users can manage banks, cash, months, and daily expenses with real-time updates and persistent MongoDB storage.",
+              "The dashboard is where everything comes together: your bank accounts and cash on one side, a monthly overview in the middle, and the month you're currently looking at on the other — all updating in real time and saved automatically.",
             ],
             listItems: [
-              "Three-column responsive layout",
-              "Real-time balance calculations",
-              "Unsaved changes detection & save button",
-              "Beautiful gradient cards & modern UI",
+              "Three-panel overview: accounts, month, spending",
+              "Balances update instantly as you make changes",
+              "Warns you before you lose unsaved edits",
+              "Clean, modern card-based layout",
             ],
             images: ["/P23_4.png"],
           },
         ],
       },
       {
-        title: "Bank Accounts Management",
+        title: "Bank Accounts",
         description: [
           {
             text: [
-              "Users can add new banks, view current balances, and perform deposit, withdrawal, and inter-bank transfer operations through a clean modal interface. All changes are instantly reflected and saved to the database.",
+              "Add any bank account, see its balance at a glance, and deposit, withdraw, or move money between accounts — all through a simple pop-up, with every change saved instantly.",
             ],
             listItems: [
               "Add new bank accounts",
-              "Deposit / Withdraw / Transfer functionality",
-              "Search/filter bank accounts",
-              "Rich visual bank cards with gradients",
+              "Deposit, withdraw, or transfer between banks",
+              "Search and filter your accounts",
+              "Visually distinct cards for each bank",
             ],
             images: ["/P23_5.png"],
           },
         ],
       },
       {
-        title: "Cash Management",
+        title: "Cash on Hand",
         description: [
           {
             text: [
-              "Dedicated cash management section allows users to track physical cash, deposit cash to banks, or record new cash earnings — all with safety checks and real-time updates.",
+              "A dedicated space for tracking physical cash — move it into a bank account or log new cash income, with checks in place so your numbers never go out of sync.",
             ],
             listItems: [
-              "Track physical cash balance",
-              "Deposit cash to any bank",
-              "Record new cash income",
-              "Clean modal interface for cash actions",
+              "Track your physical cash balance",
+              "Deposit cash into any bank account",
+              "Log new cash income",
+              "Simple pop-up for every action",
             ],
             images: ["/P23_6.png"],
           },
         ],
       },
       {
-        title: "Monthly Spending Tracking",
+        title: "Monthly Spending",
         description: [
           {
             text: [
-              "Users can create new months, select any month to view, and add daily spendings with date, item name, and amount. The system prevents duplicate dates and updates cash balance accordingly.",
+              "Step through your months one at a time and log what you spent each day — the item, the amount, the date — and Expense Tracker keeps your balances current automatically, catching duplicate entries before they happen.",
             ],
             listItems: [
-              "Add previous/next/current months",
-              "Monthly spending list with totals",
-              "Add/edit/delete daily expenses",
-              "Date uniqueness validation",
+              "Move between previous, current, and future months",
+              "See your full spending list and total for the month",
+              "Add, edit, or delete any daily expense",
+              "Guards against logging the same date twice",
             ],
             images: ["/P23_7.png", "/P23_8.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Under the Hood",
         description: [
           {
             text: [
-              "Built with Next.js App Router and TypeScript for type-safe full-stack development. Uses MongoDB for persistent financial data, Tailwind CSS for responsive styling, and modern React patterns for smooth user experience.",
+              "Built with Next.js and TypeScript for a fast, reliable dashboard, with MongoDB keeping every account and expense saved and up to date the moment you make a change.",
             ],
             listItems: [
-              "Next.js App Router + TypeScript",
-              "MongoDB for real-time finance data",
-              "Optimistic UI updates & error handling",
-              "Responsive design with theme support",
+              "Next.js and TypeScript throughout",
+              "MongoDB for real-time financial data",
+              "Smooth, responsive interface with theme support",
             ],
             images: [],
           },
@@ -831,9 +826,9 @@ const projects = [
     img: ["/P22MainImage.png"],
     liveLink: "https://mydailyroutine.app",
     shortDescription:
-      "A production full-stack Next.js 16 productivity SaaS — dual authentication (NextAuth Google OAuth + custom JWT email/password with OTP verification), Gemini-powered AI routine builder, drag-and-drop weekly timeline, goal tracking, analytics, and Paddle one-time checkout with HMAC-verified webhooks. Shipped to mydailyroutine.app on 20 April 2026.",
+      "My Daily Routine helps you actually stick to a routine — plan your week, chat with AI to build it, track long-term goals, and see your progress with real stats. Live at mydailyroutine.app.",
     longDescription:
-      "My Daily Routine is a polished, production-grade full-stack productivity SaaS that helps users plan weekly routines, track long-term goals, and analyze daily completion stats. Architected on Next.js 16 (App Router, React Compiler) with React 19.2 and strict TypeScript, the platform combines a high-fidelity drag-and-drop weekly timeline, a Gemini-backed AI routine assistant, Recharts-powered analytics, image-resized profile uploads to S3-compatible storage, and a hardened Paddle one-time payment flow with HMAC-SHA256 webhook signature verification. It ships two parallel authentication systems — NextAuth v5 for Google OAuth and a custom jose-signed JWT cookie for email/password users with hashed-OTP email verification — unified behind middleware route protection and a `getActionActor()` server-action guard that re-derives the caller from cookies and never trusts client-passed identifiers. Backed by MongoDB via Mongoose with global connection caching, MongoDB-backed fixed-window rate limiting, a strict CSP, deep server-side response sanitization, and a daily cron job that prunes unverified accounts, the project demonstrates real-world security, observability, and product-completeness end-to-end. Live at mydailyroutine.app, shipped 20 April 2026.",
+      "My Daily Routine is a full productivity app that helps people plan their week, build better habits, and actually see whether they're sticking to it. You lay out your days on a drag-and-drop weekly timeline, or describe what you want and let an AI assistant draft and refine a routine for you. Longer-term goals live alongside your daily schedule, and a full stats dashboard shows your streaks, trends, and patterns over time. Sign in with Google or email, and go premium for the AI features and unlimited routines. Built with Next.js, React, and MongoDB, and live at mydailyroutine.app.",
     techStack: [
       ["Next.js 16", "/NextJs.png"],
       ["React 19.2", "/React.png"],
@@ -847,42 +842,38 @@ const projects = [
     gitLink: null,
     feaTures: [
       {
-        title: "Marketing Landing & Pricing",
+        title: "Landing Page & Pricing",
         description: [
           {
             text: [
-              "A polished marketing surface — landing page, pricing page, testimonials, and full legal coverage (privacy, terms, refund) — built to convert first-time visitors and satisfy Paddle merchant-of-record requirements.",
-              "Fully SEO-equipped with App Router metadata, dynamic sitemap, robots, and PWA manifest. Responsive across mobile, tablet, and desktop with class-based dark mode powered by a custom `ThemeProvider`.",
-              "Animated hero, feature reveals, and micro-interactions delivered with Framer Motion 12 for a premium feel without sacrificing performance.",
+              "A proper marketing site greets first-time visitors — a landing page, pricing, testimonials, and all the legal pages a real paid product needs.",
+              "It's fully optimized for search engines, works well on any device, and supports both light and dark mode.",
+              "Smooth animations throughout give it a polished, premium feel without slowing anything down.",
             ],
             listItems: [
-              "Animated, conversion-focused hero with CTA routing to register / dashboard",
-              "Dedicated `/pricing`, `/testimonials`, `/privacy`, `/terms-and-conditions`, `/refund` routes",
-              "App Router `metadata`, `sitemap.ts`, `robots.ts`, and PWA `manifest.ts`",
-              "Class-based dark mode (`darkMode: 'class'`) with persistent theme",
-              "Framer Motion entrance animations, Lucide / React Icons iconography",
-              "Strict CSP with Paddle frame-src allowlisted in `next.config.ts`",
+              "Animated landing page with a clear path to sign up or try it",
+              "Dedicated pricing, testimonials, and legal pages",
+              "Fully responsive, with light and dark mode",
+              "Polished animations and micro-interactions throughout",
             ],
             images: ["/P22LandingPage.png", "/P22PricingPage.png"],
           },
         ],
       },
       {
-        title: "Dual Authentication — NextAuth (Google) + Custom JWT (Email / Password)",
+        title: "Sign In Your Way",
         description: [
           {
             text: [
-              "Two identity systems run in parallel. Google users sign in through NextAuth v5 beta. Email/password users authenticate against a custom flow that verifies passwords with `bcrypt` and issues an HS256 JWT (7-day expiry) signed via `jose`, stored in an httpOnly `authToken` cookie.",
-              "A single `src/middleware.ts` protects every authenticated route (`/dashBoard`, `/goals`, `/stats`, `/profile`, `/billing`, `/ai-routine`, `/admin`, `/changePassword`, `/color`). It checks for a NextAuth session first, then falls back to verifying the JWT cookie with `jwtVerify`, and redirects to `/login?callbackUrl=...` on failure.",
-              "Every server action re-derives the caller server-side via `getActionActor()` and `assertActorCanAccessEmail()` — the client-passed `email` argument is treated as untrusted input. Non-admin callers can only mutate their own data; admins are explicitly elevated.",
+              "You can sign in with Google in one click, or create an account with just your email and password — whichever you prefer.",
+              "Every part of the app that needs you to be signed in is protected automatically, and if you try to access something without being logged in, you're sent straight to the login page.",
+              "Behind the scenes, the app always double-checks who's actually making a request, rather than trusting anything sent from the browser — so your data stays yours.",
             ],
             listItems: [
-              "NextAuth v5 beta with Google provider + custom JWT (jose, HS256, 7-day expiry)",
-              "`bcrypt` password hashing with `select: false` schema field, `.select('+password')` on demand",
-              "httpOnly, signed `authToken` cookie with strict same-site posture",
-              "Edge-compatible middleware route protection with callback URL preservation",
-              "Server-action actor guard (`getActionActor` / `assertActorCanAccessEmail`) — never trusts client email",
-              "Forgot-password & reset flow under `(auth)` route group",
+              "Sign in with Google, or with your own email and password",
+              "Passwords are securely encrypted, never stored as plain text",
+              "Every protected page checks you're really logged in",
+              "A full forgot-password and reset flow if you ever get locked out",
             ],
             images: [
               "/P22LoginPage.png",
@@ -894,44 +885,40 @@ const projects = [
         ],
       },
       {
-        title: "Email OTP Verification & Cron-Based Account Hygiene",
+        title: "Email Verification & Account Cleanup",
         description: [
           {
             text: [
-              "New email/password registrations trigger a hashed one-time-password emailed via Brevo SMTP through `nodemailer`. Codes live in a dedicated `OtpCode` collection with `expiresAt` and `attempts` counters to defeat brute-force and replay.",
-              "An authenticated cron endpoint (`GET /api/cron/cleanup-unverified`, Bearer `CRON_SECRET`) runs daily to delete unverified accounts older than 30 days, keeping the user collection clean and compliant.",
-              "Transactional email templates also drive welcome and password-reset flows, all routed through the same hardened SMTP layer.",
+              "New accounts are verified with a one-time code sent straight to your email, so every account on the platform is a real one.",
+              "Unverified accounts that never get confirmed are automatically cleaned up after 30 days, keeping things tidy behind the scenes.",
+              "The same email system also sends your welcome message and handles password resets.",
             ],
             listItems: [
-              "Hashed OTP storage with `expiresAt` TTL and `attempts` lockout counter",
-              "Brevo SMTP via `nodemailer` for OTP, welcome, and password-reset emails",
-              "`/api/send-otp` + `/api/verify-jwt` route handlers with rate limiting",
-              "Bearer-token-protected cron endpoint deletes unverified accounts >30 days old",
-              "MongoDB-backed fixed-window rate limiting (`ApiRateLimit` collection, IP + key parts)",
+              "One-time verification code sent by email on signup",
+              "Codes expire and are protected against repeated guessing",
+              "Unverified accounts are cleaned up automatically after 30 days",
+              "Welcome and password-reset emails sent the same way",
             ],
             images: ["/P22OtpVerification.png"],
           },
         ],
       },
       {
-        title: "Dashboard — Drag-and-Drop Weekly Timeline",
+        title: "Your Weekly Timeline",
         description: [
           {
             text: [
-              "The dashboard is the heart of the product: a full seven-day timeline rendered side-by-side with a continuous midnight-to-midnight time axis and a colored 'now' line that ticks live to the user's current position in the day.",
-              "Tasks are draggable up, down, and (on desktop) across day columns with a blue drop preview that shows the exact landing slot before release. A `sync drag` mode shifts a task by the same delta across every day it appears, making bulk routine adjustments effortless.",
-              "Each task carries a category (work, health, sleep, meals, etc.), start/end time, and color coding. Zoom controls expand the day for fine-grained editing, a 'jump to now' button snaps the viewport to the current time, and undo / redo (Ctrl+Z / Ctrl+Y) are wired through Redux.",
-              "When a task's start time arrives, the app fires an audible chime and a toast notification with `Mark complete` / `Dismiss` actions that log straight to the user's stats.",
+              "The dashboard is where your whole week lives — all seven days laid out side by side, with a live line showing exactly where you are right now.",
+              "Just drag any task to move it — up, down, or to a different day — and drop it exactly where you want it. Need to shift the same task across the whole week? One \"sync\" mode moves it everywhere at once.",
+              "Every task has its own category, time, and color, so your week is easy to read at a glance. Zoom in for detail, jump back to the current moment, and undo anything with a keystroke.",
+              "When a task is about to start, you get a gentle sound and reminder — with a one-tap way to mark it done.",
             ],
             listItems: [
-              "Seven-day side-by-side timeline with continuous 24-hour axis",
-              "Live `now` line that auto-updates to the current minute",
-              "Drag-to-reschedule with blue ghost preview of the landing slot",
-              "Cross-day drag on desktop, single-day swipe view on mobile / tablet",
-              "`Sync drag` mode propagates a single drag across every weekday a task lives on",
-              "Zoom in / zoom out, jump-to-now, and Ctrl+Z / Ctrl+Y undo / redo",
-              "Real-time start-of-task chime + toast with `Mark complete` / `Dismiss`",
-              "Manual green-check completion on today's view writes directly to stats",
+              "All seven days laid out together, with a live \"now\" marker",
+              "Drag and drop to reschedule anything, instantly",
+              "Shift a repeating task across every day it appears, in one move",
+              "Zoom, jump-to-now, and undo/redo for fast editing",
+              "A gentle reminder chime when a task is about to start",
             ],
             images: [
               "/P22DashBoardPage.png",
@@ -942,85 +929,75 @@ const projects = [
         ],
       },
       {
-        title: "Routine Editor — Single-Day, Multi-Day, and Swap",
+        title: "Editing Made Easy",
         description: [
           {
             text: [
-              "A sidebar editor opens when adding a new task or clicking any task on the timeline. Pre-filled fields drive a fast edit loop: rename, recategorize, retime, and apply changes to the current day or to any subset of weekdays in one save.",
-              "The form supports adding the same task to multiple days at once (`Add task in multiple days`), deleting a task from a single day or from every day at once (`Delete from every day`), and a dedicated swap-time-slots feature that exchanges the time windows of two tasks atomically.",
-              "Conflict detection prevents overlapping schedules; duplicate-name prevention per day keeps things tidy; minimum and maximum duration are validated server-side. Save persists to MongoDB through Server Actions.",
+              "Click any task to open a simple editor — rename it, change its category or time, and apply the change to just today or to several days at once.",
+              "You can add the same task to multiple days in one go, remove it everywhere at once, or even swap the time slots of two tasks directly.",
+              "The app quietly checks for scheduling conflicts and duplicate names as you go, so your week always stays realistic.",
             ],
             listItems: [
-              "Day pills select the editing target — current day or a custom multi-day set",
-              "Add / edit / delete across single day, custom set, or every weekday",
-              "Atomic swap-time-slots between two existing tasks",
-              "Strict overlap, duplicate-name, and duration validation",
-              "Quick search / filter within the current day's task list",
-              "Server Action persistence with toast feedback (Sonner 2)",
+              "Edit a task's name, category, or time in one place",
+              "Apply changes to one day, several days, or the whole week",
+              "Swap two tasks' time slots in a single move",
+              "Automatic conflict and duplicate checking as you edit",
             ],
             images: ["/P22SidebarRoutine.png", "/P22TaskEditor.png"],
           },
         ],
       },
       {
-        title: "AI Routine Builder — Gemini-Powered Conversational Planning",
+        title: "Build a Routine by Chatting with AI",
         description: [
           {
             text: [
-              "Premium members unlock `/ai-routine`, a separate timeline where users converse with Google Gemini (`@google/genai`) to draft and refine an entire weekly routine. The system prompt automatically references the user's real routine and the current AI-generated draft so suggestions always stay grounded in their actual life.",
-              "Each conversation is persisted per-user in a dedicated `AIRoutine` collection alongside the AI-generated routine. Gemini returns a reply plus an optional `updatedRoutine`, which is rendered live on the AI timeline as the chat unfolds.",
-              "When the user is happy, a single click in the dashboard sidebar copies the AI routine into their main routine — closing the loop between agentic suggestion and committed schedule.",
+              "For premium members, an AI assistant helps you plan your week just by talking to it — describe what you want your days to look like, and it drafts a routine based on your actual schedule and goals.",
+              "The conversation is saved, so you can keep refining the plan over time. When you're happy with what the AI has built, one click copies it straight into your real routine.",
             ],
             listItems: [
-              "`@google/genai` (Gemini) via dedicated server action `aiRoutineResponse`",
-              "Per-user `AIRoutine` Mongoose collection: conversation history + generated routine",
-              "System prompt grounded in the user's real routine and current AI draft",
-              "Live timeline that re-renders as Gemini streams `updatedRoutine` back",
-              "One-click copy from AI routine into the main routine",
-              "Redux `response` slice manages chat state; `usePrice` / `useAuth` gate access",
+              "Chat naturally to build or adjust your weekly routine",
+              "Suggestions are grounded in your real schedule, not generic advice",
+              "Your conversation is saved so you can keep refining it",
+              "One click copies the AI's plan into your actual routine",
             ],
             images: ["/P22AIRoutinePage.png", "/P22AIChatFlow.png"],
           },
         ],
       },
       {
-        title: "Goals — Subtasks, Priorities, and Timeline Integration",
+        title: "Track Your Bigger Goals",
         description: [
           {
             text: [
-              "The goals page lets users capture longer-horizon objectives — each with a name, priority, due date, optional time, subtasks, repeat rule, tags, and a reminder date. Tap the status pill to cycle a goal through to-do → in progress → done; pin important goals so they stay at the top.",
-              "Goals that carry a specific time appear as markers directly on the routine timeline on the day they are due — so the user's long-term ambitions and short-term schedule remain visually connected in one view.",
-              "All goal data lives on the same User document used for routine and stats, so reads stay fast and writes stay atomic.",
+              "Alongside your daily schedule, you can set longer-term goals — with a priority, due date, subtasks, and reminders — and track them from to-do through to done.",
+              "Goals with a specific time show up right on your weekly timeline, so your big-picture ambitions and your day-to-day schedule always stay connected.",
             ],
             listItems: [
-              "Goal CRUD with priority, due date, time, repeat rule, tags",
-              "Nested subtasks with independent completion state",
-              "Status cycle (to-do → in progress → done) with one-tap pill",
-              "Pinning to surface high-priority goals",
-              "Timeline markers on the routine view for time-bound goals",
-              "Stored as embedded subdocuments on the User schema for atomic writes",
+              "Set goals with priority, due dates, subtasks, and reminders",
+              "Track progress from to-do, to in progress, to done",
+              "Pin your most important goals to keep them visible",
+              "Time-based goals appear directly on your weekly timeline",
             ],
             images: ["/P22GoalsPage.png", "/P22GoalEditor.png"],
           },
         ],
       },
       {
-        title: "Stats & Analytics — Streaks, Trends, Insights",
+        title: "See Your Progress",
         description: [
           {
             text: [
-              "Every completion the user logs (manual check, notification action, or automatic completion) feeds a per-day stats record on the User document. The `/stats` page renders four tabs of analytics powered by Recharts 3.",
-              "The Overview tab shows daily completion percentage, current streak, best-ever streak, and overall average. The Monthly tab breaks performance down by month with detailed tables. The Tasks tab reveals which tasks the user completes most often. The Insights tab generates personalized analysis — strongest day, three-month trend lines, and habit observations driven by the user's own data.",
-              "Charts include all-time trend, daily performance, weekly averages, and a calendar heat map for an at-a-glance feel for any month of the year.",
+              "Every task you complete feeds into a full stats dashboard, so you can actually see how consistent you've been — not just guess.",
+              "See your current and best streaks, a monthly breakdown, which tasks you complete most (and which you don't), and personalized insights about your habits, like your strongest day of the week.",
+              "A full year's activity is laid out as a heat map, so your progress is visible at a glance.",
             ],
             listItems: [
-              "Recharts 3 line, bar, and heat-map visualizations",
-              "Streak tracker (current + best) with rolling daily completion %",
-              "All-time, daily, and weekly-average trend charts",
-              "Monthly drilldown with tabular data and per-month aggregates",
-              "Per-task frequency analysis (what gets done, what slips)",
-              "Personalized insights: strongest weekday, 3-month trend, habit notes",
-              "Calendar heat map for the entire year of completion data",
+              "Current and best-ever streaks",
+              "Monthly breakdown of your completion rate",
+              "See which tasks you keep — and which you keep skipping",
+              "Personalized insights about your habits and patterns",
+              "A full year of activity shown as a heat map",
             ],
             images: [
               "/P22StatsOverview.png",
@@ -1032,43 +1009,34 @@ const projects = [
         ],
       },
       {
-        title: "Profile & Photo Pipeline — S3 + sharp Image Processing",
+        title: "Your Profile",
         description: [
           {
             text: [
-              "The profile page lets users edit their display name and upload a profile photo. Photos are processed entirely server-side: a `uploadPhoto(email, FormData)` Server Action streams the file through `sharp`, which resizes it to 256×256 WebP, then writes it to S3-compatible storage (MinIO via `@aws-sdk/client-s3`) under `profiles/<userId>/<uuid>.webp` with `ACL: public-read`.",
-              "The previous `photoKey` is deleted on replacement so storage stays tidy. The Server Action body limit is intentionally raised to 10 MB in `next.config.ts` to accommodate the upload pipeline without weakening other action paths.",
-              "Mongoose documents are always run through `cleanUserForClient` before being serialized to Redux or into a JWT, stripping `_id`, version keys, and Buffer internals — a deliberate guard against leaking ORM internals to the browser.",
+              "Update your display name and upload a profile photo — it's automatically resized and optimized so it loads fast without looking blurry.",
+              "Your data is always cleaned before it's ever sent to your browser, so nothing about how the app works internally is ever exposed.",
             ],
             listItems: [
-              "Server Action `uploadPhoto` accepts `FormData`, validates, resizes, and uploads",
-              "`sharp` resizes to a normalized 256×256 WebP for fast load and small footprint",
-              "S3-compatible storage (MinIO) via `@aws-sdk/client-s3`, public-read ACL",
-              "Old `photoKey` deleted on replacement (no orphaned objects)",
-              "10 MB Server Action body limit configured explicitly in `next.config.ts`",
-              "`cleanUserForClient` sanitizes Mongoose docs before reaching the wire",
+              "Update your name and profile photo anytime",
+              "Photos are automatically optimized for fast loading",
+              "Your data is kept clean and private, always",
             ],
             images: ["/P22ProfilePage.png", "/P22PhotoUpload.png"],
           },
         ],
       },
       {
-        title: "Paddle Billing — One-Time Checkout & HMAC-Verified Webhooks",
+        title: "Simple, Secure Billing",
         description: [
           {
             text: [
-              "Premium uses a one-time purchase model via Paddle. The frontend opens Paddle Checkout through `@paddle/paddle-js`; a 100% discount path exists for the Test plan to keep QA and demos friction-free.",
-              "`POST /api/paddle/webhooks` validates the `Paddle-Signature` header (`ts=...;h1=...`) by computing HMAC-SHA256 over `ts:rawBody` and comparing with `crypto.timingSafeEqual` to defeat timing attacks. Every event is deduplicated through a `PaddleWebhookEvent` collection so retries never double-extend access.",
-              "On a verified successful payment the webhook calls the `updatePaymentType` Server Action, which extends the user's `expiredAt` and updates `paymentType`. The `/billing` page surfaces the user's current plan, expiry, and a fresh checkout CTA.",
+              "Going premium is a one-time purchase, handled securely through Paddle — no recurring surprises.",
+              "Every payment is verified on the backend before your account is upgraded, so access is only ever granted for real, confirmed payments. Your billing page always shows your current plan and when it's valid until.",
             ],
             listItems: [
-              "Paddle.js client SDK with one-time-purchase checkout overlay",
-              "100% discount path for the Test plan (controlled by feature flag)",
-              "HMAC-SHA256 webhook signature verification with `timingSafeEqual` compare",
-              "Idempotent event handling via `PaddleWebhookEvent` dedupe collection",
-              "Strict CSP `frame-src` allowlist for Paddle sandbox + production domains",
-              "`updatePaymentType` Server Action extends `expiredAt` atomically",
-              "Billing page surfaces plan, expiry, and renewal CTA",
+              "One-time purchase for premium — no subscriptions",
+              "Payments verified securely before any upgrade is granted",
+              "Billing page shows your plan and renewal status clearly",
             ],
             images: [
               "/P22BillingPage.png",
@@ -1078,69 +1046,54 @@ const projects = [
         ],
       },
       {
-        title: "Admin Tooling — Users, Feedback, Moderation",
+        title: "Admin Dashboard",
         description: [
           {
             text: [
-              "An admin-gated `/admin` route gives privileged users a dashboard for managing the user base and triaging product feedback. Access is enforced both at the middleware layer and inside every Server Action via the `isAdmin` flag on `getActionActor()`.",
-              "Admins can list users, inspect account state (verified, premium, expiry), and respond to feedback submissions stored in a dedicated `Feedback` collection — closing the loop between user signal and product iteration.",
+              "A private admin area lets me manage the user base and respond to feedback directly, so issues get seen and fixed quickly.",
             ],
             listItems: [
-              "Admin-only `/admin` route with double-layered guards (middleware + actions)",
-              "User list with verification, plan, and expiry visibility",
-              "Feedback inbox backed by `Feedback` Mongoose collection",
-              "Same actor-guard pattern (`getActionActor`) — no client-trust escapes",
+              "Manage users and account status",
+              "Respond to feedback submitted by real users",
+              "Locked down to admin accounts only",
             ],
             images: ["/P22AdminPanel.png", "/P22AdminFeedback.png"],
           },
         ],
       },
       {
-        title: "Security, Performance, and Architecture",
+        title: "Built to Be Fast and Secure",
         description: [
           {
             text: [
-              "Strict Content Security Policy in `next.config.ts` allowlists Paddle frames only, locks `frame-ancestors` to `'none'`, and sets `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, and a `Permissions-Policy` that disables camera, microphone, and geolocation by default.",
-              "MongoDB-backed fixed-window rate limiting protects sensitive endpoints (`enforceRateLimit(req, { route, max, windowMs, keyParts })`) keyed by IP plus optional context. A TTL index expires counters automatically — no cron required.",
-              "The Mongoose connection is cached on `globalThis._mongoosePromise` to survive Next.js HMR and serverless invocation churn. React Compiler is enabled (`reactCompiler: true`) so explicit `useMemo` / `useCallback` is reserved for cases the compiler can't see through.",
-              "Redux Toolkit holds three slices — `auth` (user, routine, goals, stats), `price` (Paddle pricing), `response` (AI conversation) — with `cleanUserForClient` enforced on every server-to-client boundary.",
-              "App Router Server Actions are colocated in a single `src/app/actions/index.ts` (~970 LOC, banner-organized by domain) so the action surface is auditable and easy to grep.",
+              "Under the hood, the app is hardened the way a real production service should be — strict security headers, rate limiting on sensitive actions, and a database connection built to stay stable under real traffic.",
+              "The codebase is organized so it's easy to follow and safe to change, with every server-side action double-checking who's really making the request before it touches your data.",
             ],
             listItems: [
-              "Strict CSP, `X-Frame-Options: DENY`, `nosniff`, locked `Permissions-Policy`",
-              "MongoDB-backed fixed-window rate limiter with TTL index expiry",
-              "Global Mongoose promise cache (`globalThis._mongoosePromise`) for HMR + serverless safety",
-              "React Compiler enabled — automatic memoization, leaner component code",
-              "Redux Toolkit (auth / price / response) with sanitized payloads only",
-              "Server Actions consolidated in one banner-organized file for auditability",
-              "`mongoose.models[name] || mongoose.model(...)` pattern to survive HMR",
-              "`select: false` on `password` schema field, explicit `+password` opt-in",
-              "Edge-friendly middleware checks NextAuth session then JWT fallback",
-              "Bearer-protected cron, HMAC-verified webhooks, idempotent event handling",
+              "Strict security headers and a locked-down content policy",
+              "Rate limiting to protect against abuse",
+              "A database connection built to stay reliable under load",
+              "Every action re-verifies who's making the request, every time",
             ],
             images: ["/P22Architecture.png", "/P22DarkMode.png"],
           },
         ],
       },
       {
-        title: "Tech Stack at a Glance",
+        title: "Built With",
         description: [
           {
             text: [
-              "Next.js 16 (App Router, React Compiler) · React 19.2 · TypeScript 5.9 (strict) · Tailwind CSS 3.4 (class-based dark mode) · Framer Motion 12 · Redux Toolkit 2 + react-redux 9.",
-              "NextAuth v5 beta (Google) · custom JWT via `jose` + `bcrypt` · MongoDB / Mongoose 8 · `@aws-sdk/client-s3` + `sharp` (MinIO) · Paddle (`@paddle/paddle-js`) · `@google/genai` (Gemini) · `nodemailer` over Brevo SMTP · Recharts 3 · Sonner 2 · ESLint 9 (flat config).",
+              "My Daily Routine is built on Next.js, React, and TypeScript on the frontend, with MongoDB handling the data behind it.",
+              "It uses Google Gemini for the AI routine assistant, Paddle for payments, and cloud storage for profile photos — all tied together with Redux Toolkit for state and Recharts for the analytics charts.",
             ],
             listItems: [
-              "Frontend: Next.js 16 App Router, React 19.2, TypeScript strict, Tailwind 3.4, Framer Motion 12",
-              "State: Redux Toolkit 2 with three feature slices (auth / price / response)",
-              "Auth: NextAuth v5 beta + jose-signed JWT + bcrypt + httpOnly cookies",
-              "Data: MongoDB / Mongoose 8 with global connection cache",
-              "Media: S3-compatible MinIO via `@aws-sdk/client-s3` + sharp 256×256 WebP pipeline",
-              "Payments: Paddle one-time checkout + HMAC-SHA256 webhook verification",
-              "AI: `@google/genai` (Gemini) for conversational routine building",
-              "Email: nodemailer over Brevo SMTP (OTP, welcome, password reset)",
-              "Analytics: Recharts 3 charts, Sonner 2 toasts, Lucide / React Icons",
-              "Tooling: ESLint 9 flat config, TypeScript ESLint 8, Next.js implicit `tsc --noEmit`",
+              "Frontend: Next.js, React, TypeScript, Tailwind CSS, Framer Motion",
+              "State: Redux Toolkit",
+              "Backend & Data: MongoDB",
+              "AI: Google Gemini",
+              "Payments: Paddle",
+              "Analytics: Recharts",
             ],
             images: [],
           },
@@ -1157,9 +1110,9 @@ const projects = [
     img: ["/P16pic.png"],
     liveLink: "https://be-healthy-delta.vercel.app/",
     shortDescription:
-      "A full-stack Next.js application built in September 2025 for health and wellness, featuring BMI calculation, meal planning, workout tracking, and community engagement with MongoDB integration.",
+      "Be Healthy helps you build better habits in one place — track your BMI, get a meal plan and recipes that fit it, follow a workout plan, and build wellness habits you can actually stick to.",
     longDescription:
-      "Be Healthy is a full-stack Next.js application developed in September 2025 to promote physical fitness, healthy eating, effective workouts, and mental well-being. It offers ten features, including a BMI Calculator accessible without login, and nine others (Profile Settings, Dashboard, Healthy Recipe Suggestions, Nutrition Tracker, Workout Planner, Wellness Goal Setting, Guided Meditation Sessions, Health Coach, and Community) available post-login. Built with Next.js, React, Tailwind CSS, JavaScript, and MongoDB, the platform provides a responsive, user-friendly experience with real-time data management, showcasing skills in full-stack development, database integration, and dynamic UI design.",
+      "Be Healthy is a wellness app that brings the basics of getting healthier into one place. Calculate your BMI for free, then sign in to get a daily meal plan and recipes matched to it, a nutrition tracker that shows what you've actually eaten, a workout plan built around your body condition, and simple tools for setting wellness goals, learning to meditate, and getting quick advice for common ailments. There's also a community space to share progress with other users. Built with Next.js, React, and MongoDB.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1170,54 +1123,49 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/Be-Healthy",
     feaTures: [
       {
-        title: "Landing Page (/ Route)",
+        title: "Landing Page",
         description: [
           {
             text: [
-              "The landing page introduces the Be Healthy app, designed to promote physical fitness, healthy eating, workouts, and mental well-being, with a theme toggle for light/dark modes.",
-              "Only the BMI Calculator is accessible without login; other features require user authentication.",
+              "The homepage introduces what Be Healthy does and lets you try the BMI calculator right away — everything else needs a free account.",
             ],
             listItems: [
-              "Engaging introduction to health and wellness features",
-              "Light/dark theme toggle for personalized experience",
-              "Restricted access to most features without login",
-              "Responsive design for all devices",
+              "Clear introduction to the app's health features",
+              "Light and dark mode",
+              "Try the BMI calculator with no account needed",
+              "Works well on any device",
             ],
             images: ["/P16pic.png"],
           },
         ],
       },
       {
-        title: "Authentication Routes",
+        title: "Account & Login",
         description: [
           {
             text: [
-              "Unauthenticated users are directed to the /login route with a login form, and can navigate to the /register route to create an account with name, email, and secure password.",
-              "MongoDB stores passwords as hashed values for security, and post-registration, users are redirected to the login page.",
+              "A simple sign-up and login flow — create an account with your name, email, and password, and you're in.",
             ],
             listItems: [
-              "Secure login and registration with MongoDB",
-              "Hashed password storage for data protection",
-              "Seamless navigation between login and registration",
-              "Responsive form design for all devices",
+              "Secure login and registration",
+              "Passwords are safely encrypted",
+              "Smooth navigation between login and sign-up",
             ],
             images: ["/P16_1pic.png", "/P16_2pic.png"],
           },
         ],
       },
       {
-        title: "User Profile Settings",
+        title: "Your Profile",
         description: [
           {
             text: [
-              "The Profile Settings section allows users to upload, change, or delete their profile picture, and update name, bio, phone number, and password (with current password verification).",
-              "Users can also log out from this page, ensuring secure session management.",
+              "Update your profile picture, bio, phone number, and password whenever you like — changing your password requires confirming the old one first, for security.",
             ],
             listItems: [
-              "Editable profile with photo management",
-              "Secure password updates with verification",
-              "Logout functionality with redirection",
-              "Responsive profile interface",
+              "Editable profile with photo upload",
+              "Secure password changes",
+              "Simple, safe logout",
             ],
             images: ["/P16_3pic.png", "/P16_4pic.png"],
           },
@@ -1228,14 +1176,12 @@ const projects = [
         description: [
           {
             text: [
-              "The Dashboard provides a centralized overview, initially empty, that dynamically updates with summaries of user activity across BMI, recipes, nutrition, workouts, goals, and meditation.",
-              "It serves as a hub for tracking progress across the app’s features.",
+              "Your dashboard is a single home base that fills in as you use the app — a running summary of your BMI, meals, workouts, goals, and meditation progress.",
             ],
             listItems: [
-              "Dynamic activity summaries for user engagement",
-              "Real-time updates with MongoDB integration",
-              "Responsive layout for progress tracking",
-              "Centralized hub for all health features",
+              "One place to see all your activity",
+              "Updates automatically as you use the app",
+              "Quick access to every feature",
             ],
             images: ["/P16_5pic.png"],
           },
@@ -1246,32 +1192,29 @@ const projects = [
         description: [
           {
             text: [
-              "The BMI Calculator, accessible without login, allows users to input age, height (feet/cm), weight (kg/lbs), and gender to calculate BMI, view body condition, and see a chart of BMI ranges.",
-              "Users can recalculate BMI as needed for updated results.",
+              "Enter your age, height, weight, and gender to get your BMI instantly, along with what it means for your body and where you fall on the healthy-range chart. Recalculate anytime your numbers change.",
             ],
             listItems: [
-              "Input fields for age, height, weight, and gender",
-              "BMI result with body condition analysis",
-              "Visual chart for BMI range comparison",
-              "Recalculation functionality for flexibility",
+              "Free to use, no account needed",
+              "Clear result with what it means for you",
+              "Visual chart to see where you stand",
+              "Recalculate anytime",
             ],
             images: ["/P16_6pic.png"],
           },
         ],
       },
       {
-        title: "Healthy Recipe Suggestions",
+        title: "Meal Plans & Recipes",
         description: [
           {
             text: [
-              "This feature provides a daily meal plan tailored to the user’s BMI and body condition, offering three meal options for each of five daily meals.",
-              "Users can select one meal per time slot and revisit/reselect meals anytime.",
+              "Get a daily meal plan built around your own BMI, with three recipe choices for each of your five meals — pick what sounds good and switch it up whenever you want.",
             ],
             listItems: [
-              "Personalized meal plans based on BMI",
-              "Three meal options for five daily slots",
-              "Flexible meal selection and reselection",
-              "Responsive meal plan interface",
+              "Meal plan personalized to your BMI",
+              "Three recipe choices per meal",
+              "Change your picks anytime",
             ],
             images: ["/P16_7pic.png"],
           },
@@ -1282,14 +1225,12 @@ const projects = [
         description: [
           {
             text: [
-              "The Nutrition Tracker displays total calories and nutritional breakdown for meals completed from the daily plan, updating dynamically as users log meals.",
-              "For example, it shows calories/nutrients for three of five meals consumed.",
+              "As you log the meals you actually ate, the Nutrition Tracker keeps a running total of your calories and nutrients, so you can see how your day adds up in real time.",
             ],
             listItems: [
-              "Real-time calorie and nutrient tracking",
-              "Dynamic updates based on meal completion",
-              "User-friendly nutritional breakdown display",
-              "MongoDB-backed data persistence",
+              "Live calorie and nutrient totals",
+              "Updates as you log each meal",
+              "Clear, easy-to-read breakdown",
             ],
             images: ["/P16_8pic.png"],
           },
@@ -1300,49 +1241,44 @@ const projects = [
         description: [
           {
             text: [
-              "The Workout Planner suggests four workout plans based on BMI and body condition: two for six days a week and two for five days a week.",
-              "Users can select a plan and switch to another if their needs change.",
+              "Get a workout plan that matches your BMI and body condition — choose from a five- or six-day-a-week schedule, and switch plans anytime your goals change.",
             ],
             listItems: [
-              "Tailored workout plans for varying schedules",
-              "Flexible plan selection and reselection",
-              "BMI-based workout recommendations",
-              "Responsive workout plan interface",
+              "Plans built around your BMI",
+              "Five- or six-day schedules to choose from",
+              "Switch plans anytime",
             ],
             images: ["/P16_9pic.png"],
           },
         ],
       },
       {
-        title: "Wellness Goal Setting",
+        title: "Wellness Goals",
         description: [
           {
             text: [
-              "Users can select from 15 daily habits related to nutrition, exercise, sleep, mental health, and hydration to set personal wellness goals.",
-              "Goals can be modified or reset at any time for flexibility.",
+              "Pick from 15 everyday habits covering nutrition, exercise, sleep, mental health, and hydration, and set them as personal goals you can track and adjust anytime.",
             ],
             listItems: [
-              "15 habit options for goal setting",
-              "Flexible goal modification and reset",
-              "Comprehensive wellness categories",
-              "User-friendly goal management interface",
+              "15 habits to choose from",
+              "Covers nutrition, exercise, sleep, and more",
+              "Edit or reset your goals anytime",
             ],
             images: ["/P16_10pic.png"],
           },
         ],
       },
       {
-        title: "Guided Meditation Sessions",
+        title: "Meditation & Mental Health",
         description: [
           {
             text: [
-              "This feature offers 15 tips and instructions to improve mental health and build resilience, with options to revisit and reselect practices.",
+              "A collection of 15 simple tips and short practices to help you build resilience and take care of your mental health, ready whenever you need them.",
             ],
             listItems: [
-              "15 meditation tips for mental well-being",
-              "Flexible selection of meditation practices",
-              "Responsive and calming interface design",
-              "Support for mental health resilience",
+              "15 guided tips and practices",
+              "Revisit any practice anytime",
+              "A calm, simple interface",
             ],
             images: ["/P16_11pic.png"],
           },
@@ -1353,13 +1289,12 @@ const projects = [
         description: [
           {
             text: [
-              "The Health Coach provides information on 50 common minor ailments and their first-aid treatments, e.g., searching 'fever' displays at-home relief options.",
+              "Search for a common ailment — like a fever or a headache — and get practical, at-home first-aid guidance for 50 everyday health issues.",
             ],
             listItems: [
-              "Searchable database of 50 minor ailments",
-              "Practical first-aid treatment information",
-              "User-friendly health resource interface",
-              "MongoDB-backed data retrieval",
+              "Searchable guide to 50 common ailments",
+              "Practical, at-home advice",
+              "Fast, simple lookup",
             ],
             images: ["/P16_12pic.png"],
           },
@@ -1370,32 +1305,28 @@ const projects = [
         description: [
           {
             text: [
-              "The Community section allows users to view posts from other Be Healthy users and create, edit, or delete their own posts to foster connection and motivation.",
+              "Share your progress, post updates, and see what other Be Healthy users are up to — a space to stay motivated together.",
             ],
             listItems: [
-              "View and interact with community posts",
-              "CRUD operations for user-generated posts",
-              "Responsive community engagement interface",
-              "MongoDB-backed post storage",
+              "View and post in the community feed",
+              "Edit or delete your own posts",
+              "Built to keep you motivated",
             ],
             images: ["/P16_13pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast performance and SEO-friendly content delivery.",
-              "Integrates MongoDB for real-time user and health data management, with Tailwind CSS for responsive, utility-first styling.",
+              "Built with Next.js for fast, SEO-friendly pages, and MongoDB for keeping your health data saved and up to date, styled with Tailwind CSS.",
             ],
             listItems: [
-              "Next.js dynamic routing for feature pages",
-              "MongoDB for secure data storage and retrieval",
-              "React hooks for state and effect management",
-              "Tailwind CSS for consistent, responsive design",
-              "Optimized performance for health app functionality",
+              "Next.js for fast, dynamic pages",
+              "MongoDB for real-time data",
+              "Tailwind CSS for a clean, responsive design",
             ],
             images: [],
           },
@@ -1412,9 +1343,9 @@ const projects = [
     img: ["/P15pic.png"],
     liveLink: "https://bracu-faculty-review.vercel.app/",
     shortDescription:
-      "A full-stack Next.js application built in July 2025 for faculty reviews, enabling students to comment, rate, and view faculty details with admin management features.",
+      "Faculty Review helps students make better course choices — search any faculty member, read what other students say about them, leave your own comment, and rate them out of 5.",
     longDescription:
-      "Faculty Review is a full-stack Next.js application developed in July 2025 to facilitate student reviews and ratings of university faculty. The landing page displays faculty cards with search functionality, accessible only after login. Students can comment, view others' comments, and rate faculty, while admins can manage faculty data. Built with Next.js, React, Tailwind CSS, and JavaScript, the platform ensures a responsive and intuitive experience, showcasing skills in authentication, dynamic rendering, and role-based functionality.",
+      "Faculty Review gives students a real place to share and read honest feedback on their university faculty. Search for any professor by name, initials, or department, then read comments from other students, leave your own, and rate them out of 5 — so the next student picking a course knows what to expect. Admins keep the faculty list itself up to date behind the scenes. Built with Next.js, React, and MongoDB.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1425,91 +1356,80 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/Bracu-Faculty-Review",
     feaTures: [
       {
-        title: "Landing Page (/ Route)",
+        title: "Browse & Search Faculty",
         description: [
           {
             text: [
-              "The landing page displays a grid of faculty cards, each showing the faculty's name, image, and initial, with a search input box to filter by initials, name, or department.",
-              "Access to the landing page and its features requires user authentication, redirecting unauthenticated users to the login route.",
+              "A grid of every faculty member, each with their name, photo, and initials — search by name, initials, or department to find who you're looking for in seconds. You'll need an account to browse, so reviews stay tied to real students.",
             ],
             listItems: [
-              "Responsive faculty card grid layout",
-              "Dynamic search by initials, name, or department",
-              "Protected route requiring login",
-              "Intuitive and engaging UI design",
+              "Clean grid of every faculty member",
+              "Instant search by name, initials, or department",
+              "Free to sign up and browse",
             ],
             images: ["/P15pic.png"],
           },
         ],
       },
       {
-        title: "Authentication Routes",
+        title: "Account & Login",
         description: [
           {
             text: [
-              "Unauthenticated users attempting to access the landing page or navbar items are redirected to the /login route, featuring a login form.",
-              "The login page provides a link to the /register route for new users to create an account, with seamless navigation between the two.",
+              "A simple login and sign-up flow — create an account in a couple of steps and you're ready to start reading and leaving reviews.",
             ],
             listItems: [
-              "Secure login form with validation",
-              "Navigation to registration page",
-              "Responsive form design for all devices",
-              "Consistent authentication flow",
+              "Secure login with validation",
+              "Quick account creation",
+              "Smooth navigation between login and sign-up",
             ],
             images: ["/P15_1pic.png", "/P15_2pic.png"],
           },
         ],
       },
       {
-        title: "Faculty Review Interface (/ Route, Post-Login)",
+        title: "Reviews & Ratings",
         description: [
           {
             text: [
-              "After login, clicking a faculty card renders a different component on the same / route, with the upper left side allowing students to add comments about the faculty.",
-              "The bottom left shows other students' comments, the top right displays detailed faculty information, and the bottom right allows rating the faculty from 0 to 5 (0 for no rating).",
+              "Click any faculty member to see their full profile: leave your own comment, read what other students have said, and rate them out of 5 — all on one page.",
             ],
             listItems: [
-              "Interactive comment section for student feedback",
-              "Display of peer comments for community insights",
-              "Detailed faculty information view",
-              "Rating system with 0-5 scale",
+              "Leave a comment about any faculty member",
+              "Read comments from other students",
+              "Rate faculty out of 5",
             ],
             images: ["/P15_3pic.png"],
           },
         ],
       },
       {
-        title: "Admin Dashboard (/admin Route)",
+        title: "Admin Dashboard",
         description: [
           {
             text: [
-              "Admins, after login, see an additional 'Edit' icon in the navbar, leading to the /admin route where they can add, edit, or delete faculty information in the database.",
-              "The admin interface ensures comprehensive management of faculty data with a user-friendly design.",
+              "Admins get an extra option in the menu to add, edit, or remove faculty from the database, so the list itself always stays accurate and current.",
             ],
             listItems: [
-              "CRUD operations for faculty data",
-              "Admin-only access to management features",
-              "Responsive layout for database operations",
-              "Secure data handling and validation",
+              "Add, edit, or remove faculty",
+              "Admin-only access",
+              "Keeps the faculty list accurate",
             ],
             images: ["/P15_4pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast performance and SEO-friendly content delivery.",
-              "Utilizes Tailwind CSS for responsive, utility-first styling, with React for dynamic component rendering and state management.",
+              "Built with Next.js for fast, dynamic pages and MongoDB for storing reviews and ratings, styled with Tailwind CSS.",
             ],
             listItems: [
-              "Next.js dynamic routing for role-based interfaces",
-              "React hooks for state and effect management",
-              "Tailwind CSS for consistent, responsive design",
-              "Secure authentication and data handling",
-              "Optimized performance for user interactions",
+              "Next.js for fast, dynamic pages",
+              "MongoDB for reviews and ratings",
+              "Tailwind CSS for a clean, responsive design",
             ],
             images: [],
           },
@@ -1526,9 +1446,9 @@ const projects = [
     img: ["/P9pic.png"],
     liveLink: "https://timetrack-ten.vercel.app/",
     shortDescription:
-      "A full-stack Next.js application built in May 2025 for daily routine time management, featuring task creation, scheduling, and MongoDB integration.",
+      "Time Track keeps your daily routine organized — create tasks on a daily or weekly schedule, at whatever time works for you, and everything stays saved and up to date.",
     longDescription:
-      "Time Track is a full-stack Next.js application developed in May 2025 to help users manage their daily routines efficiently. It features a user-friendly dashboard where users can create, edit, and delete tasks with customizable schedules (daily or weekly) and time formats (AM/PM or 24-hour). The system integrates MongoDB for real-time data management, ensuring seamless task tracking and profile management. Built with Next.js, React, Tailwind CSS, JavaScript, and MongoDB, the platform offers a responsive experience, showcasing skills in full-stack development, database integration, and dynamic UI design.",
+      "Time Track is a simple task scheduler for keeping your day-to-day routine on track. Create an account, add tasks with the time and schedule you want — daily or weekly, in whatever time format you prefer — and edit or remove them anytime from a clean dashboard. Built with Next.js, React, and MongoDB.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1539,73 +1459,66 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/TimeTrack",
     feaTures: [
       {
-        title: "Authentication Routes",
+        title: "Account & Login",
         description: [
           {
             text: [
-              "Unauthenticated users are redirected to the /login route, featuring a login form, with an option to navigate to the /register route for account creation.",
-              "The login and registration pages provide a secure and seamless authentication flow, consistent with modern web standards.",
+              "A simple, secure sign-up and login flow gets you into your own space in a couple of steps.",
             ],
             listItems: [
-              "Secure login form with MongoDB-backed authentication",
-              "Seamless navigation between login and registration",
-              "Responsive form design for all devices",
-              "User-friendly authentication interface",
+              "Secure login and registration",
+              "Smooth navigation between login and sign-up",
+              "Responsive on any device",
             ],
             images: ["/P9_1pic.png", "/P9_2pic.png"],
           },
         ],
       },
       {
-        title: "Task Management Dashboard",
+        title: "Task Dashboard",
         description: [
           {
             text: [
-              "After login, users access a centralized dashboard where they can create tasks, assign names, set times in AM/PM or 24-hour format, and choose daily or weekly recurrence.",
-              "Tasks can be edited or deleted, with real-time updates stored in MongoDB for persistent data management.",
+              "Your dashboard is where you build your routine — add a task, give it a name, set the time in whichever format you prefer, and choose whether it repeats daily or weekly.",
+              "Edit or delete any task anytime, and every change is saved instantly.",
             ],
             listItems: [
-              "Task creation with customizable time formats",
-              "Support for daily or weekly task scheduling",
-              "Edit and delete functionality for tasks",
-              "Responsive dashboard layout for task management",
+              "Create tasks with a custom time and format",
+              "Daily or weekly repeating schedules",
+              "Edit or delete any task",
+              "Everything saves automatically",
             ],
             images: ["/P9_3pic.png"],
           },
         ],
       },
       {
-        title: "Profile Route",
+        title: "Your Profile",
         description: [
           {
             text: [
-              "Clicking the profile icon in the navbar navigates to the /profile route, displaying user information from registration, with options to upload, change, or remove a profile photo, update name, bio, password (but not email), and log out.",
-              "The profile functionality mirrors that of the Library Management project, ensuring a consistent user experience.",
+              "Update your profile photo, name, bio, and password anytime from your profile page — your email stays fixed, but everything else is yours to update.",
             ],
             listItems: [
-              "Editable profile with photo and personal details",
-              "Secure updates for name, bio, and password",
-              "Logout functionality with redirection to login",
-              "Responsive profile page layout",
+              "Editable profile photo and details",
+              "Secure name, bio, and password updates",
+              "Simple, safe logout",
             ],
             images: ["/P9_4pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast performance and SEO-friendly content delivery.",
-              "Integrates MongoDB for real-time task and user data management, with Tailwind CSS for responsive, utility-first styling.",
+              "Built with Next.js for fast, dynamic pages and MongoDB for keeping your tasks saved in real time, styled with Tailwind CSS.",
             ],
             listItems: [
-              "Next.js dynamic routing for authentication and profile",
-              "MongoDB for efficient task storage and retrieval",
-              "React hooks for state and effect management",
-              "Tailwind CSS for consistent, responsive design",
-              "Real-time task updates with database integration",
+              "Next.js for fast, dynamic pages",
+              "MongoDB for real-time task storage",
+              "Tailwind CSS for a clean, responsive design",
             ],
             images: [],
           },
@@ -1622,9 +1535,9 @@ const projects = [
     img: ["/P19pic.png"],
     liveLink: "https://library-management-system-alpha-nine.vercel.app/",
     shortDescription:
-      "A custom full-stack Next.js library management system to be built in October 2025 for a local client's small personal library, with user borrowing (max 3 books), fine tracking for overdue returns, admin book management, and MongoDB backend.",
+      "Library Management gives a small community library a real digital system — members can browse and borrow up to 3 books at a time, with fines calculated automatically for anything returned late.",
     longDescription:
-      "Library Management will be a full-stack Next.js application I will develop in October 2025 for one of my local clients in Dhaka — he runs a small personal/community library and needs a simple, reliable digital system to manage his book collection. The app will support user registration/login, browsing and borrowing up to 3 books at a time, automatic fine calculation (100 TK per day per overdue book), borrowing history, profile management, and search. Admins (the client himself) will be able to add/edit/delete books, view all users, and maintain data integrity (e.g., cannot delete borrowed books). Built with Next.js, React, Tailwind CSS, JavaScript, and MongoDB, it will provide a clean, responsive interface that will save him hours of manual record-keeping and help track loans more accurately for his library users.",
+      "Library Management is a custom system I built for a client who runs a small community library in Dhaka and was tracking everything by hand. Members create an account, browse the collection, and borrow up to 3 books at a time — with a 100 TK per day fine calculated automatically on anything returned late. The client manages the whole book collection and member list himself from a simple admin dashboard. Built with Next.js, React, and MongoDB.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1635,54 +1548,49 @@ const projects = [
     gitLink: null,
     feaTures: [
       {
-        title: "Landing Page (/ Route)",
+        title: "Browse the Collection",
         description: [
           {
             text: [
-              "The landing page displays a grid of book cards with images and IDs, accessible only after login, with a navbar containing History and Login (or profile icon post-login).",
-              "Unauthenticated users clicking cards or navbar items are redirected to the /login route.",
+              "Every book in the library is laid out as a simple card grid, with the whole collection open to browse once you're signed in.",
             ],
             listItems: [
-              "Responsive book card grid layout",
-              "Protected routes requiring authentication",
-              "Dynamic navbar with profile icon post-login",
-              "Visual fallback to first name's letter if no profile image",
+              "Clean, browsable grid of every book",
+              "Sign in to browse the full collection",
+              "Your profile photo (or initial) shows once you're logged in",
             ],
             images: ["/P19pic.png", "/P19_3pic.png"],
           },
         ],
       },
       {
-        title: "Authentication Routes",
+        title: "Account & Login",
         description: [
           {
             text: [
-              "Unauthenticated users are redirected to the /login route, featuring a login form, with an option to navigate to the /register route for account creation.",
-              "Post-login, users see their profile image or first name’s initial in the navbar on the landing page.",
+              "A simple sign-up and login flow gets members into their own account in a couple of steps.",
             ],
             listItems: [
-              "Secure login form with MongoDB-backed authentication",
-              "Seamless navigation between login and registration",
-              "Responsive form design for all devices",
-              "Dynamic navbar update post-authentication",
+              "Secure login and registration",
+              "Smooth navigation between login and sign-up",
+              "Works well on any device",
             ],
             images: ["/P19_1pic.png", "/P19_2pic.png"],
           },
         ],
       },
       {
-        title: "User Book Interaction (/user Route)",
+        title: "Borrow & Return",
         description: [
           {
             text: [
-              "Clicking a book card navigates to the /user route, showing detailed book information on the left with a 'Borrow Book' button, 'Return Book' if borrowed, or messages like 'No more books in the stock' or 'Maximum book borrow limit (3) has reached.'",
-              "The right side displays the user’s borrowed books with images, borrow dates, expired dates, and a red pop-up for overdue fines (100 TK per book per day, e.g., 400 TK for two books overdue by two days).",
+              "Click any book to see its details and borrow it in one click — or return it when you're done. If a book's already checked out, or you've hit your 3-book limit, you'll see a clear message instead.",
+              "Your borrowed books are listed alongside their due dates, and any overdue fine is shown clearly and calculated automatically — 100 TK per book, per day late.",
             ],
             listItems: [
-              "Detailed book view with borrow/return options",
-              "Borrow limit enforcement (max 3 books)",
-              "Real-time fine calculation for overdue books",
-              "Responsive split layout for book and borrow list",
+              "One-click borrow and return",
+              "Clear message when a book's unavailable or you're at your limit",
+              "Automatic overdue fine calculation",
             ],
             images: [
               "/P19_5pic.png",
@@ -1695,105 +1603,90 @@ const projects = [
         ],
       },
       {
-        title: "Search Functionality",
+        title: "Search",
         description: [
           {
             text: [
-              "A search input box on the landing page allows users to filter book cards by title, author, genre, or ID, providing real-time results with MongoDB queries.",
+              "Search the collection by title, author, genre, or ID, and see results update instantly.",
             ],
             listItems: [
-              "Dynamic search filtering across multiple fields",
-              "Real-time updates to book card display",
-              "User-friendly search input design",
-              "MongoDB-backed search optimization",
+              "Instant search across title, author, genre, or ID",
             ],
             images: ["/P19_4pic.png"],
           },
         ],
       },
       {
-        title: "History Route (/history)",
+        title: "Borrowing History",
         description: [
           {
             text: [
-              "The /history route, accessible via the navbar, displays the user’s lifetime borrowing history in book cards, each showing the book image, borrowing date, and returning or expired date.",
+              "See your full borrowing history in one place — every book you've ever borrowed, when you got it, and when it was returned or was due.",
             ],
             listItems: [
-              "Comprehensive borrowing history display",
-              "Card-based layout for borrowing history",
-              "Clear date information for borrowing and returns",
-              "Responsive design for history overview",
+              "Full history of everything you've borrowed",
+              "Clear borrow and return dates",
             ],
             images: ["/P19_10pic.png"],
           },
         ],
       },
       {
-        title: "Profile Route (/profile)",
+        title: "Your Profile",
         description: [
           {
             text: [
-              "The /profile route shows the user’s personal information from registration, with options to upload, change, or remove a profile photo, update name, bio, password (but not email), and log out.",
+              "Update your profile photo, name, bio, and password anytime from your profile page.",
             ],
             listItems: [
-              "Editable profile with photo and personal details",
-              "Secure updates for name, bio, and password",
-              "Logout functionality with redirection to login",
-              "Responsive profile page layout",
+              "Editable photo and personal details",
+              "Secure password updates",
             ],
             images: ["/P19_11pic.png"],
           },
         ],
       },
       {
-        title: "Admin Dashboard (/admin Route)",
+        title: "Admin Dashboard",
         description: [
           {
             text: [
-              "Admins access all user features plus two additional navbar items: Users and Admin. The /admin route allows adding new books via a form on the left and viewing/editing/deleting existing books in a row-based list on the right.",
-              "Books cannot be deleted if currently borrowed by any user, with MongoDB ensuring data integrity.",
+              "The client manages the entire collection from here — adding new books and editing or removing existing ones. A book currently on loan can't be deleted, so the collection's records always stay accurate.",
             ],
             listItems: [
-              "Form for adding new books with validation",
-              "Row-based list for book management",
-              "Restricted deletion for borrowed books",
-              "MongoDB-backed CRUD operations",
+              "Add, edit, or remove books",
+              "Borrowed books are protected from deletion",
             ],
             images: ["/P19_12pic.png", "/P19_12pic_2.png"],
           },
         ],
       },
       {
-        title: "Users Route (/allUsers)",
+        title: "Member List",
         description: [
           {
             text: [
-              "The /allUsers route, accessible to admins via the navbar, displays all user information in card format, including user image, name, email, and phone.",
+              "A full list of every registered member, with their photo, name, email, and phone number, so the client can always see who's using the library.",
             ],
             listItems: [
-              "Card-based layout for user information",
-              "Display of user image and contact details",
-              "Responsive design for admin user management",
-              "Secure access restricted to admins",
+              "Full member list with contact details",
+              "Admin-only access",
             ],
             images: ["/P19_13pic.png", "/P19_13pic_2.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast performance and SEO-friendly content delivery.",
-              "Integrates MongoDB for robust, real-time book and user data management, with Tailwind CSS for responsive, utility-first styling.",
+              "Built with Next.js for fast, dynamic pages and MongoDB for keeping every book, member, and loan record accurate and up to date, styled with Tailwind CSS.",
             ],
             listItems: [
-              "Next.js dynamic routing for user and admin pages",
-              "MongoDB for efficient data storage and retrieval",
-              "React hooks for state and effect management",
-              "Tailwind CSS for consistent, responsive design",
-              "Fine calculation logic for overdue books",
+              "Next.js for fast, dynamic pages",
+              "MongoDB for real-time data",
+              "Automatic fine calculation built in",
             ],
             images: [],
           },
@@ -1810,9 +1703,9 @@ const projects = [
     img: ["/P7pic.png"],
     liveLink: "https://cafeteria-opal-psi.vercel.app/",
     shortDescription:
-      "A full-stack React.js e-commerce platform built in February 2025 for a cafeteria, featuring user/admin dashboards, food ordering, and Firebase integration.",
+      "Cafeteria is an online food ordering app — browse the menu, add items to your cart, and check out, while the cafeteria runs its whole operation from an admin dashboard behind the scenes.",
     longDescription:
-      "Cafeteria is a full-stack React.js application developed in February 2025 for an online food ordering platform. It supports user authentication via Firebase, with distinct interfaces for admins and users. Admins can manage food items, employees, members, vendors, raw materials, works, and payments, while users can browse food items, add to cart, and view profiles. Styled with Tailwind CSS and integrated with Firebase for real-time database operations, the site ensures a responsive, intuitive experience, showcasing skills in authentication, role-based routing, and dynamic UI.",
+      "Cafeteria is an online ordering platform for a food service business. Customers browse the menu, add what they want to a cart, and check out, while the business side runs everything else — food items, staff, members, suppliers, and payments — from a dedicated admin dashboard. Built with React, Firebase, and Tailwind CSS.",
     techStack: [
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -1822,18 +1715,15 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/Cafeteria",
     feaTures: [
       {
-        title: "Authentication Routes",
+        title: "Account & Login",
         description: [
           {
             text: [
-              "Unauthenticated users are directed to the /login route, displaying a login form for secure access.",
-              "From the login page, users can navigate to the /register route to create a new account.",
+              "A simple, secure sign-up and login flow gets you ordering in a couple of steps.",
             ],
             listItems: [
-              "Secure login form with Firebase authentication",
-              "Seamless navigation to registration page",
-              "Responsive form design for all devices",
-              "User-friendly authentication flow",
+              "Secure login and registration",
+              "Smooth navigation between login and sign-up",
             ],
             images: ["/P7_1pic.png", "/P7_2pic.png"],
           },
@@ -1844,104 +1734,87 @@ const projects = [
         description: [
           {
             text: [
-              "Upon admin login, users are redirected to the landing page (/) with a navbar containing Home, Food Items, Employees, Members, Vendors, Raw Materials, Works, Payment, and Log Out.",
-              "Clicking 'Food Items' navigates to /foodItems, where admins can update, edit, or delete food items in the Firebase database.",
+              "The business side of the app: admins manage food items, staff, members, suppliers, materials, and payments, all from one dashboard.",
             ],
             listItems: [
-              "Role-based admin navbar with management options",
-              "CRUD operations for food items via Firebase",
-              "Responsive admin interface for database management",
-              "Secure admin-only access to sensitive routes",
+              "Manage food items, staff, and suppliers",
+              "Add, edit, or remove menu items",
+              "Admin-only access",
             ],
             images: ["/P7_3pic.png", "/P7_4pic.png"],
           },
         ],
       },
       {
-        title: "User Dashboard",
+        title: "Customer Home",
         description: [
           {
             text: [
-              "Upon user login, the landing page (/) displays a navbar with Profile, Home, Food Items, Cart, and Log Out options, tailored for user interaction.",
-              "The landing page provides a welcoming interface consistent with admin access but with user-specific functionality.",
+              "Once you're signed in as a customer, you get a simple, focused view of your profile, the menu, and your cart.",
             ],
             listItems: [
-              "User-specific navbar with relevant options",
-              "Consistent landing page design for all roles",
-              "Responsive and intuitive user interface",
-              "Secure user authentication via Firebase",
+              "Clean, customer-focused navigation",
+              "Quick access to menu, cart, and profile",
             ],
             images: ["/P7_5pic.png"],
           },
         ],
       },
       {
-        title: "Food Items Route (/foodItems)",
+        title: "Browse the Menu",
         description: [
           {
             text: [
-              "For users, the /foodItems route displays a grid of food item cards, each featuring an image, name, quantity, price, and 'Add to Cart' button.",
-              "The interface allows users to browse and select food items for purchase, distinct from the admin’s management view.",
+              "Every food item is laid out as a card with its photo, name, quantity, and price — add anything straight to your cart.",
             ],
             listItems: [
-              "Responsive food item card grid layout",
-              "Clear display of item details and pricing",
-              "Interactive 'Add to Cart' functionality",
-              "User-focused browsing experience",
+              "Browsable menu with photos and pricing",
+              "Add items to your cart in one click",
             ],
             images: ["/P7pic.png"],
           },
         ],
       },
       {
-        title: "Cart Route (/cart)",
+        title: "Cart & Checkout",
         description: [
           {
             text: [
-              "Clicking the Cart icon navigates users to the /cart route, showing all selected food items with their total price.",
-              "Users can proceed to payment or empty the cart using dedicated buttons.",
+              "Your cart shows everything you've picked and the total cost — proceed to payment when you're ready, or clear it and start over.",
             ],
             listItems: [
-              "Dynamic cart display with total cost",
-              "Options to proceed to payment or clear cart",
-              "Responsive design for cart management",
-              "Real-time updates with Firebase integration",
+              "Clear cart summary with total cost",
+              "Proceed to payment or clear the cart",
             ],
             images: ["/P7_6pic.png"],
           },
         ],
       },
       {
-        title: "Profile Route (/profile)",
+        title: "Your Profile",
         description: [
           {
             text: [
-              "The /profile route displays the user’s personal information provided during registration, offering a clear and concise view of their account details.",
+              "A simple view of your account details, exactly as you registered them.",
             ],
             listItems: [
-              "Display of user registration details",
-              "Responsive profile page layout",
-              "Secure data retrieval via Firebase",
-              "Clean and user-friendly interface",
+              "Clear view of your account details",
             ],
             images: ["/P7_7pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with React.js for dynamic, component-based architecture and Firebase for secure authentication and real-time database operations.",
-              "Utilizes Tailwind CSS for responsive, utility-first styling, ensuring a consistent and modern design across all routes.",
+              "Built with React for a fast, dynamic interface, Firebase for authentication and real-time data, and Tailwind CSS for a clean, responsive design.",
             ],
             listItems: [
-              "Firebase for authentication and data management",
-              "React Router for role-based navigation",
-              "React hooks for state and effect management",
-              "Tailwind CSS for rapid, responsive styling",
-              "Optimized performance for e-commerce functionality",
+              "React for a dynamic, responsive interface",
+              "Firebase for authentication and real-time data",
+              "Tailwind CSS for consistent styling",
             ],
             images: [],
           },
@@ -1958,9 +1831,9 @@ const projects = [
     img: ["/P14pic.png"],
     liveLink: "https://our-agency-one.vercel.app/",
     shortDescription:
-      "A frontend Next.js website built in January 2025 for a custom agency, showcasing their work with dynamic animations and responsive design.",
+      "Our Agency is a portfolio site for a creative agency — an animated showcase of their work, with a detail page for every project and a way for clients to get in touch.",
     longDescription:
-      "Our Agency is a frontend Next.js website developed in January 2025 for a custom agency to highlight their portfolio. The site features a dynamic landing page with interactive work previews, a dedicated works route, and a contact form. Built with Next.js, React, Framer Motion, Tailwind CSS, and JavaScript, it uses Framer Motion for smooth animations on hover and navigation. The platform offers a responsive, engaging experience, showcasing skills in dynamic routing, animation integration, and modern UI design.",
+      "Our Agency is a portfolio website built to show off a creative agency's work in an engaging way. Visitors browse a hover-animated preview of every project on the homepage, click through to a full case-study page for any one of them, and can reach out directly through a contact form. Built with Next.js, React, and Framer Motion for smooth, polished animation throughout.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1971,103 +1844,79 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/OurAgency",
     feaTures: [
       {
-        title: "Landing Page (/ Route)",
+        title: "Landing Page",
         description: [
           {
             text: [
-              "The landing page features a responsive navbar with 'Our Work,' 'Play Music,' and 'Get in Touch' buttons, creating an intuitive navigation experience.",
-              "The hero section includes a heading, subheading, and smaller divs listing all agency works, with Framer Motion animations enhancing interactivity.",
+              "A bold homepage lists every piece of work the agency has done, with quick links to browse the full portfolio or get in touch.",
+              "Hover over any project and the whole page comes alive — the background switches to that project's image, and its title, type, and a short description slide into view.",
             ],
             listItems: [
-              "Responsive navbar with interactive buttons",
-              "Dynamic hero with engaging heading and subheading",
-              "Work preview divs with Framer Motion animations",
-              "Consistent design across devices",
+              "Full list of agency work on one page",
+              "Background and preview change as you hover over each project",
+              "Smooth, animated transitions throughout",
+              "Looks great on any device",
             ],
-            images: ["/P14pic.png"],
-          },
-          {
-            text: [
-              "On mouseover of any work div, the background image changes to the work’s image, and the heading/subheading area updates to show the work’s image, title, small description, and work type.",
-            ],
-            listItems: [
-              "Dynamic background image change on hover",
-              "Animated content swap using Framer Motion",
-              "Interactive work previews with title and type",
-              "Smooth transitions for enhanced UX",
-            ],
-            images: ["/P14_1pic.png"],
+            images: ["/P14pic.png", "/P14_1pic.png"],
           },
         ],
       },
       {
-        title: "Work Detail Page (/works/{work-title})",
+        title: "Project Detail Page",
         description: [
           {
             text: [
-              "Clicking a work div navigates to a dynamic route (/works/{work-title}), displaying a detailed view of the selected work, including its image, title, type, and comprehensive description.",
-              "The page provides an immersive experience with rich content and consistent styling.",
+              "Click into any project to see it properly — the full image, title, type, and a complete write-up of the work.",
             ],
             listItems: [
-              "Dynamic routing for individual work pages",
-              "Detailed work descriptions with images",
-              "Consistent layout with landing page previews",
-              "Responsive design for detailed content",
+              "A dedicated page for every project",
+              "Full write-up with image and details",
             ],
             images: ["/P14_2pic.png"],
           },
         ],
       },
       {
-        title: "Works Route (/works)",
+        title: "Full Portfolio",
         description: [
           {
             text: [
-              "The Works route, accessible via the 'Our Work' navbar link, displays all work cards with images, titles, and types, mirroring the landing page’s interactive design.",
-              "Clicking any card navigates to the respective /works/{work-title} route for detailed information.",
+              "A dedicated page lists every project as a card, so visitors can browse the whole portfolio at a glance and click into anything that catches their eye.",
             ],
             listItems: [
-              "Card-based layout for all agency works",
-              "Interactive cards with images and types",
-              "Seamless navigation to detailed work pages",
-              "Framer Motion animations for card interactions",
+              "Every project shown as a browsable card",
+              "One click through to the full case study",
             ],
             images: ["/P14_3pic.png"],
           },
         ],
       },
       {
-        title: "Contact Route (/contact)",
+        title: "Get in Touch",
         description: [
           {
             text: [
-              "The Contact route, accessible via the 'Get in Touch' button, features a 'Send Message' form for users to submit inquiries or feedback.",
-              "The form is designed for simplicity and reliability, ensuring effective communication with the agency.",
+              "A simple contact form gives visitors a direct way to reach the agency with a question or project inquiry.",
             ],
             listItems: [
-              "Integrated contact form with validation",
-              "Responsive design for desktop and mobile",
-              "Clear call-to-action for user inquiries",
-              "Consistent styling with Tailwind CSS",
+              "Simple, reliable contact form",
+              "Clear call-to-action to get in touch",
             ],
             images: ["/P14_4pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast performance and SEO-friendly content delivery.",
-              "Utilizes Framer Motion for smooth animations on hover and navigation, combined with Tailwind CSS for responsive, utility-first styling.",
+              "Built with Next.js for fast, dynamic pages, and Framer Motion for the smooth hover and transition animations throughout.",
             ],
             listItems: [
-              "Next.js dynamic routing for work pages",
-              "Framer Motion for interactive animations",
-              "React hooks for state and effect management",
-              "Tailwind CSS for consistent, responsive design",
-              "Optimized performance for agency portfolio",
+              "Next.js for fast, dynamic pages",
+              "Framer Motion for smooth animation",
+              "Tailwind CSS for a clean, responsive design",
             ],
             images: [],
           },
@@ -2084,9 +1933,9 @@ const projects = [
     img: ["/P17_2_screenshotOfLandingPage.png"],
     liveLink: "https://chemistry-mcq-test.vercel.app/",
     shortDescription:
-      "A comprehensive SSC Chemistry MCQ preparation platform with intelligent 10-question tests, built-in 10-minute timer, complete syllabus coverage, exam tips, user authentication, progress tracking, and performance analytics.",
+      "Chemistry MCQ Test helps SSC students actually prepare for their chemistry exam — randomized 10-question timed tests, the full syllabus to review, exam tips, and charts showing how they're improving over time.",
     longDescription:
-      "Your SSC Chemistry MCQ Test application will be a comprehensive educational platform designed specifically for students preparing for SSC (Secondary School Certificate) chemistry examinations. The application will feature an intelligent MCQ generation system that randomly selects 10 chemistry questions from a curated database covering all major branches including Inorganic, Physical, and Organic Chemistry, with a built-in 10-minute timer to simulate real exam conditions. Beyond just testing, the platform will offer extensive learning resources through a comprehensive coverage section that displays the complete SSC chemistry syllabus in an interactive, expandable format, allowing students to systematically review topics, subtopics, and key concepts. The application will also include strategic exam tips that provide test-taking techniques, subject-specific shortcuts, and common pitfalls to avoid, helping students maximize their performance. With a robust user authentication system, progress tracking capabilities, and detailed performance analytics displayed through interactive line charts, students will be able to monitor their improvement over time, save scores, and track their learning journey. The modern, responsive interface built with Next.js 14 and Tailwind CSS will ensure a seamless learning experience across all devices, making it an all-in-one solution for SSC chemistry exam preparation that combines practice, learning, strategy, and progress monitoring in a single, user-friendly platform.",
+      "Chemistry MCQ Test is a study platform built for students preparing for their SSC chemistry exam. Take a randomized 10-question test under a real 10-minute timer, browse the complete syllabus to review any topic, and read practical exam tips and shortcuts. Every test result is saved, so students can track their scores and see their improvement over time on a simple chart. Built with Next.js and TypeScript.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -2097,18 +1946,16 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/Chemistry-MCQ-Test",
     feaTures: [
       {
-        title: "Landing Page & Authentication",
+        title: "Getting Started",
         description: [
           {
             text: [
-              "A clean, motivational landing page welcomes SSC students and guides them toward the main features.",
-              "Robust user authentication system (login/register) allows users to create accounts, save progress, and track performance over time.",
+              "A welcoming homepage greets students and guides them straight to what they need. Creating a free account lets you save your progress and come back to track it anytime.",
             ],
             listItems: [
-              "Encouraging design tailored for SSC Chemistry students",
-              "Secure login and registration with email/password",
-              "Protected routes for personalized experience",
-              "Responsive and mobile-friendly interface",
+              "Simple, welcoming design for SSC students",
+              "Secure login and registration",
+              "Your progress is saved to your account",
             ],
             images: [
               "/P17_2_screenshotOfLandingPage.png",
@@ -2119,19 +1966,16 @@ const projects = [
         ],
       },
       {
-        title: "MCQ Test System with Timer",
+        title: "Timed Practice Tests",
         description: [
           {
             text: [
-              "The core feature allows students to take realistic model tests. The system randomly selects 10 high-quality MCQs from a comprehensive database covering Inorganic, Physical, and Organic Chemistry.",
-              "A built-in 10-minute countdown timer simulates actual exam pressure.",
+              "Take a real practice test: 10 questions randomly pulled from a full question bank covering Inorganic, Physical, and Organic Chemistry, under a genuine 10-minute countdown that mirrors real exam pressure.",
             ],
             listItems: [
-              "Random selection of 10 MCQs per test",
-              "Full coverage of SSC Chemistry syllabus (Grades 9-10)",
-              "10-minute timer with visual countdown",
-              "Realistic exam-style questions with 4 options each",
-              "Instant submission and scoring",
+              "10 random questions per test, covering the full syllabus",
+              "Real 10-minute timer",
+              "Instant scoring the moment you submit",
             ],
             images: [
               "/P17_3_screenshotOfMCQTestInterface.png",
@@ -2141,53 +1985,48 @@ const projects = [
         ],
       },
       {
-        title: "Syllabus Coverage Section",
+        title: "Full Syllabus, Organized",
         description: [
           {
             text: [
-              "An interactive, expandable syllabus viewer displays the complete SSC Chemistry syllabus.",
-              "Students can browse all chapters, topics, and subtopics in an organized format for systematic revision.",
+              "Browse the entire SSC Chemistry syllabus in one place — expand any chapter to review its topics and subtopics before your next test.",
             ],
             listItems: [
-              "Fully structured SSC Chemistry syllabus",
-              "Expandable accordion-style sections",
-              "Topic-wise and subtopic-wise breakdown",
-              "Easy navigation for quick review",
+              "Complete syllabus, chapter by chapter",
+              "Expand any section to review the details",
+              "Built for quick, systematic revision",
             ],
             images: ["/P17_5_screenshotOfSyllabusCoverage.png"],
           },
         ],
       },
       {
-        title: "Exam Tips & Strategies",
+        title: "Exam Tips",
         description: [
           {
             text: [
-              "Dedicated section providing valuable exam strategies, time-management tips, subject-specific shortcuts, and common mistakes to avoid in SSC Chemistry exams.",
+              "Practical advice for exam day — time-management tips, shortcuts for specific chapters, and the common mistakes students make, so you know what to avoid.",
             ],
             listItems: [
-              "Test-taking techniques and shortcuts",
-              "Chapter-wise important tips",
-              "Common pitfalls and how to avoid them",
-              "Practical advice for maximizing scores",
+              "Real test-taking techniques and shortcuts",
+              "Tips organized by chapter",
+              "Common mistakes to avoid",
             ],
             images: ["/P17_6_screenshotOfExamTipsPage.png"],
           },
         ],
       },
       {
-        title: "Progress Tracking & Analytics",
+        title: "Track Your Progress",
         description: [
           {
             text: [
-              "After each test, students can view detailed performance analytics including score, accuracy, time taken, and weak areas.",
-              "Interactive line charts show improvement trends over multiple attempts.",
+              "After every test, see exactly how you did — your score, accuracy, and how long it took — and watch a simple chart show your improvement across every attempt, so you know which topics still need work.",
             ],
             listItems: [
-              "Save and review past test scores",
-              "Performance analytics with line charts",
-              "Progress tracking across attempts",
-              "Identification of strong and weak topics",
+              "Every test score saved automatically",
+              "A simple chart of your progress over time",
+              "See which topics need more work",
             ],
             images: [
               "/P17_7_screenshotOfPerformanceAnalytics.png",
@@ -2197,20 +2036,15 @@ const projects = [
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js 14 (App Router) for excellent performance and SEO. The modern, clean UI is powered by Tailwind CSS, ensuring a responsive experience on all devices (mobile-first design).",
-              "The application combines practice tests, learning resources, strategy guides, and progress monitoring into one powerful platform.",
+              "Built with Next.js and TypeScript for a fast, reliable experience on any device, styled with Tailwind CSS.",
             ],
             listItems: [
-              "Next.js 14 + TypeScript for type safety and performance",
-              "Tailwind CSS for modern, responsive design",
-              "Curated question database with random selection",
-              "10-minute timer implementation",
-              "Interactive charts for analytics",
-              "User authentication and progress persistence",
+              "Next.js and TypeScript throughout",
+              "Tailwind CSS for a clean, responsive design",
             ],
             images: [],
           },
@@ -2227,9 +2061,9 @@ const projects = [
     img: ["/P8pic.png"],
     liveLink: "https://protein-corner-frontend.vercel.app/",
     shortDescription:
-      "A frontend Next.js e-commerce platform built in November 2024 for Protein Corner, showcasing protein-based products with filtering, cart, and payment features.",
+      "Protein Corner is a storefront for a protein-food business — browse chicken, fish, beef, egg, and milk products, filter by category, and check out with a cart and payment flow.",
     longDescription:
-      "Protein Corner is a frontend Next.js e-commerce application developed in November 2024 to sell protein-based products like chicken, fish, beef, egg, and milk. The site features a dynamic hero section with a product video, a responsive navbar, product cards with filtering options, a contact form, a cart system, and a payment route. Built with Next.js, React, Tailwind CSS, and JavaScript, it delivers a fast, user-friendly experience, highlighting skills in dynamic routing, state management, and responsive design.",
+      "Protein Corner is an e-commerce storefront for a business selling protein-based foods — chicken, fish, beef, egg, and milk. A video-led homepage introduces the products, customers filter and browse by category, add items to a cart, and check out with a clear order summary. Built with Next.js, React, and Tailwind CSS.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -2239,121 +2073,93 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/protein-corner-frontend",
     feaTures: [
       {
-        title: "Landing Page (/ Route)",
+        title: "Landing Page",
         description: [
           {
             text: [
-              "The landing page features a hero section with a video showcasing chicken, fish, beef, egg, and milk, creating an engaging introduction to the store.",
-              "The navbar includes links to Shop, Contact, Payment, Login, and a Cart icon, with 'Enter Shop' and 'Contact Us' buttons in the hero section.",
+              "A video-led homepage introduces the products — chicken, fish, beef, egg, and milk — with quick links to shop or get in touch.",
+              "Scroll down and the full product catalog appears: photo, name, price, and any discount for each item, with filters to browse by category.",
             ],
             listItems: [
-              "Dynamic hero video for product engagement",
-              "Responsive navbar with intuitive navigation",
-              "Prominent call-to-action buttons in hero",
-              "Consistent design across devices",
+              "Video hero introducing the products",
+              "Simple, intuitive navigation",
+              "Filter products by category",
+              "Add to cart in one click",
             ],
-            images: ["/P8pic.png"],
-          },
-          {
-            text: [
-              "Scrolling down reveals a product catalog with cards displaying image, name, price, discount, and an 'Add to Cart' button, alongside filtering options for all, chicken, beef, egg, milk, and fish.",
-            ],
-            listItems: [
-              "Responsive product card grid layout",
-              "Dynamic filtering by product category",
-              "Clear pricing and discount display",
-              "Interactive 'Add to Cart' functionality",
-            ],
-            images: ["/P8_1pic.png"],
+            images: ["/P8pic.png", "/P8_1pic.png"],
           },
         ],
       },
       {
-        title: "Shop Route",
+        title: "Shop",
         description: [
           {
             text: [
-              "The Shop route mirrors the product catalog from the landing page, featuring cards with image, name, price, discount, and 'Add to Cart' button, along with category filters for all, chicken, beef, egg, milk, and fish.",
-              "This dedicated route provides a focused shopping experience with consistent design and functionality.",
+              "A dedicated shop page for focused browsing — the same catalog and category filters as the homepage, without the distractions.",
             ],
             listItems: [
-              "Consistent product card layout with landing page",
-              "Category-based filtering for easy browsing",
-              "Seamless add-to-cart interactions",
-              "Optimized for performance and usability",
+              "Full product catalog, filterable by category",
+              "Fast, focused shopping experience",
             ],
             images: ["/P8_1_1pic.png"],
           },
         ],
       },
       {
-        title: "Cart Functionality",
+        title: "Cart",
         description: [
           {
             text: [
-              "Clicking 'Add to Cart' on a product card adds the item to the cart, accessible via the Cart icon in the navbar, displaying all added products.",
-              "Users can adjust quantities using '+' and '-' buttons for each product in the cart.",
+              "Add anything to your cart and adjust quantities right there with simple plus and minus buttons — everything updates instantly.",
             ],
             listItems: [
-              "Dynamic cart with real-time updates",
-              "Quantity adjustment for each product",
-              "Responsive cart display for all devices",
-              "State management for cart persistence",
+              "Cart updates in real time",
+              "Adjust quantities with one tap",
             ],
             images: ["/P8_3pic.png"],
           },
         ],
       },
       {
-        title: "Contact Route",
+        title: "Contact",
         description: [
           {
             text: [
-              "The Contact route features a 'Send Message' form linked to the company email, allowing users to submit inquiries or support requests, similar to the Utes project.",
-              "The form is designed for simplicity and reliability, ensuring effective communication with the Protein Corner team.",
+              "A simple contact form gives customers a direct way to reach the business with a question or order request.",
             ],
             listItems: [
-              "Integrated contact form with email functionality",
-              "Form validation for reliable submissions",
-              "Responsive design for desktop and mobile",
-              "Clear call-to-action for inquiries",
+              "Simple, reliable contact form",
+              "Direct line to the business",
             ],
             images: ["/P8_2pic.png"],
           },
         ],
       },
       {
-        title: "Payment Route",
+        title: "Checkout",
         description: [
           {
             text: [
-              "The Payment route displays all products added to the cart, their total cost, and a 'Checkout' button to complete the purchase process.",
-              "The layout ensures clarity and ease of use for finalizing transactions.",
+              "A clear summary of everything in your cart and the total cost, with a straightforward checkout button to complete the order.",
             ],
             listItems: [
-              "Comprehensive cart summary with total cost",
-              "Checkout button for transaction completion",
-              "Responsive and clear payment interface",
-              "Secure and streamlined purchase flow",
+              "Clear order summary with total cost",
+              "Simple, one-click checkout",
             ],
             images: ["/P8_4pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast load times and SEO-friendly content delivery.",
-              "Utilizes Tailwind CSS for a responsive, utility-first design system, maintaining consistency across all routes and devices.",
+              "Built with Next.js for fast, dynamic pages, styled with Tailwind CSS for a clean, responsive design across every device.",
             ],
             listItems: [
-              "Next.js dynamic routing for shop and payment pages",
-              "React hooks for state and effect management",
-              "Tailwind CSS for rapid, responsive styling",
-              "Optimized image and video handling",
-              "SEO-friendly structure for e-commerce visibility",
+              "Next.js for fast, dynamic pages",
+              "Tailwind CSS for a responsive design",
             ],
             images: [],
           },
@@ -2370,9 +2176,9 @@ const projects = [
     img: ["/P12pic.png"],
     liveLink: "https://utes.vercel.app/",
     shortDescription:
-      "A frontend Next.js website built in October 2024 for Utes, an IT solutions company, featuring a comprehensive showcase of services, clients, and career opportunities with responsive design.",
+      "Utes is the company website I built as their sole frontend developer — a full showcase of their IT services, client work, and open roles, all in one polished site.",
     longDescription:
-      "Utes is a frontend Next.js website developed in October 2024 for Utes, an IT solutions company, where I served as the sole frontend developer. The platform showcases the company's services, clients, and career opportunities through a professional interface with dynamic routing. It includes a responsive navbar with theme toggle and login, a hero section, detailed service pages, client testimonials, career listings, a contact form, and an about page. Built with Next.js, Tailwind CSS, and JavaScript, the site ensures a seamless, modern user experience, highlighting my skills in dynamic routing, responsive design, and content presentation.",
+      "Utes is the official website for an IT solutions company, built while I was their sole frontend developer. It walks visitors through everything the company offers — web and app development, hosting, marketing, and security — showcases real client work and results, lists open roles for anyone looking to join, and gives visitors a simple way to get in touch. Built with Next.js and Tailwind CSS.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -2382,139 +2188,109 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/Utes",
     feaTures: [
       {
-        title: "Landing Page (/ Route)",
+        title: "Landing Page",
         description: [
           {
             text: [
-              "The landing page features a responsive navbar with the Utes logo, links to Services, Clients, Career, Contact, About, a theme toggle button, and a login button for user authentication.",
-              "The hero section displays an image of the company building with a heading 'Transforming Your Ideas into Digital Reality' and a subheading 'Expert IT Solutions Designed to Optimize Operations, Enhance Security, and Propel Your Business into the Future.'",
+              "The homepage makes a strong first impression — a bold hero section pitching what Utes does, with light/dark mode and a clean way to browse the rest of the site.",
+              "Scroll down and you get a quick preview of the company's services, clients, and open roles, all in one glance.",
             ],
             listItems: [
-              "Responsive navbar with dynamic theme toggle and login",
-              "Engaging hero section with impactful imagery and messaging",
-              "Clear typography and professional layout",
-              "Smooth scrolling and interactive card previews",
+              "Bold, professional hero section",
+              "Light and dark mode",
+              "Quick preview of services, clients, and careers",
             ],
-            images: ["/P12pic.png"],
-          },
-          {
-            text: [
-              "Scrolling down reveals cards showcasing services, clients, and career opportunities, providing a quick overview of Utes's capabilities.",
-            ],
-            listItems: [
-              "Card-based layout for services, clients, and careers",
-              "Responsive grid optimized for all devices",
-              "Interactive hover effects for user engagement",
-              "Consistent visual hierarchy for easy navigation",
-            ],
-            images: ["/P12_1pic.png"],
+            images: ["/P12pic.png", "/P12_1pic.png"],
           },
         ],
       },
       {
-        title: "Services Route",
+        title: "Services",
         description: [
           {
             text: [
-              "The Services route details Utes’s offerings, including Web Development, Android App Development, iOS App Development, Domain and Hosting, Digital Marketing, Email Marketing, Cyber Security Service, and Graphic Design.",
-              "Each service includes a detailed description, e.g., 'Our IT solution company offers expert web development services, creating responsive, user-friendly websites tailored to your business needs,' paired with logos and visuals.",
+              "A full breakdown of everything Utes offers — web and app development, hosting, digital and email marketing, cybersecurity, and graphic design — each explained in plain terms.",
             ],
             listItems: [
-              "Detailed service descriptions with business value",
-              "Service-specific logos and imagery",
-              "Responsive layout for multi-device access",
-              "SEO-optimized content for discoverability",
+              "Every service explained clearly",
+              "Covers web, app, marketing, security, and design work",
             ],
             images: ["/P12_2pic.png"],
           },
         ],
       },
       {
-        title: "Clients Route",
+        title: "Client Work",
         description: [
           {
             text: [
-              "The Clients route showcases Utes's portfolio of successful projects and client testimonials, highlighting partnerships across various industries including technology, healthcare, and e-commerce.",
-              "Each client case study includes project details, challenges faced, solutions delivered, and measurable outcomes, demonstrating Utes's expertise and reliability.",
+              "Real case studies from real clients across different industries — what they needed, what Utes built, and the results it got them.",
             ],
             listItems: [
-              "Detailed client case studies with project outcomes",
-              "Testimonials from satisfied clients",
-              "Industry-specific success stories",
-              "Visual project showcases and results",
+              "Real client case studies with outcomes",
+              "Testimonials from real clients",
+              "Work spanning multiple industries",
             ],
             images: ["/P12_3pic.png"],
           },
         ],
       },
       {
-        title: "Career Route",
+        title: "Careers",
         description: [
           {
             text: [
-              "The Career route displays current job openings at Utes, including positions for software developers, designers, and IT specialists, with detailed job descriptions and requirements.",
-              "Each listing includes role responsibilities, required qualifications, benefits offered, and a straightforward application process for prospective candidates.",
+              "Open roles at Utes, laid out clearly — what the job involves, what's required, and how to apply.",
             ],
             listItems: [
-              "Current job openings with detailed descriptions",
-              "Clear requirements and qualifications",
-              "Company benefits and culture information",
-              "Easy application process for candidates",
+              "Current job openings, clearly described",
+              "Requirements and benefits up front",
+              "Simple way to apply",
             ],
             images: ["/P12_4pic.png"],
           },
         ],
       },
       {
-        title: "Contact Route",
+        title: "Contact",
         description: [
           {
             text: [
-              "The Contact route features a 'Send Message' form linked to the company email, enabling users to submit inquiries or support requests.",
-              "The form is designed for ease of use, ensuring seamless communication with the Utes team.",
+              "A simple contact form gives visitors a direct line to the Utes team for any inquiry.",
             ],
             listItems: [
-              "Integrated contact form with email functionality",
-              "Form validation for reliable submissions",
-              "Responsive design for desktop and mobile devices",
-              "Clear call-to-action for business inquiries",
+              "Simple, reliable contact form",
+              "Direct line to the team",
             ],
             images: ["/P12_5pic.png"],
           },
         ],
       },
       {
-        title: "About Route",
+        title: "About Utes",
         description: [
           {
             text: [
-              "The About route presents 'About Utes' with a compelling narrative: 'At Utes, we are dedicated to transforming businesses through innovative IT solutions. With a team of experienced professionals, we specialize in software development, cloud services, and cybersecurity.'",
-              "The page emphasizes the company's mission, customer-centric approach, and commitment to excellence and continuous improvement.",
+              "The company's story and mission, in their own words — who they are, what they specialize in, and how they work with clients.",
             ],
             listItems: [
-              "Compelling company narrative and mission statement",
-              "Showcase of specialized services and expertise",
-              "Customer-centric approach and tailoring emphasis",
-              "Professional content tailored for business partnerships",
+              "The company's mission and story",
+              "What they specialize in",
             ],
             images: ["/P12_6pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring optimal performance and SEO benefits for the corporate website.",
-              "Utilizes Tailwind CSS for a responsive, utility-first design system that maintains consistency across all routes and devices.",
+              "Built with Next.js for fast, SEO-friendly pages and Tailwind CSS for a consistent, professional look across the whole site.",
             ],
             listItems: [
-              "Next.js dynamic routing for multi-page architecture",
-              "Tailwind CSS for rapid, responsive development",
-              "React components for reusable UI elements",
-              "Optimized image handling and performance",
-              "SEO-friendly structure for business visibility",
+              "Next.js for fast, dynamic pages",
+              "Tailwind CSS for a consistent design",
             ],
             images: [],
           },
@@ -2531,9 +2307,9 @@ const projects = [
     img: ["/P6pic.png"],
     liveLink: "https://guest-book-gamma.vercel.app/",
     shortDescription:
-      "A full-stack React.js application built in September 2024 for an interactive guest book platform, featuring user authentication, profile customization, and responsive design.",
+      "Guest Book is a simple personal profile app — sign in, upload a photo, write a short bio, and it's yours to keep updated.",
     longDescription:
-      "Guest Book is a full-stack React.js application developed in September 2024 to create an interactive platform where users can log in, customize their profiles, and manage personal details. The app features authentication routes (/login and /register), a home page with a profile display, and options to upload a photo, edit a bio, and log out. Styled with Tailwind CSS, it offers a clean, responsive interface, showcasing skills in user authentication, state management, and dynamic UI components.",
+      "Guest Book is a small, focused app for keeping a personal profile online — sign in, upload a profile photo, write a short bio, and update either whenever you like. Built with React, Firebase, and Tailwind CSS.",
     techStack: [
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -2543,83 +2319,61 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/GuestBook",
     feaTures: [
       {
-        title: "Authentication Routes",
+        title: "Account & Login",
         description: [
           {
             text: [
-              "Unauthenticated users accessing the root route (/) are redirected to the /login route for secure access.",
-              "The login page provides an option to navigate to the registration page, with seamless navigation back to login from registration.",
+              "A simple, secure login and registration flow — sign in to see your profile, or create an account in a couple of steps.",
             ],
             listItems: [
-              "Protected routes for authenticated users",
-              "Smooth navigation between login and registration",
-              "Responsive form layouts for user input",
-              "Secure redirection for unauthorized access",
+              "Secure login and registration",
+              "Smooth navigation between login and sign-up",
             ],
             images: ["/P6_1pic.png", "/P6_2pic.png"],
           },
         ],
       },
       {
-        title: "Home Route: User Profile",
+        title: "Your Profile",
         description: [
           {
             text: [
-              "After successful login, users land on the home route (/) displaying a profile circle showing the first letter of their name if no photo is set.",
-              "The profile includes an upload photo icon, delete photo icon, a bio field with an edit bio icon, and a logout button below.",
+              "Once you're signed in, you land on your profile — shown as your initial until you upload a photo. Add or remove a photo, edit your bio, and see your changes reflected instantly.",
             ],
             listItems: [
-              "Dynamic profile circle with initial letter fallback",
-              "Interactive photo upload and delete functionality",
-              "Editable bio field with intuitive controls",
-              "Logout button for secure session termination",
+              "Upload or remove your profile photo anytime",
+              "Edit your bio with instant updates",
+              "Simple, clean profile layout",
             ],
-            images: ["/P6_3pic.png"],
-          },
-          {
-            text: [
-              "Users can upload a profile photo and update their bio, with changes reflected instantly in the profile display.",
-            ],
-            listItems: [
-              "Real-time profile photo updates",
-              "Dynamic bio editing with instant UI refresh",
-              "Responsive design for profile elements",
-              "User-friendly feedback for profile changes",
-            ],
-            images: ["/P6_4pic.png"],
+            images: ["/P6_3pic.png", "/P6_4pic.png"],
           },
         ],
       },
       {
-        title: "Logout Functionality",
+        title: "Logout",
         description: [
           {
             text: [
-              "Clicking the logout button terminates the session and redirects the user back to the /login route, ensuring secure access control.",
+              "One click safely signs you out and sends you back to the login page.",
             ],
             listItems: [
-              "Secure session termination",
-              "Seamless redirection to login page",
-              "Clear user feedback on logout",
-              "Consistent navigation flow",
+              "Secure, one-click logout",
             ],
             images: ["/P6_1pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with React.js for efficient component-based architecture and dynamic user interactions.",
-              "Utilizes Tailwind CSS for responsive, utility-first styling, ensuring a consistent and modern interface across devices.",
+              "Built with React for a fast, dynamic interface and Firebase for authentication and data, styled with Tailwind CSS.",
             ],
             listItems: [
-              "React Router for authentication and navigation",
-              "React hooks for state management and side effects",
-              "Tailwind CSS for rapid and responsive styling",
-              "Clean and modular code structure",
+              "React for a dynamic interface",
+              "Firebase for authentication and data",
+              "Tailwind CSS for consistent styling",
             ],
             images: [],
           },
@@ -2636,9 +2390,9 @@ const projects = [
     img: ["/P3Pic.png"],
     liveLink: "https://improved-tasker5.vercel.app/",
     shortDescription:
-      "A frontend React.js task management application built in September 2024, enabling users to create, edit, delete, and organize tasks with intuitive notifications and search features.",
+      "Tasker is a simple to-do app — add tasks with a priority and tags, mark favorites, search through them, and get a clear confirmation every time you add, edit, or delete one.",
     longDescription:
-      "Tasker is a frontend React.js application developed in September 2024 for efficient task management. The home route features a hero section and a task list area where users can add, edit, delete, favorite, and search tasks. Tasks include details like title, description, priority, and tags, with mandatory field validation and color-coded notifications for actions. Styled with Tailwind CSS, the app provides a responsive and user-friendly interface, demonstrating advanced state management, form handling, and UI feedback mechanisms in React.",
+      "Tasker is a straightforward task manager for staying on top of your to-do list. Add a task with a title, description, priority, and tags, edit or delete it anytime, star the ones that matter most, and search through everything instantly — with a clear confirmation message every step of the way. Built with React and Tailwind CSS.",
     techStack: [
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -2647,120 +2401,94 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/ImprovedTasker5",
     feaTures: [
       {
-        title: "Home Route: Hero and Initial Task View",
+        title: "Getting Started",
         description: [
           {
             text: [
-              "The home route opens with an engaging hero section that introduces the task management functionality.",
-              "Below the hero, an empty task list displays 'Create Your First Task' title, an 'Add Task' button, and 'Task List is empty!' message in the center.",
+              "A clean welcome screen introduces the app, and until you add your first task, a simple empty state points you straight to the \"Add Task\" button.",
             ],
             listItems: [
-              "Visually appealing hero section for user onboarding",
-              "Clear call-to-action with 'Add Task' button",
-              "Responsive layout adapting to all screen sizes",
-              "Intuitive empty state design to encourage interaction",
+              "Friendly, clear onboarding",
+              "Obvious call-to-action to add your first task",
             ],
             images: ["/P3Pic.png", "/P3_1pic.png"],
           },
         ],
       },
       {
-        title: "Adding a New Task",
+        title: "Add a Task",
         description: [
           {
             text: [
-              "Clicking 'Add Task' opens a large absolute modal titled 'Add New Task' where users input task title, description, priority, and tags—all fields are mandatory.",
-              "If fields are incomplete, an error message appears: 'You have to give every information about this task!' preventing creation.",
+              "Adding a task takes a title, description, priority, and tags — Tasker makes sure every field is filled in before it lets you create it, so your task list never has gaps.",
+              "The moment a task is created, you get a clear confirmation and it appears right at the top of your list.",
             ],
             listItems: [
-              "Modal form with mandatory fields for task details",
-              "Client-side validation for complete data entry",
-              "User-friendly input interfaces for priority and tags",
-              "Seamless modal open/close animations",
+              "Simple form for title, description, priority, and tags",
+              "Checks every field is filled in before saving",
+              "Instant confirmation when a task is added",
             ],
-            images: ["/P3_2pic.png", "/P3_3pic.png"],
-          },
-          {
-            text: [
-              "Upon filling all fields and clicking 'Create New Task', the task is added to the list with a green pop-up notification: 'Task {taskName} has been added successfully'.",
-            ],
-            listItems: [
-              "Successful addition with visual confirmation",
-              "Dynamic task rendering in the main list",
-              "Color-coded success notification",
-              "Persistent task storage using local state",
-            ],
-            images: ["/P3_4pic.png"],
+            images: ["/P3_2pic.png", "/P3_3pic.png", "/P3_4pic.png"],
           },
         ],
       },
       {
-        title: "Editing a Task",
+        title: "Edit a Task",
         description: [
           {
             text: [
-              "Each task has an edit button; clicking it opens the same modal titled 'Edit Task' pre-filled with existing details for updates.",
-              "After modifications and confirmation, the task updates in the list with a yellow pop-up: 'Task {taskName} has been edited successfully'.",
+              "Click edit on any task and the same simple form opens, pre-filled with its details — update anything and confirm, and the change is reflected instantly with its own confirmation message.",
             ],
             listItems: [
-              "Pre-populated edit modal for seamless updates",
-              "Validation and error handling during edits",
-              "Real-time reflection of changes in the UI",
-              "Yellow notification for edit confirmation",
+              "Edit any task's details in place",
+              "Pre-filled form for fast updates",
+              "Clear confirmation when changes are saved",
             ],
             images: ["/P3_5pic.png", "/P3_6pic.png"],
           },
         ],
       },
       {
-        title: "Deleting Tasks",
+        title: "Delete Tasks",
         description: [
           {
             text: [
-              "Individual tasks can be deleted via a delete button, triggering a red pop-up: 'Task {taskName} has been deleted successfully'.",
-              "A 'Delete All' button clears the entire list, showing 'All tasks has been deleted successfully' and resetting to the initial empty state.",
+              "Remove a single task with one click, or clear your entire list at once with \"Delete All\" — either way, you get a clear confirmation that it's done.",
             ],
             listItems: [
-              "Instant removal with confirmation notification",
-              "Bulk delete functionality for all tasks",
-              "Red color-coded alerts for destructive actions",
-              "State reset to empty view after full deletion",
+              "Delete a single task in one click",
+              "Clear your whole list at once",
+              "Confirmation shown for every deletion",
             ],
             images: ["/P3_7pic.png", "/P3_10pic.png"],
           },
         ],
       },
       {
-        title: "Additional Task Management Features",
+        title: "Favorites & Search",
         description: [
           {
             text: [
-              "Tasks can be marked as favorite or unfavorite for quick access, and a search input field filters tasks dynamically by name or tags.",
-              "These features enhance organization and retrieval, making task management more efficient.",
+              "Star any task to keep it easy to find, and use the search bar to instantly filter your list by name or tag.",
             ],
             listItems: [
-              "Toggle favorite status with visual indicators",
-              "Real-time search filtering across tasks",
-              "Combined priority and tag-based organization",
-              "Responsive updates without page reloads",
+              "Star tasks to mark them as favorites",
+              "Instant search by name or tag",
             ],
             images: ["/P3_8pic.png", "/P3_9pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with React.js for component-based architecture, enabling modular task components and modal dialogs.",
-              "Utilizes Tailwind CSS for responsive styling and quick development of modals, notifications, and layouts.",
+              "Built with React for a fast, responsive interface, styled with Tailwind CSS.",
             ],
             listItems: [
-              "React hooks for state management and side effects",
-              "Local state persistence for tasks (useState/useEffect)",
-              "Tailwind CSS for consistent and utility-first styling",
-              "Event-driven notifications with timed dismissals",
+              "React for a fast, dynamic interface",
+              "Tailwind CSS for consistent styling",
             ],
             images: [],
           },
@@ -2777,9 +2505,9 @@ const projects = [
     img: ["/P10pic.png"],
     liveLink: "https://cine-rental-two.vercel.app/",
     shortDescription:
-      "A frontend React.js application built in August 2024 for renting movies, featuring a responsive movie catalog, cart functionality, and theme switching.",
+      "CineRental is a movie rental catalog — browse titles, see details and ratings, add them to a cart, and check out, with light and dark mode.",
     longDescription:
-      "CineRental is a frontend React.js application developed in August 2024 to allow users to browse and rent movies. The home route displays a collection of movie cards, each with details like name, genre, rating, and an 'Add to Cart' button. The app includes dynamic pop-up messages for cart actions, a detailed movie view, a cart summary with checkout and removal options, and a light/dark theme toggle. Styled with Tailwind CSS, it ensures a seamless, responsive experience across devices, showcasing skills in state management, UI/UX design, and interactive components.",
+      "CineRental lets you browse a catalog of movies, check ratings and details on any title, and add what you want to rent to a cart before checking out. Switch between light and dark mode however you like to browse. Built with React and Tailwind CSS.",
     techStack: [
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -2788,108 +2516,91 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/CineRental",
     feaTures: [
       {
-        title: "Home Route: Movie Catalog",
+        title: "Browse Movies",
         description: [
           {
             text: [
-              "The home route showcases a collection of movie cards, each displaying the movie's name, genre, rating, and an 'Add to Cart' button for quick interaction.",
-              "The layout is designed to be visually engaging, with a responsive grid that adapts to various screen sizes for optimal browsing.",
+              "Every movie is shown as a card with its name, genre, and rating, plus a quick \"Add to Cart\" button — browse the full catalog in a clean, responsive grid.",
             ],
             listItems: [
-              "Responsive movie card grid layout",
-              "Clear display of movie name, genre, and rating",
-              "Interactive 'Add to Cart' button on each card",
-              "Optimized for performance across devices",
+              "Browsable grid of every movie",
+              "Genre and rating shown at a glance",
+              "Add to cart in one click",
             ],
             images: ["/P10pic.png"],
           },
         ],
       },
       {
-        title: "Cart Functionality",
+        title: "Cart",
         description: [
           {
             text: [
-              "Clicking the 'Add to Cart' button adds the movie to the cart and displays an absolute pop-up message: 'The movie {movieName} added to the cart'.",
-              "If the same movie is added again, a pop-up message appears: 'The movie {movieName} has been added to the cart already'.",
+              "Adding a movie gives you a clear confirmation, and trying to add the same one twice lets you know it's already in your cart — so you always know exactly what you've picked.",
             ],
             listItems: [
-              "Dynamic pop-up messages for cart actions",
-              "State management to track added movies",
-              "User-friendly feedback for duplicate additions",
-              "Smooth and responsive cart interactions",
+              "Clear confirmation when you add a movie",
+              "Warns you if it's already in your cart",
             ],
             images: ["/P10_1pic.png", "/P10_2pic.png"],
           },
         ],
       },
       {
-        title: "Theme Switching",
+        title: "Light & Dark Mode",
         description: [
           {
             text: [
-              "The app supports light and dark theme switching, allowing users to toggle between modes for a personalized viewing experience.",
-              "The theme toggle is seamlessly integrated, ensuring consistent styling across all components and pages.",
+              "Switch between light and dark themes anytime, with consistent styling across every page.",
             ],
             listItems: [
-              "Light and dark theme toggle functionality",
-              "Consistent styling with Tailwind CSS",
-              "Persistent theme state management",
-              "Smooth transitions between themes",
+              "Light and dark mode",
+              "Consistent look across the whole app",
             ],
             images: ["/P10_3pic.png"],
           },
         ],
       },
       {
-        title: "Movie Detail Pop-up",
+        title: "Movie Details",
         description: [
           {
             text: [
-              "Clicking a movie card's image opens a large, centered absolute pop-up div displaying detailed movie information, including a big image, name, rating, and 'Add to Cart' button.",
-              "The pop-up provides an immersive view of the selected movie, enhancing user engagement with clear and detailed content.",
+              "Click any movie to see a full-size view with its complete details, rating, and a button to add it straight to your cart.",
             ],
             listItems: [
-              "Dynamic pop-up for detailed movie information",
-              "Large image display with rating and cart button",
-              "Responsive and centered pop-up design",
-              "Seamless navigation and interaction",
+              "Full-size detail view for any movie",
+              "Add to cart straight from the detail view",
             ],
             images: ["/P10_4pic.png"],
           },
         ],
       },
       {
-        title: "Cart Summary Pop-up",
+        title: "Cart Summary",
         description: [
           {
             text: [
-              "Clicking the cart icon in the navigation opens a large absolute pop-up div displaying all movies added to the cart, along with a checkout button.",
-              "Users can remove individual movies from the cart, providing flexible cart management within the pop-up.",
+              "Open your cart to see everything you've added, remove anything you've changed your mind about, and check out when you're ready.",
             ],
             listItems: [
-              "Comprehensive cart summary with all added movies",
-              "Checkout button for completing the rental process",
-              "Remove functionality for individual movies",
-              "Responsive and user-friendly pop-up design",
+              "Full cart summary with checkout",
+              "Remove any movie from your cart",
             ],
             images: ["/P10_5pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with React.js for efficient component-based architecture and dynamic user interactions.",
-              "Utilizes Tailwind CSS for rapid development of a responsive and visually consistent user interface.",
+              "Built with React for a fast, dynamic interface, styled with Tailwind CSS.",
             ],
             listItems: [
-              "React hooks for state and effect management",
-              "Dynamic pop-up components for cart and movie details",
-              "Tailwind CSS for responsive and consistent styling",
-              "Clean and modular code structure",
+              "React for a dynamic interface",
+              "Tailwind CSS for consistent styling",
             ],
             images: [],
           },
@@ -2906,9 +2617,9 @@ const projects = [
     img: ["/P5pic.png"],
     liveLink: "https://shop-center-black.vercel.app/",
     shortDescription:
-      "A frontend Next.js e-commerce platform built in August 2024 to showcase and sell products online, featuring a responsive product catalog and dynamic routing.",
+      "Shop Center is a general online storefront — browse products by category, see full details on anything, and add it to your cart.",
     longDescription:
-      "Shop Center is a frontend Next.js e-commerce platform developed in August 2024 for a client to facilitate online product browsing and purchasing. The site features a hero section on the home route, a product catalog with clickable cards, and dynamic routes for individual products and category pages. Styled with Tailwind CSS and powered by React and Next.js, it offers a fast, user-friendly shopping experience across devices, showcasing skills in dynamic routing, API integration, and UI/UX design.",
+      "Shop Center is an e-commerce storefront where you browse a full product catalog, drill down into any category, and check full details — price, rating, and discount — before adding something to your cart. Built with Next.js, React, and Tailwind CSS.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -2918,72 +2629,61 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/ShopCenter",
     feaTures: [
       {
-        title: "Home Route: Hero and Product Catalog",
+        title: "Browse Products",
         description: [
           {
             text: [
-              "The home route features a visually engaging hero section that welcomes users and sets the tone for the e-commerce experience.",
-              "Scrolling down reveals a product catalog with cards displaying each product's image, name, category, and price, such as 'iPhone 9 (smartphones) - An apple mobile which is nothing like apple - $549 $478'.",
+              "A welcoming homepage leads into a full product catalog — every item shown with its photo, name, category, and price, ready to click into.",
             ],
             listItems: [
-              "Eye-catching hero section for brand impact",
-              "Responsive grid layout for product cards",
-              "Clear display of product name, category, and pricing",
-              "Clickable cards for seamless navigation to product details",
+              "Browsable catalog of every product",
+              "Name, category, and price shown at a glance",
+              "Click any product for full details",
             ],
             images: ["/P5pic.png", "/P5_1pic.png"],
           },
         ],
       },
       {
-        title: "Product Detail Page",
+        title: "Product Details",
         description: [
           {
             text: [
-              "Accessible via dynamic routes (/product/id), the product detail page displays an enlarged image of the selected product along with detailed information.",
-              "Details include product name, category (e.g., smartphones), rating, discount, price, and an 'Add to Cart' button, e.g., 'iPhone 9 (smartphones) - An apple mobile which is nothing like apple - $549 $478'.",
+              "See any product up close — a larger image, its rating, any discount, and the full price, with an \"Add to Cart\" button right there.",
             ],
             listItems: [
-              "Dynamic routing for individual product pages",
-              "Detailed product information with ratings and discounts",
-              "Interactive 'Add to Cart' functionality",
-              "Responsive layout for enhanced viewing",
+              "Full product details with rating and discount",
+              "Add to cart in one click",
             ],
             images: ["/P5_2pic.png"],
           },
         ],
       },
       {
-        title: "Category Page",
+        title: "Browse by Category",
         description: [
           {
             text: [
-              "Clicking the category text (e.g., 'smartphones') navigates to a dynamic category route (/category/smartphones) displaying all products within that category.",
-              "The category page provides a filtered view of products, maintaining the same card-based layout for consistency and ease of browsing.",
+              "Click any category to see every product in it, in the same clean layout as the main catalog.",
             ],
             listItems: [
-              "Dynamic category routing for filtered product display",
-              "Consistent card layout for category-specific products",
-              "Seamless navigation from product to category pages",
-              "Optimized for quick category browsing",
+              "Browse products filtered by category",
+              "Same familiar layout throughout",
             ],
             images: ["/P5_3pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with Next.js for server-side rendering and dynamic routing, ensuring fast load times and SEO-friendly content delivery.",
-              "Utilizes Tailwind CSS for a responsive, visually consistent design, enhancing user engagement across mobile and desktop devices.",
+              "Built with Next.js for fast, dynamic pages, styled with Tailwind CSS.",
             ],
             listItems: [
-              "Next.js dynamic routes for product and category pages",
-              "React hooks for efficient state management",
-              "Tailwind CSS for rapid and consistent styling",
-              "Optimized image handling with Next.js Image component",
+              "Next.js for fast, dynamic pages",
+              "Tailwind CSS for a responsive design",
             ],
             images: [],
           },
@@ -3000,9 +2700,9 @@ const projects = [
     img: ["/P2pic.png"],
     liveLink: "https://lws-react-js-assignment-2.vercel.app/",
     shortDescription:
-      "A frontend React.js application built in July 2024 for searching and discovering books, featuring intuitive search and sorting capabilities with a responsive design.",
+      "Book Finder helps you discover your next read — browse a full book collection, search by title or keyword, and sort however suits you.",
     longDescription:
-      "Book Finder is a frontend React.js application developed in July 2024 to help users search and discover books. The site features a home page displaying various books, with options to search via an input box and sort by alphabetical order or publication year. Styled with Tailwind CSS, it ensures a fast, responsive experience across devices, demonstrating skills in API integration, state management, and user-friendly UI design.",
+      "Book Finder makes it easy to browse and discover books — search by title or keyword and sort the results alphabetically or by publication year to find exactly what you're after. Built with React and Tailwind CSS.",
     techStack: [
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -3011,72 +2711,60 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/LWS-ReactJS-Assignment-2",
     feaTures: [
       {
-        title: "Home Page: Book Display",
+        title: "Browse Books",
         description: [
           {
             text: [
-              "The home page serves as the main interface, showcasing a diverse collection of books in an organized and visually appealing layout.",
-              "Users can browse through various kinds of books, with each entry displaying essential details for quick overview.",
+              "The homepage shows a full, browsable collection of books, laid out cleanly so you can scan through and find something worth reading.",
             ],
             listItems: [
-              "Responsive grid layout for book cards",
-              "Dynamic loading of book data",
-              "Clean and intuitive user interface",
-              "Optimized for performance across devices",
+              "Clean, browsable collection of books",
+              "Quick overview of each title",
             ],
             images: ["/P2pic.png"],
           },
         ],
       },
       {
-        title: "Search Functionality",
+        title: "Search",
         description: [
           {
             text: [
-              "An intuitive search input box allows users to find specific books quickly by entering keywords or titles.",
-              "The search feature dynamically filters the book list in real-time, providing instant results as users type.",
+              "Type a title or keyword and the list filters instantly, so finding a specific book takes seconds.",
             ],
             listItems: [
-              "Real-time search filtering",
-              "Keyword-based book matching",
-              "User-friendly input interface",
-              "Seamless integration with book display",
+              "Instant search as you type",
+              "Find any book by title or keyword",
             ],
             images: ["/P2_1pic.png"],
           },
         ],
       },
       {
-        title: "Sorting Options",
+        title: "Sorting",
         description: [
           {
             text: [
-              "Users can organize the book list using multiple sorting criteria to suit their browsing preferences.",
-              "Available sorting options include alphabetical order (A-Z or Z-A) and publication year (oldest to latest or latest to oldest).",
+              "Sort the list alphabetically or by publication year, in whichever order helps you browse best.",
             ],
             listItems: [
-              "Alphabetical sorting (A-Z and Z-A)",
-              "Chronological sorting by publication year",
-              "Instant reordering of book list",
-              "Intuitive dropdown or button controls",
+              "Sort alphabetically, A-Z or Z-A",
+              "Sort by publication year, oldest or newest first",
             ],
             images: ["/P2_2pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with React.js for efficient component-based architecture and dynamic user interactions.",
-              "Utilizes Tailwind CSS for rapid development of a responsive and consistent user interface.",
+              "Built with React for a fast, responsive interface, styled with Tailwind CSS.",
             ],
             listItems: [
-              "React hooks for state and effect management",
-              "Efficient data filtering and sorting algorithms",
-              "Tailwind CSS for styling and responsiveness",
-              "Clean, modular code structure",
+              "React for a dynamic interface",
+              "Tailwind CSS for consistent styling",
             ],
             images: [],
           },
@@ -3093,9 +2781,9 @@ const projects = [
     img: ["/P11pic.png"],
     liveLink: "https://photo-feed-omega.vercel.app/",
     shortDescription:
-      "A frontend React.js application built in July 2024 to showcase and interact with nature-related photos, offering a visually engaging and responsive user experience.",
+      "Photo Feed is a nature photo gallery — browse a curated collection, open any photo for a closer look, and see who uploaded it and how it's performing.",
     longDescription:
-      "Photo Feed is a frontend React.js application developed in July 2024 to display a collection of nature-related photos. The site features a home route with a gallery of images and individual photo pages accessible via dynamic routes (/photo-id). Users can view enlarged photos, see uploader details, love and share counts, and save images. Styled with Tailwind CSS and powered by React, the app ensures a seamless and responsive experience across devices, highlighting skills in dynamic routing, state management, and UI/UX design.",
+      "Photo Feed is a gallery for browsing nature photography. Scroll through a curated collection on the homepage, then open any photo for a full-size view with the uploader's name, its love and share counts, and an option to save it. Built with React and Tailwind CSS.",
     techStack: [
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -3104,54 +2792,46 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/PhotoFeed",
     feaTures: [
       {
-        title: "Home Route: Photo Gallery",
+        title: "Browse the Gallery",
         description: [
           {
             text: [
-              "The home route presents a visually appealing gallery of nature-related photos, designed to engage users with a clean and intuitive layout.",
-              "Users can browse a curated collection of images, with each photo clickable to navigate to a dedicated photo page for more details.",
+              "A clean, curated gallery of nature photos — click any thumbnail to open it up for a closer look.",
             ],
             listItems: [
-              "Responsive grid layout for photo thumbnails",
-              "Smooth navigation to individual photo pages",
-              "Optimized image loading for performance",
-              "Consistent styling across devices",
+              "Curated gallery of nature photography",
+              "Clean, browsable grid layout",
             ],
             images: ["/P11pic.png"],
           },
         ],
       },
       {
-        title: "Individual Photo Page",
+        title: "Full Photo View",
         description: [
           {
             text: [
-              "Accessible via dynamic routes (/photo-id), the individual photo page displays an enlarged version of the selected image for an immersive viewing experience.",
-              "The page includes details such as the uploader’s name, love reaction count, share count, and an option to save the image to the user’s device.",
+              "Open any photo to see it full-size, along with who uploaded it, how many loves and shares it has, and an option to save it to your device.",
             ],
             listItems: [
-              "Dynamic routing for individual photo pages",
-              "Display of uploader details and engagement metrics",
-              "Interactive love and share functionalities",
-              "Image download feature for user convenience",
+              "Full-size photo view",
+              "Uploader name, loves, and shares shown",
+              "Save any photo to your device",
             ],
             images: ["/P11_1pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with React.js for dynamic client-side rendering, ensuring efficient user interactions and fast performance.",
-              "Utilizes Tailwind CSS for a responsive, visually consistent design, enhancing user engagement across mobile and desktop devices.",
+              "Built with React for a fast, dynamic interface, styled with Tailwind CSS.",
             ],
             listItems: [
-              "React Router for scalable dynamic routing",
-              "React hooks for efficient state management",
-              "Tailwind CSS for rapid and consistent styling",
-              "Optimized image handling for performance",
+              "React for a dynamic interface",
+              "Tailwind CSS for consistent styling",
             ],
             images: [],
           },
@@ -3168,9 +2848,9 @@ const projects = [
     img: ["/P4pic.png"],
     liveLink: "https://news-feed-swart-nine.vercel.app/",
     shortDescription:
-      "A frontend React.js website built in June 2024 to display real-time news updates fetched from an external API, offering a clean and responsive user experience.",
+      "News Feed pulls in real-time news from a live API and displays it in a clean, easy-to-read feed.",
     longDescription:
-      "News Feed is a frontend React.js application developed in June 2024 to deliver real-time news updates. The site features a single home route that fetches news data from an external server via a React API call. Styled with Tailwind CSS, it provides a responsive and intuitive interface, displaying a 'Today's news is loading' message during data retrieval. The project showcases skills in API integration, React state management, and modern web development practices.",
+      "News Feed is a simple app that fetches real-time news from a live API and displays it in a clean, readable feed the moment you open it. Built with React and Tailwind CSS.",
     techStack: [
       ["React", "/React.png"],
       ["Tailwind CSS", "/TailwindCss.png"],
@@ -3179,36 +2859,31 @@ const projects = [
     gitLink: "https://github.com/Lawrence-Amlan-Gomes/NewsFeed",
     feaTures: [
       {
-        title: "Home Route: News Feed Display",
+        title: "Live News Feed",
         description: [
           {
             text: [
-              "The home route serves as the primary interface, fetching and displaying real-time news updates from an external API in a clean, organized layout.",
-              "While news data is being retrieved, a user-friendly 'Today's news is loading' message is shown to enhance the user experience during loading states.",
+              "Open the app and it fetches the latest news right away, laying it out in a clean, easy-to-scan feed — with a friendly loading message while it fetches.",
             ],
             listItems: [
-              "Real-time news updates fetched via React API calls",
-              "Responsive grid layout for news articles",
-              "Loading state with clear user feedback",
-              "Optimized performance for fast data rendering",
+              "Real-time news pulled from a live API",
+              "Clean, readable feed layout",
+              "Friendly loading state while news fetches",
             ],
             images: ["/P4pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with React.js for dynamic rendering and efficient client-side performance, ensuring a seamless user experience.",
-              "Utilizes Tailwind CSS for a responsive and visually appealing design, maintaining consistency across mobile and desktop devices.",
+              "Built with React for dynamic rendering, styled with Tailwind CSS.",
             ],
             listItems: [
-              "Efficient API integration with error handling",
-              "React hooks for state and lifecycle management",
-              "Tailwind CSS for rapid and consistent styling",
-              "Clean and maintainable code structure",
+              "React for dynamic rendering",
+              "Tailwind CSS for consistent styling",
             ],
             images: [],
           },
@@ -3225,9 +2900,9 @@ const projects = [
     img: ["/P1pic.png"],
     liveLink: "https://react-projects-ruddy-seven.vercel.app",
     shortDescription:
-      "A frontend React.js portfolio showcasing a collection of small-scale React projects, built in June 2024 for personal development and demonstration.",
+      "A small showcase of standalone React projects I built while learning — a theme switcher, a Tic-Tac-Toe game, a stopwatch, and a to-do list.",
     longDescription:
-      "Short React Projects is a frontend React.js website developed to showcase a collection of five small-scale React projects. Built in June 2024, the site features a clean, responsive design with a gallery-style layout, detailed project descriptions, and navigation routes for each project. Styled with modular CSS (folder.module.css format), it offers an engaging user experience across devices, highlighting skills in React development, state management, and UI/UX design.",
+      "Short React Projects is a collection of small, self-contained apps built while sharpening my React fundamentals — a light/dark theme switcher, a playable Tic-Tac-Toe game, a working stopwatch, and a simple to-do list manager, each its own little demo of a core React pattern. Built with React.",
     techStack: [
       ["React", "/React.png"],
       ["CSS", "/css.png"],
@@ -3240,107 +2915,87 @@ const projects = [
         description: [
           {
             text: [
-              "The home route serves as the welcoming entry point to the portfolio, featuring a clean and minimalistic design that immediately engages visitors.",
-              "Displays the main title 'Welcome to My React JS Projects' with a professional layout that sets the tone for the entire portfolio experience.",
+              "A simple welcome page introduces the collection and links straight into each project.",
             ],
             listItems: [
-              "Clean, minimalistic design for professional first impression",
-              "Responsive layout that works seamlessly across all devices",
-              "Immediate navigation access to all project routes",
-              "Consistent branding and styling throughout the application",
+              "Clean, simple entry point",
+              "Quick access to every project",
             ],
             images: ["/P1pic.png"],
           },
         ],
       },
       {
-        title: "Project One: Theme Changer",
+        title: "Theme Changer",
         description: [
           {
             text: [
-              "A dynamic theme-switching component that demonstrates React's state management capabilities and provides users with customizable visual preferences.",
-              "The interface displays 'Theme' as the main heading, followed by 'Dark/Light' toggle text and corresponding Sun/Moon icons for intuitive user interaction.",
+              "Switch between light and dark mode with one click — a simple sun/moon toggle that instantly flips the whole page's look.",
             ],
             listItems: [
-              "Smooth theme transitions between dark and light modes",
-              "Intuitive UI with clear visual indicators (Sun/Moon icons)",
-              "Dynamic background color changes (bg-black or bg-white)",
-              "Persistent theme state management using React hooks",
+              "One-click light/dark toggle",
+              "Simple sun/moon icon switch",
             ],
             images: ["/P1_1pic.png"],
           },
         ],
       },
       {
-        title: "Project Two: Tic-Tac-Toe Game",
+        title: "Tic-Tac-Toe Game",
         description: [
           {
             text: [
-              "A fully functional Tic-Tac-Toe game implementation that showcases game logic, state management, and user interaction patterns in React.",
-              "Players alternate between 'X' and 'O' symbols, with the game automatically detecting and displaying the winner upon completion of a valid winning pattern.",
+              "A fully playable Tic-Tac-Toe game — take turns as X and O, and it automatically detects and announces the winner.",
             ],
             listItems: [
-              "Complete game logic with win condition detection",
-              "Turn-based gameplay with visual feedback for current player",
-              "Winner announcement with clear visual indication",
-              "Restart functionality available at any point during gameplay",
+              "Fully playable two-player game",
+              "Automatic win detection",
+              "Restart anytime",
             ],
             images: ["/P1_2pic.png"],
           },
         ],
       },
       {
-        title: "Project Three: Stopwatch Application",
+        title: "Stopwatch",
         description: [
           {
             text: [
-              "A simple yet elegant stopwatch application that demonstrates timer functionality, state persistence, and user control patterns in React applications.",
-              "Users can start, pause, and reset the stopwatch, with the reset functionality returning the timer to its initial 00:00:00 state for fresh timing sessions.",
+              "A simple stopwatch you can start, pause, and reset — accurate down to the millisecond.",
             ],
             listItems: [
-              "Precise time tracking with millisecond accuracy",
-              "Intuitive start/pause controls with clear visual states",
-              "Reset functionality that returns to initial state",
-              "Clean, readable time display format",
-              "Responsive design for touch and click interactions",
+              "Start, pause, and reset controls",
+              "Accurate to the millisecond",
             ],
             images: ["/P1_3pic.png"],
           },
         ],
       },
       {
-        title: "Project Four: Todo List Manager",
+        title: "Todo List Manager",
         description: [
           {
             text: [
-              "A task management application that implements basic CRUD (Create, Read, Update, Delete) operations, demonstrating practical data manipulation in React.",
-              "Users can add new tasks to the list and remove completed tasks, providing a simple yet effective task organization system for personal productivity.",
+              "A basic to-do list — add tasks as you think of them, and remove them once they're done.",
             ],
             listItems: [
-              "Add new tasks with instant list updates",
-              "Delete functionality for task removal",
-              "Persistent task state management",
-              "Clean, organized list presentation",
-              "Responsive input and interaction design",
+              "Add tasks instantly",
+              "Remove tasks when they're done",
             ],
             images: ["/P1_4pic.png"],
           },
         ],
       },
       {
-        title: "Technical Implementation",
+        title: "Built With",
         description: [
           {
             text: [
-              "Built with modern React.js architecture, ensuring efficient client-side rendering and dynamic user interactions.",
-              "Utilizes modular CSS (folder.module.css) for scoped, maintainable, and responsive styling across all components.",
+              "Built with React, using modular CSS to keep each project's styling clean and self-contained.",
             ],
             listItems: [
-              "Modern React hooks for efficient state management",
-              "React Router for seamless navigation between projects",
-              "Modular CSS for scoped and maintainable styling",
-              "Optimized image handling for performance",
-              "Professional code structure and documentation",
+              "React for every project",
+              "Modular CSS for clean, scoped styling",
             ],
             images: [],
           },

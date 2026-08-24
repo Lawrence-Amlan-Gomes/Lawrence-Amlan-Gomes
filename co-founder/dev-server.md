@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3002 (3000/3001 held by foreign next-server processes, as usual), restarted 5 times (landing-photo/YouTube edits, blog removal + type field + gitLink strip + filter navbar, filter navbar positioning fix, scrollbar-overlap fix) — killed clean at End Today on 2026-08-22.
+note: last session ran on 3001 (3000 held by a foreign process, as usual), restarted many times (footer/projects layout fixes, floating chat rebuild, chatbot table-of-contents rearchitecture, full content voice rewrite, new Services offering) — killed clean at End Today on 2026-08-24.
 ```

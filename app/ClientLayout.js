@@ -8,6 +8,7 @@ import ResponseProvider from "./providers/ResponseProvider";
 import ThemeWrapper from "@/components/ThemeWrapper";
 import TopNavbar from "@/components/TopNavbar";
 import TopNavBarWarper from "@/components/TopNavBarWarper";   // ← probably meant TopNavBarWrapper?
+import FloatingChat from "@/components/FloatingChat";
 
 export default function ClientLayout({ children }) {
   return (
@@ -18,7 +19,8 @@ export default function ClientLayout({ children }) {
             <ThemeWrapper>
               <TopNavbar />
               <TopNavBarWarper>{children}</TopNavBarWarper>
-              {/* 
+              <FloatingChat />
+              {/*
                 If you have a sidebar toggle or mobile menu button,
                 you can place <SideBarHandle /> here or inside ThemeWrapper
               */}

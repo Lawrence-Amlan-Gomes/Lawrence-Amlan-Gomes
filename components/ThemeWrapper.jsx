@@ -8,7 +8,7 @@ export default function ThemeWrapper({ children }) {
   return (
     <div
       id="app-scroll-root"
-      className={`h-screen w-full overflow-y-auto scrollbar ${
+      className={`h-screen w-full overflow-y-auto overflow-x-hidden scrollbar ${
         theme
           ? "scrollbar-thumb-[#222222] scrollbar-track-[#f8f8f8] bg-white"
           : "scrollbar-thumb-[#eeeeee] scrollbar-track-[#0f0f0f] bg-black"

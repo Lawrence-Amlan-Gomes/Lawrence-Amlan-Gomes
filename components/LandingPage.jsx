@@ -5,6 +5,7 @@ import Image from "next/image";
 import Footer from "./Footer";
 import LandingAbout from "./LandingAbout";
 import LandingProjects from "./LandingProjects";
+import LandingServices from "./LandingServices";
 import LandingTestimonials from "./LandingTestimonials";
 import LandingContact from "./LandingContact";
 import LandingButtons from "./LandingButtons";
@@ -23,6 +24,7 @@ export default function LandingPage({ testimonials = [], submissionsOpen }) {
       <LandingButtons/>
       <LandingStatsStrip/>
       <LandingProjects/>
+      <LandingServices/>
       <LandingTestimonials testimonials={testimonials} submissionsOpen={submissionsOpen}/>
       <LandingContact/>
       <Footer />

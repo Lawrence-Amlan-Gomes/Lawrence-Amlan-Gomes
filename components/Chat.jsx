@@ -6,8 +6,12 @@ import { response } from "@/app/server";
 import PromptInput from "./PromptInput";
 import EachInputOutput from "./EachInputOutput";
 import { useTheme } from "@/app/hooks/useTheme";
-import { useAuth } from "@/app/hooks/useAuth";
-import { useRouter } from "next/navigation";
+
+const SUGGESTIONS = [
+  "What's your tech stack?",
+  "Which clients have you worked with?",
+  "What projects have you shipped?",
+];
 
 export default function Chat() {
   const {
@@ -18,9 +22,7 @@ export default function Chat() {
     inputOuputPair,
     setInputOutputPair,
   } = useResponse();
-  const router = useRouter();
   const [isTyping, setIsTyping] = useState(true);
-  const { auth } = useAuth();
   const { theme } = useTheme();
   const [firstTime, setFirstTime] = useState(true);
   const [request, setRequest] = useState(false);
@@ -37,12 +39,13 @@ export default function Chat() {
     }
   };
 
-  const getResponse = async () => {
-    if (myText !== "") {
+  const getResponse = async (overrideText) => {
+    const text = overrideText ?? myText;
+    if (text !== "") {
       setIsTyping(false);
       setRequest(true);
-      setTempMyText(myText);
-      const tempInputOutputPair = [...inputOuputPair, [myText, "loading"]];
+      setTempMyText(text);
+      const tempInputOutputPair = [...inputOuputPair, [text, "loading"]];
       setInputOutputPair(tempInputOutputPair);
       setMyText("");
       setTimeout(scrollToBottom, 0);
@@ -50,15 +53,11 @@ export default function Chat() {
   };
 
   useEffect(() => {
-    setTimeout(scrollToBottom, 0); // Defer to ensure DOM update
+    setTimeout(scrollToBottom, 0);
   }, [inputOuputPair]);
 
   useEffect(() => {
-    if (inputOuputPair.length === 0) {
-      console.log(inputOuputPair.length);
-    } else {
-      setFirstTime(false);
-    }
+    if (inputOuputPair.length > 0) setFirstTime(false);
   }, [inputOuputPair]);
 
   useEffect(() => {
@@ -91,82 +90,76 @@ export default function Chat() {
   }, [request, tempMyText, inputOuputPair, setAiResponse, setInputOutputPair]);
 
   return (
-    <div
-      className={`w-full h-full relative overflow-hidden border-[1px] p-2 rounded-xl ${
-        theme
-          ? "bg-[#f8f8f8] border-blue-800 text-[#0a0a0a]"
-          : "bg-[#080808] border-blue-800 text-[#ebebeb]"
-      }`}
-    >
+    <div className="w-full h-full flex flex-col">
       {firstTime ? (
-        <div
-          className={`w-full h-full flex flex-col justify-between ${
-            theme
-              ? "bg-[#f8f8f8] text-[#0a0a0a]"
-              : "bg-[#0a0a0a] text-[#ebebeb]"
-          }`}
-        >
-          <div className="flex-grow flex justify-center items-center">
-            <div className="text-[22px] font-bold">Let&apos;s Talk</div>
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-4 gap-4">
+          <div
+            className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl ${
+              theme ? "bg-blue-50" : "bg-blue-500/10"
+            }`}
+          >
+            👋
           </div>
-          <div className="w-[96%] h-[60px] mx-[2%] mb-2">
-            <PromptInput
-              myText={myText}
-              setMyText={setMyText}
-              getResponse={getResponse}
-              setIsTyping={setIsTyping}
-              aiResponse={aiResponse}
-            />
+          <div>
+            <div
+              className={`text-base font-semibold ${
+                theme ? "text-[#111111]" : "text-[#f0f0f0]"
+              }`}
+            >
+              Ask me anything
+            </div>
+            <p
+              className={`text-xs mt-1 ${
+                theme ? "text-[#777777]" : "text-[#999999]"
+              }`}
+            >
+              I can talk about my skills, projects, and clients.
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2 mt-1">
+            {SUGGESTIONS.map((s) => (
+              <button
+                key={s}
+                onClick={() => getResponse(s)}
+                className={`text-xs px-3 py-1.5 rounded-full border-[1px] transition-colors hover:cursor-pointer ${
+                  theme
+                    ? "border-[#dddddd] text-[#444444] hover:bg-[#f2f2f2]"
+                    : "border-[#2a2a2a] text-[#cccccc] hover:bg-[#141414]"
+                }`}
+              >
+                {s}
+              </button>
+            ))}
           </div>
         </div>
       ) : (
-        <>
-          <div className={`w-full h-full mt-1 relative`}>
-            <div
-              ref={messagesRef}
-              className={`w-full h-full overflow-y-auto scrollbar pb-[20%] ${
-                theme ? "scrollbar-thumb-black" : "scrollbar-thumb-white"
-              }`}
-            >
-              <div className="w-full z-0 my-5">
-                {inputOuputPair.length === 0 ? (
-                  <div className="text-center text-[14px] text-[#666666]">
-                    No messages yet. Start typing to chat!
-                  </div>
-                ) : (
-                  inputOuputPair.map((item, index) => (
-                    <EachInputOutput
-                      key={index}
-                      pair={item}
-                      isLast={index === inputOuputPair.length - 1}
-                      isLoading={request && index === inputOuputPair.length - 1}
-                    />
-                  ))
-                )}
-                <div className="h-[20px]"></div>
-              </div>
-            </div>
-          </div>
-          <div
-            className={`w-[95%] z-30 h-[60px] absolute bottom-[4%] flex justify-center items-center`}
-          >
-            <div className="w-[96%] mx-[2%]">
-              <PromptInput
-                myText={myText}
-                setMyText={setMyText}
-                getResponse={getResponse}
-                setIsTyping={setIsTyping}
-                aiResponse={aiResponse}
+        <div
+          ref={messagesRef}
+          className={`flex-1 min-h-0 overflow-y-auto scrollbar-thin px-0.5 ${
+            theme ? "scrollbar-thumb-[#cccccc]" : "scrollbar-thumb-[#333333]"
+          }`}
+        >
+          <div className="flex flex-col gap-3 py-3">
+            {inputOuputPair.map((item, index) => (
+              <EachInputOutput
+                key={index}
+                pair={item}
+                isLast={index === inputOuputPair.length - 1}
+                isLoading={request && index === inputOuputPair.length - 1}
               />
-            </div>
+            ))}
           </div>
-          <div
-            className={`w-[92%] z-20 h-[20%] absolute bottom-0 flex justify-center items-center ${
-              theme ? "bg-[#f8f8f8]" : "bg-[#0a0a0a]"
-            }`}
-          ></div>
-        </>
+        </div>
       )}
+      <div className="pt-2 shrink-0">
+        <PromptInput
+          myText={myText}
+          setMyText={setMyText}
+          getResponse={getResponse}
+          setIsTyping={setIsTyping}
+          aiResponse={aiResponse}
+        />
+      </div>
     </div>
   );
 }

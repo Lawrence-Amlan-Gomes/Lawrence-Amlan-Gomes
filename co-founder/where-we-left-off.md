@@ -4,39 +4,33 @@ _Owned by skillCoFounder.md — read this first on every session start, overwrit
 
 ## Current focus
 
-Two-part session: small landing/contact tweaks, then a real restructuring of how projects and client-status are represented across the site.
+Long session, several distinct threads, all shipped:
 
-1. **Landing photo + YouTube link**: swapped the Landing About section's photo from `/22.jpg` (portrait, `aspect-[3/4]`) to `/ProfilePic27.png` (square, frame changed to `aspect-square`) in `components/LandingAbout.jsx`. Added a YouTube link (`https://www.youtube.com/channel/UCQGdRvyFVqexgZWts4O3jsA`) to all three contact-adjacent components — `Footer.jsx` (icon row via `SiYoutube`), `Contact.jsx` and `LandingContact.jsx` (tech-stack icon grid, same `[name, null, null, IconComponent]` pattern as Fiverr/Contra).
+1. **Footer/mobile + `/projects` layout bugs fixed**: the footer's icon row was actually overflowing horizontally on mobile (~640–900px width), forcing the whole page to scroll sideways — fixed by making it wrap, plus added a global `overflow-x: hidden` safety net. The `/projects` filter bar was literally overlapping the "My Projects" heading at several widths (not just tight) — replaced fragile percentage-based padding with a fixed, breakpoint-stepped offset. Also fixed the project detail page's oversized tech-stack icons (flat 28px from 640px up → now gradient-scaled 18–24px per breakpoint).
 
-2. **New project taxonomy — asked clarifying questions first, then implemented**: every entry in `app/projects/projects.js` now has `type: "saas" | "clients-project" | "hobby-project"`. Client's-project (2): Library Management, Facelees. SaaS (3): My Daily Routine, Real Caffeine Calculator, Budget Meal Maker. Hobby-project (18): everything else, including Chemistry MCQ Test (reclassified — was implicitly treated as client work before). Client and SaaS entries got `gitLink: null` — the existing `{gitLink && ...}` conditional rendering in `ProjectCard.jsx`/`ProjectCardDetailed.jsx`/`SingleProject.jsx` already hides the GitHub button on falsy, so no UI code changes were needed there, only data.
+2. **Contact page restructured, chatbot became a global floating widget**: removed the old "Send a Message" email form (`SendMessage.jsx` deleted, now fully dead) and the page-embedded chat panel. `components/FloatingChat.jsx` (new) mounts a circular-avatar chat bubble globally in `ClientLayout.js`, hidden on `/admin` and `/login`. `Chat.jsx`/`PromptInput.jsx`/`EachInputOutput.jsx` fully redesigned for the floating-panel context (modern bubble UI, suggestion chips, pill input) since the old boxed-card look no longer fit once nested inside the panel's own chrome.
 
-3. **Mr. Kabir testimonial deleted from the live MongoDB testimonials collection** (Lawrence confirmed via AskUserQuestion) — his testimonial claimed a client relationship over Chemistry MCQ Test, which is no longer accurate now that project is hobby-classified. Also stripped from `scripts/seed-testimonials.mjs`'s `SEED_DATA` so a future re-seed (empty-collection guard) can't bring him back.
+3. **AI chatbot rearchitected around a Table of Contents + on-demand tool call** (Lawrence's own idea, explicitly requested to avoid overwhelming the model's context as the project catalog grows): `app/server.js` now sends only a lightweight one-line-per-project index in `systemInstruction`, plus a `get_project_details(urlTitle)` Gemini function-calling tool that fetches one project's full detail (description, features, tech stack, live testimonial from MongoDB) only when actually needed. Verified live across single-turn, multi-turn/coreference, and multi-project-lookup cases. Caught and fixed a real bug during verification: Gemini can't reliably *count* items from the table of contents (gave 18, then 16 for "how many hobby projects") — fixed by injecting pre-computed, authoritative counts instead of trusting the model to derive them.
 
-4. **Blogs/Writing removed entirely** (Lawrence confirmed full deletion, not just hiding): deleted `app/blogs/`, `app/blog/[urlTitle]/`, `app/blogs/blogs.js`, and all Blog* components (`Blogs.jsx`, `LandingBlogs.jsx`, `BlogCard.jsx`, `BlogCardDetailed.jsx`, `SingleBlog.jsx`). Removed the nav link (`TopNavbar.jsx`), the home-page section (`LandingPage.jsx`), the "Blogs:" section in the AI chatbot bio (`app/myself.js`), and README's "Writing" section.
+4. **Full content voice rewrite**: every visitor-facing project description (all 23 projects — short + long descriptions + every feature breakdown) rewritten from engineering-spec tone to problem/solution/light-tech-touch language, per Lawrence's explicit direction. Also rewrote the About/Landing hero bio the same way. Fixed two stale future-tense project descriptions along the way (Library Management, Chemistry MCQ Test both still said "will be built" despite being live for months).
 
-5. **`/projects` filter bar**, built and then corrected twice at Lawrence's direction:
-   - First built as `sticky`, inside the padded content flow — wrong, it pushed the "My Projects" heading/divider down from their original position.
-   - Corrected to `fixed` (out of flow), positioned right under the main navbar (`top-14`/`sm:top-14`/`md:top-16`, matching `TopNavbar.jsx`'s breakpoints) — heading/divider now sit at their original pre-feature position again.
-   - Then found overlapping the scrollbar — fixed by replicating `TopNavbar.jsx`'s exact scrollbar-measurement pattern (`document.getElementById("app-scroll-root")`, `offsetWidth - clientWidth`, applied as an inline `right` style) instead of a plain `inset-x-0`/`w-full`.
-   - Filters: All / SaaS / Client Projects / Hobby Projects, client-side, driven by the new `type` field.
+5. **New Services offering** (Lawrence supplied the 4 services himself): `app/services.js` (new, single source of truth) — Custom Web/Mobile App, Embedded AI Chatbot, Automated Meeting Scheduler, Lead Magnet & Email Capture, each as Technical Implementation / Business Outcome. Rendered via new `components/LandingServices.jsx` on `/home` (between Projects and Testimonials), wired into the chatbot's system instruction, added to `README.md`, and referenced in the Contact page intro. Two service cards carry an honest "you're looking at this right now" proof note since the chatbot and Cal.com scheduler are genuinely running on this same site.
 
-6. **CLAUDE.md updated live during the session** (not deferred to End Today): Pages table (blog rows removed, `/projects` row now documents the filter bar), new "### Projects" pattern section documenting `type` and the `gitLink: null` convention, Testimonials section's stale "unlike projects.js/blogs" wording fixed.
+6. **CLAUDE.md kept accurate live throughout** (not deferred) — new AI Chatbot architecture section, new Services pattern section, directory layout entries for `app/services.js`, Pages table row for `/home`, corrected the stale EmailJS/contact-form mentions.
 
-7. **Outbound mail sent to both destinations** — `Client List Correction + Project Taxonomy.md` to `skillsUpdateMentor` and `jobCrackMentor`: corrects a fact from an earlier mail (Kabir was named as a real client; he no longer is), and shares the new `saas`/`clients-project`/`hobby-project` taxonomy. Judged relevant because it corrects previously-sent information, not just routine polish.
-
-8. **"Everywhere's about" sync**: not run as a separate step — no new skill/stack piece was verified this session (this was reclassification + feature removal, not a new capability), so nothing there to sync beyond what's already covered by items 4 and 6 above.
+7. **Outbound mail sent to both destinations** — 3 files each to `skillsUpdateMentor` and `jobCrackMentor`: the chatbot tool-calling architecture (a real reusable pattern + the counting-bug lesson), the new Services productization (positioning signal), and a brief UX/content-polish summary.
 
 ## Immediate next step
 
-Nothing code-blocking. Carried forward from prior sessions, still open:
+Nothing code-blocking. Carried forward, still open:
 - Add the six `S3_*` env vars to Vercel (testimonial uploads still won't work in prod without them).
 - Keep or gut the dead `/register` route + mockup `/payment` surface?
+- `@emailjs/browser` is now a fully unused dependency (its only caller, the old contact form, was removed this session) — never followed up on whether to remove it from `package.json`.
 - Icons for Testing & Tooling / CI/CD / Astro chips, or stay text-only permanently?
-- `app/myself.js`'s Experience section says the freelance role started "Jan 2026," but `app/about/experiences.js` says "Oct 2025" — real discrepancy, still unfixed, noticed twice now.
 
 ## Open questions
 
-None outstanding — both structural decisions this session (Kabir testimonial deletion, full vs. partial blog removal) were confirmed directly with Lawrence via AskUserQuestion before implementing.
+None outstanding.
 
 ## Blockers
 

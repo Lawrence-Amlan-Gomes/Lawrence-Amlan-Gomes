@@ -2,6 +2,17 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-24 — End Today (Mobile/layout bug fixes, chatbot went global + rearchitected around a table-of-contents tool call, full content voice rewrite, new Services offering)
+
+- Fixed two real layout bugs: the footer's icon row was overflowing horizontally on mobile between ~640–900px, forcing the whole page to scroll sideways (fixed by wrapping + a global `overflow-x: hidden` safety net); the `/projects` filter bar was literally overlapping the page heading at several widths (fixed fragile percentage-based padding with a fixed, breakpoint-stepped offset). Also fixed oversized (flat 28px from 640px up) tech-stack icons on project detail pages to scale gradually per breakpoint.
+- Removed the old email "Send a Message" contact form entirely (`SendMessage.jsx` deleted) and the page-embedded chat panel; the AI chatbot is now a global floating widget (`components/FloatingChat.jsx`, mounted in `ClientLayout.js`, hidden on `/admin`/`/login`). Fully redesigned `Chat.jsx`/`PromptInput.jsx`/`EachInputOutput.jsx` for the floating-panel context.
+- Rearchitected the AI chatbot (`app/server.js`) around a lightweight table-of-contents system prompt plus a `get_project_details` Gemini function-calling tool that fetches one project's full detail (including a live MongoDB testimonial) only on demand — Lawrence's own idea, to keep context small as the project catalog grows. Verified live across single-turn, multi-turn/coreference, and multi-project-lookup questions. Found and fixed a real bug during verification: Gemini can't reliably count items from a list (gave 18, then 16, for "how many hobby projects") — fixed by injecting pre-computed authoritative counts instead of trusting the model to derive them.
+- Rewrote every visitor-facing project description (all 23 projects — short/long descriptions + every feature breakdown) from engineering-spec tone to problem/solution/light-tech-touch language, plus the About/Landing hero bio, per Lawrence's explicit direction. Fixed two stale future-tense descriptions (Library Management, Chemistry MCQ Test) along the way.
+- Added a new Services offering: `app/services.js` (new source of truth, 4 services Lawrence supplied himself) rendered via new `components/LandingServices.jsx` on `/home`, wired into the chatbot, README, and the Contact page intro.
+- `CLAUDE.md` kept accurate live throughout (AI Chatbot architecture, new Services pattern section, directory entries, corrected stale EmailJS/contact-form mentions) rather than deferred to this step.
+- Sent 3 mails each to `skillsUpdateMentor` and `jobCrackMentor` (chatbot tool-calling architecture + counting-bug lesson, Services productization, brief UX/content-polish summary).
+- Dev server: started on 3001 this session (3000 held by a foreign process, as usual), restarted many times through the iteration rounds, killed clean at End Today.
+
 ### 2026-08-22 — End Today (Landing photo/YouTube tweaks, project type taxonomy + client-list correction, blogs removed, projects filter navbar)
 
 - Swapped Landing About's photo to the square `/ProfilePic27.png` (frame changed to `aspect-square`); added a YouTube link across Footer, Contact, and LandingContact.

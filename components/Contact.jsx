@@ -7,11 +7,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { TiTick } from "react-icons/ti";
-import { callCreateMessage } from "@/app/actions";
-import EachField from "./EachField";
-import Chat from "./Chat";
-import { Sen } from "next/font/google";
-import SendMessage from "./SendMessage";
 import CalEmbed from "./CalEmbed";
 import { SiFiverr, SiYoutube } from "react-icons/si";
 import { FaBriefcase } from "react-icons/fa";
@@ -76,44 +71,82 @@ export default function Contact() {
       }`}
     >
       <div className="w-full mb-[5%] px-[5%] sm:px-[10%]">
-      <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 mb-8">
-          {/* LEFT: Contact Me intro + icons */}
-          <div className="w-full lg:w-1/2 flex flex-col">
-            <div
-              className={`flex items-center mb-5 gap-4 ${
-                theme ? "text-[#333333]" : "text-[#dddddd]"
-              }`}
-            >
-              <h1
-                className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 ${
-                  theme ? "text-[#333333]" : "text-[#dddddd]"
-                }`}
-              >
-                Contact Me
-              </h1>
-              <div
-                className="flex-grow h-[1px]"
-                style={{
-                  backgroundImage: theme
-                    ? "linear-gradient(to right, rgba(51, 51, 51, 0), rgba(51, 51, 51, 1))"
-                    : "linear-gradient(to right, rgba(221, 221, 221, 0), rgba(221, 221, 221, 0.4))",
-                }}
-              />
-            </div>
-            <div className="flex flex-col sm:flex-row lg:flex-col mt-2 gap-4 sm:gap-0 lg:gap-4">
-              <p
-                className={`text-sm sm:text-base lg:text-md w-full sm:w-[60%] lg:w-full ${
-                  theme ? "text-[#666666]" : "text-[#aaaaaa]"
-                }`}
-              >
-                Get in touch via email or connect with me on X, LinkedIn, or
-                GitHub to explore my work and stay updated! Click the following
-                icons to reach out.
-              </p>
-              <div className="w-full sm:w-[40%] lg:w-full flex justify-start pl-0 sm:pl-8 lg:pl-0 items-center">
-                {showPopup && (
+        <div className="flex flex-col items-center text-center mb-10">
+          <h1
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 ${
+              theme ? "text-[#333333]" : "text-[#dddddd]"
+            }`}
+          >
+            Contact Me
+          </h1>
+          <p
+            className={`text-sm sm:text-base lg:text-md max-w-xl ${
+              theme ? "text-[#666666]" : "text-[#aaaaaa]"
+            }`}
+          >
+            Looking for a custom app, an AI chatbot, or automated scheduling
+            for your business? Get in touch via email or connect with me on
+            X, LinkedIn, or GitHub — tap any icon below to reach out.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4 max-w-4xl mx-auto mb-16">
+          {techStack.map((tech) => {
+            const Icon = tech[3];
+            const isEmail = urls[tech[0]] === "email";
+            return (
+              <div key={tech[0]} className="relative">
+                <a
+                  href={isEmail ? "#" : urls[tech[0]]}
+                  target={!isEmail ? "_blank" : undefined}
+                  rel={!isEmail ? "noopener noreferrer" : undefined}
+                  onClick={
+                    isEmail
+                      ? (e) => {
+                          e.preventDefault();
+                          handleGoogleClick();
+                        }
+                      : undefined
+                  }
+                  onMouseEnter={isEmail ? () => setShowPopup(true) : undefined}
+                  onMouseLeave={
+                    isEmail
+                      ? () => {
+                          if (!isClicked) setShowPopup(false);
+                        }
+                      : undefined
+                  }
+                  className={`flex flex-col items-center justify-center gap-2 aspect-square p-3 sm:p-5 hover:cursor-pointer rounded-xl border-[1px] transition-colors ${
+                    theme
+                      ? "border-[#e5e5e5] hover:border-blue-800 hover:bg-[#fafafa]"
+                      : "border-[#222222] hover:border-blue-700 hover:bg-[#0a0a0a]"
+                  }`}
+                >
+                  {Icon ? (
+                    <Icon
+                      size={28}
+                      className={theme ? "text-[#333333]" : "text-[#dddddd]"}
+                    />
+                  ) : (
+                    <Image
+                      src={theme ? tech[1] : tech[2]}
+                      alt={tech[0]}
+                      width={28}
+                      height={28}
+                      className="object-contain"
+                    />
+                  )}
+                  <span
+                    className={`text-[10px] sm:text-xs font-medium ${
+                      theme ? "text-[#555555]" : "text-[#aaaaaa]"
+                    }`}
+                  >
+                    {tech[0]}
+                  </span>
+                </a>
+                {isEmail && showPopup && (
                   <div
-                    className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-1 ${
+                    className={`absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1 z-10 ${
                       theme
                         ? "bg-[#ffffff] text-[#333333] border-[1px] border-[#333333]"
                         : "bg-[#080808] text-[#bbbbbb] border-[1px] border-[#bbbbbb]"
@@ -129,115 +162,9 @@ export default function Contact() {
                   </div>
                 )}
               </div>
-            </div>
-            <div className="mt-6 flex flex-row flex-nowrap justify-between gap-2 sm:flex-wrap sm:gap-4 sm:justify-start relative">
-              {techStack.map((tech) => {
-                const Icon = tech[3];
-                return (
-                <a
-                  key={tech[0]}
-                  href={urls[tech[0]] === "email" ? "#" : urls[tech[0]]}
-                  target={urls[tech[0]] !== "email" ? "_blank" : undefined}
-                  rel={
-                    urls[tech[0]] !== "email" ? "noopener noreferrer" : undefined
-                  }
-                  onClick={
-                    urls[tech[0]] === "email"
-                      ? (e) => {
-                          e.preventDefault();
-                          handleGoogleClick();
-                        }
-                      : undefined
-                  }
-                  onMouseEnter={
-                    urls[tech[0]] === "email" ? () => setShowPopup(true) : undefined
-                  }
-                  onMouseLeave={
-                    urls[tech[0]] === "email"
-                      ? () => {
-                          if (!isClicked) setShowPopup(false);
-                        }
-                      : undefined
-                  }
-                  className={`flex flex-col items-center justify-center p-4 sm:p-8 hover:cursor-pointer rounded-lg border-[1px] ${
-                    theme
-                      ? "border-blue-800 hover:bg-[#fafafa]"
-                      : "border-blue-700 hover:bg-[#080808]"
-                  }`}
-                >
-                  {Icon ? (
-                    <Icon size={32} />
-                  ) : (
-                    <Image
-                      src={theme ? tech[1] : tech[2]}
-                      alt={tech[0]}
-                      width={32}
-                      height={32}
-                      className="object-contain"
-                    />
-                  )}
-                </a>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* RIGHT: Chat with me */}
-          <div className="w-full lg:w-1/2 mt-8 lg:mt-0 flex flex-col sm:flex-row lg:flex-col min-h-[400px] overflow-hidden gap-5 sm:gap-0 lg:gap-4">
-            <div className="w-full sm:w-[40%] lg:w-full pr-0 sm:pr-5 lg:pr-0 flex flex-col">
-              <div
-                className={`flex items-center mb-4 gap-4 ${
-                  theme ? "text-[#333333]" : "text-[#dddddd]"
-                }`}
-              >
-                <h2
-                  className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${
-                    theme ? "text-[#333333]" : "text-[#dddddd]"
-                  }`}
-                >
-                  Chat with me
-                </h2>
-                <div
-                  className="flex-grow h-[1px] hidden lg:block"
-                  style={{
-                    backgroundImage: theme
-                      ? "linear-gradient(to right, rgba(51, 51, 51, 0), rgba(51, 51, 51, 1))"
-                      : "linear-gradient(to right, rgba(221, 221, 221, 0), rgba(221, 221, 221, 0.4))",
-                  }}
-                />
-              </div>
-              <p
-                className={`text-sm sm:text-base lg:text-md sm:mb-6 text-justify ${
-                  theme ? "text-[#666666]" : "text-[#aaaaaa]"
-                }`}
-              >
-                I&apos;d love to chat with you in real-time! My AI-powered chat
-                bot is here to answer your questions about my portfolio, projects,
-                skills, or any other topic. Feel free to start a conversation, and
-                I&apos;ll respond instantly. Whether you&apos;re interested in
-                collaboration, feedback, or just a casual talk, this chat is the
-                perfect way to connect.
-              </p>
-              <div
-                className={`w-full h-[100px] sm:flex lg:hidden hidden items-center justify-end mt-auto`}
-              >
-                <div className="relative h-full aspect-[1/1] overflow-hidden rounded-md">
-                  <Image
-                    src="/ChatBoticon.png"
-                    alt="Chat Bot Icon"
-                    width={1000}
-                    height={32}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="w-full sm:w-[60%] lg:w-full sm:pt-8 lg:pt-2 pl-0 sm:pl-7 lg:pl-0 pr-0 sm:pr-2 lg:pr-0 aspect-[3/4] sm:md:aspect-[1/1] overflow-hidden">
-              <Chat />
-            </div>
-          </div>
+            );
+          })}
         </div>
-        <SendMessage theme={theme} />
 
         <div id="cal-booking" className="mt-24 scroll-mt-24">
           <div

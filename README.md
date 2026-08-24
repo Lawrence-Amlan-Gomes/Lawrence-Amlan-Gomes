@@ -25,6 +25,19 @@ Over the past year, I've independently built and launched SaaS products and clie
 
 ---
 
+## Services
+
+What I build for clients and businesses, beyond my own products:
+
+| Service | What It Is | What It Gets You |
+|---|---|---|
+| **Custom Web / Mobile App** | Full-stack web or cross-platform mobile app for your product, service, or SaaS | A professional digital presence — without $10k+ local dev fees |
+| **Embedded AI Chatbot** | AI chatbot trained on your business's own data, FAQs, and product catalog | 24/7 instant support that handles complex product questions |
+| **Automated Meeting Scheduler** | AI bot integrated directly with Google Calendar or Calendly | Chatting prospects convert into booked meetings — no email back-and-forth |
+| **Lead Magnet & Email Capture** | Email capture built into the chat flow, synced to your CRM | Everyday site traffic becomes a growing email list |
+
+---
+
 ## Flagship Project — mydailyroutine.app
 
 > Live AI-powered daily planner SaaS — built solo, shipped in 1 month, 5 active users

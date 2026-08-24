@@ -39,7 +39,7 @@ export default function Projects() {
 
   return (
     <div
-      className={`w-full sm:pt-[13%] pt-[20%] ${
+      className={`w-full pt-[150px] md:pt-[160px] ${
         theme ? "bg-[#ffffff] text-[#aaaaaaa]" : "bg-[#000000] text-[#eeeeee]"
       }`}
     >
@@ -100,9 +100,9 @@ export default function Projects() {
               theme ? "text-[#666666]" : "text-[#aaaaaa]"
             }`}
           >
-            I am passionate about transforming new ideas into reality through
-            innovative projects. Explore this portfolio to see my all latest to
-            oldest works, showcasing both my creativity and technical expertise.
+            Everything I&apos;ve built — SaaS products, client work, and
+            personal projects — each one solving a real problem for someone,
+            from the most recent to the very first.
           </p>
         </div>
         <div className="space-y-4 sm:space-y-6">

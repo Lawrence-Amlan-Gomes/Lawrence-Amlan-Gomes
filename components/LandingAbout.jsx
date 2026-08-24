@@ -66,16 +66,13 @@ export default function LandingAbout() {
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
-          I&apos;m a Full-Stack Developer based in Dhaka, Bangladesh,
-          specializing in building and shipping complete, production-ready web
-          applications — from architecture to deployment. My core stack: Next.js
-          (App Router) · TypeScript · React · Node.js · MongoDB · Redis ·
-          Tailwind CSS · Redux Toolkit · AWS S3. I&apos;ve independently built
-          and launched multiple SaaS products and client projects — handling
-          feature development, Paddle payment integrations, CI/CD pipelines,
-          custom domains, and cloud deployments on Vercel, Netlify, and
-          self-hosted Coolify. I move fast, integrate AI APIs across projects,
-          and deliver clean, maintainable codebases that scale.
+          I help people and businesses turn ideas into real, working products
+          — I design them, build them, and take them all the way to
+          production. I&apos;ve independently shipped multiple SaaS products
+          and client projects, handling everything a launch needs: the app
+          itself, payments, deployment, and the domain it runs on — mostly
+          with Next.js and TypeScript. I move fast, lean on AI tools to build
+          faster, and deliver clean work that scales.
         </motion.p>
 
         {/* Mobile bio */}
@@ -85,9 +82,10 @@ export default function LandingAbout() {
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
-          Full-Stack Developer shipping production apps end-to-end. Next.js ·
-          TypeScript · MongoDB · Redis · Tailwind · AWS S3. Paddle payments,
-          CI/CD, and cloud deployments.
+          I turn ideas into real, working products — from first line of code
+          to production. I&apos;ve independently shipped multiple SaaS
+          products and client projects, handling payments, deployment, and
+          everything in between.
         </motion.p>
 
         {/* Desktop CTA */}
@@ -108,14 +106,13 @@ export default function LandingAbout() {
             theme ? "text-[#666666]" : "text-[#aaaaaa]"
           }`}
         >
-          <li>Build type-safe, full-stack apps with Next.js & TypeScript</li>
-          <li>Deploy via Vercel, Netlify, and self-hosted Coolify on VPS</li>
-          <li>Integrate Paddle for subscriptions and one-time payment flows</li>
-          <li>Implement AI-powered features via third-party APIs</li>
-          <li>Set up GitHub-based CI/CD pipelines and custom domains</li>
-          <li>Scale backends with MongoDB and Redis caching</li>
-          <li>Manage state efficiently using Redux Toolkit</li>
-          <li>Craft responsive, accessible UIs with Tailwind CSS</li>
+          <li>Build full-stack apps with Next.js, fast and reliable end to end</li>
+          <li>Handle deployment and custom domains so it just works in production</li>
+          <li>Set up real payments — subscriptions and one-time purchases</li>
+          <li>Add AI-powered features that genuinely help users</li>
+          <li>Automate testing and releases so updates ship safely</li>
+          <li>Build backends that stay fast as data and traffic grow</li>
+          <li>Design clean, responsive interfaces people enjoy using</li>
         </motion.ul>
 
         {/* Desktop social quick-links */}

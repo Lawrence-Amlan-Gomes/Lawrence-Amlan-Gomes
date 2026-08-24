@@ -1,6 +1,7 @@
 "use client";
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function EachInputOutput({ pair, isLast, isLoading }) {
   const { theme } = useTheme();
@@ -12,7 +13,6 @@ export default function EachInputOutput({ pair, isLast, isLoading }) {
     let lastIndex = 0;
     let match;
 
-    // Split text into bold and non-bold segments
     while ((match = regex.exec(text)) !== null) {
       const before = text.slice(lastIndex, match.index);
       const boldText = match[1];
@@ -20,64 +20,70 @@ export default function EachInputOutput({ pair, isLast, isLoading }) {
       parts.push({ text: boldText, isBold: true });
       lastIndex = regex.lastIndex;
     }
-    // Add remaining text after the last match
     if (lastIndex < text.length) {
       parts.push({ text: text.slice(lastIndex), isBold: false });
     }
 
-    // Render segments as JSX
     return parts.map((part, index) => (
-      <span key={index} className={part.isBold ? "font-bold" : ""}>
+      <span key={index} className={part.isBold ? "font-semibold" : ""}>
         {part.text}
       </span>
     ));
   };
 
-  // Typing animation variants
-  const typingVariants = {
-    animate: {
-      opacity: [0, 1, 0],
-      transition: {
-        opacity: {
-          repeat: Infinity,
-          duration: 0.5,
-          ease: "easeInOut",
-        },
-      },
-    },
-  };
-
   return (
-    <div className="w-full">
-      <div
-        className={`border-[1px] ${
-          theme ? "bg-[#ffffff] text-black border-[#333333]" : "bg-[#000000] text-[#cccccc] border-[#444444]"
-        } w-[78%] ml-[20%] text-justify py-2 px-3 rounded-md sm:mb-2 mr-[2%] text-[10px] sm:text-[14px] mb-3`}
-      >
-        {renderTextWithBold(pair[0])}
+    <div className="w-full flex flex-col gap-2">
+      <div className="flex justify-end">
+        <div
+          className={`max-w-[82%] rounded-2xl rounded-br-md px-3.5 py-2 text-[13px] leading-relaxed ${
+            theme ? "bg-blue-800 text-white" : "bg-blue-700 text-white"
+          }`}
+        >
+          {renderTextWithBold(pair[0])}
+        </div>
       </div>
-      <div
-        className={`w-[78%] mr-[20%] ml-[2%] ${
-          theme ? "text-[#111111]" : "text-[#dddddd]"
-        } text-justify pr-3 pl-2 rounded-md mb-5 text-[10px] sm:text-[14px] `}
-      >
-        {isLast && isLoading ? (
-          <motion.div
-            className="flex items-center space-x-2"
-            variants={typingVariants}
-            animate="animate"
-          >
-            <motion.span className="inline-block w-2 h-2 bg-current rounded-full"></motion.span>
-            <motion.span className="inline-block w-2 h-2 bg-current rounded-full"></motion.span>
-            <motion.span className="inline-block w-2 h-2 bg-current rounded-full"></motion.span>
-          </motion.div>
-        ) : (
-          pair[1].split("[/n]").map((paragraph, index) => (
-            <p key={index} className="sm:mb-3 bg-1">
-              {renderTextWithBold(paragraph)}
-            </p>
-          ))
-        )}
+
+      <div className="flex items-end gap-2">
+        <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0">
+          <Image
+            src="/ProfilePic27.png"
+            alt="Lawrence"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div
+          className={`max-w-[82%] rounded-2xl rounded-bl-md px-3.5 py-2 text-[13px] leading-relaxed ${
+            theme ? "bg-[#f1f1f1] text-[#111111]" : "bg-[#161616] text-[#e5e5e5]"
+          }`}
+        >
+          {isLast && isLoading ? (
+            <div className="flex items-center gap-1.5 py-1">
+              {[0, 1, 2].map((i) => (
+                <motion.span
+                  key={i}
+                  className="w-1.5 h-1.5 bg-current rounded-full inline-block"
+                  animate={{ opacity: [0.3, 1, 0.3] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 0.9,
+                    delay: i * 0.15,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            pair[1]
+              .split("[/n]")
+              .filter((paragraph) => paragraph.trim() !== "")
+              .map((paragraph, index) => (
+                <p key={index} className={index > 0 ? "mt-2" : ""}>
+                  {renderTextWithBold(paragraph)}
+                </p>
+              ))
+          )}
+        </div>
       </div>
     </div>
   );

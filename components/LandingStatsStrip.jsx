@@ -1,6 +1,7 @@
 "use client";
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
+import projects from "@/app/projects/projects";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -19,11 +20,19 @@ const staggerContainer = {
 export default function LandingStatsStrip() {
   const { theme } = useTheme();
 
+  const hobbyProjectsCount = projects.filter(
+    (p) => p.type === "hobby-project"
+  ).length;
+  const clientsCount = projects.filter(
+    (p) => p.type === "clients-project"
+  ).length;
+  const saasCount = projects.filter((p) => p.type === "saas").length;
+
   const stats = [
-    { value: "20+", label: "Projects Shipped" },
-    { value: "3+", label: "Happy Clients" },
+    { value: `${hobbyProjectsCount}`, label: "Projects Shipped" },
+    { value: `${clientsCount}`, label: "Happy Clients" },
     { value: "2+", label: "Years Experience" },
-    { value: "SaaS", label: "Products Launched" },
+    { value: `${saasCount}`, label: "SaaS Products Launched" },
   ];
 
   return (
