@@ -1039,8 +1039,9 @@ const projects = [
               "Billing page shows your plan and renewal status clearly",
             ],
             images: [
-              "/P22BillingPage.png",
+              "/P22PaddleCheckoutStep1.png",
               "/P22PaddleCheckout.png",
+              "/P22ProfilePage.png",
             ],
           },
         ],

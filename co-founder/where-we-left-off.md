@@ -4,18 +4,19 @@ _Owned by skillCoFounder.md — read this first on every session start, overwrit
 
 ## Current focus
 
-Short follow-up session, closing a gap in the prior one: the floating chatbot's first-impression empty state didn't mention the new Services offering (shipped last session) at all.
+Chat Relay session with Fiverr's Claude cofounder (building a Gallery for a new Gig: "integrate Stripe or Paddle billing into an existing app") turned up a real content bug, now fixed.
 
-1. **Chatbot empty-state fix**: `components/Chat.jsx` — subtitle now says "I can talk about my skills, projects, clients, **and services**"; added a 4th suggestion chip, "What services do you offer?" — verified live, correctly lists all 4 services with accurate descriptions.
-2. **Closed-chat-button polish**: `components/FloatingChat.jsx` — the floating avatar button now shows a blue border (`border-blue-800`/`border-blue-600` by theme) when the panel is closed, so it reads as more clickable/inviting; the open state (blue circle + X icon) is unchanged.
-3. No mail sent this round — this was a small, self-contained polish fix on work already mailed to both destinations last session, nothing new skill/fact-wise to report.
+1. Confirmed directly against `app/projects/projects.js`: **My Daily Routine** has real, documented Paddle integration — "Simple, Secure Billing" feature (one-time purchase, server-verified before upgrade, billing page shows plan status), tech stack line explicitly says `"Payments: Paddle"`.
+2. Confirmed no Stripe anywhere in the codebase; confirmed Facelees is COD-only, not a real payment integration; confirmed (via live MongoDB query, not the deleted static `testimonials.js`) neither of the 2 real testimonials mentions payment/billing.
+3. **Fixed a real mislabeled-asset bug**, caught by Fiverr's Claude visually inspecting the screenshot rather than trusting its filename: `public/P22BillingPage.png` was actually a Paddle checkout screen, not a billing/plan-status page. Renamed it to `public/P22PaddleCheckoutStep1.png` and updated the "Simple, Secure Billing" feature block to reference the real billing/plan-status screenshot (`/P22ProfilePage.png`, already used elsewhere) alongside it. Verified live — page and both images return 200.
+4. No outbound mail sent — this was a same-project asset-naming fix, not new skill/fact material for `skillsUpdateMentor`/`jobCrackMentor`.
 
 ## Immediate next step
 
 Nothing code-blocking. Carried forward, still open:
 - Add the six `S3_*` env vars to Vercel (testimonial uploads still won't work in prod without them).
 - Keep or gut the dead `/register` route + mockup `/payment` surface?
-- `@emailjs/browser` is now a fully unused dependency (its only caller, the old contact form, was removed two sessions ago) — never followed up on whether to remove it from `package.json`.
+- `@emailjs/browser` is now a fully unused dependency (its only caller, the old contact form, was removed several sessions ago) — never followed up on whether to remove it from `package.json`.
 - Icons for Testing & Tooling / CI/CD / Astro chips, or stay text-only permanently?
 
 ## Open questions
@@ -28,4 +29,4 @@ None on my side. Lawrence needs to add the `S3_*` vars to Vercel for testimonial
 
 ## Dev server
 
-Not running — killed clean this session. See `co-founder/dev-server.md`.
+Not running — started per the standard startup rule (landed on 3001), never restarted since no code changes happened this session, killed clean at End Today. See `co-founder/dev-server.md`.

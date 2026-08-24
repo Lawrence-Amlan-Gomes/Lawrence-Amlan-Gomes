@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session ran on 3001 (3000 held by a foreign process, as usual) for a short follow-up (chatbot empty-state Services mention + closed-button blue border) — killed clean at End Today on 2026-08-24 (later session).
+note: last session was Chat Relay (Fiverr Stripe/Paddle billing gig research), which surfaced a real mislabeled-screenshot bug — fixed in projects.js/public, verified live on a brief 3001 restart, killed clean at End Today on 2026-08-25.
 ```

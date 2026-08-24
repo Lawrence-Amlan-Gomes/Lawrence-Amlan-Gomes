@@ -2,6 +2,17 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-25 — End Today (Chat Relay with Fiverr: Stripe/Paddle billing Gig research; real image-mislabeling bug found and fixed)
+
+- Pure Chat Relay session with Fiverr's Claude cofounder, sourcing real material for a new Gig ("integrate Stripe or Paddle billing into an existing app").
+- Confirmed against `app/projects/projects.js` directly: **My Daily Routine** has real, documented Paddle integration ("Simple, Secure Billing" feature — one-time purchase, server-verified before upgrade, billing page shows plan status; tech stack explicitly lists `"Payments: Paddle"`). Confirmed zero Stripe references anywhere in the file.
+- Ruled out Facelees — its checkout is "Shopping Cart & Cash on Delivery Flow," COD only, not a real payment gateway; told Fiverr's Claude not to use it.
+- Queried the live testimonials MongoDB collection directly (not the deleted static `testimonials.js`) — only 2 testimonials exist (Library Management, Facelees), neither payment-related; told Fiverr's Claude nothing usable exists there.
+- **Real bug found via inbound mail**, not this session's own initial check: Fiverr's Claude flagged, after visually inspecting the file (not just trusting its name), that `public/P22BillingPage.png` was actually a Paddle checkout screen (email/country entry step), not a billing/plan-status page. Verified this myself by viewing both images directly, then found the *actual* billing/plan-status screenshot was `public/P22ProfilePage.png` (already used elsewhere, under "Your Profile" — shows subscription plan + expiry date, matching the "Simple, Secure Billing" copy's claim). Fixed for real: `git mv public/P22BillingPage.png public/P22PaddleCheckoutStep1.png`, updated the "Simple, Secure Billing" feature's `images` array in `projects.js` to `["/P22PaddleCheckoutStep1.png", "/P22PaddleCheckout.png", "/P22ProfilePage.png"]` — now every image in that block actually matches its claim. Verified live: `/project/my-daily-routine` and both image paths return 200.
+- Processed 1 inbound mail mid-session from Fiverr (arrived during the relay, not at startup) confirming what was used from the reply and surfacing the image-mislabel finding above — absorbed and deleted per protocol.
+- No mail sent outbound — nothing genuinely new to report to `skillsUpdateMentor`/`jobCrackMentor` beyond a same-project asset-naming fix, consistent with past-session precedent that Chat Relay content already delivered live to its origin doesn't get re-mailed elsewhere.
+- Dev server: started on 3001 at session start (3000 held by a foreign process, as usual), killed at first End Today pass, restarted briefly on 3001 to verify the image fix, killed clean again after.
+
 ### 2026-08-24 (later session) — End Today (Chatbot empty-state gap closed: Services mentioned + 4th suggestion chip, closed-button blue border)
 
 - Fixed a gap from earlier today's Services launch: the chatbot's first-impression empty state ("Ask me anything...") didn't mention Services at all. `components/Chat.jsx` — subtitle now includes "and services", added a 4th suggestion chip "What services do you offer?" — verified live, returns an accurate answer covering all 4 services.
