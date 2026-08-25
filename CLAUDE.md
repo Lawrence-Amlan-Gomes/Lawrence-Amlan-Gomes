@@ -53,8 +53,9 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 | `/about` | About + skills (`app/about/skills.js`) + experience |
 | `/projects` | Projects list — sticky secondary filter bar (`components/Projects.jsx`) below the main navbar, filters client-side by each project's `type` (`saas` / `clients-project` / `hobby-project`) |
 | `/project/[urlTitle]` | Single project detail |
+| `/case-studies` | Case studies list — client-work deep dives (see Case Studies pattern below) |
+| `/case-study/[urlTitle]` | Single case study detail |
 | `/contact` | Contact icon grid (X/LinkedIn/GitHub/Email/Fiverr/Contra/YouTube) + Cal.com booking embed. No contact form, no page-specific chatbot — the AI chatbot is now a global floating widget (see AI Chatbot pattern below) |
-| `/resume` | Resume viewer |
 | `/testimonials` | Testimonials — DB-backed (see Testimonials pattern below), not a static file. Includes a public add/edit form, shown only when the admin toggle is on. |
 | `/thesis` | Thesis section (`page.jsx` — the one page not using `.js`) |
 | `/profile` | User profile — **orphaned, see Known Gaps** |
@@ -91,6 +92,13 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 ### Projects
 - Every entry in `app/projects/projects.js` has a `type` field: `"saas"`, `"clients-project"`, or `"hobby-project"` — drives the filter bar on `/projects` (`components/Projects.jsx`) and is the single source of truth for that classification (no separate DB field or list elsewhere).
 - `clients-project` and `saas` entries set `gitLink: null` — those projects intentionally show no GitHub link in the UI (client work and shipped SaaS products aren't public repos). `ProjectCard.jsx` / `ProjectCardDetailed.jsx` / `SingleProject.jsx` already render the GitHub button conditionally on `gitLink` being truthy, so this is enforced purely by the data, not by extra UI logic.
+- `type: "saas"` entries show "See Live" instead of "Live Demo" as their live-link label (`ProjectCard.jsx`, `ProjectCardDetailed.jsx`) — every other type keeps "Live Demo".
+
+### Case Studies
+- `app/case-studies/case-studies.js` is a separate static file (not fields on `projects.js`) holding longer-form client-work narratives — `client`, `industry`, `timeline`, `heroImg`, `summary`, `challenge`, `approach` (array of `{title, description}` steps), `results` (array of strings). Linked to a project by `projectUrlTitle`, matched against `app/projects/projects.js`'s `urlTitle`.
+- Scoped to `type: "clients-project"` entries only (Facelees, Library Management as of 2026-08-26) — `saas`/`hobby-project` entries don't get one.
+- Rendered at `/case-studies` (`components/CaseStudies.jsx`, list) and `/case-study/[urlTitle]` (`components/SingleCaseStudy.jsx`, detail).
+- Anywhere a project or testimonial links out, it checks `caseStudies` for a match and swaps the label/destination: client project cards (`ProjectCard.jsx`, `ProjectCardDetailed.jsx`) show an extra "Case Study" link, `SingleProject.jsx`'s floating action buttons add a case-study button, and `TestimonialCard.jsx`'s project link becomes "View Case Studies" pointing at `/case-study/[urlTitle]` instead of "View Project" pointing at `/project/[urlTitle]`. Add a new case study only in `case-studies.js` — these surfaces pick it up automatically via the `projectUrlTitle` match, no extra wiring needed.
 
 ### Services
 - `app/services.js` is the single source of truth for the productized services Lawrence offers to clients/businesses (Custom Web/Mobile App, Embedded AI Chatbot, Automated Meeting Scheduler, Lead Magnet & Email Capture) — distinct from `app/projects/projects.js`, which lists things he's already shipped, not offerings for hire. Each entry has `title`, `implementation`, `outcome`, and an optional `proof` (a factual note when the service is demonstrable on this very site, e.g. the floating chatbot or Cal.com booking).

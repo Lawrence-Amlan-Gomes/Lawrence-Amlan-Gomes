@@ -141,9 +141,6 @@ export default function LandingAbout() {
           >
             <FaLinkedin className="text-sm" /> LinkedIn
           </a>
-          <span className={`text-xs ${theme ? "text-[#999999]" : "text-[#555555]"}`}>
-            · Based in Dhaka, BD
-          </span>
         </motion.div>
 
         {/* Mobile: horizontally scrollable pill list */}

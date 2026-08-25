@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import projects from "@/app/projects/projects";
+import caseStudies from "@/app/case-studies/case-studies";
 import Link from "next/link";
 import ProjectCard from "./ProjectCard";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -159,6 +160,11 @@ export default function LandingProjects() {
               shortDescription={project.shortDescription}
               techStack={project.techStack}
               gitLink={project.gitLink}
+              type={project.type}
+              urlTitle={project.urlTitle}
+              hasCaseStudy={caseStudies.some(
+                (cs) => cs.projectUrlTitle === project.urlTitle
+              )}
             />
           </div>
         ))}

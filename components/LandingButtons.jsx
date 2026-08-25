@@ -2,7 +2,7 @@
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaUser, FaFileAlt, FaBookOpen, FaRegCalendarAlt } from "react-icons/fa";
+import { FaUser, FaBookOpen, FaRegCalendarAlt } from "react-icons/fa";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -23,12 +23,6 @@ export default function LandingButtons() {
       isPrimary: true,
       href: "/about",
       icon: <FaUser className="text-sm" />,
-    },
-    {
-      label: "Resume",
-      isPrimary: false,
-      href: "/resume",
-      icon: <FaFileAlt className="text-sm" />,
     },
     {
       label: "Published Paper",

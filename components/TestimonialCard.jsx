@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import caseStudies from "@/app/case-studies/case-studies";
 
 function TestimonialVideo({ videoUrl, videoPosition, className }) {
   const videoRef = useRef(null);
@@ -235,13 +236,19 @@ export default function TestimonialCard({
 
       {projectUrlTitle && (
         <Link
-          href={`/project/${projectUrlTitle}`}
+          href={
+            caseStudies.some((cs) => cs.projectUrlTitle === projectUrlTitle)
+              ? `/case-study/${projectUrlTitle}`
+              : `/project/${projectUrlTitle}`
+          }
           onClick={(e) => e.stopPropagation()}
           className={`text-xs sm:text-sm font-medium underline-offset-4 transition-colors ${
             theme ? "text-blue-600 hover:text-blue-700" : "text-blue-700 hover:text-blue-800"
           }`}
         >
-          View Project →
+          {caseStudies.some((cs) => cs.projectUrlTitle === projectUrlTitle)
+            ? "View Case Studies →"
+            : "View Project →"}
         </Link>
       )}
     </div>

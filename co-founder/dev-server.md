@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session was Chat Relay (Fiverr Stripe/Paddle billing gig research), which surfaced a real mislabeled-screenshot bug — fixed in projects.js/public, verified live on a brief 3001 restart, killed clean at End Today on 2026-08-25.
+note: last session (2026-08-26) shipped the Case Studies feature, removed Resume, and a few content tweaks. Killed clean at End Today, .next cleared after a stale-cache error mid-session.
 ```

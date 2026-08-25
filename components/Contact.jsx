@@ -177,7 +177,7 @@ export default function Contact() {
                 theme ? "text-[#333333]" : "text-[#dddddd]"
               }`}
             >
-              Book a Meeting
+              Book a Discovery Call
             </h2>
             <div
               className="flex-grow h-[1px]"
@@ -194,7 +194,7 @@ export default function Contact() {
             }`}
           >
             Pick a time that works for you and let&apos;s chat. Schedule a
-            quick 15-minute meeting directly on my calendar below.
+            quick 15-minute discovery call directly on my calendar below.
           </p>
           <div
             className={`w-full rounded-lg border-[1px] overflow-hidden ${

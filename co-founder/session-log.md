@@ -2,6 +2,19 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-26 — End Today (Case Studies feature shipped, Resume removed, minor copy/UI polish)
+
+- **New Case Studies feature**: `/case-studies` (list) + `/case-study/[urlTitle]` (detail), backed by a new `app/case-studies/case-studies.js` static file — scoped to `type: "clients-project"` entries only (Facelees, Library Management), linked to `projects.js` by `urlTitle`. Scoping decisions (data file vs. inline field, which project types qualify) were confirmed with Lawrence via AskUserQuestion before building.
+- Wired into every surface that touches those two client projects: `ProjectCard.jsx`/`ProjectCardDetailed.jsx` (Case Study link), `SingleProject.jsx` (floating case-study button), `TestimonialCard.jsx` (project link becomes "View Case Studies" → `/case-study/[urlTitle]` instead of "View Project" → `/project/[urlTitle]`, only when a case study exists for that project).
+- `type: "saas"` projects now show "See Live" instead of "Live Demo" on `ProjectCard.jsx`/`ProjectCardDetailed.jsx`.
+- Contact page: "Book a Meeting" → "Book a Discovery Call", 15-minute session copy updated to say "discovery call."
+- Theme toggle (`ToogleTheme.jsx`) redesigned from a static Sun/Moon PNG swap into an animated pill switch (sliding thumb, `react-icons` Sun/Moon) — also dropped a leftover debug `console.log`.
+- **Removed the Resume feature entirely** (Lawrence's call): dropped the "Resume" button from the landing About action row (`LandingButtons.jsx`), deleted `/resume` route + `components/Resume.jsx`, and removed the now-orphaned `public/resume.jpg` / `public/resume.pdf` (nothing else referenced them).
+- Removed the "· Based in Dhaka, BD" location tag from the landing About desktop bio row (`LandingAbout.jsx`).
+- Updated `CLAUDE.md`: added `/case-studies` + `/case-study/[urlTitle]` to the route table, added a new "Case Studies" pattern section, added the saas "See Live" note to the Projects section, removed the `/resume` route row.
+- Hit one stale-`.next`-cache issue after deleting `Resume.jsx` mid-session (React `useContext` null error on `/home`) — resolved per the standing `dev-server.md` rule: `rm -rf .next` before the next dev restart.
+- No mail sent — pure local content/feature work, nothing new for `jobCrackMentor`.
+
 ### 2026-08-25 — End Today (Chat Relay with Fiverr: Stripe/Paddle billing Gig research; real image-mislabeling bug found and fixed)
 
 - Pure Chat Relay session with Fiverr's Claude cofounder, sourcing real material for a new Gig ("integrate Stripe or Paddle billing into an existing app").

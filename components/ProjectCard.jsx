@@ -13,6 +13,9 @@ export default function ProjectCard({
   shortDescription,
   techStack,
   gitLink,
+  type,
+  urlTitle,
+  hasCaseStudy,
 }) {
   const { theme } = useTheme();
 
@@ -75,8 +78,18 @@ export default function ProjectCard({
               theme ? "hover:text-blue-800" : "hover:text-blue-500"
             }`}
           >
-            <FiExternalLink className="text-sm" /> Live Demo
+            <FiExternalLink className="text-sm" /> {type === "saas" ? "See Live" : "Live Demo"}
           </a>
+          {hasCaseStudy && (
+            <Link
+              href={`/case-study/${urlTitle}`}
+              className={`flex items-center gap-1.5 ${
+                theme ? "hover:text-blue-800" : "hover:text-blue-500"
+              }`}
+            >
+              Case Study
+            </Link>
+          )}
           {gitLink && (
             <a
               href={gitLink}

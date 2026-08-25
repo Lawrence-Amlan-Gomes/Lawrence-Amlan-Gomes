@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "@/app/hooks/useTheme";
 import projects from "@/app/projects/projects";
+import caseStudies from "@/app/case-studies/case-studies";
 import Footer from "./Footer";
 import ProjectCardDetailed from "./ProjectCardDetailed";
 
@@ -116,6 +117,10 @@ export default function Projects() {
               shortDescription={project.shortDescription}
               techStack={project.techStack}
               gitLink={project.gitLink}
+              type={project.type}
+              hasCaseStudy={caseStudies.some(
+                (cs) => cs.projectUrlTitle === project.urlTitle
+              )}
             />
           ))}
         </div>

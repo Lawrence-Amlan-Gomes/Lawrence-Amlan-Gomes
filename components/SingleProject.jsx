@@ -1,15 +1,17 @@
 "use client";
 import { useTheme } from "@/app/hooks/useTheme";
 import projects from "@/app/projects/projects";
+import { getCaseStudy } from "@/app/case-studies/case-studies";
 import Image from "next/image";
 import Link from "next/link";
-import { FaArrowLeft, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { FaArrowLeft, FaExternalLinkAlt, FaGithub, FaFileAlt } from "react-icons/fa";
 import Footer from "./Footer";
 
 export default function SingleProject({ urlTitle }) {
   const { theme } = useTheme();
 
   const project = projects.find((p) => p.urlTitle === urlTitle);
+  const caseStudy = getCaseStudy(urlTitle);
 
   if (!project) {
     return <div>Project not found</div>;
@@ -182,6 +184,19 @@ export default function SingleProject({ urlTitle }) {
           >
             <FaExternalLinkAlt />
           </a>
+          {caseStudy && (
+            <Link
+              href={`/case-study/${project.urlTitle}`}
+              className={`p-2 sm:p-3 rounded-lg text-md sm:text-xl ${
+                theme
+                  ? "bg-[#ffffff] text-[#0a0a0a] border-[1px] border-blue-800 hover:bg-blue-800 hover:text-[#ffffff]"
+                  : "bg-[#1a1a1a] text-[#ebebeb] border-[1px] border-blue-700 hover:bg-blue-700 hover:text-[#ffffff]"
+              }`}
+              title="Case Study"
+            >
+              <FaFileAlt />
+            </Link>
+          )}
           {project.gitLink && (
             <a
               href={project.gitLink}

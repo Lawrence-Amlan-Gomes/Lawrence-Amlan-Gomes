@@ -25,9 +25,6 @@ A list of mailbox folder paths, one per sibling project, that Lawrence provides.
 
 ```
 destinations:
-  - name: skillsUpdateMentor
-    path: /Users/lawrencealangomes/Documents/MySelf/mail-box/skillsUpdateMentor/
-    scope: full session summary (not limited to skills topics, despite the folder name)
   - name: jobCrackMentor
     path: /Users/lawrencealangomes/Documents/JobCrack/mail-box/
     scope: full session summary (unconfirmed — assumed same as skillsUpdateMentor until Lawrence narrows it)
