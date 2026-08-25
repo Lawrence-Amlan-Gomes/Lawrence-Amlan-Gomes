@@ -1,13 +1,12 @@
-"use client";
-import LandingPage from "../components/LandingPage";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import LandingPage from "@/components/LandingPage";
+import { getAllTestimonialsAction, getSettingsAction } from "@/app/actions/testimonials";
 
-export default function Home() {
-  const router = useRouter();
-  useEffect(() => {
-    router.push("/home");
-  }, [router]);
-
-  return <LandingPage />;
+export default async function Home() {
+  const [testimonials, settings] = await Promise.all([
+    getAllTestimonialsAction(),
+    getSettingsAction(),
+  ]);
+  return (
+      <LandingPage testimonials={testimonials} submissionsOpen={settings.testimonialSubmissionsOpen} />
+  );
 }

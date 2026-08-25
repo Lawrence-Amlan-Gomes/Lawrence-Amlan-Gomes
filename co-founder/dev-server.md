@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session (2026-08-26) shipped the Case Studies feature, removed Resume, and a few content tweaks. Killed clean at End Today, .next cleared after a stale-cache error mid-session.
+note: last session (2026-08-26, later session) merged /home into the root route. Killed clean at End Today.
 ```

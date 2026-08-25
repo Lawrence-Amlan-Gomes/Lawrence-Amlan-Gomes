@@ -101,7 +101,7 @@ export default function Testimonials({ initialTestimonials, submissionsOpen }) {
         </div>
         <div className="fixed right-[5%] md:right-[11%] top-[80px] sm:top-[110px] md:top-[150px] transform -translate-y-1/2 flex flex-row gap-3 md:flex-col sm:gap-4 z-50">
           <Link
-            href="/home"
+            href="/"
             className={`p-2 sm:p-3 rounded-lg text-md sm:text-xl md:hidden block ${
               theme
                 ? "bg-[#ffffff] text-[#0a0a0a] border-[1px] border-blue-800 hover:bg-blue-800 hover:text-[#ffffff]"
@@ -114,7 +114,7 @@ export default function Testimonials({ initialTestimonials, submissionsOpen }) {
         </div>
         <div className="md:fixed hidden left-[26%] sm:left-[4%] top-[80px] sm:top-[125px] transform -translate-y-1/2 md:flex flex-col gap-3 sm:gap-4 z-50">
           <Link
-            href="/home"
+            href="/"
             className={`p-2 sm:p-3 rounded-lg text-md sm:text-xl ${
               theme
                 ? "bg-[#ffffff] text-[#0a0a0a] border-[1px] border-blue-800 hover:bg-blue-800 hover:text-[#ffffff]"

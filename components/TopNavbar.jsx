@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 // Array of navigation items
 const navItems = [
-  { href: "/home", label: "Home", activeKey: "home" },
+  { href: "/", label: "Home", activeKey: "home" },
   { href: "/projects", label: "Projects", activeKey: "projects" },
   { href: "/testimonials", label: "Clients", activeKey: "testimonials" },
   { href: "/about", label: "About", activeKey: "about" },
@@ -80,7 +80,7 @@ const TopNavbar = () => {
         }`}
       >
         {/* Logo */}
-        <Link href="/home">
+        <Link href="/">
           <div
             className={`text-lg sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wide ${
               theme ? "text-[#222222]" : "text-[#dadada]"
@@ -118,7 +118,7 @@ const TopNavbar = () => {
         }`}
       >
         {/* Logo */}
-        <Link href="/home">
+        <Link href="/">
           <div
             className={`text-lg font-bold tracking-wide ${
               theme ? "text-[#222222]" : "text-[#dadada]"

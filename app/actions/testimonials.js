@@ -40,7 +40,7 @@ async function requireSubmissionsOpen() {
 
 function revalidateTestimonialPages() {
   revalidatePath("/testimonials");
-  revalidatePath("/home");
+  revalidatePath("/");
   revalidatePath("/admin/testimonials");
 }
 

@@ -2,6 +2,15 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-26 (later session) — End Today (Merged /home into root route)
+
+- Removed the separate `/home` route: `app/page.js` now renders `LandingPage` directly (the content that used to live in `app/home/page.js`), instead of a client-side redirect from `/` to `/home`. `app/home/` deleted.
+- Updated every `/home` reference to `/`: navbar logo + "Home" nav item (`TopNavbar.jsx`), `Testimonials.jsx`, `Thesis.jsx`, `AdminShell.jsx`, and the `revalidatePath("/home")` call in `app/actions/testimonials.js` (now `revalidatePath("/")`).
+- `TopNavbar.jsx`'s active-tab logic (`pathname.split("/").pop()` falling back to `"home"` on empty string) already handled root correctly with no changes needed.
+- Updated `CLAUDE.md`'s route table and the Services section's `/home` mention.
+- Verified live: `/` → 200, `/home` → 404, `/projects`/`/about`/`/testimonials` unaffected. Lint clean.
+- No mail sent — internal route refactor only, nothing relevant to `jobCrackMentor`.
+
 ### 2026-08-26 — End Today (Case Studies feature shipped, Resume removed, minor copy/UI polish)
 
 - **New Case Studies feature**: `/case-studies` (list) + `/case-study/[urlTitle]` (detail), backed by a new `app/case-studies/case-studies.js` static file — scoped to `type: "clients-project"` entries only (Facelees, Library Management), linked to `projects.js` by `urlTitle`. Scoping decisions (data file vs. inline field, which project types qualify) were confirmed with Lawrence via AskUserQuestion before building.

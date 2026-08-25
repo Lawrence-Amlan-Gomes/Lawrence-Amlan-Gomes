@@ -48,8 +48,7 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 
 | Route | Purpose |
 |---|---|
-| `/` | Redirects client-side to `/home` (`app/page.js`) |
-| `/home` | Landing page — About/Stats/Projects/Services/Testimonials sections |
+| `/` | Landing page — About/Stats/Projects/Services/Testimonials sections (`app/page.js`). There is no separate `/home` route — it was merged into root 2026-08-26. |
 | `/about` | About + skills (`app/about/skills.js`) + experience |
 | `/projects` | Projects list — sticky secondary filter bar (`components/Projects.jsx`) below the main navbar, filters client-side by each project's `type` (`saas` / `clients-project` / `hobby-project`) |
 | `/project/[urlTitle]` | Single project detail |
@@ -102,7 +101,7 @@ utils/data-util.js # replaceMongoIdInObject / replaceMongoIdInArray helpers
 
 ### Services
 - `app/services.js` is the single source of truth for the productized services Lawrence offers to clients/businesses (Custom Web/Mobile App, Embedded AI Chatbot, Automated Meeting Scheduler, Lead Magnet & Email Capture) — distinct from `app/projects/projects.js`, which lists things he's already shipped, not offerings for hire. Each entry has `title`, `implementation`, `outcome`, and an optional `proof` (a factual note when the service is demonstrable on this very site, e.g. the floating chatbot or Cal.com booking).
-- Rendered on `/home` via `components/LandingServices.jsx` (between Projects and Testimonials in `components/LandingPage.jsx`) and fed to the AI chatbot via `app/server.js`'s `buildServicesBlock()`. Add a new service only here — it then appears on the site and in chatbot answers automatically.
+- Rendered on `/` via `components/LandingServices.jsx` (between Projects and Testimonials in `components/LandingPage.jsx`) and fed to the AI chatbot via `app/server.js`'s `buildServicesBlock()`. Add a new service only here — it then appears on the site and in chatbot answers automatically.
 
 ### Testimonials
 - DB-backed (`models/testimonial-model.js`), not a static file — unlike `projects.js`, which stays static. Query/mutation functions live in `db/queries.js`; all actions in `app/actions/testimonials.js`.

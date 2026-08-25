@@ -51,7 +51,7 @@ const AdminShell = ({ email, children }) => {
             {item.label}
           </Link>
         ))}
-        <Link href="/home" className={navItemClass(false)}>
+        <Link href="/" className={navItemClass(false)}>
           <FiExternalLink size={18} />
           View Site
         </Link>
