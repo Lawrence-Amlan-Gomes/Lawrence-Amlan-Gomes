@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: last session (2026-08-26, later session) merged /home into the root route. Killed clean at End Today.
+note: last session (2026-08-26/27) was pure Coolify/DB-migration ops work, no local dev needed after the initial check. Killed clean at End Today.
 ```

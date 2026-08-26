@@ -2,6 +2,16 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-27 — End Today (Migrated hosting Vercel→Coolify and database Atlas→self-hosted Mongo, negotiated shared-DB plan with Solvendix)
+
+- **Chat Relay with Solvendix**: agreed a shared-DB shape — only a `founder_profile` collection (and possibly later, read-only testimonials) genuinely shared between the two sites, each app's own data staying isolated. Solvendix keeps write ownership of testimonials if that's ever wired up (adds `visibleOn` + optional `projectUrlTitle`); Solvendix defines the `founder_profile` schema, Lawrence's real bio content gets seeded into it once that schema lands. Mid-session, Lawrence decided to consolidate infra rather than split it: moved this portfolio onto the same Coolify/Hostinger VPS as Solvendix instead of a shared Atlas cluster (the original plan).
+- **Hosting migration**: this app moved from Vercel to self-hosted Coolify (`185.201.8.71`), deployed from the public GitHub repo via Nixpacks, domain `lawrenceamlangomes.com` fully cut over (no more sslip.io preview). Hit and fixed: `MONGODB_CONNECTION_STRING` needing Coolify's "Available at Buildtime" toggle (root layout's `dbConnect()` runs during static prerendering), a bogus `3000:5432`/`5432` port-template default on a new MongoDB resource, and a build getting killed with no error text (ruled out both OOM and disk — root cause never fully pinned down, but a clean redeploy succeeded).
+- **Database migration**: provisioned a new self-hosted MongoDB on the Coolify VPS (several delete/recreate cycles — MongoDB's root-user init only runs once against an empty data dir, so "rotating" the password via Coolify's UI without recreating the resource silently did nothing; also discovered a genuinely unrelated container, Lawrence's My Daily Routine app, was squatting on host port 27017 for 12+ days, publicly exposed — left untouched, not this project's issue). Once a real fresh resource existed, ran `mongodump | mongorestore` from Atlas straight into it: 13 documents (8 messages, 2 testimonials, 2 users, 1 settings) migrated and verified intact. Updated `.env.local` to match.
+- Hit the same "empty testimonials" bug twice: `services/mongo.js` passes the connection string straight to `mongoose.connect()` with no separate `dbName` — a connection string missing the database-name path segment silently connects to Mongo's default `test` db instead of erroring, which looks exactly like "no data" rather than a misconfiguration.
+- `CLAUDE.md` updated: Database/Environment Variables sections now reflect Coolify + self-hosted Mongo instead of Vercel + Atlas, with the buildtime-env-var and missing-db-name gotchas documented so they don't get rediscovered later.
+- **Not confirmed working end-to-end** — see `where-we-left-off.md`. The very last redeploy (after correcting the connection string) was never verified live before End Today.
+- No mail sent to jobCrackMentor — pure infra/ops work, nothing relevant to a job-mentorship project.
+
 ### 2026-08-26 (later session) — End Today (Merged /home into root route)
 
 - Removed the separate `/home` route: `app/page.js` now renders `LandingPage` directly (the content that used to live in `app/home/page.js`), instead of a client-side redirect from `/` to `/home`. `app/home/` deleted.

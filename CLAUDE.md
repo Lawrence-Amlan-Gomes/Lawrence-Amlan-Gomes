@@ -15,7 +15,7 @@ npm run lint     # ESLint
 
 **Framework**: Next.js 14 App Router (JavaScript, not TypeScript)  
 **Styling**: Tailwind CSS + Framer Motion  
-**Database**: MongoDB via Mongoose — connection in `services/mongo.js`  
+**Database**: MongoDB via Mongoose — connection in `services/mongo.js`. As of 2026-08-27, self-hosted MongoDB on the same Coolify/Hostinger VPS as production (not Atlas — migrated off Atlas this date), sharing the underlying MongoDB instance with the sibling business site **Solvendix** (separate cluster database on that instance is planned for cross-site shared data like a founder profile; this app's own data lives in the `lawrenceAmlanGomes` database, untouched by that sharing). See Environment Variables below for connection details and deployment-platform notes.  
 **Auth**: NextAuth v5 beta with Google OAuth (`app/auth.js`)  
 **AI**: Google Gemini 2.5 Flash via `@google/genai` (`app/server.js`)  
 **Email**: none — the contact form (and its EmailJS integration) was removed 2026-08-24; `@emailjs/browser` is now an unused dependency left in `package.json`
@@ -135,9 +135,11 @@ S3_BUCKET=
 S3_PUBLIC_URL=
 ```
 
-> Google sign-in works in both dev and production as of 2026-08-20 — Vercel's `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are set, and Google Cloud Console's authorized redirect URIs include the `www.lawrenceamlangomes.com` production domain (the bare apex alone wasn't enough — it threw `redirect_uri_mismatch` until the `www` variant was added).
+> **Production hosting moved from Vercel to self-hosted Coolify (Hostinger VPS, `185.201.8.71`) on 2026-08-27.** All production env vars now live in that Coolify app resource's Environment Variables panel, not Vercel's — Vercel is no longer in use for this project. `MONGODB_CONNECTION_STRING` needed its "Available at Buildtime" toggle enabled in Coolify, since `app/layout.js`'s `dbConnect()` call runs during Next.js's static prerendering of several pages (`/about`, `/admin`, `/admin/testimonials`, `/case-studies`, `/changePassword`) — without it the build fails with `MongooseError: uri ... got "undefined"`. The connection string must also include the target database name in its path (e.g. `.../lawrenceAmlanGomes?...`) — omitting it silently connects to Mongo's default `test` database instead, which looks like "no data" rather than an error.
 >
-> **`S3_*` vars are local-only so far** — set in `.env.local`, not yet added to Vercel. Testimonial photo/video uploads will fail in production until Lawrence adds all six to Vercel's env vars.
+> Google sign-in worked in both dev and production as of 2026-08-20 on Vercel — Google Cloud Console's authorized redirect URIs include the `www.lawrenceamlangomes.com` production domain (the bare apex alone wasn't enough — it threw `redirect_uri_mismatch` until the `www` variant was added). Not yet re-verified against the new Coolify deployment as of 2026-08-27; the domain itself is unchanged so it should still hold, but confirm before relying on it.
+>
+> **`S3_*` vars** were local-only through 2026-08-26; added to Coolify's env vars as part of the 2026-08-27 hosting migration alongside the rest of the production env vars.
 
 ## Known Gaps / Incomplete Areas
 
