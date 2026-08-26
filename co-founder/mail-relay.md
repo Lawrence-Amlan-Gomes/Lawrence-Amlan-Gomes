@@ -29,6 +29,9 @@ destinations:
     path: /Users/lawrencealangomes/Documents/JobCrack/mail-box/
     scope: full session summary (unconfirmed — assumed same as skillsUpdateMentor until Lawrence narrows it)
     note: folder already contains non-mail files (about.md, education.md, experiences.md, hero.md, projects.md) as of 2026-07-23 — left untouched, additive-only
+  - name: skillsUpdateMentor
+    path: /Users/lawrencealangomes/Documents/MySelf/mail-box/skillsUpdateMentor/
+    status: BROKEN as of 2026-08-27 — this folder no longer exists. Its parent (/Users/lawrencealangomes/Documents/MySelf/mail-box/) now only contains a differently-named folder, saasCoFounder/, with one unrelated-looking file in it (not confirmed to be the renamed destination). Skipped this destination in the 2026-08-27 End Today mail rather than guess. Needs Lawrence to confirm the real current path before mailing here again.
 ```
 
 Update this list whenever Lawrence gives a new path, or says a destination has moved/should be removed. Keep it as the durable source of truth — don't ask him to repeat it every session.
