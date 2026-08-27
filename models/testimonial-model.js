@@ -27,6 +27,14 @@ const schema = new Schema(
     projectUrlTitle: { type: String, default: null },
     locked: { type: Boolean, default: false },
     order: { type: Number, default: 0 },
+
+    visibleOn: { type: [String], default: ["portfolio"] },
+    solvendixCaseStudyRef: { type: String, default: null },
+    status: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "approved",
+    },
   },
   { timestamps: true }
 );
