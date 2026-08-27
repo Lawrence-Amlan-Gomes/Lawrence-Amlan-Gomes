@@ -68,7 +68,13 @@ export default function Testimonials({ initialTestimonials, submissionsOpen }) {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
           {submissionsOpen &&
             (formMode === "create" ? (
-              <TestimonialForm existing={null} onSaved={handleSaved} onCancel={closeForm} />
+              <TestimonialForm
+                existing={null}
+                onSaved={handleSaved}
+                onCancel={closeForm}
+                wideBreakpoint="lg"
+                className="xl:col-span-2"
+              />
             ) : (
               <AddTestimonialCard onClick={() => setFormMode("create")} />
             ))}
@@ -79,6 +85,8 @@ export default function Testimonials({ initialTestimonials, submissionsOpen }) {
                 existing={testimonial}
                 onSaved={handleSaved}
                 onCancel={closeForm}
+                wideBreakpoint="lg"
+                className="xl:col-span-2"
               />
             ) : (
               <TestimonialCard

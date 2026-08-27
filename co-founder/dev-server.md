@@ -17,7 +17,7 @@ _Owned by skillCoFounder.md._
 ```
 status: running
 port: 3001
-pid: 55355
+pid: 3715
 started_at: 2026-08-27 (fourth session)
-note: 3000 held by a foreign process, as usual. 3002 also has an untouched stray process, not mine. Restarted after making add/edit swap in place on both / and /testimonials — not pushed yet.
+note: 3000 held by a foreign process, as usual. 3002 also has an untouched stray process, not mine. Restarted after enlarging the theme toggle icon (reverted an earlier mistaken Google-icon size change) — not pushed yet.
 ```

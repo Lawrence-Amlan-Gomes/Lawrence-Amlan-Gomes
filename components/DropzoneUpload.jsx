@@ -41,6 +41,7 @@ export default function DropzoneUpload({
       }}
       role="button"
       tabIndex={0}
+      aria-label={label}
       className={`group relative w-full ${aspectClass} rounded-lg border-2 border-dashed cursor-pointer overflow-hidden flex flex-col items-center justify-center gap-2 text-center px-3 transition-colors ${
         dragging
           ? theme
@@ -79,10 +80,7 @@ export default function DropzoneUpload({
           </div>
         </>
       ) : (
-        <>
-          <FiUploadCloud className={`text-2xl ${theme ? "text-blue-700" : "text-blue-500"}`} />
-          <span className={`text-xs ${theme ? "text-blue-700" : "text-blue-500"}`}>{label}</span>
-        </>
+        <FiUploadCloud className={`text-2xl ${theme ? "text-blue-700" : "text-blue-500"}`} />
       )}
     </div>
   );

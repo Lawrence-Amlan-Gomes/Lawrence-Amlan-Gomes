@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -22,7 +21,6 @@ const staggerContainer = {
 
 export default function LandingTestimonials({ testimonials: initialTestimonials = [], submissionsOpen }) {
   const { theme } = useTheme();
-  const router = useRouter();
   const scrollRef = useRef(null);
   const holdDirectionRef = useRef(0);
   const holdRafRef = useRef(null);
@@ -157,9 +155,15 @@ export default function LandingTestimonials({ testimonials: initialTestimonials 
         className="flex flex-nowrap items-stretch overflow-x-auto overflow-y-hidden gap-4 sm:gap-6 py-4 scrollbar-hide"
       >
         {submissionsOpen && (
-          <div className="w-[340px] max-[425px]:w-[90vw] sm:w-[400px] lg:w-[460px] flex-shrink-0">
+          <div
+            className={
+              formMode === "create"
+                ? "w-[340px] max-[425px]:w-[90vw] sm:w-[400px] md:w-[640px] lg:w-[700px] flex-shrink-0"
+                : "w-[340px] max-[425px]:w-[90vw] sm:w-[400px] lg:w-[460px] flex-shrink-0"
+            }
+          >
             {formMode === "create" ? (
-              <TestimonialForm existing={null} onSaved={handleSaved} onCancel={closeForm} />
+              <TestimonialForm existing={null} onSaved={handleSaved} onCancel={closeForm} wideBreakpoint="md" />
             ) : (
               <div className="h-[320px] max-[425px]:h-[400px] sm:h-[360px] lg:h-[400px]">
                 <AddTestimonialCard onClick={() => setFormMode("create")} />
@@ -172,16 +176,12 @@ export default function LandingTestimonials({ testimonials: initialTestimonials 
           return isEditing ? (
             <div
               key={testimonial.id}
-              className="w-[340px] max-[425px]:w-[90vw] sm:w-[400px] lg:w-[460px] flex-shrink-0"
+              className="w-[340px] max-[425px]:w-[90vw] sm:w-[400px] md:w-[640px] lg:w-[700px] flex-shrink-0"
             >
-              <TestimonialForm existing={testimonial} onSaved={handleSaved} onCancel={closeForm} />
+              <TestimonialForm existing={testimonial} onSaved={handleSaved} onCancel={closeForm} wideBreakpoint="md" />
             </div>
           ) : (
-            <div
-              key={testimonial.id}
-              onClick={() => router.push("/testimonials")}
-              className="flex-shrink-0 cursor-pointer"
-            >
+            <div key={testimonial.id} className="flex-shrink-0">
               <TestimonialCard
                 id={testimonial.id}
                 name={testimonial.name}
