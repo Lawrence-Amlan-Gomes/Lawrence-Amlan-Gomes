@@ -15,9 +15,9 @@ _Owned by skillCoFounder.md._
 ## Current State
 
 ```
-status: running
-port: 3001
-pid: 3715
-started_at: 2026-08-27 (fourth session)
-note: 3000 held by a foreign process, as usual. 3002 also has an untouched stray process, not mine. Restarted after enlarging the theme toggle icon (reverted an earlier mistaken Google-icon size change) — not pushed yet.
+status: not running
+port: none
+pid: none
+started_at: none
+note: killed clean at End Today (2026-08-28 session). Note: an untouched foreign process was still on 3002 as of this session — not mine, left alone.
 ```
