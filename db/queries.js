@@ -62,6 +62,14 @@ async function getAllTestimonials() {
   return replaceMongoIdInArray(all);
 }
 
+async function getPublicTestimonials() {
+  const visible = await testimonialModel
+    .find({ status: "approved" })
+    .sort({ order: 1, createdAt: -1 })
+    .lean();
+  return replaceMongoIdInArray(visible);
+}
+
 async function getTestimonialById(id) {
   const found = await testimonialModel.findById(id).lean();
   if (!found) return null;
@@ -128,6 +136,7 @@ export {
   getAllMessages,
   updateMessage,
   getAllTestimonials,
+  getPublicTestimonials,
   getTestimonialById,
   createTestimonial,
   updateTestimonial,

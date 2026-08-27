@@ -9,6 +9,7 @@ import {
   adminUpdateSettingsAction,
   adminDeleteTestimonialAction,
   adminReorderTestimonialsAction,
+  adminSetTestimonialStatusAction,
 } from "@/app/actions/testimonials";
 
 export default function AdminTestimonials({ initialTestimonials, initialSubmissionsOpen }) {
@@ -19,6 +20,7 @@ export default function AdminTestimonials({ initialTestimonials, initialSubmissi
   const [togglingSettings, setTogglingSettings] = useState(false);
   const [toggleError, setToggleError] = useState("");
   const [deletingId, setDeletingId] = useState(null);
+  const [togglingStatusId, setTogglingStatusId] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(null);
   const [savingOrder, setSavingOrder] = useState(false);
@@ -77,6 +79,17 @@ export default function AdminTestimonials({ initialTestimonials, initialSubmissi
   const handleDragEnd = () => {
     setDraggedIndex(null);
     setDragOverIndex(null);
+  };
+
+  const handleToggleVisibility = async (t) => {
+    setTogglingStatusId(t.id);
+    try {
+      const nextStatus = t.status === "rejected" ? "approved" : "rejected";
+      await adminSetTestimonialStatusAction(t.id, nextStatus);
+      await refresh();
+    } finally {
+      setTogglingStatusId(null);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -202,6 +215,9 @@ export default function AdminTestimonials({ initialTestimonials, initialSubmissi
               </div>
             </div>
             <div className="flex flex-col items-end gap-1 text-[11px] flex-shrink-0">
+              <span className={t.status === "rejected" ? "text-red-600 font-medium" : "text-green-600 font-medium"}>
+                {t.status === "rejected" ? "Hidden" : "Visible"}
+              </span>
               <span className={t.locked ? "text-red-600 font-medium" : textMuted}>
                 {t.locked ? "Locked" : "Unlocked"}
               </span>
@@ -210,6 +226,16 @@ export default function AdminTestimonials({ initialTestimonials, initialSubmissi
               )}
             </div>
             <div className="flex gap-2 flex-shrink-0">
+              <button
+                type="button"
+                onClick={() => handleToggleVisibility(t)}
+                disabled={togglingStatusId === t.id}
+                className={`text-[13px] font-medium underline-offset-2 hover:underline disabled:opacity-60 ${
+                  theme ? "text-blue-700" : "text-blue-500"
+                }`}
+              >
+                {togglingStatusId === t.id ? "..." : t.status === "rejected" ? "Show" : "Hide"}
+              </button>
               <button
                 type="button"
                 onClick={() => setEditing(t)}

@@ -12,7 +12,7 @@ import projects from "./projects/projects";
 import skills from "./about/skills";
 import services from "./services";
 import { dbConnect } from "@/services/mongo";
-import { getAllTestimonials } from "@/db/queries";
+import { getPublicTestimonials } from "@/db/queries";
 
 const TYPE_LABEL = {
   saas: "SaaS Product",
@@ -106,7 +106,7 @@ async function getProjectDetails(urlTitle) {
   let clientTestimonial = null;
   try {
     await dbConnect();
-    const testimonials = await getAllTestimonials();
+    const testimonials = await getPublicTestimonials();
     const match = testimonials.find((t) => t.projectUrlTitle === urlTitle);
     if (match) {
       clientTestimonial = {

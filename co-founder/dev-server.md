@@ -17,7 +17,7 @@ _Owned by skillCoFounder.md._
 ```
 status: running
 port: 3001
-pid: 19770
+pid: 40528
 started_at: 2026-08-27 (fourth session)
-note: 3000 held by a foreign process, as usual. Restarted after a build + forcing / and /testimonials dynamic.
+note: 3000 held by a foreign process, as usual. 3002 also has an untouched stray process, not mine. Restarted after shipping the testimonial hide/show feature.
 ```

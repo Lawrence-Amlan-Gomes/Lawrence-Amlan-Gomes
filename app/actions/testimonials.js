@@ -4,6 +4,7 @@ import { dbConnect } from "@/services/mongo";
 import { auth } from "../auth";
 import {
   getAllTestimonials,
+  getPublicTestimonials,
   getTestimonialById,
   createTestimonial,
   updateTestimonial,
@@ -112,6 +113,22 @@ async function requestUploadUrl({ kind, contentType }) {
 async function getAllTestimonialsAction() {
   await dbConnect();
   return await getAllTestimonials();
+}
+
+async function getPublicTestimonialsAction() {
+  await dbConnect();
+  return await getPublicTestimonials();
+}
+
+async function adminSetTestimonialStatusAction(id, status) {
+  await requireAdmin();
+  await dbConnect();
+  if (!["approved", "rejected"].includes(status)) {
+    throw new Error("Invalid status");
+  }
+  const updated = await updateTestimonial(id, { status });
+  revalidateTestimonialPages();
+  return updated;
 }
 
 async function getSettingsAction() {
@@ -228,12 +245,14 @@ async function adminDeleteTestimonialAction(id) {
 export {
   requestUploadUrl,
   getAllTestimonialsAction,
+  getPublicTestimonialsAction,
   getSettingsAction,
   adminUpdateSettingsAction,
   createPublicTestimonialAction,
   updatePublicTestimonialAction,
   adminCreateTestimonialAction,
   adminUpdateTestimonialAction,
+  adminSetTestimonialStatusAction,
   adminReorderTestimonialsAction,
   adminDeleteTestimonialAction,
 };
