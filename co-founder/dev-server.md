@@ -15,9 +15,9 @@ _Owned by skillCoFounder.md._
 ## Current State
 
 ```
-status: not running
-port: none
-pid: none
-started_at: none
-note: killed by request mid-session (2026-08-27).
+status: running
+port: 3001
+pid: 19770
+started_at: 2026-08-27 (fourth session)
+note: 3000 held by a foreign process, as usual. Restarted after a build + forcing / and /testimonials dynamic.
 ```
