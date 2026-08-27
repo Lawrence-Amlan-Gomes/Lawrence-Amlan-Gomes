@@ -1,11 +1,13 @@
 'use client';
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/app/hooks/useTheme";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import TestimonialCard from "./TestimonialCard";
 import AddTestimonialCard from "./AddTestimonialCard";
+import TestimonialForm from "./TestimonialForm";
+import { getPublicTestimonialsAction } from "@/app/actions/testimonials";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const fadeUp = {
@@ -18,12 +20,24 @@ const staggerContainer = {
   show: { transition: { staggerChildren: 0.10 } },
 };
 
-export default function LandingTestimonials({ testimonials = [], submissionsOpen }) {
+export default function LandingTestimonials({ testimonials: initialTestimonials = [], submissionsOpen }) {
   const { theme } = useTheme();
   const router = useRouter();
   const scrollRef = useRef(null);
   const holdDirectionRef = useRef(0);
   const holdRafRef = useRef(null);
+  const [testimonials, setTestimonials] = useState(initialTestimonials);
+  const [formMode, setFormMode] = useState(null); // null | "create" | testimonial
+
+  const refresh = async () => {
+    const fresh = await getPublicTestimonialsAction();
+    setTestimonials(fresh);
+  };
+  const closeForm = () => setFormMode(null);
+  const handleSaved = async () => {
+    await refresh();
+    closeForm();
+  };
 
   const scrollByCard = (direction) => {
     scrollRef.current?.scrollBy({ left: direction * 380, behavior: "smooth" });
@@ -143,33 +157,51 @@ export default function LandingTestimonials({ testimonials = [], submissionsOpen
         className="flex flex-nowrap items-stretch overflow-x-auto overflow-y-hidden gap-4 sm:gap-6 py-4 scrollbar-hide"
       >
         {submissionsOpen && (
-          <div className="w-[340px] max-[425px]:w-[90vw] sm:w-[400px] lg:w-[460px] h-[320px] max-[425px]:h-[400px] sm:h-[360px] lg:h-[400px] flex-shrink-0">
-            <AddTestimonialCard href="/testimonials" />
+          <div className="w-[340px] max-[425px]:w-[90vw] sm:w-[400px] lg:w-[460px] flex-shrink-0">
+            {formMode === "create" ? (
+              <TestimonialForm existing={null} onSaved={handleSaved} onCancel={closeForm} />
+            ) : (
+              <div className="h-[320px] max-[425px]:h-[400px] sm:h-[360px] lg:h-[400px]">
+                <AddTestimonialCard onClick={() => setFormMode("create")} />
+              </div>
+            )}
           </div>
         )}
-        {testimonials.map((testimonial) => (
-          <div
-            key={testimonial.id}
-            onClick={() => router.push("/testimonials")}
-            className="flex-shrink-0 cursor-pointer"
-          >
-            <TestimonialCard
-              id={testimonial.id}
-              name={testimonial.name}
-              designation={testimonial.designation}
-              comment={testimonial.comment}
-              rating={testimonial.rating}
-              photoUrl={testimonial.photoUrl}
-              photoPosition={testimonial.photoPosition}
-              videoUrl={testimonial.videoUrl}
-              videoPosition={testimonial.videoPosition}
-              videoHidden={testimonial.videoHidden}
-              projectUrlTitle={testimonial.projectUrlTitle}
-              locked={testimonial.locked}
-              variant="row"
-            />
-          </div>
-        ))}
+        {testimonials.map((testimonial) => {
+          const isEditing = formMode && formMode !== "create" && formMode.id === testimonial.id;
+          return isEditing ? (
+            <div
+              key={testimonial.id}
+              className="w-[340px] max-[425px]:w-[90vw] sm:w-[400px] lg:w-[460px] flex-shrink-0"
+            >
+              <TestimonialForm existing={testimonial} onSaved={handleSaved} onCancel={closeForm} />
+            </div>
+          ) : (
+            <div
+              key={testimonial.id}
+              onClick={() => router.push("/testimonials")}
+              className="flex-shrink-0 cursor-pointer"
+            >
+              <TestimonialCard
+                id={testimonial.id}
+                name={testimonial.name}
+                designation={testimonial.designation}
+                comment={testimonial.comment}
+                rating={testimonial.rating}
+                photoUrl={testimonial.photoUrl}
+                photoPosition={testimonial.photoPosition}
+                videoUrl={testimonial.videoUrl}
+                videoPosition={testimonial.videoPosition}
+                videoHidden={testimonial.videoHidden}
+                projectUrlTitle={testimonial.projectUrlTitle}
+                locked={testimonial.locked}
+                canEdit={submissionsOpen}
+                onEdit={() => setFormMode(testimonial)}
+                variant="row"
+              />
+            </div>
+          );
+        })}
       </div>
       <div className="flex justify-center mt-8">
         <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>

@@ -4,7 +4,7 @@ import { useTheme } from "@/app/hooks/useTheme";
 import TestimonialCard from "./TestimonialCard";
 import TestimonialForm from "./TestimonialForm";
 import AddTestimonialCard from "./AddTestimonialCard";
-import { getAllTestimonialsAction } from "@/app/actions/testimonials";
+import { getPublicTestimonialsAction } from "@/app/actions/testimonials";
 import Footer from "./Footer";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export default function Testimonials({ initialTestimonials, submissionsOpen }) {
   const [formMode, setFormMode] = useState(null); // null | "create" | testimonial object
 
   const refresh = async () => {
-    const fresh = await getAllTestimonialsAction();
+    const fresh = await getPublicTestimonialsAction();
     setTestimonials(fresh);
   };
 
@@ -65,39 +65,41 @@ export default function Testimonials({ initialTestimonials, submissionsOpen }) {
           </p>
         </div>
 
-        {submissionsOpen && formMode && (
-          <div className="mb-8">
-            <TestimonialForm
-              existing={formMode === "create" ? null : formMode}
-              onSaved={handleSaved}
-              onCancel={closeForm}
-            />
-          </div>
-        )}
-
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
-          {submissionsOpen && !formMode && (
-            <AddTestimonialCard onClick={() => setFormMode("create")} />
+          {submissionsOpen &&
+            (formMode === "create" ? (
+              <TestimonialForm existing={null} onSaved={handleSaved} onCancel={closeForm} />
+            ) : (
+              <AddTestimonialCard onClick={() => setFormMode("create")} />
+            ))}
+          {testimonials.map((testimonial) =>
+            formMode && formMode !== "create" && formMode.id === testimonial.id ? (
+              <TestimonialForm
+                key={testimonial.id}
+                existing={testimonial}
+                onSaved={handleSaved}
+                onCancel={closeForm}
+              />
+            ) : (
+              <TestimonialCard
+                key={testimonial.id}
+                id={testimonial.id}
+                name={testimonial.name}
+                designation={testimonial.designation}
+                comment={testimonial.comment}
+                rating={testimonial.rating}
+                photoUrl={testimonial.photoUrl}
+                photoPosition={testimonial.photoPosition}
+                videoUrl={testimonial.videoUrl}
+                videoPosition={testimonial.videoPosition}
+                videoHidden={testimonial.videoHidden}
+                projectUrlTitle={testimonial.projectUrlTitle}
+                locked={testimonial.locked}
+                canEdit={submissionsOpen}
+                onEdit={() => setFormMode(testimonial)}
+              />
+            )
           )}
-          {testimonials.map((testimonial) => (
-            <TestimonialCard
-              key={testimonial.id}
-              id={testimonial.id}
-              name={testimonial.name}
-              designation={testimonial.designation}
-              comment={testimonial.comment}
-              rating={testimonial.rating}
-              photoUrl={testimonial.photoUrl}
-              photoPosition={testimonial.photoPosition}
-              videoUrl={testimonial.videoUrl}
-              videoPosition={testimonial.videoPosition}
-              videoHidden={testimonial.videoHidden}
-              projectUrlTitle={testimonial.projectUrlTitle}
-              locked={testimonial.locked}
-              canEdit={submissionsOpen}
-              onEdit={() => setFormMode(testimonial)}
-            />
-          ))}
         </div>
         <div className="fixed right-[5%] md:right-[11%] top-[80px] sm:top-[110px] md:top-[150px] transform -translate-y-1/2 flex flex-row gap-3 md:flex-col sm:gap-4 z-50">
           <Link
