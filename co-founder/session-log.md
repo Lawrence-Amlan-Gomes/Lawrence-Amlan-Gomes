@@ -2,6 +2,18 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-08-27 (third session) — End Today (Fixed GitHub auto-deploy, shipped testimonial schema fields + live data backfill, found a real MinIO CORS bug)
+
+- **GitHub → Coolify auto-deploy was broken**: no webhook existed for this repo at all (unlike `mydailyroutine.app`, which auto-deploys — likely connected via Coolify's GitHub App integration rather than a plain repo URL). Fixed manually: copied Coolify's webhook URL + secret into GitHub's repo Settings → Webhooks (push events only). Confirmed working by watching the next real push actually trigger a deployment.
+- Shipped the testimonial schema fields agreed with Solvendix yesterday: `visibleOn`, `solvendixCaseStudyRef`, `status` added to `models/testimonial-model.js` (schema-only, no query filtering logic yet — deliberately incremental, next session's job). Built clean, committed, pushed (`8188b40`), auto-deployed via the newly-fixed webhook.
+- **Real bug caught while testing**: Solvendix's Claude found the two pre-existing testimonials (Zaman, Musfiq) had neither new field at all — Mongoose schema defaults don't retroactively apply to already-stored documents. Fixed with a one-time additive backfill (`$addToSet` for `visibleOn`, `$set` only where `status` was missing), verified independently on both sides afterward, nothing clobbered (Solvendix's own `"solvendix"` tag preserved).
+- **Solvendix independently fixed an unrelated pre-existing bug**: both testimonials' `photoUrl` were relative paths into this project's own `public/` folder, never actually uploaded to MinIO — dead links that predated this session entirely. They located the real files and uploaded them into the shared bucket themselves. Verified afterward: new URLs resolve, `/testimonials` still 200s.
+- **Found and independently verified a real, currently-live bug**: the shared MinIO bucket has no CORS configuration at all, and this MinIO deployment rejects `PutBucketCors` outright — can only be fixed at the container level in Coolify (`MINIO_API_CORS_ALLOW_ORIGIN` + restart), not from app code. Reproduced the exact same error myself with my own credentials before reporting it as fact. Practical effect: the public testimonial submission form's browser-direct photo/video upload is likely silently failing for real visitors right now. Lawrence's call: fix it tomorrow, not tonight.
+- `CLAUDE.md` updated: new Known Gaps entry for the MinIO CORS bug, new Environment Variables note documenting the manual webhook fix.
+- Sent 1 mail to `jobCrackMentor` (`GitHub Webhook Fix and MinIO CORS Bug Found.md`) — covers the three concrete technical lessons from this half of the session. `skillsUpdateMentor` still skipped (broken path, unresolved).
+- Processed 2 inbound mails from Solvendix mid-session (durable-record duplicates of things already resolved live via direct messaging) — absorbed as already-known, deleted, nothing new to file.
+- Dev server: stayed off the entire session — all verification done via `npm run build` and direct database/HTTP checks, no browser testing needed.
+
 ### 2026-08-27 (later session) — End Today (Verified prior migration live, negotiated + then overrode shared-DB architecture with Solvendix, discovered direct cross-session agent messaging)
 
 - Verified the previous session's unconfirmed Coolify/Mongo migration: `/testimonials`, `/about`, `/case-studies`, `/`, `/admin` all return correct status codes live, Mr. Zaman's testimonial confirmed actually rendering. That "probably broken until checked" item from before is now closed.
