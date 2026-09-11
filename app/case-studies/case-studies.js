@@ -38,36 +38,41 @@ const caseStudies = [
     ],
   },
   {
-    projectUrlTitle: "library-management",
-    client: "Community Library (Dhaka)",
+    projectUrlTitle: "cloud-flow-library",
+    client: "Cloud Flow Library (Dhaka)",
     industry: "Education / Community Services",
-    timeline: "2025, ~4 weeks",
+    timeline: "2026, rebuilt September 2026",
     heroImg: "/P19pic.png",
     summary:
-      "A small community library in Dhaka was tracking every borrow, return, and fine by hand. It needed a real digital system members and the librarian could both rely on.",
+      "The same Dhaka library client I'd built a book-borrowing system for came back with a different need: a way for visitors to browse the catalog and pay to reserve a seat in the physical reading room online, instead of showing up and hoping a spot was free.",
     challenge:
-      "Manual tracking meant no reliable record of who had which books, no consistent way to calculate late fines, and no easy way for members to see what was available before showing up in person. The client needed something simple enough to run himself day to day, without ongoing developer support.",
+      "The original borrowing-tracking system didn't fit what the client actually needed going forward — the real bottleneck was the reading room itself, with no way for a visitor to check seat availability or reserve one in advance, and no way to collect the seat fee without doing it in person. The rebuild had to drop the old borrowing model entirely rather than bolt a booking feature on top of it.",
     approach: [
       {
-        title: "Member-facing borrowing system",
+        title: "A generated but fully browsable catalog",
         description:
-          "Members create an account, browse the collection, and borrow up to 3 books at a time — with a 100 TK/day late fine calculated automatically, removing manual fine tracking entirely.",
+          "1,200 books, searchable by title or author and filterable by category, genre, and availability — open to any visitor, no account required.",
       },
       {
-        title: "A simple admin dashboard for one person to run",
+        title: "Seat booking that respects real-world constraints",
         description:
-          "The client manages the full book collection and member list himself from a straightforward dashboard — no technical background required, no developer needed for day-to-day operation.",
+          "A calendar that only opens on the library's real days and hours (Saturday–Thursday, 9AM–9PM), 1-hour slots capped at 10 seats each, a 100 TK fee, and payment through bKash restricted to visitors inside Bangladesh.",
       },
       {
-        title: "A stack built to stay maintainable",
+        title: "An AI assistant that can finish the booking itself",
         description:
-          "Next.js, React, and MongoDB — chosen for a clean, reliable system a small library could depend on long-term without ongoing infrastructure overhead.",
+          "A floating Gemini-powered chat widget, Flo, answers booking questions and — once it has a name, email, phone, date, and time from the conversation — hands back a ready-to-pay booking link, no form-hunting required.",
+      },
+      {
+        title: "Timezone bugs fixed at the root, not patched at the surface",
+        description:
+          "Caught a real bug during the rebuild where date logic followed the server's own timezone, so \"Saturday\" could silently resolve to Friday (a closed day) depending on where it ran. Fixed by anchoring every date check to Asia/Dhaka and enforcing the closed-day/hours rule server-side on every path into a booking — the calendar UI, the chatbot's generated link, and a hand-typed URL alike — not just in the client-side calendar component.",
       },
     ],
     results: [
-      "Replaced fully manual, error-prone tracking with automatic fine calculation and a real borrowing record.",
-      "The librarian runs the system independently — no code changes needed to manage books or members.",
-      "Live in production, used by real library members for browsing and borrowing.",
+      "Replaced the old book-borrowing system entirely with a paid seat-booking model built around how the library actually operates day to day.",
+      "Visitors can browse 1,200 books and book a reading-room seat in under a minute, with no account required.",
+      "The AI assistant can carry a visitor from a plain-language question straight through to a ready-to-pay booking link.",
     ],
   },
 ];

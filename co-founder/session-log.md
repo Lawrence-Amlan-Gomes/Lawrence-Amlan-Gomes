@@ -2,6 +2,20 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-09-11 — End Today (Mail backlog processed, Cloud Flow Library rewrite: renamed & rebuilt the Library Management project and case study)
+
+- Processed 13 inbound mails (13-day gap since last session) — 12 Solvendix FYI (cold-outreach machine progress, pricing model overhaul, Meta/gh-CLI/rate-limit technical gotchas) plus 1 Fiverr mail with first real Gig dashboard stats. All absorbed and deleted; saved 2 reusable technical notes to cross-session memory (`gh` multi-account git-push gotcha, background-agent rate-limit resume pattern).
+- **Chat Relay, direct cross-session**: discovered the Library Management project's own Claude (`library-be`) was live via `ListAgents`, messaged it directly instead of manual copy-paste. Learned the client (real, confirmed with Lawrence: Mr. Zaman) had that entire project rewritten from scratch — dropped the book-borrowing model, rebuilt as "Cloud Flow Library": a 1,200-book browsable catalog plus paid 1-hour reading-room seat booking (bKash, Bangladesh-restricted), an AI booking assistant ("Flo"), and a locked-down Google-only admin login.
+- Renamed and rewrote the project entry (`app/projects/projects.js`, id 19: `library-management` → `cloud-flow-library`, new live link `https://cloude-flow-library.vercel.app/`, confirmed live) and its case study (`app/case-studies/case-studies.js`), including a real technical-decision story (a timezone bug fixed by anchoring all date logic to Asia/Dhaka and validating server-side on every booking entry point).
+- Used Playwright to screenshot the new live site end-to-end (home, catalog, booking calendar, seat modal, checkout, admin gate, chat widget) and replaced all 16 old `public/P19*.png` files with 9 new ones.
+- Updated Mr. Zaman's live testimonial DB doc and the seed script so `projectUrlTitle` still resolves to the renamed project — did not touch his actual quoted testimonial text (still says "library management system," his real words; flagged to Lawrence rather than rewritten).
+- Verified everything live on a restarted dev server (all routes 200, testimonial case-study link resolves, lint clean).
+- `CLAUDE.md` updated: Case Studies section's project list corrected, new note on the Projects section documenting that a `clients-project` can get fully renamed/rewritten and what has to stay in sync when it does.
+- Told Solvendix's Claude directly (live `SendMessage`, not mail) that their own copied case study for this project (copied 2026-08-28) is now stale, with full detail to update it — no reply yet by End Today.
+- Sent 1 mail to `jobCrackMentor` about the rewrite (their project mirror may still describe the old borrowing system). `skillsUpdateMentor` still skipped (broken path, unresolved).
+- Environment note: `node_modules` was completely missing at session start — ran `npm install` before the dev server would run at all; flagged to Lawrence, cause unconfirmed.
+- Dev server: `node_modules` reinstalled from scratch, started on 3002 this session (3000/3001 held by foreign processes, as usual), restarted once after the code changes, killed clean at End Today.
+
 ### 2026-08-28 — End Today (Database credential lockout, real testimonial hide/show + in-place add/edit, fixed a live caching bug, two architecture specs written for Solvendix)
 
 - **Fixed a real production bug**: `/` and `/testimonials` were statically cached — a testimonial added via the dev server never appeared on production because `revalidatePath()` only refreshes the cache of whatever process runs it. Forced both routes dynamic. Pushed (`1e22e2b`).
@@ -101,79 +115,15 @@ _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 - Sent 3 mails each to `skillsUpdateMentor` and `jobCrackMentor` (chatbot tool-calling architecture + counting-bug lesson, Services productization, brief UX/content-polish summary).
 - Dev server: started on 3001 this session (3000 held by a foreign process, as usual), restarted many times through the iteration rounds, killed clean at End Today.
 
-### 2026-08-22 — End Today (Landing photo/YouTube tweaks, project type taxonomy + client-list correction, blogs removed, projects filter navbar)
+### Earlier sessions (compressed, 2026-07-23 to 2026-08-22)
 
-- Swapped Landing About's photo to the square `/ProfilePic27.png` (frame changed to `aspect-square`); added a YouTube link across Footer, Contact, and LandingContact.
-- Added a `type: "saas" | "clients-project" | "hobby-project"` field to every entry in `app/projects/projects.js` after asking clarifying questions. Client's-project: Library Management, Facelees. SaaS: My Daily Routine, Real Caffeine Calculator, Budget Meal Maker. Everything else (18, including a reclassified Chemistry MCQ Test) is hobby-project. Client/SaaS entries got `gitLink: null` — existing conditional rendering already hides the GitHub button, no component changes needed.
-- Deleted Mr. Kabir's testimonial from the live MongoDB collection (confirmed with Lawrence first) — it claimed a client relationship over Chemistry MCQ Test, no longer accurate now that project is hobby-classified. Also removed from `scripts/seed-testimonials.mjs` so a re-seed can't resurrect it.
-- Removed blogs entirely, per Lawrence's explicit "I don't need them anymore" (confirmed full deletion vs. hide-only): `/blogs`, `/blog/[urlTitle]`, `blogs.js`, all Blog* components, the nav link, the home-page section, the AI bio's Blogs paragraph, and README's Writing section.
-- Built a filter bar on `/projects` (All / SaaS / Client Projects / Hobby Projects), corrected twice at Lawrence's direction: first attempt was `sticky`-in-flow and pushed the heading down from its original position — fixed by making it `fixed` and out of flow; then it was found overlapping the main scrollbar — fixed by replicating `TopNavbar.jsx`'s exact scrollbar-width measurement pattern instead of a plain full-width bar.
-- `CLAUDE.md` updated live (not deferred): Pages table, new "Projects" pattern section, stale Testimonials wording fixed.
-- Sent 1 mail each to `skillsUpdateMentor` and `jobCrackMentor` (`Client List Correction + Project Taxonomy.md`) — corrects a previously-sent fact (Kabir named as a client) and shares the new taxonomy.
-- Dev server: started on 3002 this session (3000/3001 held by foreign processes, as usual), restarted 5 times through the iteration rounds, killed clean at End Today.
-
-### 2026-08-21 — End Today (New Project Maker: Budget Meal Maker added as project #27, screenshot-checklist format rule corrected, skills/README synced)
-
-- Ran the full New Project Maker workflow: added project #27 "Budget Meal Maker" (Astro + TypeScript islands, Cloudflare Workers deploy, hand-rolled meal-budget allocation solver, SEO content library) to `app/projects/projects.js`, produced the screenshot checklist, Lawrence captured and dropped all 8 images in `public/`.
-- Found and fixed a real bug: the main image landed as `p27.png` (lowercase), which would 404 on Vercel's case-sensitive filesystem despite working fine on macOS locally — renamed to `P27.png` to match convention, verified all 8 images + the project page return 200.
-- Screenshot Checklist delivery format corrected twice at Lawrence's direction, now locked into `new-project-maker.md` Phase 4: each filename stem goes in its own fenced code block (real copy-icon button in this chat UI), `.png` and the instruction sit outside the block as plain text. Ruled out both a full HTML Artifact with JS copy buttons and inline single-backtick spans (no copy button on those here) before landing on this.
-- "Everywhere's about" sync: added Astro and Cloudflare Workers (both newly verified via this project) as chips to `app/about/skills.js`, added Budget Meal Maker to `README.md`'s Selected Projects table. Deliberately left the curated "core stack" bio prose (About.jsx, LandingAbout.jsx, myself.js, README badges, experiences.js) untouched — one project's first use of a tool isn't yet "core."
-- Sent outbound mail to both `skillsUpdateMentor` and `jobCrackMentor` describing the new project and new skills — first time in several sessions this project's work was judged mail-relevant, versus recent UI-polish sessions that weren't.
-- Processed 1 inbound mail (Fiverr Gig 3 status, FYI only) at session start; absorbed into memory, deleted.
-- Dev server: started on 3002 this session (3000/3001 held by foreign processes, as usual), restarted twice for code changes, killed clean at End Today.
-
-### 2026-08-20 (later session) — End Today (Testimonials rebuilt as a full DB-backed feature: schema, S3 uploads, admin CRUD, public submissions, drag-reorder)
-
-- Fixed production Google OAuth `redirect_uri_mismatch` — Google Cloud Console only had the bare apex domain registered, not `www.lawrenceamlangomes.com` (the site's actual canonical domain). Added the `www` variant to both Authorized JavaScript origins and redirect URIs. Confirmed working by Lawrence; no code change.
-- Rebuilt the admin panel shell: `Admin.jsx` → `AdminShell.jsx` (real sidebar nav, mobile drawer) wired through a new `app/admin/layout.js` that owns the `/admin/*` auth guard. Fixed the sidebar/content rendering underneath the sitewide fixed navbar.
-- **Testimonials moved from a static file to MongoDB**, with a real feature set: S3-compatible (MinIO) blob storage via presigned direct-to-browser uploads (`services/s3.js`), admin CRUD + non-destructive photo/video framing (`AdminTestimonialEditor.jsx` + `MediaFramer.jsx`), a public submission/edit form gated by an admin toggle (`TestimonialForm.jsx`, `DropzoneUpload.jsx`), custom video controls (native controls silently drop volume/fullscreen at narrow widths), and admin drag-to-reorder (`order` field, native HTML5 DnD, no new dependency) that now drives public display order.
-- Found and fixed a real concurrency bug in `services/mongo.js`: `dbConnect()` had no connection caching, and pages now firing multiple parallel server actions per request caused an intermittent Mongoose buffering-timeout crash on `/home`. Added the standard cached-connection-promise pattern; verified stable under concurrent load.
-- Several rounds of landing-card sizing iteration (fixed-width auto-derived video sizing → JS content-based dynamic width → back to simple fixed width+height per breakpoint, per Lawrence's explicit correction) — landed on: two fixed size presets (with/without video), internally scrollable comment section with a themed scrollbar, full-screen-width non-video cards at ≤425px. `/testimonials` (grid page) deliberately untouched throughout.
-- Migrated the 3 original static testimonials into Mongo (`scripts/seed-testimonials.mjs`, locked); deleted the now-dead `app/testimonials/testimonials.js`. 4 real testimonials live now (3 seeded + 1 Lawrence added himself via the real form while testing — left as real data).
-- New standing rule: restart the tracked dev server after every code change automatically (saved to `co-founder/dev-server.md` and cross-session memory). Also fixed dev-server hygiene: `npm run dev`'s background PID from `$!` doesn't reliably match the real listening process (cleaned up several stray orphans this session), and alternating `npm run build`/`npm run dev` corrupts `.next` — now `rm -rf .next` before restarting dev after any build.
-- `CLAUDE.md` updated: new directory entries, `/admin/testimonials` route, corrected auth-guard location, new Testimonials pattern section, new `S3_*` env vars, corrected the now-stale "Google OAuth broken in prod" note.
-- No outbound mail — consistent with established precedent that pure portfolio feature-work isn't relevant to either configured mail destination.
-- Dev server: started on 3001 this session (3000 held by the usual foreign process), restarted many times through the iteration rounds, killed clean at End Today.
-
-### 2026-08-20 — End Today (Hidden admin login built, landing sections horizontal-scroll + arrows, navbar/scrollbar bug fixed)
-
-- Built the real admin login flow: `LoginForm.jsx` stripped to a single Google button + red "Only admins can login" warning; `app/auth.js` restricts sign-in to `amlangomes@gmail.com` server-side via a `signIn` callback; new `app/admin/page.js` (server-guarded) + `components/Admin.jsx`; real `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` set in `.env.local` (Google sign-in now actually works, was previously broken). `/login` and `/admin` restyled to match the site's real color language instead of the unused `color.js` tokens.
-- Flagged for Lawrence: Vercel needs `GOOGLE_CLIENT_ID` updated and `GOOGLE_CLIENT_SECRET` added manually (can't do this myself); Google Cloud Console redirect URI needs the prod domain for the new OAuth client. Local `productionENV.txt` (gitignored) updated to match as a reference.
-- Applied horizontal-scroll-all-cards + hold-to-scroll arrow buttons to Projects, Testimonials, and My Writings sections identically. Fixed three real bugs along the way: uneven card heights (missing `h-full`), a pre-existing latent bug where `scrollbar-hide` was used in multiple places but never actually defined anywhere (added real CSS to `globals.css`), and a CSS spec quirk (`overflow-x-auto` silently forcing `overflow-y: auto`) that was both cropping the hover-lifted card border and making rows vertically scrollable.
-- Fixed the navbar's `w-[99%]` hack (Lawrence's own workaround for the navbar covering the scrollbar): now dynamically measures the real scrollbar width and insets the fixed nav by that exact amount. Considered `sticky` positioning instead but reverted — it would've broken nearly every page's `pt-[20%] sm:pt-[13%]` top-padding compensation.
-- No outbound mail — nothing this session relevant to either configured destination's scope.
-- Dev server: started on 3001 this session (3000 held by a foreign process), restarted once mid-session after the `.env.local` change, killed clean at End Today.
-
-### 2026-08-19 — End Today (Fiverr + Contra social links added)
-
-- Added Fiverr and Contra as new social/contact links across all three surfaces: `components/Footer.jsx` (icon links), `components/Contact.jsx`, and `components/LandingContact.jsx` (techStack/urls pattern).
-- Fiverr uses `SiFiverr` (react-icons/si); Contra has no dedicated icon in react-icons, used `FaBriefcase` as a generic stand-in.
-- Extended the `techStack` tuple in Contact.jsx/LandingContact.jsx with an optional 4th icon-component slot so Fiverr/Contra render via react-icons instead of requiring new themed PNG assets like the existing X/LinkedIn/GitHub/Email entries.
-- Links: `https://www.fiverr.com/s/qb8xwdy` and `https://contra.com/amlan_gomes_233w6dje?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=amlan_gomes_233w6dje`.
-- ESLint clean on all three files; `/contact` and `/home` verified 200 locally.
-- No outbound mail — not relevant to either configured destination's scope.
-- **Inbound mail processed at End Today** (arrived mid-session, not at startup): first-ever async Mail Relay from Contra — 4 real Services published on Contra ($80 Next.js bug fix, full-stack dev, e-commerce backed by Facelees, AI integration backed by My Daily Routine), a new Account section (KYC/Payoneer/e-TIN guidance), growth-plan research closed out, and a hard "zero spend on Contra until first payout clears" rule locked in on their side. Absorbed into `contra_project.md`, mail file deleted.
-- Dev server: started on 3001 this session (3000 held by a foreign process, same pattern as recent sessions), killed clean at End Today.
-
-### 2026-08-18 — End Today (Fiverr Gig 2 closure mail + first Contra Chat Relay, 4 Work Cards sourced)
-
-- No portfolio code touched — 2 inbound mails plus one live Chat Relay session with a brand-new sibling project.
-- Processed and deleted 2 inbound mails from Fiverr: Gig 2 ("AI Feature Integration") used the 2 real AI Routine screenshots given last session (no invented specifics); Gig 2 is now published (Remotion + CapCut video). Absorbed into `mail_box_senders.md`.
-- **First-ever Chat Relay with Contra** — a new sibling project, Lawrence's contra.com onboarding tracker forked from the Fiverr tracker, building a "Work" section one card at a time. Across 4 exchanges, sourced real details + disk-verified image paths for: My Daily Routine (solo SaaS), Facelees (real client Musfiq), ShortStack (solo, backend/infra), Chemistry MCQ Test (real client Kabir) — all 4 now published as full Work Cards in Contra. Flagged Contra's real UI constraints (Skills capped to 1 option, Tools to 3, Industry to 3 fixed choices) as told by their side, no action needed here. Saved new cross-session memory `contra_project.md` to track this relationship going forward.
-- Answered a direct question from Lawrence mid-relay: Chemistry MCQ Test has only one `date` field on file (2025-12-10), no start/end range.
-- No outbound mail sent — same judgment as recent sessions: nothing genuinely new for either configured destination, Contra relay content already delivered live to its origin.
-- Dev server: started on 3003 this session (3000/3001/3002 all held by other foreign processes, same pattern as recent sessions), killed clean at End Today.
-
-### 2026-08-16 — End Today (Fiverr Gig 1 closure mail + Gig 2 Chat Relay, AI Routine assets)
-
-- No portfolio code touched — one inbound mail plus one live Chat Relay exchange, both with the Fiverr project.
-- Processed and deleted 1 inbound mail: Fiverr Gig 1 is fully built (7/7 steps) using last session's recommendations (My Daily Routine, Facelees, Chemistry MCQ Test); two case-study PDFs built. Lawrence's Facelees→portfolio→contact-info Fiverr ToS concern was researched by them and closed as a non-issue. Absorbed into `mail_box_senders.md`.
-- **Chat Relay with Fiverr's cofounder**: for Gig 2 ("AI feature integration"), gave them the only 2 real images tied to the AI Routine Builder feature (`P22AIRoutinePage.png`, `P22AIChatFlow.png`) and real feature detail from `app/projects/projects.js` — declined to invent a third image, a specific Gemini model version (not documented for this feature, and explicitly not the same as the portfolio's own separately-documented Gemini 2.5 Flash chatbot), or a user testimonial (none exists — My Daily Routine is Lawrence's own SaaS, not a client project).
-- No outbound mail sent — same judgment as 2026-08-14: nothing genuinely new for either configured destination, Chat Relay content already delivered live to its origin.
-- Dev server: started on 3003 this session (3000/3001/3002 all held by other foreign processes, same pattern as last two sessions), killed clean at End Today.
-
-### Earlier sessions (compressed, 2026-07-23 to 2026-08-14)
-
+- **2026-08-22**: added `type` taxonomy (saas/clients-project/hobby-project) to every project entry; deleted an inaccurate Kabir testimonial; removed blogs entirely; built the `/projects` filter bar (two rounds of positioning fixes).
+- **2026-08-21**: New Project Maker workflow added project #27 (Budget Meal Maker); fixed a case-sensitive image-filename bug; locked in the Screenshot Checklist delivery format; synced new skills (Astro, Cloudflare Workers) to `skills.js`/README.
+- **2026-08-20 (later session)**: testimonials moved from a static file to a full MongoDB-backed feature (S3/MinIO uploads, admin CRUD, public submissions, drag-reorder); fixed a real Mongoose connection-caching concurrency bug; new standing rule locked in — restart the dev server after every code change.
+- **2026-08-20**: built the real hidden admin login (Google-only, restricted to one email); fixed a real production Google OAuth redirect bug; applied horizontal-scroll+arrows to landing sections, fixing three real CSS bugs along the way.
+- **2026-08-19**: added Fiverr + Contra as social/contact links; first-ever inbound Mail Relay processed (from Contra).
+- **2026-08-18**: first-ever Chat Relay with Contra (a new sibling project), sourcing 4 real Work Cards; no portfolio code touched.
+- **2026-08-16**: Chat Relay with Fiverr sourcing real AI-feature assets for their Gig 2; no portfolio code touched.
 - **2026-08-14**: 16-day inbound mail catch-up (DSA Visualized, High Level Design, Node + Express, Fiverr — 11 mails absorbed into `mail_box_senders.md`); Chat Relay with Fiverr sourcing real project assets for their first Gig. No portfolio code touched, no outbound mail.
 - **2026-07-29**: new standing rules locked in — silent execution (no narration mid-task), `skillGit` defaults to `git add -A`, Mail Relay Outbound became automatic every End Today (no more "send the mails" needed). Processed 5 High Level Design inbound mails.
 - **2026-07-24**: built Mail Relay's Inbound half (`mail-box/` at project root, auto-checked every session start); defined the "everywhere's about" public-facing sync rule; `skillGit` auto-chain onto End Today locked in.

@@ -1529,16 +1529,16 @@ const projects = [
   },
   {
     id: 19,
-    title: "Library Management",
-    urlTitle: "library-management",
+    title: "Cloud Flow Library",
+    urlTitle: "cloud-flow-library",
     type: "clients-project",
-    date: "2025-10-15",
+    date: "2026-09-11",
     img: ["/P19pic.png"],
-    liveLink: "https://library-management-system-alpha-nine.vercel.app/",
+    liveLink: "https://cloude-flow-library.vercel.app/",
     shortDescription:
-      "Library Management gives a small community library a real digital system — members can browse and borrow up to 3 books at a time, with fines calculated automatically for anything returned late.",
+      "Cloud Flow Library is a full rebuild for a real Dhaka library client — visitors browse a 1,200-book catalog and book a paid 1-hour reading-room seat online, with an AI assistant that can complete the whole booking by chat.",
     longDescription:
-      "Library Management is a custom system I built for a client who runs a small community library in Dhaka and was tracking everything by hand. Members create an account, browse the collection, and borrow up to 3 books at a time — with a 100 TK per day fine calculated automatically on anything returned late. The client manages the whole book collection and member list himself from a simple admin dashboard. Built with Next.js, React, and MongoDB.",
+      "Cloud Flow Library replaces an earlier system I built for the same client — a small community library in Dhaka — with a completely different concept. The old version tracked members borrowing physical books. This one drops the borrowing model entirely: visitors browse a large, searchable book catalog for free, and reserve a paid 1-hour seat in the library's physical reading room — no account needed, just a name, email, and phone number at checkout. The library is open Saturday–Thursday, 9AM–9PM, with 10 seats per hour and a 100 TK fee paid through bKash, restricted to payments from inside Bangladesh. A floating AI assistant, Flo, can answer booking questions or just take a date and time in conversation and hand back a ready-to-pay link. The client and one other admin sign in with a locked-down Google account to see exactly who's booked into any given slot. Built with Next.js, React, and MongoDB, with Auth.js for the admin login and Gemini for the AI assistant.",
     techStack: [
       ["Next.js", "/NextJs.png"],
       ["React", "/React.png"],
@@ -1549,131 +1549,82 @@ const projects = [
     gitLink: null,
     feaTures: [
       {
-        title: "Browse the Collection",
+        title: "1,200-Book Catalog",
         description: [
           {
             text: [
-              "Every book in the library is laid out as a simple card grid, with the whole collection open to browse once you're signed in.",
+              "A big, browsable catalog — 1,200 books across fiction, non-fiction, children's, academic, reference, comics, and poetry — open to anyone, no sign-in required.",
             ],
             listItems: [
-              "Clean, browsable grid of every book",
-              "Sign in to browse the full collection",
-              "Your profile photo (or initial) shows once you're logged in",
+              "1,200 books, open to browse with no account",
+              "Search by title or author",
+              "Filter by category, genre, and availability, sort A-Z",
             ],
-            images: ["/P19pic.png", "/P19_3pic.png"],
+            images: ["/P19_1pic.png"],
           },
         ],
       },
       {
-        title: "Account & Login",
+        title: "Book a Seat",
         description: [
           {
             text: [
-              "A simple sign-up and login flow gets members into their own account in a couple of steps.",
+              "Pick an open day on the calendar — the library runs Saturday through Thursday, closed Fridays — and see every 1-hour slot from 9AM to 9PM with real-time seat availability (10 seats per slot).",
             ],
             listItems: [
-              "Secure login and registration",
-              "Smooth navigation between login and sign-up",
-              "Works well on any device",
+              "Calendar respects real opening days and hours",
+              "1-hour slots, 10 seats each, shown live",
+              "100 TK fee per seat",
             ],
-            images: ["/P19_1pic.png", "/P19_2pic.png"],
+            images: ["/P19_2pic.png", "/P19_3pic.png"],
           },
         ],
       },
       {
-        title: "Borrow & Return",
+        title: "Checkout & Payment",
         description: [
           {
             text: [
-              "Click any book to see its details and borrow it in one click — or return it when you're done. If a book's already checked out, or you've hit your 3-book limit, you'll see a clear message instead.",
-              "Your borrowed books are listed alongside their due dates, and any overdue fine is shown clearly and calculated automatically — 100 TK per book, per day late.",
+              "Confirming a slot opens a details summary, then a short checkout form — just a name, email, and phone number — before paying the 100 TK fee through bKash. Payment is restricted to visitors inside Bangladesh.",
             ],
             listItems: [
-              "One-click borrow and return",
-              "Clear message when a book's unavailable or you're at your limit",
-              "Automatic overdue fine calculation",
+              "No account needed to book",
+              "Simple 3-field checkout form",
+              "Pay by bKash, Bangladesh-only",
             ],
-            images: [
-              "/P19_5pic.png",
-              "/P19_6pic.png",
-              "/P19_7pic.png",
-              "/P19_8pic.png",
-              "/P19_9pic.png",
-            ],
+            images: ["/P19_4pic.png", "/P19_5pic.png"],
           },
         ],
       },
       {
-        title: "Search",
+        title: "AI Booking Assistant",
         description: [
           {
             text: [
-              "Search the collection by title, author, genre, or ID, and see results update instantly.",
+              "A floating chat assistant, Flo, sits on every page. It answers questions about booking, or — once it's gathered a name, email, phone, date, and time in conversation — hands back a ready-to-pay booking link, so a visitor never has to leave the chat to finish booking.",
             ],
             listItems: [
-              "Instant search across title, author, genre, or ID",
+              "Floating chat widget on every page",
+              "Answers real booking questions",
+              "Can complete a booking conversationally and hand back a payment link",
             ],
-            images: ["/P19_4pic.png"],
+            images: ["/P19_8pic.png"],
           },
         ],
       },
       {
-        title: "Borrowing History",
+        title: "Admin Access",
         description: [
           {
             text: [
-              "See your full borrowing history in one place — every book you've ever borrowed, when you got it, and when it was returned or was due.",
+              "There's no public login button anywhere on the site — the only entry point is a small footer link. Signing in is Google-only and locked to two approved admin accounts. Once in, an admin reuses the same booking calendar, but clicking a slot shows exactly who's booked into it — name, email, phone, and transaction ID — instead of booking it themselves.",
             ],
             listItems: [
-              "Full history of everything you've borrowed",
-              "Clear borrow and return dates",
+              "Hidden admin entry point, Google-only sign-in",
+              "Locked to specific approved accounts",
+              "Drill into any slot to see who's booked, with contact details",
             ],
-            images: ["/P19_10pic.png"],
-          },
-        ],
-      },
-      {
-        title: "Your Profile",
-        description: [
-          {
-            text: [
-              "Update your profile photo, name, bio, and password anytime from your profile page.",
-            ],
-            listItems: [
-              "Editable photo and personal details",
-              "Secure password updates",
-            ],
-            images: ["/P19_11pic.png"],
-          },
-        ],
-      },
-      {
-        title: "Admin Dashboard",
-        description: [
-          {
-            text: [
-              "The client manages the entire collection from here — adding new books and editing or removing existing ones. A book currently on loan can't be deleted, so the collection's records always stay accurate.",
-            ],
-            listItems: [
-              "Add, edit, or remove books",
-              "Borrowed books are protected from deletion",
-            ],
-            images: ["/P19_12pic.png", "/P19_12pic_2.png"],
-          },
-        ],
-      },
-      {
-        title: "Member List",
-        description: [
-          {
-            text: [
-              "A full list of every registered member, with their photo, name, email, and phone number, so the client can always see who's using the library.",
-            ],
-            listItems: [
-              "Full member list with contact details",
-              "Admin-only access",
-            ],
-            images: ["/P19_13pic.png", "/P19_13pic_2.png"],
+            images: ["/P19_7pic.png"],
           },
         ],
       },
@@ -1682,12 +1633,13 @@ const projects = [
         description: [
           {
             text: [
-              "Built with Next.js for fast, dynamic pages and MongoDB for keeping every book, member, and loan record accurate and up to date, styled with Tailwind CSS.",
+              "Built with Next.js and React for the catalog and booking flow, MongoDB for storing every seat booking, Auth.js with Google OAuth for the locked-down admin login, and Gemini for the AI booking assistant — styled with Tailwind CSS.",
             ],
             listItems: [
-              "Next.js for fast, dynamic pages",
-              "MongoDB for real-time data",
-              "Automatic fine calculation built in",
+              "Next.js and React for the full booking flow",
+              "MongoDB for seat bookings",
+              "Auth.js + Google OAuth for admin login",
+              "Gemini for the AI booking assistant",
             ],
             images: [],
           },

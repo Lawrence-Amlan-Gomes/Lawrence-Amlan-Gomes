@@ -9,7 +9,7 @@ const SEED_DATA = [
     designation: "Local Client, Dhaka",
     photoUrl: "/C1pic.png",
     photoKey: null,
-    projectUrlTitle: "library-management",
+    projectUrlTitle: "cloud-flow-library",
     rating: 5,
     comment:
       "Lawrence did an outstanding job developing my library management system website. He was highly professional, understood my requirements quickly, and delivered a clean, efficient, and user-friendly system ahead of schedule. His technical expertise and attention to detail truly impressed me. I'd highly recommend him for any web development project.",

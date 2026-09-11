@@ -4,36 +4,46 @@ _Owned by skillCoFounder.md — read this first on every session start, overwrit
 
 ## Current focus
 
-Long session (2026-08-27 into 2026-08-28): locked down the shared-database mess from before, shipped real testimonial features (hide/show, in-place add/edit, responsive form layout), fixed a live production caching bug, and wrote two full architecture specs for Solvendix's Claude to build their own equivalents (testimonial UI, AI chatbot).
+Session (2026-09-11), after a 13-day gap since 2026-08-28: processed a big backlog of inbound mail (13 files, mostly Solvendix FYI), then did a full rewrite of the "Library Management" project → renamed to "Cloud Flow Library" after the real client (Mr. Zaman) had the whole app rebuilt from a book-borrowing system into a paid seat-booking system.
 
 ## Immediate next step
 
-**Nothing blocking.** Two real loose ends carried forward, both need Lawrence's hands, not code:
+**Nothing blocking.** One thing to ask Lawrence, one thing to watch for:
 
-1. **Rotate the `root` MongoDB password** on the old shared instance (`185.201.8.71:27018`) — this is the actual step that revokes anyone still holding the old root credential (Solvendix, if any old copy of it still exists anywhere). Deliberately held back until Lawrence confirms production is stable on the new scoped `lawrenceapp` credential first — do this only after that confirmation, so a mid-flight rotation can't take the live site down.
-2. **Switch production's `MONGODB_CONNECTION_STRING` to the internal Coolify address** instead of the public one — dev should stay on the public address (a local machine isn't on Coolify's internal Docker network), production doesn't need to be. An internal connection string (with the new scoped credential) was already handed to Lawrence; whether it actually works can't be tested from this session (no access to Coolify's internal network) — needs his confirmation after he pastes it in and redeploys.
+1. **Mr. Zaman's testimonial still quotes his old words** ("my library management system website") — deliberately left untouched since it's his real quote, not something to rewrite for him. Ask Lawrence if he wants an updated line from Zaman, or if it's fine as-is (still reads as a genuine, positive review, just uses old terminology).
+2. **Sent Solvendix's Claude a direct message** (via SendMessage, live cross-session) asking them to update their own copied case study for this project (they'd copied the old "library-management" content into their own `lib/case-studies.ts` on 2026-08-28) and re-screenshot the new live site. No reply yet as of this End Today — check next session whether they responded or need a nudge.
+
+Two older loose ends carried forward again from 2026-08-28, still unconfirmed either way — ask Lawrence if these got done manually outside a session:
+3. Rotate the `root` MongoDB password on the old shared instance (`185.201.8.71:27018`).
+4. Switch production's `MONGODB_CONNECTION_STRING` to Coolify's internal address instead of the public one.
 
 ## What actually shipped this session (code, not just talk)
 
-- **Fixed a real live bug**: `/` and `/testimonials` were statically cached pages — a testimonial added via the dev server never showed up on production because `revalidatePath()` only refreshes the cache of whatever process ran it. Forced both routes dynamic (`export const dynamic = "force-dynamic"`) so they always query fresh. Pushed (`1e22e2b`).
-- **Database credential hardening**: created a database-scoped MongoDB user (`lawrenceapp`, readWrite on `lawrenceAmlanGomes` only, verified it can't touch `admin`), migrated dev and handed Lawrence the production connection string to use in Coolify. Confirmed Solvendix has since stood up its own fully separate MongoDB server (different host/port) — no longer shares this database at all. Saved a new read-only `SOLVENDIX_MONGODB_CONNECTION_STRING` (into `.env.local` only, not yet wired to any code) for a future one-way sync of Solvendix reviews into this app's testimonials — **that sync is not built, only the credential is saved.**
-- **Real testimonial hide/show**: `getPublicTestimonials()` (approved-only) now powers every visitor-facing surface (`/`, `/testimonials`, the AI chatbot); `getAllTestimonials()` (unfiltered) stays admin-only. A Hide/Show button per testimonial in `/admin/testimonials` flips `status` between `approved`/`rejected`. Pushed (`085e70d`).
-- **In-place add/edit**: clicking the dashed "Add" card or a testimonial's "Edit" link now swaps that exact card, in its own position, into the form — on both the landing row and the full grid page — instead of the form floating elsewhere. Also brought full add/edit to the landing page, which previously just linked out to `/testimonials`. Fixed a related bug: the visitor-facing refresh after save was pulling the unfiltered admin list. Pushed (`9e460bf`).
-- **Testimonial form polish**: photo/video upload boxes are icon-only now (no label text), smaller and side-by-side; the form goes two-column landscape on wide screens (≥768px on landing, ≥1024px on `/testimonials`, spanning the full grid row once it goes two-up). Removed the landing card's click-to-navigate-away (it fought with inline editing). Rebuilt the theme toggle from a pill switch into one small square icon button (sun/moon shows the *destination* state, not current). Pushed (`dc05308`).
-- Wrote two full structural/architecture specs directly in-chat for Lawrence to paste to Solvendix's Claude: the testimonial add/edit UI (grid/row layout, in-place swap behavior, upload flow, business rules), and the AI chatbot system (Gemini function-calling pattern, system prompt structure, tool design, floating widget UI). Neither is code in this repo — pure documentation handed to Lawrence.
-- `CLAUDE.md` kept accurate live throughout (Database section rewritten for the new credential + Solvendix split, three new Known Gaps entries for the two pending loose ends above plus the unsync'd Solvendix credential, Testimonials section documents the show/hide wiring).
+- **Cloud Flow Library rewrite, portfolio-side**: Chat-relayed directly (via `ListAgents`/`SendMessage`, not manual copy-paste — the other Claude, `library-be`, was live) with the Library Management project's own Claude to get the full rewrite details. Confirmed with Lawrence it's still the same real client (Mr. Zaman) and got the go-ahead to rename to "Cloud Flow Library."
+- Renamed the project entry (`app/projects/projects.js`, id 19): `title`/`urlTitle` (`library-management` → `cloud-flow-library`), new live link (`https://cloude-flow-library.vercel.app/`, confirmed live with a 200 check), full new `shortDescription`/`longDescription`/`feaTures` describing the new concept — a 1,200-book browsable catalog (generated, not real inventory) plus paid 1-hour reading-room seat booking (Sat–Thu, 9AM–9PM, 10 seats/slot, 100 TK via bKash, Bangladesh-restricted payment), an AI booking assistant ("Flo"), and a hidden Google-only admin login with a per-slot booking drill-down.
+- Rewrote the matching case study (`app/case-studies/case-studies.js`) — new challenge/approach/results, including a real technical-decision story from the rebuild (a timezone bug: date logic followed the server's own timezone instead of Asia/Dhaka, so "Saturday" could resolve to the closed day; fixed by anchoring to Asia/Dhaka and validating server-side on every booking entry point, not just the client calendar).
+- **Screenshots**: used Playwright (already installed on this machine, browsers cached) to screenshot the new live site end-to-end — home, book catalog, booking calendar, seat-slot list, seat-details modal, checkout form (empty + filled), admin sign-in gate, and the Flo chat widget open. Replaced all 16 old `public/P19*.png` files with 9 new ones matching the new feature set.
+- **Database**: updated Mr. Zaman's live testimonial doc's `projectUrlTitle` (`library-management` → `cloud-flow-library`) directly via a one-off script, and the same field in `scripts/seed-testimonials.mjs`, so the "View Case Studies" link kept resolving. Did **not** touch his actual quoted testimonial text (see Open Questions).
+- Verified everything live on a restarted dev server: `/project/cloud-flow-library`, `/case-study/cloud-flow-library`, `/projects`, `/case-studies`, `/testimonials` all 200, testimonial's case-study link resolves to the new slug, lint clean (pre-existing `<img>` warnings only, nothing new).
+- `CLAUDE.md` updated: Case Studies section's project list corrected, new Projects-section note documenting that a `clients-project` can get fully renamed/rewritten if the real client's own project changes, and what has to be kept in sync when that happens (`urlTitle`, the case study's `projectUrlTitle`, any DB testimonial's `projectUrlTitle`).
+- **Told Solvendix directly** (SendMessage, live session `solvendix-24`) that their copied case study for this project is now stale, with full detail to update it themselves.
+- **Environment note**: `node_modules` was completely missing at session start (fresh checkout or a wipe) — ran `npm install` (480 packages, some deprecation warnings, no blocking issues) before the dev server would run at all. Flagged to Lawrence, cause unconfirmed.
+- **Mail processed**: 13 inbound mails (12 Solvendix FYI spanning 2026-08-28 to 2026-09-11, 1 Fiverr with first real Gig performance stats), all absorbed and deleted. Saved two reusable technical notes to cross-session memory: a shared-machine `gh` multi-account gotcha that could silently break this project's own `git push`, and a background-agent-resume-on-rate-limit pattern. Sent 1 outbound mail to `jobCrackMentor` about the Cloud Flow Library rewrite (their `projects.md` may still describe the old borrowing system). `skillsUpdateMentor` still skipped (broken path, unresolved since 2026-08-27).
 
 ## Open questions
 
-- Cross-linking (solvendix.com ↔ lawrenceamlangomes.com) — still not implemented, still a confirmed real requirement, untouched this session.
-- Case study client consent (Zaman, Musfiq) for Solvendix — still not done.
-- `skillsUpdateMentor` mail destination is still broken (see `mail-relay.md`) — needs Lawrence to confirm the real current path.
-- If Lawrence wants the Solvendix-review sync actually built (reading their DB, writing new testimonials into ours), that's a real next task — he explicitly declined it this session ("I don't want" mid-message), so don't build it unprompted.
+- Mr. Zaman's testimonial quote still says "library management system" — ask Lawrence whether to request an updated line or leave it (see Immediate next step #1).
+- Whether Solvendix's Claude actually updates their copied case study — no reply received by End Today (see Immediate next step #2).
+- The two carried-over Mongo/Coolify loose ends (root password rotation, internal address switch) — still unconfirmed either way (see Immediate next step #3/#4).
+- Fiverr's `profileSetupSteps.tsx` still wrongly claims a Chemistry MCQ Test testimonial (Mr. Kabir) is "in hand" — flagged 3 times now by Fiverr's own mail, unresolved. Ask Lawrence whether that testimonial is coming back or Fiverr's claim should just be corrected (not this project's file to fix).
+- Cross-linking (solvendix.com ↔ lawrenceamlangomes.com) — still not implemented, untouched again this session.
+- Case study client consent (Zaman, Musfiq) for Solvendix reusing this project's case-study content — still unresolved as of the last Solvendix mail on it (2026-08-28).
+- `skillsUpdateMentor` mail destination still broken — needs Lawrence to confirm the real current path.
 
 ## Blockers
 
-None — both loose ends above are waiting on Lawrence's confirmation, not on any unresolved technical question.
+None — everything above is waiting on Lawrence's input or another session's reply, not an unresolved technical question.
 
 ## Dev server
 
-Not running — killed clean at End Today. Note: a foreign, untouched process was still sitting on port 3002 this whole session (not started by me, never touched, unrelated to anything above).
+Not running — killed clean at End Today. `node_modules` had to be reinstalled from scratch this session (see above) — if a future session hits the same "next: command not found," that's expected until `npm install` is run again, not a new problem.
