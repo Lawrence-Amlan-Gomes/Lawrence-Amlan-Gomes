@@ -15,9 +15,9 @@ _Owned by skillCoFounder.md._
 ## Current State
 
 ```
-status: not running
-port: none
-pid: none
-started_at: none
-note: killed clean at End Today (2026-09-11 session). 3000/3001 held by foreign processes all session, untouched. node_modules was missing entirely at session start — ran npm install first (480 packages) before dev would even run; flagged to Lawrence.
+status: running
+port: 3001
+pid: 67144
+started_at: 2026-09-20 (session start)
+note: restarted 2026-09-20 after GEMINI_API_KEY + model + tool-call fix. 3000 (MySelf project) foreign, untouched. Landed on 3001 because it freed up. NEXTAUTH_URL commented out in .env.local (dev only).
 ```

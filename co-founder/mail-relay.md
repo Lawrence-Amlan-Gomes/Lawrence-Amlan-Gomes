@@ -4,7 +4,7 @@ _Owned by skillCoFounder.md. Outbound activated by "send the mails" (typically s
 
 ## Purpose
 
-Unlike **Chat Relay** (`chat-relay.md`), which is a live, synchronous back-and-forth that Lawrence manually copy-pastes between two open sessions, Mail Relay is async and file-based in both directions:
+Unlike **Chat Relay** (`chat-relay.md`), which is a live, synchronous direct chat between two open cofounder sessions (via `ListAgents`/`SendMessage`, opened only when Lawrence says "Start Chat"), Mail Relay is async and file-based in both directions:
 
 - **Outbound**: at end of session, I write detailed mail files describing what happened in *this* session into a mailbox folder that belongs to another cofounder project. That other project's Claude reads them whenever its own session starts, syncs the information, and deletes the files once absorbed. I never read or delete files from a destination mailbox myself — only write into it. See **Outbound** section below.
 - **Inbound**: sibling projects' Claude cofounders write mail files into *my own* mailbox — `mail-box/` at this project's root. On every session start, I read whatever's sitting there, absorb anything valuable into my own state, and delete each file once processed. This is the mirror image of Outbound and uses the same mail format, just addressed to me instead of from me. See **Inbound** section below.

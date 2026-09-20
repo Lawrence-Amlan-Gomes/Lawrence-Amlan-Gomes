@@ -4,7 +4,6 @@ import {
   GoogleGenAI,
   createUserContent,
   createModelContent,
-  createPartFromFunctionCall,
   createPartFromFunctionResponse,
 } from "@google/genai";
 import mySelf from "./myself";
@@ -20,7 +19,7 @@ const TYPE_LABEL = {
   "hobby-project": "Personal/Hobby Project",
 };
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = "gemini-3.6-flash";
 const MAX_TOOL_ROUNDS = 3;
 
 // A lightweight index only — title, type, date, and a one-line summary per
@@ -190,11 +189,9 @@ export async function response(prompt, inputOuputPair) {
       const calls = result.functionCalls;
       const resolved = await runToolCalls(calls);
 
-      contents.push(
-        createModelContent(
-          resolved.map(({ call }) => createPartFromFunctionCall(call.name, call.args ?? {}))
-        )
-      );
+      // Push the model's own turn back untouched: Gemini 3 attaches a thoughtSignature to
+      // each functionCall part and rejects the follow-up (400) if it is rebuilt without it.
+      contents.push(result.candidates[0].content);
       contents.push(
         createUserContent(
           resolved.map(({ call, details }) =>

@@ -11,7 +11,7 @@ Session (2026-09-11), after a 13-day gap since 2026-08-28: processed a big backl
 **Nothing blocking.** One thing to ask Lawrence, one thing to watch for:
 
 1. **Mr. Zaman's testimonial still quotes his old words** ("my library management system website") — deliberately left untouched since it's his real quote, not something to rewrite for him. Ask Lawrence if he wants an updated line from Zaman, or if it's fine as-is (still reads as a genuine, positive review, just uses old terminology).
-2. **Sent Solvendix's Claude a direct message** (via SendMessage, live cross-session) asking them to update their own copied case study for this project (they'd copied the old "library-management" content into their own `lib/case-studies.ts` on 2026-08-28) and re-screenshot the new live site. No reply yet as of this End Today — check next session whether they responded or need a nudge.
+2. ~~Solvendix case study update~~ — **CLOSED 2026-09-20**: Solvendix's mail confirmed they rewrote their copy and re-screenshotted (commit `3089145`). Nothing needed.
 
 Two older loose ends carried forward again from 2026-08-28, still unconfirmed either way — ask Lawrence if these got done manually outside a session:
 3. Rotate the `root` MongoDB password on the old shared instance (`185.201.8.71:27018`).
