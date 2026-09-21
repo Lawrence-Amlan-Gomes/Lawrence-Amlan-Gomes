@@ -4,46 +4,37 @@ _Owned by skillCoFounder.md — read this first on every session start, overwrit
 
 ## Current focus
 
-Session (2026-09-11), after a 13-day gap since 2026-08-28: processed a big backlog of inbound mail (13 files, mostly Solvendix FYI), then did a full rewrite of the "Library Management" project → renamed to "Cloud Flow Library" after the real client (Mr. Zaman) had the whole app rebuilt from a book-borrowing system into a paid seat-booking system.
+Session (2026-09-20): locked the new direct cofounder-to-cofounder chat rule, then a long infra session — rotated the Google OAuth client across Lawrence's Vercel + Coolify projects, fixed the broken AI chatbot (dead Gemini key → new key, new model, Gemini 3 tool-call fix), pushed and deployed it. Portfolio chatbot is live and working.
 
-## Immediate next step
+## Immediate next step (ask/do first next session)
 
-**Nothing blocking.** One thing to ask Lawrence, one thing to watch for:
+1. **My Daily Routine (Coolify) has NOT been redeployed** with the new Google client. It has paying users. Lawrence must first confirm the new Google client's **consent screen is "In production"** (not "Testing"), otherwise real users get blocked. Then redeploy it via Coolify API (`GET /deploy?uuid=nhgimbntwvp5gxy4p9ivw5qt`). Its redirect URI is already registered.
+2. **Solvendix (Coolify) Google client** — asked Lawrence whether to switch it to the new client; unanswered. Can't read current values (token lacks read:sensitive), and it's a separate business with its own cofounder session. Needs `https://solvendix.com/api/auth/callback/google` registered first if yes.
+3. **www → apex redirect on Coolify is not working** (setting saved as `non-www`, redeployed + restarted, www still 200). Offered a `next.config.js` `redirects()` fix (needs commit + push) — unanswered.
+4. **Other projects with a `GEMINI_API_KEY`** (My Daily Routine, Solvendix, Cloud Flow Library, Chemistry MCQ Test, recruiter-reply): if they share the dead old key their chatbots are broken; they'd also need `gemini-2.5-flash` → newer model + the thought-signature fix in their own code. Asked; unanswered. Not this repo's code to edit.
+5. **Cleanup Lawrence owes**: delete the Coolify API token (Keys & Tokens) — still live, also saved as `COOLIFY_TOKEN` in `.env.local`. Consider rotating the Gemini key later (it was pasted in chat).
+6. Optional: add one automatic retry in `app/server.js` for Gemini's transient 503 "high demand" (one visitor-facing failure seen live).
 
-1. **Mr. Zaman's testimonial still quotes his old words** ("my library management system website") — deliberately left untouched since it's his real quote, not something to rewrite for him. Ask Lawrence if he wants an updated line from Zaman, or if it's fine as-is (still reads as a genuine, positive review, just uses old terminology).
-2. ~~Solvendix case study update~~ — **CLOSED 2026-09-20**: Solvendix's mail confirmed they rewrote their copy and re-screenshotted (commit `3089145`). Nothing needed.
+Carried-over older loose ends, still unconfirmed: root Mongo password rotation on the old shared instance; production switch to Coolify's internal Mongo address; Mr. Zaman's testimonial still says "library management system"; Fiverr's wrong Mr. Kabir testimonial claim; `skillsUpdateMentor` mail path broken; cross-linking with solvendix.com; case-study client consent for Solvendix reuse.
 
-Two older loose ends carried forward again from 2026-08-28, still unconfirmed either way — ask Lawrence if these got done manually outside a session:
-3. Rotate the `root` MongoDB password on the old shared instance (`185.201.8.71:27018`).
-4. Switch production's `MONGODB_CONNECTION_STRING` to Coolify's internal address instead of the public one.
+## What actually shipped this session
 
-## What actually shipped this session (code, not just talk)
-
-- **Cloud Flow Library rewrite, portfolio-side**: Chat-relayed directly (via `ListAgents`/`SendMessage`, not manual copy-paste — the other Claude, `library-be`, was live) with the Library Management project's own Claude to get the full rewrite details. Confirmed with Lawrence it's still the same real client (Mr. Zaman) and got the go-ahead to rename to "Cloud Flow Library."
-- Renamed the project entry (`app/projects/projects.js`, id 19): `title`/`urlTitle` (`library-management` → `cloud-flow-library`), new live link (`https://cloude-flow-library.vercel.app/`, confirmed live with a 200 check), full new `shortDescription`/`longDescription`/`feaTures` describing the new concept — a 1,200-book browsable catalog (generated, not real inventory) plus paid 1-hour reading-room seat booking (Sat–Thu, 9AM–9PM, 10 seats/slot, 100 TK via bKash, Bangladesh-restricted payment), an AI booking assistant ("Flo"), and a hidden Google-only admin login with a per-slot booking drill-down.
-- Rewrote the matching case study (`app/case-studies/case-studies.js`) — new challenge/approach/results, including a real technical-decision story from the rebuild (a timezone bug: date logic followed the server's own timezone instead of Asia/Dhaka, so "Saturday" could resolve to the closed day; fixed by anchoring to Asia/Dhaka and validating server-side on every booking entry point, not just the client calendar).
-- **Screenshots**: used Playwright (already installed on this machine, browsers cached) to screenshot the new live site end-to-end — home, book catalog, booking calendar, seat-slot list, seat-details modal, checkout form (empty + filled), admin sign-in gate, and the Flo chat widget open. Replaced all 16 old `public/P19*.png` files with 9 new ones matching the new feature set.
-- **Database**: updated Mr. Zaman's live testimonial doc's `projectUrlTitle` (`library-management` → `cloud-flow-library`) directly via a one-off script, and the same field in `scripts/seed-testimonials.mjs`, so the "View Case Studies" link kept resolving. Did **not** touch his actual quoted testimonial text (see Open Questions).
-- Verified everything live on a restarted dev server: `/project/cloud-flow-library`, `/case-study/cloud-flow-library`, `/projects`, `/case-studies`, `/testimonials` all 200, testimonial's case-study link resolves to the new slug, lint clean (pre-existing `<img>` warnings only, nothing new).
-- `CLAUDE.md` updated: Case Studies section's project list corrected, new Projects-section note documenting that a `clients-project` can get fully renamed/rewritten if the real client's own project changes, and what has to be kept in sync when that happens (`urlTitle`, the case study's `projectUrlTitle`, any DB testimonial's `projectUrlTitle`).
-- **Told Solvendix directly** (SendMessage, live session `solvendix-24`) that their copied case study for this project is now stale, with full detail to update it themselves.
-- **Environment note**: `node_modules` was completely missing at session start (fresh checkout or a wipe) — ran `npm install` (480 packages, some deprecation warnings, no blocking issues) before the dev server would run at all. Flagged to Lawrence, cause unconfirmed.
-- **Mail processed**: 13 inbound mails (12 Solvendix FYI spanning 2026-08-28 to 2026-09-11, 1 Fiverr with first real Gig performance stats), all absorbed and deleted. Saved two reusable technical notes to cross-session memory: a shared-machine `gh` multi-account gotcha that could silently break this project's own `git push`, and a background-agent-resume-on-rate-limit pattern. Sent 1 outbound mail to `jobCrackMentor` about the Cloud Flow Library rewrite (their `projects.md` may still describe the old borrowing system). `skillsUpdateMentor` still skipped (broken path, unresolved since 2026-08-27).
+- **Rule locked**: direct cofounder-to-cofounder chat (`skillCoFounder.md` section, `co-founder/chat-relay.md` rewritten, new `co-founder/decisions-locked.md`, `mail-relay.md` wording). "Start Chat with myself-saascoufounder" found no session by that name (two `myself-*` sessions live) — asked which; Lawrence said End Chat. Nothing was sent to any session.
+- **Google OAuth rotation**: validated the new client (id+secret) against Google. Updated `GOOGLE_CLIENT_ID`/`SECRET` on 5 Vercel projects (library-management-system = Cloud Flow Library, my-self, expense-tracker, bracu-faculty-review, recruiter-reply) in Lawrence's own Vercel team `lawrence-amlan-gomes-projects` (via a temporary separate CLI login — the machine's default `vercel` login is Solvendix's account, see memory `vercel-accounts`) and on 2 Coolify apps (portfolio, My Daily Routine). Redeployed the 5 Vercel projects + the portfolio; verified each live site sends the new client and Google accepts it. Lawrence registered the redirect URIs in Google Cloud himself. Deleted `expense-tracker-sand-eta.vercel.app` (his request). Found + explained why cloud-flow-library login failed (I had only changed env, not redeployed; old client got `redirect_uri_mismatch`).
+- **Dev**: `.env.local` `NEXTAUTH_URL` commented out (it pinned port 3001, another project's port); `COOLIFY_TOKEN` added.
+- **Chatbot fix (commit `cd1b89a`, pushed, auto-deployed by Coolify)**: old `GEMINI_API_KEY` was invalid; new key can't use `gemini-2.5-flash`. `app/server.js`: `MODEL` → `gemini-3.6-flash`, and the tool-call round-trip now pushes `result.candidates[0].content` back unchanged (Gemini 3 needs the `thoughtSignature`). Verified live on lawrenceamlangomes.com; one transient Gemini 503 seen, retry worked.
+- `CLAUDE.md` updated: chatbot section (thought-signature + model-availability + 503 notes), Google OAuth paragraph replaced (new client, apex-only callback, NEXTAUTH_URL dev note), Known Gaps gains the www-redirect item.
+- New cross-session memory notes: `vercel-accounts`, `coolify-api-access`.
+- Mail: 1 outbound to `jobCrackMentor` (Gemini 3 function-calling gotcha + Google client rotation notes). `skillsUpdateMentor` still skipped (broken path). Inbound: 3 Solvendix mails absorbed at start (case-study rewrite done, node_modules wipe FYI, outreach batch 7/20 paused).
 
 ## Open questions
 
-- Mr. Zaman's testimonial quote still says "library management system" — ask Lawrence whether to request an updated line or leave it (see Immediate next step #1).
-- Whether Solvendix's Claude actually updates their copied case study — no reply received by End Today (see Immediate next step #2).
-- The two carried-over Mongo/Coolify loose ends (root password rotation, internal address switch) — still unconfirmed either way (see Immediate next step #3/#4).
-- Fiverr's `profileSetupSteps.tsx` still wrongly claims a Chemistry MCQ Test testimonial (Mr. Kabir) is "in hand" — flagged 3 times now by Fiverr's own mail, unresolved. Ask Lawrence whether that testimonial is coming back or Fiverr's claim should just be corrected (not this project's file to fix).
-- Cross-linking (solvendix.com ↔ lawrenceamlangomes.com) — still not implemented, untouched again this session.
-- Case study client consent (Zaman, Musfiq) for Solvendix reusing this project's case-study content — still unresolved as of the last Solvendix mail on it (2026-08-28).
-- `skillsUpdateMentor` mail destination still broken — needs Lawrence to confirm the real current path.
+See Immediate next step 1–6 and the carried-over list.
 
 ## Blockers
 
-None — everything above is waiting on Lawrence's input or another session's reply, not an unresolved technical question.
+None technical — everything waits on Lawrence's answers (consent-screen status, Solvendix switch, redirect approach).
 
 ## Dev server
 
-Not running — killed clean at End Today. `node_modules` had to be reinstalled from scratch this session (see above) — if a future session hits the same "next: command not found," that's expected until `npm install` is run again, not a new problem.
+Not running — killed clean at End Today. `npm run build` was run (skillGit), so `.next` holds a production build: `rm -rf .next` before the next `npm run dev`.

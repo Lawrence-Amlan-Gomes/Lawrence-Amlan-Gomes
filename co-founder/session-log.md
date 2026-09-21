@@ -2,6 +2,16 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-09-20 — End Today (direct-chat rule locked; Google OAuth client rotated across Vercel + Coolify; chatbot fixed for Gemini 3 and redeployed)
+
+- Locked the direct cofounder-to-cofounder chat rule (skill file section, rewritten `chat-relay.md`, new `decisions-locked.md`). "Start Chat" with a non-matching session name was refused rather than guessed; Lawrence ended it. No session was messaged.
+- Rotated the Google OAuth client: validated new creds against Google, updated 5 Vercel projects (his own team, via a temporary separate CLI login — the default `vercel` login is Solvendix's account) + 2 Coolify apps (portfolio, My Daily Routine), redeployed the 5 Vercel + portfolio, verified every live site uses the new client. Lawrence registered redirect URIs himself; deleted the extra `expense-tracker-sand-eta` domain on request. Cloud Flow Library login had been failing because I'd changed env without redeploying (old client → `redirect_uri_mismatch`) — redeployed.
+- Held back: My Daily Routine redeploy (paying users; consent screen must be "In production") and Solvendix (unknown if same client). Coolify `www` → apex redirect saved as `non-www` but not taking effect even after deploy + restart.
+- Chatbot: old Gemini key dead, new key can't use `gemini-2.5-flash`. Switched to `gemini-3.6-flash` and fixed the tool-call round-trip to preserve Gemini 3 `thoughtSignature`s (commit `cd1b89a`). Coolify auto-deployed on push; live chatbot verified (one transient 503, retry fine).
+- `NEXTAUTH_URL` commented out in dev `.env.local` (pinned a port another project used). `CLAUDE.md` updated (chatbot, Google OAuth, www-redirect gap).
+- Mail: 1 to `jobCrackMentor`; `skillsUpdateMentor` still broken. Cleaned up my temp Vercel login and the Chrome window I opened. Lawrence still owes: delete the Coolify token.
+- Dev server: on 3001 (3000 held by the MySelf project), restarted several times, killed clean at End Today.
+
 ### 2026-09-11 — End Today (Mail backlog processed, Cloud Flow Library rewrite: renamed & rebuilt the Library Management project and case study)
 
 - Processed 13 inbound mails (13-day gap since last session) — 12 Solvendix FYI (cold-outreach machine progress, pricing model overhaul, Meta/gh-CLI/rate-limit technical gotchas) plus 1 Fiverr mail with first real Gig dashboard stats. All absorbed and deleted; saved 2 reusable technical notes to cross-session memory (`gh` multi-account git-push gotcha, background-agent rate-limit resume pattern).
