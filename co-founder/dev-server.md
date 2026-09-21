@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: killed clean at End Today (2026-09-20 session). 3000 held by the MySelf project's dev server, untouched. `npm run build` was run by skillGit, so `.next` holds a production build — `rm -rf .next` before the next `npm run dev`. NEXTAUTH_URL is commented out in .env.local (dev only).
+note: killed clean at End Today (second session of 2026-09-20; it ran on 3002 since 3000/3001 were held by foreign processes, untouched). `npm run build` is run by skillGit right after, so `.next` holds a production build — `rm -rf .next` before the next `npm run dev`. NEXTAUTH_URL is commented out in .env.local (dev only).
 ```
