@@ -15,9 +15,9 @@ _Owned by skillCoFounder.md._
 ## Current State
 
 ```
-status: running
-port: 3002
-pid: 35815
-started_at: 2026-09-29 12:11:08 +06
-note: running after the successful production build; 3000/3001 were held by foreign processes, untouched. NEXTAUTH_URL is commented out in .env.local (dev only).
+status: not running
+port: none
+pid: none
+started_at: none
+note: stopped clean at End Today on 2026-09-29. The final build leaves `.next` in production mode; clear it before the next `npm run dev`. NEXTAUTH_URL is commented out in .env.local (dev only).
 ```
