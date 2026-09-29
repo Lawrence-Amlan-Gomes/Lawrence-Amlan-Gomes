@@ -13,25 +13,25 @@ const services = [
   {
     title: "Embedded AI Chatbot",
     implementation:
-      "An AI chatbot trained on your business's own data, FAQs, and product catalog, embedded right on your site.",
+      "An AI assistant grounded in your business's FAQs, product details, and workflows, embedded on your site.",
     outcome:
-      "24/7 instant customer support that handles complex product questions automatically.",
+      "Answer common questions and help visitors take the next step at any hour.",
     proof: "You're talking to one right now — see the chat bubble in the corner.",
   },
   {
-    title: "Automated Meeting Scheduler",
+    title: "Booking & Scheduling Integration",
     implementation:
-      "Direct integration between your AI bot and Google Calendar or Calendly.",
+      "Connect an AI assistant or website flow to your calendar or booking system.",
     outcome:
-      "Turns chatting prospects into booked appointments — no back-and-forth emails.",
-    proof: "This site books meetings the same way — try it on the Contact page.",
+      "Let prospects choose a slot without back-and-forth email.",
+    proof: "This site's Contact page links to a live booking calendar.",
   },
   {
-    title: "Lead Magnet & Email Capture",
+    title: "AI Workflow Automation",
     implementation:
-      "Email capture built right into the chat flow, synced with your CRM or database.",
+      "AI-assisted inbound and outbound workflows for lead qualification, follow-ups, and handoffs between business tools.",
     outcome:
-      "Turns everyday website traffic into a growing email list for future marketing and sales.",
+      "Reduce repetitive work while keeping people in control of customer communication.",
   },
 ];
 

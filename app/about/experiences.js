@@ -1,12 +1,12 @@
 const experiences = [
   {
     id: 2,
-    title: "Freelance Full-Stack Developer",
+    title: "Freelance Full-Stack Developer & AI Engineer",
     companyName: "Self-employed · Remote",
     img: "/Company2pic.png",
     duration: "Oct 2025 - Present",
-    overview: "Designed, developed, and deployed three full-stack web applications for local clients in Dhaka, managing the complete lifecycle from requirements to production.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Vercel", "Netlify", "Coolify", "Paddle", "Git"],
+    overview: "Designed and deployed three full-stack web applications for local clients in Dhaka, including AI features, while building AI-assisted inbound and outbound workflows for businesses.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Gemini API", "AI Workflow Automation", "Vercel", "Netlify", "Coolify", "Paddle", "Git"],
     paragraphs: [
       [
         "Challenge",
@@ -14,7 +14,7 @@ const experiences = [
       ],
       [
         "Action",
-        "Built and shipped three full-stack applications using Next.js, TypeScript, Tailwind CSS, and MongoDB. Handled end-to-end deployment across Vercel, Netlify, and a self-hosted Coolify instance on a Hostinger VPS, including custom domain configuration and GitHub-based CI/CD pipelines. Integrated Paddle for subscription and one-time payment flows, and implemented AI-powered features via third-party APIs. Maintained clean, maintainable codebases through Git-based version control and iterated based on regular client consultations.",
+        "Built and shipped three full-stack applications using Next.js, TypeScript, Tailwind CSS, and MongoDB. Handled deployment across Vercel, Netlify, and self-hosted Coolify, including custom domains and GitHub-based CI/CD. Integrated Paddle payments and Gemini-powered assistants into production workflows, and built AI-assisted inbound and outbound processes for businesses. Iterated through regular client consultations.",
       ],
       [
         "Result",

@@ -12,8 +12,9 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  title: "Lawrence Amlan Gomes",
-  description: "Personal Portfolio",
+  title: "Lawrence Amlan Gomes | Full-Stack Developer & AI Engineer",
+  description:
+    "Lawrence Amlan Gomes builds production web apps, AI features, and business workflow automations.",
   icons: {
     icon: ["/favicon.ico?v=4"],
     apple: ["/apple-touch-icon.png?v=4"],

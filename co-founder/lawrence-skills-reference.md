@@ -1,6 +1,6 @@
 # Lawrence's Technical Skills — Reference
 
-_Owned by skillCoFounder.md. Source of truth for what Lawrence actually knows, so this never has to be re-derived or re-asked. Verified via a chat-relay sync (2026-07-23) with the Claude Code cofounder on Lawrence's other project (`mydailyroutine.app` / "My Daily Routine"), which maintains its own exhaustive internal Skills Tracker (`SkillsTrackerUI.tsx`) for interview prep._
+_Owned by skillCoFounder.md. Source of truth for what Lawrence actually knows, so this never has to be re-derived or re-asked. Verified on 2026-07-23 with the Claude Code cofounder on Lawrence's other project (`mydailyroutine.app` / "My Daily Routine"), which maintains its own exhaustive internal Skills Tracker (`SkillsTrackerUI.tsx`) for interview prep._
 
 **Important:** this file and `app/about/skills.js` are deliberately NOT the same thing and should stay independent — see "Portfolio vs. full inventory" below. Don't try to make the portfolio chip grid match this file 1:1.
 
@@ -21,6 +21,8 @@ Infrastructure & DevOps: Docker (multi-stage builds), Nginx, Traefik, self-hoste
 Payments: Paddle integration (one-time & subscription checkout, signed webhooks)
 
 AI Integration: Google Gemini API for in-app conversational/agentic features — confirmed shipped/live (My Daily Routine's AI Routine Builder), not just "familiar with"
+
+Applied AI engineering (updated 2026-09-29): LLM features integrated into existing software, including My Daily Routine's routine builder, Cloud Flow Library's booking assistant, and this portfolio's tool-using chatbot. Lawrence directly confirmed building AI-assisted inbound and outbound business automation and using Claude and Codex to develop software. The app integrations are documented in this repo; the business automation work is self-reported and still needs a public case study with concrete scope and results.
 
 Testing & Tooling: Jest, Supertest, Playwright, structured logging (pino), ESLint, TypeScript strict mode
 

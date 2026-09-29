@@ -15,9 +15,9 @@ _Owned by skillCoFounder.md._
 ## Current State
 
 ```
-status: not running
-port: none
-pid: none
-started_at: none
-note: killed clean at End Today (second session of 2026-09-20; it ran on 3002 since 3000/3001 were held by foreign processes, untouched). `npm run build` is run by skillGit right after, so `.next` holds a production build — `rm -rf .next` before the next `npm run dev`. NEXTAUTH_URL is commented out in .env.local (dev only).
+status: running
+port: 3002
+pid: 35815
+started_at: 2026-09-29 12:11:08 +06
+note: running after the successful production build; 3000/3001 were held by foreign processes, untouched. NEXTAUTH_URL is commented out in .env.local (dev only).
 ```

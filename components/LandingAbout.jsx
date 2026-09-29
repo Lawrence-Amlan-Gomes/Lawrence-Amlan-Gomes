@@ -56,7 +56,7 @@ export default function LandingAbout() {
             theme ? "text-[#333333]" : "text-[#cccccc]"
           }`}
         >
-          Full-Stack Developer | Shipping Production-Ready Web Apps End-to-End
+          Full-Stack Developer &amp; AI Engineer
         </motion.h2>
 
         {/* Desktop bio */}
@@ -66,13 +66,11 @@ export default function LandingAbout() {
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
-          I help people and businesses turn ideas into real, working products
-          — I design them, build them, and take them all the way to
-          production. I&apos;ve independently shipped multiple SaaS products
-          and client projects, handling everything a launch needs: the app
-          itself, payments, deployment, and the domain it runs on — mostly
-          with Next.js and TypeScript. I move fast, lean on AI tools to build
-          faster, and deliver clean work that scales.
+          I build production web apps and useful AI features — from product
+          architecture and payments to deployment. My work includes a Gemini
+          routine builder, an AI booking assistant for a library, and business
+          workflows for inbound and outbound leads. I use Claude and Codex to
+          move faster while owning the product decisions and final code.
         </motion.p>
 
         {/* Mobile bio */}
@@ -82,10 +80,9 @@ export default function LandingAbout() {
             theme ? "text-[#555555]" : "text-[#aaaaaa]"
           }`}
         >
-          I turn ideas into real, working products — from first line of code
-          to production. I&apos;ve independently shipped multiple SaaS
-          products and client projects, handling payments, deployment, and
-          everything in between.
+          I build full-stack products and AI features, from idea to
+          production. I&apos;ve shipped AI assistants inside real apps and
+          built business workflows for inbound and outbound leads.
         </motion.p>
 
         {/* Desktop CTA */}
@@ -95,8 +92,8 @@ export default function LandingAbout() {
             theme ? "text-[#444444]" : "text-[#bbbbbb]"
           }`}
         >
-          Looking to build your next production web app? Let&apos;s ship
-          something great together.
+          Need a production app or an AI workflow that solves a real business
+          problem? Let&apos;s build it.
         </motion.p>
 
         {/* Desktop bullet list */}
@@ -109,7 +106,8 @@ export default function LandingAbout() {
           <li>Build full-stack apps with Next.js, fast and reliable end to end</li>
           <li>Handle deployment and custom domains so it just works in production</li>
           <li>Set up real payments — subscriptions and one-time purchases</li>
-          <li>Add AI-powered features that genuinely help users</li>
+          <li>Integrate LLMs into apps for useful, reliable user workflows</li>
+          <li>Automate inbound and outbound lead workflows for businesses</li>
           <li>Automate testing and releases so updates ship safely</li>
           <li>Build backends that stay fast as data and traffic grow</li>
           <li>Design clean, responsive interfaces people enjoy using</li>
@@ -158,7 +156,8 @@ export default function LandingAbout() {
             "Vercel",
             "Netlify",
             "Coolify",
-            "AI APIs",
+            "LLM Integration",
+            "AI Automation",
           ].map((tag) => (
             <span
               key={tag}

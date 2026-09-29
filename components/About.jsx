@@ -44,7 +44,7 @@ export default function About() {
                 theme ? "text-[#666666]" : "text-[#aaaaaa]"
               }`}
             >
-                {`Greetings 👋 I'm Lawrence, a Full-Stack Developer based in Dhaka, Bangladesh. I help people and businesses turn an idea into a real, working product — designing it, building it, and getting it live, from the first line of code to the servers it runs on. Over the past year I've independently shipped several SaaS products and client projects, handling everything a launch needs: the app itself, payment integrations, deployment, and the custom domain it lives on — mostly built with Next.js, TypeScript, and MongoDB. I move fast, pick up new tools within days when a project needs them, and lean on AI tools to build faster without cutting corners on quality. I'm currently looking for a remote Full-Stack Developer role where I can ship real features from day one.`}
+                {`Greetings 👋 I'm Lawrence, a Full-Stack Developer and AI Engineer based in Dhaka, Bangladesh. I design, build, and deploy production web apps, then connect AI to real product workflows. I've shipped a Gemini-powered routine builder, an AI booking assistant for a library, and this portfolio's assistant, which can answer questions and use tools. I also build AI-assisted inbound and outbound workflows for businesses. My core stack is Next.js, TypeScript, Node.js, and MongoDB; I use Claude and Codex to develop faster while taking responsibility for the architecture, testing, and final result. I'm open to remote full-stack and applied AI engineering roles.`}
             </p>
           </div>
         </div>

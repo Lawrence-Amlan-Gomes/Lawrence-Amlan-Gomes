@@ -30,7 +30,8 @@ const skills = [
     items: [
       ["Auth & Security", null, null],
       ["Testing & Tooling", null, null],
-      ["AI Integration (Gemini)", "/gemini.png", "/gemini.png"],
+      ["LLM Integration (Gemini)", "/gemini.png", "/gemini.png"],
+      ["AI Workflow Automation", null, null],
     ],
   },
   {

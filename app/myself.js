@@ -1,21 +1,22 @@
 const mySelf = `
 About Me:
 
-I am Lawrence Amlan Gomes, a Full-Stack Developer based in Dhaka, Bangladesh. I help people and
-businesses turn an idea into a real, working product — designing it, building it, and getting it
-live, from the first line of code to the servers it runs on. Over the past year I've independently
-shipped several SaaS products and client projects, handling everything a launch needs: the app
-itself, payment integrations, deployment, and the custom domain it lives on — mostly built with
-Next.js, TypeScript, React, Node.js, and MongoDB. I move fast, pick up new tools within days when a
-project needs them, and lean on AI tools to build faster without cutting corners on quality.
+I am Lawrence Amlan Gomes, a Full-Stack Developer and AI Engineer based in Dhaka, Bangladesh. I
+design, build, and deploy production web apps and integrate LLMs into useful product workflows.
+I have shipped a Gemini-powered routine builder in My Daily Routine, Flo, the AI booking assistant
+in Cloud Flow Library, and this portfolio's Gemini assistant with tool use. I also build
+AI-assisted inbound and outbound workflows for businesses. My core stack includes Next.js,
+TypeScript, React, Node.js, and MongoDB. I use Claude and Codex to speed up development while
+owning the architecture, testing, and final result. I am open to remote full-stack and applied
+AI engineering roles.
 
 Experience:
 
 I have over two years of hands-on experience as a self-taught Full-Stack Developer, progressing
 from building simple frontends to independently shipping complete SaaS products and client
-applications. As a Freelance Full-Stack Developer (Oct 2025 – Present), I design, build, and deploy
+applications. As a Freelance Full-Stack Developer and AI Engineer (Oct 2025 – Present), I design, build, and deploy
 full-stack applications end-to-end — managing payments with Paddle, deploying on Vercel, Netlify,
-and self-hosted Coolify, and integrating AI APIs across multiple projects. Previously, as Sole
+and self-hosted Coolify, and integrating LLMs into production applications. Previously, as Sole
 Frontend Developer at UTES (Oct 2024 – Dec 2024), I delivered two production projects — the
 official UTES company website and the Protein Corner e-commerce frontend — independently and under
 tight deadlines using Next.js, Tailwind CSS, and Framer Motion.
