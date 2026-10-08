@@ -19,5 +19,5 @@ status: not running
 port: none
 pid: none
 started_at: none
-note: stopped clean at End Today on 2026-09-29. The final build leaves `.next` in production mode; clear it before the next `npm run dev`. NEXTAUTH_URL is commented out in .env.local (dev only).
+note: killed clean 2026-10-09 after verifying the static-testimonials refactor. NEXTAUTH_URL is commented out in .env.local (dev only).
 ```

@@ -2,6 +2,15 @@
 
 _Owned by skillCoFounder.md — newest entry on top, one entry per "End Today."_
 
+### 2026-10-09 — End Today (Testimonials rebuilt as static, admin/login removed, hosting moved Coolify → Vercel)
+
+- **Testimonials architecture changed on Lawrence's call**: no longer database-backed — no public submissions, no admin moderation. New static `app/testimonials-data.js` (2 real testimonials) plus a manual sync script (`scripts/sync-testimonials-from-solvendix.mjs`) Lawrence re-runs whenever a new client is added in Solvendix's own DB. The script caught and fixed one real stale cross-project reference (Solvendix still pointed at the project's old `library-management` slug; current slug is `cloud-flow-library`).
+- Removed `/admin` and `/login` entirely (nothing left for admin to manage) along with the whole testimonial CRUD/upload/MinIO stack. Found but deliberately left alone a separate, unrelated dead subsystem (`/profile`, `/changePassword`, registration/comments components) orphaned since the project's very first review — out of scope today, flagged for a possible future sweep.
+- **Hosting moved from Coolify to Vercel**: hit a wrong-account mixup first (an already-cached CLI login to a different Vercel account) — caught by Lawrence, reverted cleanly (deleted the wrong project, confirmed via `gh api` that the failed GitHub auto-connect left nothing behind), then logged into the correct account via device-auth. Real project deployed, env vars set, GitHub auto-deploy confirmed working.
+- **DNS cut over at Porkbun** (API access, new credentials from Lawrence): read the full live zone first to map out every unrelated record (other apps' subdomains, email DKIM/DMARC/SPF/MX), then changed only the apex + `www` records. Verified live within seconds — `lawrenceamlangomes.com` now serves from Vercel.
+- **Old Coolify app + database + the 4 orphaned MinIO test-upload objects deleted**, at Lawrence's explicit request, after precisely matching each resource (by fqdn and by the exact Mongo port in the connection string) to rule out touching the other two apps sharing the same Coolify box and MinIO bucket (My Daily Routine, Solvendix) — both verified still live and untouched afterward.
+- Build verified clean throughout; no public-facing bio/stack sync needed (no new skill, client, or milestone — just re-platforming the portfolio's own hosting between two tools Lawrence already has documented experience with).
+
 ### 2026-09-29 — End Today (AI engineering positioning shipped; Cofounder Chat protocol replaced)
 
 - Updated the portfolio's headline, bio, skills, experience, services, metadata, README, and chatbot bio to position Lawrence as a Full-Stack Developer & AI Engineer, grounded in shipped Gemini features and his reported business workflow automation work.
