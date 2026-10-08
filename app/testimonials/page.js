@@ -1,17 +1,6 @@
 import Testimonials from "@/components/Testimonials";
-import { getPublicTestimonialsAction, getSettingsAction } from "@/app/actions/testimonials";
+import testimonials from "@/app/testimonials-data";
 
-export const dynamic = "force-dynamic";
-
-export default async function Home() {
-  const [testimonials, settings] = await Promise.all([
-    getPublicTestimonialsAction(),
-    getSettingsAction(),
-  ]);
-  return (
-    <Testimonials
-      initialTestimonials={testimonials}
-      submissionsOpen={settings.testimonialSubmissionsOpen}
-    />
-  );
+export default function Home() {
+  return <Testimonials testimonials={testimonials} />;
 }

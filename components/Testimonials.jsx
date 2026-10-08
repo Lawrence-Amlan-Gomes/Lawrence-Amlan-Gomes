@@ -1,29 +1,12 @@
 "use client";
-import { useState } from "react";
 import { useTheme } from "@/app/hooks/useTheme";
 import TestimonialCard from "./TestimonialCard";
-import TestimonialForm from "./TestimonialForm";
-import AddTestimonialCard from "./AddTestimonialCard";
-import { getPublicTestimonialsAction } from "@/app/actions/testimonials";
 import Footer from "./Footer";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 
-export default function Testimonials({ initialTestimonials, submissionsOpen }) {
+export default function Testimonials({ testimonials = [] }) {
   const { theme } = useTheme();
-  const [testimonials, setTestimonials] = useState(initialTestimonials);
-  const [formMode, setFormMode] = useState(null); // null | "create" | testimonial object
-
-  const refresh = async () => {
-    const fresh = await getPublicTestimonialsAction();
-    setTestimonials(fresh);
-  };
-
-  const closeForm = () => setFormMode(null);
-  const handleSaved = async () => {
-    await refresh();
-    closeForm();
-  };
 
   return (
     <div
@@ -66,48 +49,19 @@ export default function Testimonials({ initialTestimonials, submissionsOpen }) {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
-          {submissionsOpen &&
-            (formMode === "create" ? (
-              <TestimonialForm
-                existing={null}
-                onSaved={handleSaved}
-                onCancel={closeForm}
-                wideBreakpoint="lg"
-                className="xl:col-span-2"
-              />
-            ) : (
-              <AddTestimonialCard onClick={() => setFormMode("create")} />
-            ))}
-          {testimonials.map((testimonial) =>
-            formMode && formMode !== "create" && formMode.id === testimonial.id ? (
-              <TestimonialForm
-                key={testimonial.id}
-                existing={testimonial}
-                onSaved={handleSaved}
-                onCancel={closeForm}
-                wideBreakpoint="lg"
-                className="xl:col-span-2"
-              />
-            ) : (
-              <TestimonialCard
-                key={testimonial.id}
-                id={testimonial.id}
-                name={testimonial.name}
-                designation={testimonial.designation}
-                comment={testimonial.comment}
-                rating={testimonial.rating}
-                photoUrl={testimonial.photoUrl}
-                photoPosition={testimonial.photoPosition}
-                videoUrl={testimonial.videoUrl}
-                videoPosition={testimonial.videoPosition}
-                videoHidden={testimonial.videoHidden}
-                projectUrlTitle={testimonial.projectUrlTitle}
-                locked={testimonial.locked}
-                canEdit={submissionsOpen}
-                onEdit={() => setFormMode(testimonial)}
-              />
-            )
-          )}
+          {testimonials.map((testimonial) => (
+            <TestimonialCard
+              key={testimonial.id}
+              id={testimonial.id}
+              name={testimonial.name}
+              designation={testimonial.designation}
+              comment={testimonial.comment}
+              rating={testimonial.rating}
+              photoUrl={testimonial.photoUrl}
+              photoPosition={testimonial.photoPosition}
+              projectUrlTitle={testimonial.projectUrlTitle}
+            />
+          ))}
         </div>
         <div className="fixed right-[5%] md:right-[11%] top-[80px] sm:top-[110px] md:top-[150px] transform -translate-y-1/2 flex flex-row gap-3 md:flex-col sm:gap-4 z-50">
           <Link

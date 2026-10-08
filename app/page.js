@@ -1,14 +1,6 @@
 import LandingPage from "@/components/LandingPage";
-import { getPublicTestimonialsAction, getSettingsAction } from "@/app/actions/testimonials";
+import testimonials from "@/app/testimonials-data";
 
-export const dynamic = "force-dynamic";
-
-export default async function Home() {
-  const [testimonials, settings] = await Promise.all([
-    getPublicTestimonialsAction(),
-    getSettingsAction(),
-  ]);
-  return (
-      <LandingPage testimonials={testimonials} submissionsOpen={settings.testimonialSubmissionsOpen} />
-  );
+export default function Home() {
+  return <LandingPage testimonials={testimonials} />;
 }

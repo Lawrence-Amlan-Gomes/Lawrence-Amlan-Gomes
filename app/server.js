@@ -10,8 +10,7 @@ import mySelf from "./myself";
 import projects from "./projects/projects";
 import skills from "./about/skills";
 import services from "./services";
-import { dbConnect } from "@/services/mongo";
-import { getPublicTestimonials } from "@/db/queries";
+import testimonials from "./testimonials-data";
 
 const TYPE_LABEL = {
   saas: "SaaS Product",
@@ -103,20 +102,14 @@ async function getProjectDetails(urlTitle) {
   }));
 
   let clientTestimonial = null;
-  try {
-    await dbConnect();
-    const testimonials = await getPublicTestimonials();
-    const match = testimonials.find((t) => t.projectUrlTitle === urlTitle);
-    if (match) {
-      clientTestimonial = {
-        from: match.name,
-        role: match.designation,
-        rating: match.rating,
-        quote: match.comment,
-      };
-    }
-  } catch (error) {
-    console.error("Error fetching testimonial for project detail lookup:", error);
+  const match = testimonials.find((t) => t.projectUrlTitle === urlTitle);
+  if (match) {
+    clientTestimonial = {
+      from: match.name,
+      role: match.designation,
+      rating: match.rating,
+      quote: match.comment,
+    };
   }
 
   return {

@@ -51,10 +51,7 @@ function Footer() {
                 theme ? "text-[#555555]" : "text-[#cccccc]"
               }`}
             >
-              <Link href="/login" className="no-underline hover:no-underline">
-                ©
-              </Link>{" "}
-              {new Date().getFullYear()} Lawrence. All rights reserved.
+              © {new Date().getFullYear()} Lawrence. All rights reserved.
             </span>
           </div>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-4">
